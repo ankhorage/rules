@@ -1,0 +1,83 @@
+{
+  "name": "@ankhorage/rules",
+  "version": "0.0.0",
+  "description": "Domain-agnostic rule engine and JSON configuration for Ankhorage.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankhorage/rules.git"
+  },
+  "homepage": "https://github.com/ankhorage/rules#readme",
+  "bugs": {
+    "url": "https://github.com/ankhorage/rules/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli/index.d.ts",
+      "import": "./dist/cli/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "ankhorage-rules": "./dist/cli/standalone.js"
+  },
+  "ankh": {
+    "category": "rules",
+    "provider": "./dist/cli/index.js",
+    "capabilities": [
+      "rules.config.validate"
+    ]
+  },
+  "devDependencies": {
+    "@ankhorage/ankh": "^0.8.14",
+    "@ankhorage/devtools": "^1.21.3",
+    "@ankhorage/paradox": "^0.1.26",
+    "@types/bun": "^1.4.1",
+    "@types/node": "^26.6.2",
+    "typescript": "~6.0.3"
+  },
+  "dependencies": {
+    "@ankhorage/utility": "^0.5.5"
+  },
+  "packageManager": "bun@1.4.2",
+  "keywords": [
+    "ankhorage",
+    "rules",
+    "configuration",
+    "evaluation"
+  ],
+  "scripts": {
+    "build": "rm -rf dist tsconfig.tsbuildinfo tsconfig.build.tsbuildinfo && bun x tsc -p tsconfig.build.json",
+    "check-types": "bun x tsc --noEmit -p tsconfig.json",
+    "typecheck": "bun run check-types",
+    "test": "bun test",
+    "test:standalone": "bun run build && bun scripts/test-standalone.ts",
+    "docs": "bunx @ankhorage/paradox && ankhorage-prettier --write README.md paradox",
+    "changeset": "ankhorage-changeset",
+    "changeset:status": "ankhorage-changeset status --since=origin/main",
+    "version-packages": "ankhorage-changeset version",
+    "prepack": "bun run build",
+    "lint": "ankhorage-eslint . --max-warnings=0",
+    "lint:fix": "ankhorage-eslint . --fix --max-warnings=0",
+    "format": "ankhorage-prettier --write .",
+    "format:check": "ankhorage-prettier --check .",
+    "knip:check": "ankhorage-knip"
+  }
+}
