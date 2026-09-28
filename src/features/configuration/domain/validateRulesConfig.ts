@@ -110,7 +110,7 @@ function validateConfiguredRules<TContext>(
   config: RulesConfig,
   options: RulesConfigValidationOptions<TContext>,
 ): readonly RulesConfigDiagnostic[] {
-  const registry = options.registry;
+  const { registry } = options;
   if (registry === undefined) return [];
 
   const availableCapabilities = new Set(options.capabilities ?? []);
