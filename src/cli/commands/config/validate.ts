@@ -1,6 +1,6 @@
 import { resolve } from 'node:path';
 
-import { readRulesConfigAsync } from '../../../features/configuration/adapters/filesystem/readRulesConfigAsync.js';
+import { readRulesConfigAsync } from '../../../features/configuration/composition/readRulesConfigAsync.js';
 
 /*** Execute the public `ankh rules config validate` command through the configuration feature. */
 export async function validate(

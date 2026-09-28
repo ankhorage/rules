@@ -1,5 +1,5 @@
-export { readRulesConfigAsync } from './features/configuration/adapters/filesystem/readRulesConfigAsync.js';
 export { writeRulesConfigAsync } from './features/configuration/adapters/filesystem/writeRulesConfigAsync.js';
+export { readRulesConfigAsync } from './features/configuration/composition/readRulesConfigAsync.js';
 export { validateRulesConfig } from './features/configuration/domain/validateRulesConfig.js';
 export { createRuleRegistry } from './features/evaluation/domain/createRuleRegistry.js';
 export { evaluateConfiguredRules } from './features/evaluation/domain/evaluateConfiguredRules.js';
