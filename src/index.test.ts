@@ -17,7 +17,6 @@ import {
   type Rule,
   type RuleSet,
   validateRulesConfig,
-  validateRulesConfigFileAsync,
   writeRulesConfigAsync,
 } from './index.js';
 
@@ -104,6 +103,7 @@ describe('public Rules contract', () => {
     testInvalidConfigDiagnostics,
   );
   test('applies configured options and severity overrides', testConfiguredRules);
+  test('sorts provider subjects by stable code-unit identifiers', testSubjectOrdering);
   test('reports structural configuration field diagnostics', testStructuralConfigDiagnostics);
   test(
     'reads, validates, writes, and validates the JSON-only configuration through public APIs',
@@ -147,6 +147,33 @@ function testConfiguredRules(): void {
   expect(result.diagnostics).toEqual([]);
   expect(result.findings.map((finding) => finding.severity)).toEqual(['error', 'warning']);
   expect(resolveRulesStatus(result)).toEqual({ status: 'invalid', color: 'red' });
+}
+
+function testSubjectOrdering(): void {
+  const rule: Rule<FixtureContext> = {
+    id: 'content.subject-order',
+    summary: 'Exercise deterministic subject ordering.',
+    defaultSeverity: 'info',
+    evaluate: () => [
+      {
+        ruleId: 'content.subject-order',
+        severity: 'info',
+        message: 'Subjects were observed.',
+        subjects: [
+          { id: 'ä', kind: 'document' },
+          { id: 'b', kind: 'document' },
+          { id: 'a', kind: 'document' },
+        ],
+        evidence: {},
+      },
+    ],
+  };
+
+  expect(evaluateRules({ blockers: 0, words: [] }, [rule]).findings[0]?.subjects).toEqual([
+    { id: 'a', kind: 'document' },
+    { id: 'b', kind: 'document' },
+    { id: 'ä', kind: 'document' },
+  ]);
 }
 
 function testInvalidConfigDiagnostics(): void {
@@ -231,7 +258,7 @@ async function testConfigFileOperations(): Promise<void> {
       'content.minimum-words',
       'release.no-blockers',
     ]);
-    expect((await validateRulesConfigFileAsync(path, directory)).diagnostics).toEqual([]);
+    expect((await readRulesConfigAsync(path)).diagnostics).toEqual([]);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

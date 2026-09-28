@@ -81,5 +81,6 @@ function canonicalizeFinding(
     ...finding,
     ruleId,
     severity,
+    subjects: [...finding.subjects].sort(compareRuleEntityIds),
   };
 }

@@ -45,6 +45,11 @@ async function verifyPackedPackageAsync(): Promise<void> {
     if (!help.includes('ankhorage-rules config validate')) {
       throw new Error('Installed Rules binary did not expose canonical help.');
     }
+    await writeFile(join(consumerDirectory, 'rules.json'), '{"version":1,"rules":[]}\n');
+    const validation = run([binary, 'config', 'validate'], consumerDirectory);
+    if (!validation.includes('valid:')) {
+      throw new Error('Installed Rules binary did not validate rules.json.');
+    }
   } finally {
     await rm(temporaryRoot, { force: true, recursive: true });
   }

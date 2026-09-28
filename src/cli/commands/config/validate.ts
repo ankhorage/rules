@@ -1,4 +1,6 @@
-import { validateRulesConfigFileAsync } from '../../../features/configuration/composition/validateRulesConfigFileAsync.js';
+import { resolve } from 'node:path';
+
+import { readRulesConfigAsync } from '../../../features/configuration/adapters/filesystem/readRulesConfigAsync.js';
 
 /*** Execute the public `ankh rules config validate` command through the configuration feature. */
 export async function validate(
@@ -9,7 +11,7 @@ export async function validate(
     throw new Error('ankh rules config validate accepts at most one rules.json path.');
   }
 
-  const result = await validateRulesConfigFileAsync(argv.at(0), cwd);
+  const result = await readRulesConfigAsync(resolve(cwd, argv.at(0) ?? 'rules.json'));
   return {
     exitCode: result.diagnostics.length === 0 ? 0 : 1,
     stdout: renderConfigValidation(result),
@@ -17,9 +19,7 @@ export async function validate(
 }
 
 /*** Render the command result without coupling the configuration feature to a transport. */
-function renderConfigValidation(
-  result: Awaited<ReturnType<typeof validateRulesConfigFileAsync>>,
-): string {
+function renderConfigValidation(result: Awaited<ReturnType<typeof readRulesConfigAsync>>): string {
   if (result.diagnostics.length === 0) return `rules config validate\nvalid: ${result.path}\n`;
   return [
     'rules config validate',
