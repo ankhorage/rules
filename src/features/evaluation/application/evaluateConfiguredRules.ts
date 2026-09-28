@@ -1,4 +1,3 @@
-import { validateRulesConfig } from '../../configuration/domain/validateRulesConfig.js';
 import type {
   EvaluateConfiguredRulesOptions,
   RuleEvaluationDiagnostic,
@@ -8,6 +7,7 @@ import type {
   RulesConfig,
   RulesConfigDiagnostic,
 } from '../../../types/rules.js';
+import { validateRulesConfig } from '../../configuration/domain/validateRulesConfig.js';
 import { evaluateRules } from '../domain/evaluateRules.js';
 
 /*** Resolve a configured Rule registry and evaluate its enabled rules without provider branches. */
