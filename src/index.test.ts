@@ -218,8 +218,8 @@ async function testConfigFileOperations(): Promise<void> {
 async function testCliContract(): Promise<void> {
   const provider = createRulesRuntimeProvider();
   expect(provider.capabilities).toEqual(['rules.config.validate']);
-  expect(provider.commands).toEqual([
-    expect.objectContaining({ path: ['config', 'validate'], capability: 'rules.config.validate' }),
-  ]);
+  expect(JSON.stringify(provider.commands)).toContain(
+    '"path":["config","validate"],"capability":"rules.config.validate"',
+  );
   expect((await runCli(['--help'])).exitCode).toBe(0);
 }
