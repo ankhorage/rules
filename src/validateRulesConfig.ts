@@ -100,6 +100,7 @@ function validateConfiguredRules<TContext>(
     const rule = options.registry?.ruleById.get(configuredRule.id);
     if (rule === undefined) {
       return [
+        ...diagnostics,
         {
           code: 'unknown-rule' as const,
           message: `rules.json configures unknown rule "${configuredRule.id}".`,

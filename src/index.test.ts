@@ -40,7 +40,7 @@ const contentRule = {
     options,
   }: {
     readonly context: FixtureContext;
-    readonly options: JsonValue | undefined;
+    readonly options: { readonly minimum: number } | undefined;
   }) => {
     const minimum = isMinimumOptions(options) ? options.minimum : undefined;
     return typeof minimum === 'number' && context.words.length < minimum
@@ -55,7 +55,7 @@ const contentRule = {
         ]
       : [];
   },
-} satisfies Rule<FixtureContext>;
+} satisfies Rule<FixtureContext, { readonly minimum: number }>;
 
 const releaseRule = {
   id: 'release.no-blockers',
@@ -150,6 +150,18 @@ function testConfiguredRules(): void {
       { registry, capabilities: ['text'] },
     ).diagnostics.map((diagnostic) => diagnostic.code),
   ).toEqual(['invalid-options']);
+  expect(
+    validateRulesConfig(
+      {
+        version: 1,
+        rules: [
+          { id: 'content.minimum-words', enabled: true, options: {} },
+          { id: 'missing.rule', enabled: true },
+        ],
+      },
+      { registry, capabilities: ['text'] },
+    ).diagnostics.map((diagnostic) => diagnostic.code),
+  ).toEqual(['invalid-options', 'unknown-rule']);
 
   const result = evaluateConfiguredRules({ blockers: 1, words: ['one'] }, config, registry, {
     capabilities: ['text', 'release-state'],

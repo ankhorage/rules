@@ -48,14 +48,14 @@ export interface Rule<
   TEvidence extends JsonValue = JsonValue,
 > {
   readonly defaultSeverity: RuleSeverity;
-  readonly evaluate: (input: {
+  evaluate(input: {
     readonly context: TContext;
     readonly options: TOptions | undefined;
-  }) => readonly RuleFinding<TEvidence>[];
+  }): readonly RuleFinding<TEvidence>[];
   readonly id: string;
   readonly requiredCapabilities?: readonly RuleCapability[];
   readonly summary: string;
-  readonly validateOptions?: (options: TOptions | undefined) => readonly RuleOptionDiagnostic[];
+  validateOptions?(options: TOptions | undefined): readonly RuleOptionDiagnostic[];
 }
 
 /*** A named collection of independently supplied rules that can compose with other providers. */
