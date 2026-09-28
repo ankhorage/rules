@@ -94,12 +94,13 @@ function validateConfiguredRules<TContext>(
   config: RulesConfig,
   options: RulesConfigValidationOptions<TContext>,
 ): readonly RulesConfigDiagnostic[] {
-  if (options.registry === undefined) return [];
+  const registry = options.registry;
+  if (registry === undefined) return [];
 
   const availableCapabilities = new Set(options.capabilities ?? []);
   return config.rules.reduce<RulesConfigDiagnostic[]>((diagnostics, configuredRule, index) => {
     if (!configuredRule.enabled) return diagnostics;
-    const rule = options.registry.ruleById.get(configuredRule.id);
+    const rule = registry.ruleById.get(configuredRule.id);
     if (rule === undefined) {
       return [
         ...diagnostics,
