@@ -70,12 +70,27 @@ function validateRulesConfigRule(
   if (!isNonEmptyString(value.id))
     return invalidRule('invalid-rule-id', `${path}.id`, 'must define a non-empty "id".');
   if (typeof value.enabled !== 'boolean')
-    return invalidRule('invalid-config', `${path}.enabled`, 'must define boolean "enabled".', value.id);
+    return invalidRule(
+      'invalid-config',
+      `${path}.enabled`,
+      'must define boolean "enabled".',
+      value.id,
+    );
   if (value.severity !== undefined && !isRuleSeverity(value.severity)) {
-    return invalidRule('invalid-severity', `${path}.severity`, 'has an invalid "severity".', value.id);
+    return invalidRule(
+      'invalid-severity',
+      `${path}.severity`,
+      'has an invalid "severity".',
+      value.id,
+    );
   }
   if (value.options !== undefined && !isJsonValue(value.options)) {
-    return invalidRule('invalid-options', `${path}.options`, 'has non-serializable "options".', value.id);
+    return invalidRule(
+      'invalid-options',
+      `${path}.options`,
+      'has non-serializable "options".',
+      value.id,
+    );
   }
 
   return {
@@ -94,7 +109,7 @@ function validateConfiguredRules<TContext>(
   config: RulesConfig,
   options: RulesConfigValidationOptions<TContext>,
 ): readonly RulesConfigDiagnostic[] {
-  const registry = options.registry;
+  const { registry } = options;
   if (registry === undefined) return [];
 
   const availableCapabilities = new Set(options.capabilities ?? []);
