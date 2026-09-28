@@ -1,30 +1,23 @@
 #!/usr/bin/env bun
 
-import { createDefaultCommandContext } from '@ankhorage/ankh';
+import { validate } from './commands/config/validate.js';
 
-import { renderConfigValidation, runConfigValidateCommand } from './index.js';
-
-/*** Run the standalone Rules config validator through the same public operation as the Ankh provider. */
+/*** Run the standalone Rules CLI through the same command adapter used by the Ankh provider. */
 export async function runCli(argv: readonly string[]): Promise<{ readonly exitCode: number }> {
-  const context = createDefaultCommandContext();
   const [firstToken, ...restTokens] = argv;
   if (firstToken === undefined || isHelpToken(firstToken)) {
-    context.writeStdout(renderHelp());
+    process.stdout.write(renderHelp());
     return { exitCode: 0 };
   }
   if (firstToken !== 'config' || restTokens.at(0) !== 'validate') {
-    context.writeStderr('Unknown Rules command. Run ankhorage-rules --help.\n');
+    process.stderr.write('Unknown Rules command. Run ankhorage-rules --help.\n');
     return { exitCode: 1 };
   }
 
-  try {
-    const result = await runConfigValidateCommand(restTokens.slice(1), context.cwd);
-    context.writeStdout(renderConfigValidation(result));
-    return { exitCode: result.diagnostics.length === 0 ? 0 : 1 };
-  } catch (error) {
-    context.writeStderr(`${error instanceof Error ? error.message : 'Rules command failed.'}\n`);
-    return { exitCode: 1 };
-  }
+  const result = await validate(restTokens.slice(1), process.cwd());
+  if (result.stdout.length > 0) process.stdout.write(result.stdout);
+  if (result.stderr.length > 0) process.stderr.write(result.stderr);
+  return { exitCode: result.exitCode };
 }
 
 /*** Identify help tokens accepted by the small standalone command adapter. */

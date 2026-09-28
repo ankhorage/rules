@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 
-import type { RulesConfigDiagnostic, RulesConfigReadResult } from './types/rules.js';
-import { validateRulesConfig } from './validateRulesConfig.js';
+import type { RulesConfigDiagnostic, RulesConfigReadResult } from '../../../../types/rules.js';
+import { validateRulesConfig } from '../../domain/validateRulesConfig.js';
 
 /*** Read and structurally validate a repository rules.json file. */
 export async function readRulesConfigAsync(path: string): Promise<RulesConfigReadResult> {

@@ -1,14 +1,17 @@
-import type { Rule, RuleRegistry, RuleSet } from './types/rules.js';
+import type { Rule, RuleRegistry, RuleSet } from '../../../types/rules.js';
+import { compareRuleIdentifier } from '../../../utils/compareRuleIdentifier.js';
 
 /*** Create a deterministic registry from independently owned RuleSets. */
 export function createRuleRegistry<TContext>(
   ruleSets: readonly RuleSet<TContext>[],
 ): RuleRegistry<TContext> {
-  const sortedRuleSets = [...ruleSets].sort((left, right) => left.id.localeCompare(right.id));
+  const sortedRuleSets = [...ruleSets].sort((left, right) =>
+    compareRuleIdentifier(left.id, right.id),
+  );
   assertUniqueRuleSetIds(sortedRuleSets);
   const rules = sortedRuleSets
     .flatMap((ruleSet) => ruleSet.rules)
-    .sort((left, right) => left.id.localeCompare(right.id));
+    .sort((left, right) => compareRuleIdentifier(left.id, right.id));
   assertUniqueRuleIds(rules);
 
   return {

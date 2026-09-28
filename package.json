@@ -68,7 +68,6 @@
     "check-types": "bun x tsc --noEmit -p tsconfig.json",
     "typecheck": "bun run check-types",
     "test": "bun test",
-    "test:standalone": "bun run build && bun scripts/test-standalone.ts",
     "docs": "bunx @ankhorage/paradox && ankhorage-prettier --write README.md paradox",
     "changeset": "ankhorage-changeset",
     "changeset:status": "ankhorage-changeset status --since=origin/main",

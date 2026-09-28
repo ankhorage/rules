@@ -1,4 +1,4 @@
-import { evaluateRules } from './evaluateRules.js';
+import { validateRulesConfig } from '../../configuration/domain/validateRulesConfig.js';
 import type {
   EvaluateConfiguredRulesOptions,
   RuleEvaluationDiagnostic,
@@ -6,8 +6,9 @@ import type {
   RuleFinding,
   RuleRegistry,
   RulesConfig,
-} from './types/rules.js';
-import { validateRulesConfig } from './validateRulesConfig.js';
+  RulesConfigDiagnostic,
+} from '../../../types/rules.js';
+import { evaluateRules } from '../domain/evaluateRules.js';
 
 /*** Resolve a configured Rule registry and evaluate its enabled rules without provider branches. */
 export function evaluateConfiguredRules<TContext>(
@@ -46,24 +47,12 @@ export function evaluateConfiguredRules<TContext>(
   };
 }
 
-/*** Translate config validation failures into the evaluator's portable diagnostic shape. */
-function toEvaluationDiagnostic(diagnostic: {
-  readonly code: string;
-  readonly message: string;
-  readonly path?: string;
-  readonly ruleId?: string;
-}): RuleEvaluationDiagnostic {
+/*** Translate config validation failures without collapsing their machine-readable diagnostic codes. */
+function toEvaluationDiagnostic(diagnostic: RulesConfigDiagnostic): RuleEvaluationDiagnostic {
   return {
-    code:
-      diagnostic.code === 'missing-capability'
-        ? 'missing-capability'
-        : diagnostic.code === 'unknown-rule'
-          ? 'unknown-rule'
-          : diagnostic.code === 'invalid-config'
-            ? 'invalid-config'
-            : 'invalid-options',
-    ruleId: diagnostic.ruleId ?? 'rules.config',
+    code: diagnostic.code,
     message: diagnostic.message,
+    ...(diagnostic.ruleId === undefined ? {} : { ruleId: diagnostic.ruleId }),
   };
 }
 

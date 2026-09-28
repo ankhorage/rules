@@ -5,7 +5,8 @@ import type {
   RuleEvaluationResult,
   RuleFinding,
   RuleSeverity,
-} from './types/rules.js';
+} from '../../../types/rules.js';
+import { compareRuleIdentifier } from '../../../utils/compareRuleIdentifier.js';
 
 /*** Evaluate unrelated rules in deterministic identifier order through one generic mechanism. */
 export function evaluateRules<TContext>(
@@ -14,7 +15,9 @@ export function evaluateRules<TContext>(
   options: EvaluateRulesOptions = {},
 ): RuleEvaluationResult {
   const availableCapabilities = new Set(options.capabilities ?? []);
-  const orderedRules = [...rules].sort((left, right) => left.id.localeCompare(right.id));
+  const orderedRules = [...rules].sort((left, right) =>
+    compareRuleIdentifier(left.id, right.id),
+  );
   const results = orderedRules.map((rule) =>
     evaluateRule(context, rule, availableCapabilities, options),
   );
@@ -80,6 +83,8 @@ function canonicalizeFinding(
     ...finding,
     ruleId,
     severity,
-    subjects: [...finding.subjects].sort((left, right) => left.id.localeCompare(right.id)),
+    subjects: [...finding.subjects].sort((left, right) =>
+      compareRuleIdentifier(left.id, right.id),
+    ),
   };
 }

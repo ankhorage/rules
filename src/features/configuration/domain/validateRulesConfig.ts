@@ -8,7 +8,7 @@ import type {
   RulesConfigValidationOptions,
   RulesConfigValidationResult,
   RuleSeverity,
-} from './types/rules.js';
+} from '../../../types/rules.js';
 
 /*** Validate canonical rules.json data, optionally against a concrete rule registry. */
 export function validateRulesConfig<TContext>(
@@ -66,15 +66,16 @@ function validateRulesConfigRule(
   readonly rule: RulesConfigRule | null;
 } {
   const path = `rules[${index}]`;
-  if (!isRecord(value)) return invalidRule(path, 'must be an object.');
-  if (!isNonEmptyString(value.id)) return invalidRule(path, 'must define a non-empty "id".');
+  if (!isRecord(value)) return invalidRule('invalid-config', path, 'must be an object.');
+  if (!isNonEmptyString(value.id))
+    return invalidRule('invalid-rule-id', `${path}.id`, 'must define a non-empty "id".');
   if (typeof value.enabled !== 'boolean')
-    return invalidRule(path, 'must define boolean "enabled".');
+    return invalidRule('invalid-config', `${path}.enabled`, 'must define boolean "enabled".', value.id);
   if (value.severity !== undefined && !isRuleSeverity(value.severity)) {
-    return invalidRule(path, 'has an invalid "severity".');
+    return invalidRule('invalid-severity', `${path}.severity`, 'has an invalid "severity".', value.id);
   }
   if (value.options !== undefined && !isJsonValue(value.options)) {
-    return invalidRule(path, 'has non-serializable "options".');
+    return invalidRule('invalid-options', `${path}.options`, 'has non-serializable "options".', value.id);
   }
 
   return {
@@ -98,12 +99,12 @@ function validateConfiguredRules<TContext>(
   const availableCapabilities = new Set(options.capabilities ?? []);
   return config.rules.reduce<RulesConfigDiagnostic[]>((diagnostics, configuredRule, index) => {
     if (!configuredRule.enabled) return diagnostics;
-    const rule = options.registry?.ruleById.get(configuredRule.id);
+    const rule = options.registry.ruleById.get(configuredRule.id);
     if (rule === undefined) {
       return [
         ...diagnostics,
         {
-          code: 'unknown-rule' as const,
+          code: 'unknown-rule',
           message: `rules.json configures unknown rule "${configuredRule.id}".`,
           path: `rules[${index}].id`,
           ruleId: configuredRule.id,
@@ -145,14 +146,23 @@ function invalidConfig(message: string, path?: string): RulesConfigValidationRes
   };
 }
 
-/*** Create a consistent invalid-rule diagnostic at the configured rule location. */
+/*** Create a typed structural rule diagnostic at one configured rule location. */
 function invalidRule(
+  code: 'invalid-config' | 'invalid-options' | 'invalid-rule-id' | 'invalid-severity',
   path: string,
   detail: string,
+  ruleId?: string,
 ): { readonly diagnostics: readonly RulesConfigDiagnostic[]; readonly rule: null } {
   return {
     rule: null,
-    diagnostics: [{ code: 'invalid-rule-id', message: `rules.json ${path} ${detail}`, path }],
+    diagnostics: [
+      {
+        code,
+        message: `rules.json ${path} ${detail}`,
+        path,
+        ...(ruleId === undefined ? {} : { ruleId }),
+      },
+    ],
   };
 }
 

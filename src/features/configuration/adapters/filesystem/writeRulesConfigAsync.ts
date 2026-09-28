@@ -1,7 +1,8 @@
 import { writeJsonFileAtomic } from '@ankhorage/utility/node/fs';
 
-import type { RulesConfig } from './types/rules.js';
-import { validateRulesConfig } from './validateRulesConfig.js';
+import type { RulesConfig } from '../../../../types/rules.js';
+import { compareRuleIdentifier } from '../../../../utils/compareRuleIdentifier.js';
+import { validateRulesConfig } from '../../domain/validateRulesConfig.js';
 
 /*** Validate and atomically write canonical rules.json configuration. */
 export async function writeRulesConfigAsync(path: string, config: RulesConfig): Promise<void> {
@@ -17,6 +18,6 @@ export async function writeRulesConfigAsync(path: string, config: RulesConfig): 
 function canonicalizeRulesConfig(config: RulesConfig): RulesConfig {
   return {
     version: 1,
-    rules: [...config.rules].sort((left, right) => left.id.localeCompare(right.id)),
+    rules: [...config.rules].sort((left, right) => compareRuleIdentifier(left.id, right.id)),
   };
 }

@@ -119,11 +119,11 @@ export interface RulesConfigReadResult {
   readonly path: string;
 }
 
-/*** One execution diagnostic that explains why a configured rule could not run. */
+/*** One execution diagnostic that explains why configured evaluation could not complete canonically. */
 export interface RuleEvaluationDiagnostic {
-  readonly code: 'invalid-config' | 'invalid-options' | 'missing-capability' | 'unknown-rule';
+  readonly code: RulesConfigDiagnostic['code'];
   readonly message: string;
-  readonly ruleId: string;
+  readonly ruleId?: string;
 }
 
 /*** The deterministic generic result shared by every Rules consumer. */
