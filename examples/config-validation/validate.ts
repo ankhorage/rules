@@ -1,7 +1,9 @@
 /***
  * Validate a repository rules.json file through the public generic Rules API.
  *
+ * @title Validate Rules Configuration
  * @usage
+ * @readme
  */
 import { validateRulesConfigFileAsync } from '@ankhorage/rules';
 

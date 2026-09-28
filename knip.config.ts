@@ -7,11 +7,7 @@ export default createKnipConfig({
     'src/cli/standalone.ts',
     'examples/**/*.ts',
     'paradox.config.ts',
+    'eslint.examples.config.mjs',
   ],
-  ignoreFiles: [
-    '.prettierrc.js',
-    'eslint.config.mjs',
-    'eslint.local.config.mjs',
-    'prettier.local.config.js',
-  ],
+  ignoreFiles: ['.prettierrc.js', 'eslint.config.mjs', 'prettier.local.config.js'],
 });
