@@ -1,38 +1,35 @@
 #!/usr/bin/env bun
 
-import { createDefaultCommandContext } from '@ankhorage/ankh';
+import { validate } from './commands/config/validate.js';
 
-import { renderConfigValidation, runConfigValidateCommand } from './index.js';
-
-/*** Run the standalone Rules config validator through the same public operation as the Ankh provider. */
+/*** Run the standalone Rules CLI without depending on the Ankh runtime package. */
 export async function runCli(argv: readonly string[]): Promise<{ readonly exitCode: number }> {
-  const context = createDefaultCommandContext();
   const [firstToken, ...restTokens] = argv;
   if (firstToken === undefined || isHelpToken(firstToken)) {
-    context.writeStdout(renderHelp());
+    process.stdout.write(renderHelp());
     return { exitCode: 0 };
   }
   if (firstToken !== 'config' || restTokens.at(0) !== 'validate') {
-    context.writeStderr('Unknown Rules command. Run ankhorage-rules --help.\n');
+    process.stderr.write('Unknown Rules command. Run ankhorage-rules --help.\n');
     return { exitCode: 1 };
   }
 
   try {
-    const result = await runConfigValidateCommand(restTokens.slice(1), context.cwd);
-    context.writeStdout(renderConfigValidation(result));
-    return { exitCode: result.diagnostics.length === 0 ? 0 : 1 };
+    const result = await validate(restTokens.slice(1), process.cwd());
+    process.stdout.write(result.stdout);
+    return { exitCode: result.exitCode };
   } catch (error) {
-    context.writeStderr(`${error instanceof Error ? error.message : 'Rules command failed.'}\n`);
+    process.stderr.write(`${error instanceof Error ? error.message : 'Rules command failed.'}\n`);
     return { exitCode: 1 };
   }
 }
 
-/*** Identify help tokens accepted by the small standalone command adapter. */
+/*** Identify help tokens accepted by the standalone delivery adapter. */
 function isHelpToken(value: string): boolean {
   return value === '--help' || value === '-h' || value === 'help';
 }
 
-/*** Render the standalone command contract without implying provider discovery. */
+/*** Render standalone help without introducing a second command implementation. */
 function renderHelp(): string {
   return [
     '@ankhorage/rules',

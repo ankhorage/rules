@@ -8,7 +8,7 @@ import type {
   RulesConfigValidationOptions,
   RulesConfigValidationResult,
   RuleSeverity,
-} from './types/rules.js';
+} from '../../../types/rules.js';
 
 /*** Validate canonical rules.json data, optionally against a concrete rule registry. */
 export function validateRulesConfig<TContext>(
@@ -18,11 +18,7 @@ export function validateRulesConfig<TContext>(
   const structuralResult = validateRulesConfigStructure(value);
   if (structuralResult.config === null) return structuralResult;
 
-  const diagnostics = [
-    ...structuralResult.diagnostics,
-    ...validateConfiguredRules(structuralResult.config, options),
-  ];
-
+  const diagnostics = validateConfiguredRules(structuralResult.config, options);
   return {
     config: diagnostics.length === 0 ? structuralResult.config : null,
     diagnostics,
@@ -33,8 +29,9 @@ export function validateRulesConfig<TContext>(
 function validateRulesConfigStructure(value: unknown): RulesConfigValidationResult {
   if (!isRecord(value)) return invalidConfig('rules.json must contain an object.');
   if (value.version !== 1) return invalidConfig('rules.json "version" must be 1.', 'version');
-  if (!Array.isArray(value.rules))
+  if (!Array.isArray(value.rules)) {
     return invalidConfig('rules.json "rules" must be an array.', 'rules');
+  }
 
   const ruleResults = value.rules.map((rule, index) => validateRulesConfigRule(rule, index));
   const diagnostics = ruleResults.flatMap((result) => result.diagnostics);
@@ -66,15 +63,35 @@ function validateRulesConfigRule(
   readonly rule: RulesConfigRule | null;
 } {
   const path = `rules[${index}]`;
-  if (!isRecord(value)) return invalidRule(path, 'must be an object.');
-  if (!isNonEmptyString(value.id)) return invalidRule(path, 'must define a non-empty "id".');
-  if (typeof value.enabled !== 'boolean')
-    return invalidRule(path, 'must define boolean "enabled".');
+  if (!isRecord(value)) {
+    return invalidRuleField('invalid-config', path, 'must be an object.');
+  }
+  if (!isNonEmptyString(value.id)) {
+    return invalidRuleField('invalid-rule-id', `${path}.id`, 'must define a non-empty "id".');
+  }
+  if (typeof value.enabled !== 'boolean') {
+    return invalidRuleField(
+      'invalid-config',
+      `${path}.enabled`,
+      'must define boolean "enabled".',
+      value.id,
+    );
+  }
   if (value.severity !== undefined && !isRuleSeverity(value.severity)) {
-    return invalidRule(path, 'has an invalid "severity".');
+    return invalidRuleField(
+      'invalid-severity',
+      `${path}.severity`,
+      'has an invalid "severity".',
+      value.id,
+    );
   }
   if (value.options !== undefined && !isJsonValue(value.options)) {
-    return invalidRule(path, 'has non-serializable "options".');
+    return invalidRuleField(
+      'invalid-options',
+      `${path}.options`,
+      'has non-serializable "options".',
+      value.id,
+    );
   }
 
   return {
@@ -98,7 +115,7 @@ function validateConfiguredRules<TContext>(
   const availableCapabilities = new Set(options.capabilities ?? []);
   return config.rules.reduce<RulesConfigDiagnostic[]>((diagnostics, configuredRule, index) => {
     if (!configuredRule.enabled) return diagnostics;
-    const rule = options.registry?.ruleById.get(configuredRule.id);
+    const rule = options.registry.ruleById.get(configuredRule.id);
     if (rule === undefined) {
       return [
         ...diagnostics,
@@ -145,14 +162,23 @@ function invalidConfig(message: string, path?: string): RulesConfigValidationRes
   };
 }
 
-/*** Create a consistent invalid-rule diagnostic at the configured rule location. */
-function invalidRule(
+/*** Create a field-specific diagnostic for one invalid configured rule. */
+function invalidRuleField(
+  code: RulesConfigDiagnostic['code'],
   path: string,
   detail: string,
+  ruleId?: string,
 ): { readonly diagnostics: readonly RulesConfigDiagnostic[]; readonly rule: null } {
   return {
     rule: null,
-    diagnostics: [{ code: 'invalid-rule-id', message: `rules.json ${path} ${detail}`, path }],
+    diagnostics: [
+      {
+        code,
+        message: `rules.json ${path} ${detail}`,
+        path,
+        ...(ruleId === undefined ? {} : { ruleId }),
+      },
+    ],
   };
 }
 

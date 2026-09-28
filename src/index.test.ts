@@ -7,7 +7,6 @@ import { describe, expect, test } from 'bun:test';
 
 import {
   createRuleRegistry,
-  createRulesRuntimeProvider,
   evaluateConfiguredRules,
   evaluateRules,
   type JsonValue,
@@ -15,11 +14,12 @@ import {
   resolveRulesStatus,
   type Rule,
   type RuleSet,
-  runCli,
   validateRulesConfig,
   validateRulesConfigFileAsync,
   writeRulesConfigAsync,
 } from './index.js';
+import { createRulesRuntimeProvider } from './cli/index.js';
+import { runCli } from './cli/standalone.js';
 
 interface ContentContext {
   readonly words: readonly string[];
@@ -145,7 +145,7 @@ function testConfiguredRules(): void {
   });
   expect(result.diagnostics).toEqual([]);
   expect(result.findings.map((finding) => finding.severity)).toEqual(['error', 'warning']);
-  expect(resolveRulesStatus(result.findings)).toEqual({ status: 'invalid', color: 'red' });
+  expect(resolveRulesStatus(result)).toEqual({ status: 'invalid', color: 'red' });
 }
 
 function testInvalidConfigDiagnostics(): void {
@@ -180,14 +180,35 @@ function testInvalidConfigDiagnostics(): void {
       { registry, capabilities: ['text'] },
     ).diagnostics.map((diagnostic) => diagnostic.code),
   ).toEqual(['invalid-options', 'unknown-rule']);
+  const failedEvaluation = evaluateConfiguredRules(
+    { blockers: 0, words: [] },
+    { version: 1, rules: [{ id: 'missing.rule', enabled: true }] },
+    registry,
+    { capabilities: ['text', 'release-state'] },
+  );
+  expect(failedEvaluation.diagnostics).toEqual([
+    expect.objectContaining({ code: 'unknown-rule', ruleId: 'missing.rule' }),
+  ]);
+  expect(resolveRulesStatus(failedEvaluation)).toEqual({ status: 'invalid', color: 'red' });
+
   expect(
-    evaluateConfiguredRules(
-      { blockers: 0, words: [] },
-      { version: 1, rules: [{ id: 'missing.rule', enabled: true }] },
-      registry,
-      { capabilities: ['text', 'release-state'] },
-    ).diagnostics,
-  ).toEqual([expect.objectContaining({ code: 'unknown-rule', ruleId: 'missing.rule' })]);
+    validateRulesConfig({
+      version: 1,
+      rules: [{ id: 'release.no-blockers', enabled: true, severity: 'fatal' }],
+    }).diagnostics.map((diagnostic) => diagnostic.code),
+  ).toEqual(['invalid-severity']);
+  expect(
+    validateRulesConfig({
+      version: 1,
+      rules: [{ id: 'release.no-blockers', enabled: 'yes' }],
+    }).diagnostics.map((diagnostic) => diagnostic.code),
+  ).toEqual(['invalid-config']);
+  expect(
+    validateRulesConfig({
+      version: 1,
+      rules: [{ id: 'release.no-blockers', enabled: true, options: { value: undefined } }],
+    }).diagnostics.map((diagnostic) => diagnostic.code),
+  ).toEqual(['invalid-options']);
 }
 
 async function testConfigFileOperations(): Promise<void> {
@@ -195,12 +216,18 @@ async function testConfigFileOperations(): Promise<void> {
   const path = join(directory, 'rules.json');
   const config = {
     version: 1,
-    rules: [{ id: 'content.minimum-words', enabled: true, options: { minimum: 2 } }],
+    rules: [
+      { id: 'release.no-blockers', enabled: false },
+      { id: 'content.minimum-words', enabled: true, options: { minimum: 2 } },
+    ],
   } as const;
 
   try {
     await writeRulesConfigAsync(path, config);
-    expect((await readRulesConfigAsync(path)).config).toEqual(config);
+    expect((await readRulesConfigAsync(path)).config?.rules.map((rule) => rule.id)).toEqual([
+      'content.minimum-words',
+      'release.no-blockers',
+    ]);
     expect((await validateRulesConfigFileAsync(path, directory)).diagnostics).toEqual([]);
   } finally {
     await rm(directory, { recursive: true, force: true });
@@ -208,6 +235,10 @@ async function testConfigFileOperations(): Promise<void> {
 }
 
 async function testCliContract(): Promise<void> {
+  const rootApi = await import('./index.js');
+  expect('createRulesRuntimeProvider' in rootApi).toBe(false);
+  expect('runCli' in rootApi).toBe(false);
+
   const provider = createRulesRuntimeProvider();
   expect(provider.capabilities).toEqual(['rules.config.validate']);
   expect(provider.commands).toEqual([
