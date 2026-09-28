@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/rules",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Domain-agnostic rule engine and JSON configuration for Ankhorage.",
   "license": "MIT",
   "type": "module",

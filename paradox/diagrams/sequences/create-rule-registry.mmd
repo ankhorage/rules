@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant participant_assertUniqueRuleIds as assertUniqueRuleIds
+  participant participant_assertUniqueRuleSetIds as assertUniqueRuleSetIds
+  participant participant_createRuleRegistry as createRuleRegistry
+  participant participant_findDuplicateId as findDuplicateId
+  participant_createRuleRegistry->>participant_assertUniqueRuleSetIds: assertUniqueRuleSetIds()
+  participant_assertUniqueRuleSetIds->>participant_findDuplicateId: findDuplicateId()
+  participant_findDuplicateId-->>participant_assertUniqueRuleSetIds: return
+  participant_assertUniqueRuleSetIds-->>participant_createRuleRegistry: return
+  participant_createRuleRegistry->>participant_assertUniqueRuleIds: assertUniqueRuleIds()
+  participant_assertUniqueRuleIds->>participant_findDuplicateId: findDuplicateId()
+  participant_findDuplicateId-->>participant_assertUniqueRuleIds: return
+  participant_assertUniqueRuleIds-->>participant_createRuleRegistry: return

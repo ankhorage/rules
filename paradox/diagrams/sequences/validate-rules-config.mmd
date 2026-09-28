@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant participant_findDuplicateRuleIds as findDuplicateRuleIds
+  participant participant_invalidConfig as invalidConfig
+  participant participant_isRecord as isRecord
+  participant participant_validateConfiguredRules as validateConfiguredRules
+  participant participant_validateRulesConfig as validateRulesConfig
+  participant participant_validateRulesConfigStructure as validateRulesConfigStructure
+  participant_validateRulesConfig->>participant_validateRulesConfigStructure: validateRulesConfigStructure()
+  participant_validateRulesConfigStructure->>participant_isRecord: isRecord()
+  participant_isRecord-->>participant_validateRulesConfigStructure: return
+  participant_validateRulesConfigStructure->>participant_invalidConfig: invalidConfig()
+  participant_invalidConfig-->>participant_validateRulesConfigStructure: return
+  participant_validateRulesConfigStructure->>participant_findDuplicateRuleIds: findDuplicateRuleIds()
+  participant_findDuplicateRuleIds-->>participant_validateRulesConfigStructure: return
+  participant_validateRulesConfigStructure-->>participant_validateRulesConfig: return
+  participant_validateRulesConfig->>participant_validateConfiguredRules: validateConfiguredRules()
+  participant_validateConfiguredRules-->>participant_validateRulesConfig: return

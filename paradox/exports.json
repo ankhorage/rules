@@ -1,0 +1,1329 @@
+[
+  {
+    "name": "createRuleRegistry",
+    "title": null,
+    "description": "Create a deterministic registry from independently owned RuleSets.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/createRuleRegistry.ts",
+    "sourceLocation": {
+      "filePath": "src/createRuleRegistry.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleRegistry",
+      "RuleSet"
+    ],
+    "signatures": [
+      {
+        "label": "(ruleSets: readonly RuleSet<TContext>[]) => RuleRegistry<TContext>",
+        "parameters": [
+          {
+            "name": "ruleSets",
+            "type": "readonly RuleSet<TContext>[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleRegistry<TContext>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "createRulesRuntimeProvider",
+    "title": null,
+    "description": "Create the Ankh provider that exposes the generic JSON config validation operation.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/cli/index.ts",
+    "sourceLocation": {
+      "filePath": "src/cli/index.ts",
+      "line": 11,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "() => AnkhRuntimeCommandProvider",
+        "parameters": [],
+        "returnType": "AnkhRuntimeCommandProvider",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "evaluateConfiguredRules",
+    "title": null,
+    "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/evaluateConfiguredRules.ts",
+    "sourceLocation": {
+      "filePath": "src/evaluateConfiguredRules.ts",
+      "line": 13,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "EvaluateConfiguredRulesOptions",
+      "RuleEvaluationResult",
+      "RuleRegistry",
+      "RulesConfig"
+    ],
+    "signatures": [
+      {
+        "label": "(context: TContext, config: RulesConfig, registry: RuleRegistry<TContext>, options?: EvaluateConfiguredRulesOptions) => RuleEvaluationResult",
+        "parameters": [
+          {
+            "name": "config",
+            "type": "RulesConfig",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "context",
+            "type": "TContext",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "EvaluateConfiguredRulesOptions",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "registry",
+            "type": "RuleRegistry<TContext>",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleEvaluationResult",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "EvaluateConfiguredRulesOptions",
+    "title": null,
+    "description": "Configured evaluator inputs that preserve the caller's explicit capability set.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 142,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "capabilities",
+        "kind": "property",
+        "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "evaluateRules",
+    "title": null,
+    "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/evaluateRules.ts",
+    "sourceLocation": {
+      "filePath": "src/evaluateRules.ts",
+      "line": 11,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "EvaluateRulesOptions",
+      "JsonValue",
+      "Rule",
+      "RuleEvaluationResult"
+    ],
+    "signatures": [
+      {
+        "label": "(context: TContext, rules: readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult",
+        "parameters": [
+          {
+            "name": "context",
+            "type": "TContext",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "EvaluateRulesOptions",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "rules",
+            "type": "readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleEvaluationResult",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "EvaluateRulesOptions",
+    "title": null,
+    "description": "Direct evaluator inputs that are independent of any repository configuration format.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 136,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "capabilities",
+        "kind": "property",
+        "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "optionsByRuleId",
+        "kind": "property",
+        "type": "ReadonlyMap<string, JsonValue | undefined> | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "JsonValue",
+    "title": null,
+    "description": "A JSON value that can be stored in a portable Rules configuration or finding.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 2,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "readRulesConfigAsync",
+    "title": null,
+    "description": "Read and structurally validate a repository rules.json file.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/readRulesConfigAsync.ts",
+    "sourceLocation": {
+      "filePath": "src/readRulesConfigAsync.ts",
+      "line": 7,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfigReadResult"
+    ],
+    "signatures": [
+      {
+        "label": "(path: string) => Promise<RulesConfigReadResult>",
+        "parameters": [
+          {
+            "name": "path",
+            "type": "string",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "Promise<RulesConfigReadResult>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "resolveRulesStatus",
+    "title": null,
+    "description": "Summarize generic rule findings using the reusable status semantics formerly owned by Policy.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/resolveRulesStatus.ts",
+    "sourceLocation": {
+      "filePath": "src/resolveRulesStatus.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "RuleFinding",
+      "RulesStatusDescriptor"
+    ],
+    "signatures": [
+      {
+        "label": "(findings: readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]) => RulesStatusDescriptor",
+        "parameters": [
+          {
+            "name": "findings",
+            "type": "readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RulesStatusDescriptor",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "Rule",
+    "title": null,
+    "description": "A deterministic, provider-owned policy unit evaluated by the generic engine.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 45,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "RuleFinding",
+      "RuleOptionDiagnostic",
+      "RuleSeverity"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "defaultSeverity",
+        "kind": "property",
+        "type": "RuleSeverity",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "evaluate",
+        "kind": "method",
+        "type": "(input: { readonly context: TContext; readonly options: TOptions | undefined; }) => readonly RuleFinding<TEvidence>[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "requiredCapabilities",
+        "kind": "property",
+        "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "summary",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "validateOptions",
+        "kind": "method",
+        "type": "((options: JsonValue | undefined) => readonly RuleOptionDiagnostic[]) | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleCapability",
+    "title": null,
+    "description": "A capability that a rule needs from the context supplied by its consumer.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 6,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleEvaluationDiagnostic",
+    "title": null,
+    "description": "One execution diagnostic that explains why a configured rule could not run.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 123,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "code",
+        "kind": "property",
+        "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "ruleId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleEvaluationResult",
+    "title": null,
+    "description": "The deterministic generic result shared by every Rules consumer.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 130,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "RuleEvaluationDiagnostic",
+      "RuleFinding"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "diagnostics",
+        "kind": "property",
+        "type": "readonly RuleEvaluationDiagnostic[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "findings",
+        "kind": "property",
+        "type": "readonly RuleFinding<JsonValue>[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleFinding",
+    "title": null,
+    "description": "One serializable, consumer-neutral result produced by a rule.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 28,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleSeverity",
+      "RuleSourceLocation",
+      "RuleSubject"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "evidence",
+        "kind": "property",
+        "type": "TEvidence",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "ruleId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "severity",
+        "kind": "property",
+        "type": "RuleSeverity",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceLocation",
+        "kind": "property",
+        "type": "RuleSourceLocation | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "subjects",
+        "kind": "property",
+        "type": "readonly RuleSubject[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleOptionDiagnostic",
+    "title": null,
+    "description": "A validation error returned by a provider for its own serializable options.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 38,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "code",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "path",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleRegistry",
+    "title": null,
+    "description": "A registry that resolves rules without provider discovery or domain-specific branches.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 68,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "Rule",
+      "RuleSet"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "ruleById",
+        "kind": "property",
+        "type": "ReadonlyMap<string, Rule<TContext, JsonValue, JsonValue>>",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rules",
+        "kind": "property",
+        "type": "readonly Rule<TContext, JsonValue, JsonValue>[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "ruleSets",
+        "kind": "property",
+        "type": "readonly RuleSet<TContext>[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfig",
+    "title": null,
+    "description": "The canonical JSON-only configuration stored in a repository rules.json file.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 83,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfigRule"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "rules",
+        "kind": "property",
+        "type": "readonly RulesConfigRule[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "version",
+        "kind": "property",
+        "type": "1",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfigDiagnostic",
+    "title": null,
+    "description": "A portable diagnostic emitted while parsing or applying a Rules configuration.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 89,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "code",
+        "kind": "property",
+        "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\" | \"invalid-capability\" | \"invalid-rule-id\" | \"invalid-severity\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "message",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "path",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "ruleId",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfigReadResult",
+    "title": null,
+    "description": "The result of reading a repository rules.json file without hiding parse failures.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 116,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfig",
+      "RulesConfigDiagnostic"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "config",
+        "kind": "property",
+        "type": "RulesConfig | null",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "diagnostics",
+        "kind": "property",
+        "type": "readonly RulesConfigDiagnostic[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "path",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfigRule",
+    "title": null,
+    "description": "One enabled/disabled rule selection with serializable provider options.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 75,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "RuleSeverity"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "enabled",
+        "kind": "property",
+        "type": "boolean",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "options",
+        "kind": "property",
+        "type": "JsonValue | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "severity",
+        "kind": "property",
+        "type": "RuleSeverity | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfigValidationOptions",
+    "title": null,
+    "description": "Extra facts used to validate configured rule IDs, options, and required capabilities.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 110,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleRegistry"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "capabilities",
+        "kind": "property",
+        "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "registry",
+        "kind": "property",
+        "type": "RuleRegistry<TContext> | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesConfigValidationResult",
+    "title": null,
+    "description": "The result of validating a raw JSON configuration against optional provider knowledge.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 104,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfig",
+      "RulesConfigDiagnostic"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "config",
+        "kind": "property",
+        "type": "RulesConfig | null",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "diagnostics",
+        "kind": "property",
+        "type": "readonly RulesConfigDiagnostic[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleSet",
+    "title": null,
+    "description": "A named collection of independently supplied rules that can compose with other providers.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 62,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "Rule"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rules",
+        "kind": "property",
+        "type": "readonly Rule<TContext, JsonValue, JsonValue>[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleSeverity",
+    "title": null,
+    "description": "The canonical impact levels used by every Rules provider.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 9,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleSourceLocation",
+    "title": null,
+    "description": "An optional source location supplied as factual evidence by a provider.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 19,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "column",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "endColumn",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "endLine",
+        "kind": "property",
+        "type": "number | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "line",
+        "kind": "property",
+        "type": "number",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "path",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RulesStatusDescriptor",
+    "title": null,
+    "description": "A stable status summary suitable for consumer-specific presentation.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 147,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "color",
+        "kind": "property",
+        "type": "\"green\" | \"red\" | \"yellow\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "status",
+        "kind": "property",
+        "type": "\"canonical\" | \"invalid\" | \"warnings\"",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleSubject",
+    "title": null,
+    "description": "An affected semantic subject reported independently of any presentation consumer.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 12,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "kind",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "path",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "runCli",
+    "title": null,
+    "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/cli/standalone.ts",
+    "sourceLocation": {
+      "filePath": "src/cli/standalone.ts",
+      "line": 8,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [
+      {
+        "label": "(argv: readonly string[]) => Promise<{ readonly exitCode: number; }>",
+        "parameters": [
+          {
+            "name": "argv",
+            "type": "readonly string[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "Promise<{ readonly exitCode: number; }>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "validateRulesConfig",
+    "title": null,
+    "description": "Validate canonical rules.json data, optionally against a concrete rule registry.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/validateRulesConfig.ts",
+    "sourceLocation": {
+      "filePath": "src/validateRulesConfig.ts",
+      "line": 14,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfigValidationOptions",
+      "RulesConfigValidationResult"
+    ],
+    "signatures": [
+      {
+        "label": "(value: unknown, options?: RulesConfigValidationOptions<TContext>) => RulesConfigValidationResult",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "RulesConfigValidationOptions<TContext>",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "value",
+            "type": "unknown",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RulesConfigValidationResult",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "validateRulesConfigFileAsync",
+    "title": null,
+    "description": "Validate one explicit or default rules.json path through the public configuration operation.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/validateRulesConfigFileAsync.ts",
+    "sourceLocation": {
+      "filePath": "src/validateRulesConfigFileAsync.ts",
+      "line": 7,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfigReadResult"
+    ],
+    "signatures": [
+      {
+        "label": "(inputPath: string | undefined, cwd: string) => Promise<RulesConfigReadResult>",
+        "parameters": [
+          {
+            "name": "cwd",
+            "type": "string",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "inputPath",
+            "type": "string | undefined",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "Promise<RulesConfigReadResult>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "writeRulesConfigAsync",
+    "title": null,
+    "description": "Validate and atomically write canonical rules.json configuration.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/writeRulesConfigAsync.ts",
+    "sourceLocation": {
+      "filePath": "src/writeRulesConfigAsync.ts",
+      "line": 7,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RulesConfig"
+    ],
+    "signatures": [
+      {
+        "label": "(path: string, config: RulesConfig) => Promise<void>",
+        "parameters": [
+          {
+            "name": "config",
+            "type": "RulesConfig",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "path",
+            "type": "string",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "Promise<void>",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  }
+]
