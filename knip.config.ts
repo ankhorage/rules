@@ -1,7 +1,13 @@
 import { createKnipConfig } from '@ankhorage/devtools/knip';
 
 export default createKnipConfig({
-  entry: ['src/index.ts', 'src/cli/index.ts', 'src/cli/standalone.ts', 'examples/**/*.ts'],
+  entry: [
+    'src/index.ts',
+    'src/cli/index.ts',
+    'src/cli/standalone.ts',
+    'examples/**/*.ts',
+    'paradox.config.ts',
+  ],
   ignoreFiles: [
     '.prettierrc.js',
     'eslint.config.mjs',
