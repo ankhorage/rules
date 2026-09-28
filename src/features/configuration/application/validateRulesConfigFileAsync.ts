@@ -1,12 +1,13 @@
-import { readFile } from 'node:fs/promises';
+import type { RulesConfigDiagnostic, RulesConfigReadResult } from '../../../types/rules.js';
+import { validateRulesConfig } from '../domain/validateRulesConfig.js';
 
-import type { RulesConfigDiagnostic, RulesConfigReadResult } from './types/rules.js';
-import { validateRulesConfig } from './validateRulesConfig.js';
-
-/*** Read and structurally validate a repository rules.json file. */
-export async function readRulesConfigAsync(path: string): Promise<RulesConfigReadResult> {
+/*** Read and validate one Rules configuration through a caller supplied source reader. */
+export async function validateRulesConfigFileAsync(
+  path: string,
+  readSourceAsync: (path: string) => Promise<string>,
+): Promise<RulesConfigReadResult> {
   try {
-    const source = await readFile(path, 'utf8');
+    const source = await readSourceAsync(path);
     return { path, ...validateRulesConfig(parseJson(source)) };
   } catch (error) {
     return {
@@ -22,7 +23,7 @@ function parseJson(source: string): unknown {
   return JSON.parse(source) as unknown;
 }
 
-/*** Convert filesystem and JSON failures into a portable configuration diagnostic. */
+/*** Convert source and JSON failures into a portable configuration diagnostic. */
 function createReadDiagnostic(error: unknown): RulesConfigDiagnostic {
   return {
     code: 'invalid-config',

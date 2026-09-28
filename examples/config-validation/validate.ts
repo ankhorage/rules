@@ -5,9 +5,9 @@
  * @usage
  * @readme
  */
-import { validateRulesConfigFileAsync } from '@ankhorage/rules';
+import { readRulesConfigAsync } from '@ankhorage/rules';
 
-const result = await validateRulesConfigFileAsync('rules.json', process.cwd());
+const result = await readRulesConfigAsync('rules.json');
 
 if (result.diagnostics.length > 0) {
   throw new Error(result.diagnostics.map((diagnostic) => diagnostic.message).join('\n'));

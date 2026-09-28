@@ -88,7 +88,6 @@ export interface RulesConfig {
 /*** A portable diagnostic emitted while parsing or applying a Rules configuration. */
 export interface RulesConfigDiagnostic {
   readonly code:
-    | 'invalid-capability'
     | 'invalid-config'
     | 'invalid-options'
     | 'invalid-rule-id'
