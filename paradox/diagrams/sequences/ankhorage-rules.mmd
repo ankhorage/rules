@@ -1,17 +1,11 @@
 sequenceDiagram
-  participant participant_createDefaultCommandContext as createDefaultCommandContext
   participant participant_isHelpToken as isHelpToken
-  participant participant_renderConfigValidation as renderConfigValidation
   participant participant_renderHelp as renderHelp
   participant participant_runCli as runCli
-  participant participant_runConfigValidateCommand as runConfigValidateCommand
-  participant_runCli->>participant_createDefaultCommandContext: createDefaultCommandContext()
-  participant_createDefaultCommandContext-->>participant_runCli: return
+  participant participant_validate as validate
   participant_runCli->>participant_isHelpToken: isHelpToken()
   participant_isHelpToken-->>participant_runCli: return
   participant_runCli->>participant_renderHelp: renderHelp()
   participant_renderHelp-->>participant_runCli: return
-  participant_runCli->>participant_runConfigValidateCommand: runConfigValidateCommand()
-  participant_runConfigValidateCommand-->>participant_runCli: return
-  participant_runCli->>participant_renderConfigValidation: renderConfigValidation()
-  participant_renderConfigValidation-->>participant_runCli: return
+  participant_runCli->>participant_validate: validate()
+  participant_validate-->>participant_runCli: return

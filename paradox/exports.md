@@ -3,8 +3,8 @@
 ## createRuleRegistry
 
 Kind: `function`
-Module: `src/createRuleRegistry.ts`
-Source: `src/createRuleRegistry.ts:4:1`
+Module: `src/features/evaluation/domain/createRuleRegistry.ts`
+Source: `src/features/evaluation/domain/createRuleRegistry.ts:5:1`
 
 Create a deterministic registry from independently owned RuleSets.
 
@@ -14,24 +14,11 @@ Create a deterministic registry from independently owned RuleSets.
   - ruleSets: `readonly RuleSet<TContext>[]`
   - returns: `RuleRegistry<TContext>`
 
-## createRulesRuntimeProvider
-
-Kind: `function`
-Module: `src/cli/index.ts`
-Source: `src/cli/index.ts:11:1`
-
-Create the Ankh provider that exposes the generic JSON config validation operation.
-
-### Signatures
-
-- `() => AnkhRuntimeCommandProvider`
-  - returns: `AnkhRuntimeCommandProvider`
-
 ## evaluateConfiguredRules
 
 Kind: `function`
-Module: `src/evaluateConfiguredRules.ts`
-Source: `src/evaluateConfiguredRules.ts:13:1`
+Module: `src/features/evaluation/domain/evaluateConfiguredRules.ts`
+Source: `src/features/evaluation/domain/evaluateConfiguredRules.ts:14:1`
 
 Resolve a configured Rule registry and evaluate its enabled rules without provider branches.
 
@@ -48,7 +35,7 @@ Resolve a configured Rule registry and evaluate its enabled rules without provid
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:142:1`
+Source: `src/types/rules.ts:141:1`
 
 Configured evaluator inputs that preserve the caller's explicit capability set.
 
@@ -61,24 +48,24 @@ Configured evaluator inputs that preserve the caller's explicit capability set.
 ## evaluateRules
 
 Kind: `function`
-Module: `src/evaluateRules.ts`
-Source: `src/evaluateRules.ts:11:1`
+Module: `src/features/evaluation/domain/evaluateRules.ts`
+Source: `src/features/evaluation/domain/evaluateRules.ts:12:1`
 
 Evaluate unrelated rules in deterministic identifier order through one generic mechanism.
 
 ### Signatures
 
-- `(context: TContext, rules: readonly Rule<TContext, import("./index.js").JsonValue, import("./index.js").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult`
+- `(context: TContext, rules: readonly Rule<TContext, import("../../../index.js").JsonValue, import("../../../index.js").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult`
   - context: `TContext`
   - options: `EvaluateRulesOptions` (optional)
-  - rules: `readonly Rule<TContext, import("./index.js").JsonValue, import("./index.js").JsonValue>[]`
+  - rules: `readonly Rule<TContext, import("../../../index.js").JsonValue, import("../../../index.js").JsonValue>[]`
   - returns: `RuleEvaluationResult`
 
 ## EvaluateRulesOptions
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:136:1`
+Source: `src/types/rules.ts:135:1`
 
 Direct evaluator inputs that are independent of any repository configuration format.
 
@@ -100,10 +87,10 @@ A JSON value that can be stored in a portable Rules configuration or finding.
 ## readRulesConfigAsync
 
 Kind: `function`
-Module: `src/readRulesConfigAsync.ts`
-Source: `src/readRulesConfigAsync.ts:7:1`
+Module: `src/features/configuration/composition/readRulesConfigAsync.ts`
+Source: `src/features/configuration/composition/readRulesConfigAsync.ts:6:1`
 
-Read and structurally validate a repository rules.json file.
+Wire the configuration source reader into the public file-validation operation.
 
 ### Signatures
 
@@ -114,15 +101,15 @@ Read and structurally validate a repository rules.json file.
 ## resolveRulesStatus
 
 Kind: `function`
-Module: `src/resolveRulesStatus.ts`
-Source: `src/resolveRulesStatus.ts:4:1`
+Module: `src/features/evaluation/domain/resolveRulesStatus.ts`
+Source: `src/features/evaluation/domain/resolveRulesStatus.ts:4:1`
 
-Summarize generic rule findings using the reusable status semantics formerly owned by Policy.
+Summarize the complete Rules evaluation result without treating failed evaluation as canonical.
 
 ### Signatures
 
-- `(findings: readonly Pick<RuleFinding<import("./index.js").JsonValue>, "severity">[]) => RulesStatusDescriptor`
-  - findings: `readonly Pick<RuleFinding<import("./index.js").JsonValue>, "severity">[]`
+- `(result: Pick<RuleEvaluationResult, "diagnostics" | "findings">) => RulesStatusDescriptor`
+  - result: `Pick<RuleEvaluationResult, "diagnostics" | "findings">`
   - returns: `RulesStatusDescriptor`
 
 ## Rule
@@ -156,7 +143,7 @@ A capability that a rule needs from the context supplied by its consumer.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:123:1`
+Source: `src/types/rules.ts:122:1`
 
 One execution diagnostic that explains why a configured rule could not run.
 
@@ -172,7 +159,7 @@ One execution diagnostic that explains why a configured rule could not run.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:130:1`
+Source: `src/types/rules.ts:129:1`
 
 The deterministic generic result shared by every Rules consumer.
 
@@ -261,7 +248,7 @@ A portable diagnostic emitted while parsing or applying a Rules configuration.
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| code | property | `"invalid-config" \| "invalid-options" \| "missing-capability" \| "unknown-rule" \| "invalid-capability" \| "invalid-rule-id" \| "invalid-severity"` | yes |  |
+| code | property | `"invalid-config" \| "invalid-options" \| "missing-capability" \| "unknown-rule" \| "invalid-rule-id" \| "invalid-severity"` | yes |  |
 | message | property | `string` | yes |  |
 | path | property | `string \| undefined` | no |  |
 | ruleId | property | `string \| undefined` | no |  |
@@ -270,7 +257,7 @@ A portable diagnostic emitted while parsing or applying a Rules configuration.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:116:1`
+Source: `src/types/rules.ts:115:1`
 
 The result of reading a repository rules.json file without hiding parse failures.
 
@@ -303,7 +290,7 @@ One enabled/disabled rule selection with serializable provider options.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:110:1`
+Source: `src/types/rules.ts:109:1`
 
 Extra facts used to validate configured rule IDs, options, and required capabilities.
 
@@ -318,7 +305,7 @@ Extra facts used to validate configured rule IDs, options, and required capabili
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:104:1`
+Source: `src/types/rules.ts:103:1`
 
 The result of validating a raw JSON configuration against optional provider knowledge.
 
@@ -374,7 +361,7 @@ An optional source location supplied as factual evidence by a provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:147:1`
+Source: `src/types/rules.ts:146:1`
 
 A stable status summary suitable for consumer-specific presentation.
 
@@ -401,25 +388,11 @@ An affected semantic subject reported independently of any presentation consumer
 | kind | property | `string` | yes |  |
 | path | property | `string \| undefined` | no |  |
 
-## runCli
-
-Kind: `function`
-Module: `src/cli/standalone.ts`
-Source: `src/cli/standalone.ts:8:1`
-
-Run the standalone Rules config validator through the same public operation as the Ankh provider.
-
-### Signatures
-
-- `(argv: readonly string[]) => Promise<{ readonly exitCode: number; }>`
-  - argv: `readonly string[]`
-  - returns: `Promise<{ readonly exitCode: number; }>`
-
 ## validateRulesConfig
 
 Kind: `function`
-Module: `src/validateRulesConfig.ts`
-Source: `src/validateRulesConfig.ts:14:1`
+Module: `src/features/configuration/domain/validateRulesConfig.ts`
+Source: `src/features/configuration/domain/validateRulesConfig.ts:14:1`
 
 Validate canonical rules.json data, optionally against a concrete rule registry.
 
@@ -430,28 +403,13 @@ Validate canonical rules.json data, optionally against a concrete rule registry.
   - value: `unknown`
   - returns: `RulesConfigValidationResult`
 
-## validateRulesConfigFileAsync
-
-Kind: `function`
-Module: `src/validateRulesConfigFileAsync.ts`
-Source: `src/validateRulesConfigFileAsync.ts:7:1`
-
-Validate one explicit or default rules.json path through the public configuration operation.
-
-### Signatures
-
-- `(inputPath: string | undefined, cwd: string) => Promise<RulesConfigReadResult>`
-  - cwd: `string`
-  - inputPath: `string | undefined`
-  - returns: `Promise<RulesConfigReadResult>`
-
 ## writeRulesConfigAsync
 
 Kind: `function`
-Module: `src/writeRulesConfigAsync.ts`
-Source: `src/writeRulesConfigAsync.ts:7:1`
+Module: `src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts`
+Source: `src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts:8:1`
 
-Validate and atomically write canonical rules.json configuration.
+Validate and atomically write canonical rules.json configuration through the filesystem adapter.
 
 ### Signatures
 

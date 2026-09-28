@@ -1,28 +1,30 @@
 graph LR
   module_examples_config_validation_validate_ts["examples/config-validation/validate.ts"]
   module_package_json["package.json"]
+  module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
+  module_src_cli_createRulesRuntimeProvider_ts["src/cli/createRulesRuntimeProvider.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
-  module_src_createRuleRegistry_ts["src/createRuleRegistry.ts"]
-  module_src_evaluateConfiguredRules_ts["src/evaluateConfiguredRules.ts"]
-  module_src_evaluateRules_ts["src/evaluateRules.ts"]
+  module_src_constants_rules_ts["src/constants/rules.ts"]
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts["src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts"]
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts["src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"]
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts["src/features/configuration/application/validateRulesConfigFileAsync.ts"]
+  module_src_features_configuration_composition_readRulesConfigAsync_ts["src/features/configuration/composition/readRulesConfigAsync.ts"]
+  module_src_features_configuration_domain_validateRulesConfig_ts["src/features/configuration/domain/validateRulesConfig.ts"]
+  module_src_features_evaluation_domain_createRuleRegistry_ts["src/features/evaluation/domain/createRuleRegistry.ts"]
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts["src/features/evaluation/domain/evaluateConfiguredRules.ts"]
+  module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
+  module_src_features_evaluation_domain_resolveRulesStatus_ts["src/features/evaluation/domain/resolveRulesStatus.ts"]
   module_src_index_test_ts["src/index.test.ts"]
   module_src_index_ts["src/index.ts"]
-  module_src_packageMetadata_ts["src/packageMetadata.ts"]
-  module_src_readRulesConfigAsync_ts["src/readRulesConfigAsync.ts"]
-  module_src_resolveRulesStatus_ts["src/resolveRulesStatus.ts"]
   module_src_types_rules_ts["src/types/rules.ts"]
-  module_src_validateRulesConfig_ts["src/validateRulesConfig.ts"]
-  module_src_validateRulesConfigFileAsync_ts["src/validateRulesConfigFileAsync.ts"]
-  module_src_writeRulesConfigAsync_ts["src/writeRulesConfigAsync.ts"]
+  module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
   export_createRuleRegistry["createRuleRegistry"]
-  module_src_createRuleRegistry_ts --> export_createRuleRegistry
+  module_src_features_evaluation_domain_createRuleRegistry_ts --> export_createRuleRegistry
   export_createRuleRegistry -.-> export_RuleRegistry
   export_createRuleRegistry -.-> export_RuleSet
-  export_createRulesRuntimeProvider["createRulesRuntimeProvider"]
-  module_src_cli_index_ts --> export_createRulesRuntimeProvider
   export_evaluateConfiguredRules["evaluateConfiguredRules"]
-  module_src_evaluateConfiguredRules_ts --> export_evaluateConfiguredRules
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> export_evaluateConfiguredRules
   export_evaluateConfiguredRules -.-> export_EvaluateConfiguredRulesOptions
   export_evaluateConfiguredRules -.-> export_RuleEvaluationResult
   export_evaluateConfiguredRules -.-> export_RuleRegistry
@@ -30,7 +32,7 @@ graph LR
   export_EvaluateConfiguredRulesOptions["EvaluateConfiguredRulesOptions"]
   module_src_types_rules_ts --> export_EvaluateConfiguredRulesOptions
   export_evaluateRules["evaluateRules"]
-  module_src_evaluateRules_ts --> export_evaluateRules
+  module_src_features_evaluation_domain_evaluateRules_ts --> export_evaluateRules
   export_evaluateRules -.-> export_EvaluateRulesOptions
   export_evaluateRules -.-> export_JsonValue
   export_evaluateRules -.-> export_Rule
@@ -41,12 +43,11 @@ graph LR
   export_JsonValue["JsonValue"]
   module_src_types_rules_ts --> export_JsonValue
   export_readRulesConfigAsync["readRulesConfigAsync"]
-  module_src_readRulesConfigAsync_ts --> export_readRulesConfigAsync
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --> export_readRulesConfigAsync
   export_readRulesConfigAsync -.-> export_RulesConfigReadResult
   export_resolveRulesStatus["resolveRulesStatus"]
-  module_src_resolveRulesStatus_ts --> export_resolveRulesStatus
-  export_resolveRulesStatus -.-> export_JsonValue
-  export_resolveRulesStatus -.-> export_RuleFinding
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --> export_resolveRulesStatus
+  export_resolveRulesStatus -.-> export_RuleEvaluationResult
   export_resolveRulesStatus -.-> export_RulesStatusDescriptor
   export_Rule["Rule"]
   module_src_types_rules_ts --> export_Rule
@@ -107,15 +108,10 @@ graph LR
   module_src_types_rules_ts --> export_RulesStatusDescriptor
   export_RuleSubject["RuleSubject"]
   module_src_types_rules_ts --> export_RuleSubject
-  export_runCli["runCli"]
-  module_src_cli_standalone_ts --> export_runCli
   export_validateRulesConfig["validateRulesConfig"]
-  module_src_validateRulesConfig_ts --> export_validateRulesConfig
+  module_src_features_configuration_domain_validateRulesConfig_ts --> export_validateRulesConfig
   export_validateRulesConfig -.-> export_RulesConfigValidationOptions
   export_validateRulesConfig -.-> export_RulesConfigValidationResult
-  export_validateRulesConfigFileAsync["validateRulesConfigFileAsync"]
-  module_src_validateRulesConfigFileAsync_ts --> export_validateRulesConfigFileAsync
-  export_validateRulesConfigFileAsync -.-> export_RulesConfigReadResult
   export_writeRulesConfigAsync["writeRulesConfigAsync"]
-  module_src_writeRulesConfigAsync_ts --> export_writeRulesConfigAsync
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --> export_writeRulesConfigAsync
   export_writeRulesConfigAsync -.-> export_RulesConfig

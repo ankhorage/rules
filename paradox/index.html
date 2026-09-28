@@ -127,9 +127,14 @@
               </button>
             </li>
             <li>
-    <button class="nav-button" type="button" data-target="src/cli/index.ts">
-      src/cli/index.ts
-      <small>3 functions</small>
+    <button class="nav-button" type="button" data-target="src/cli/commands/config/validate.ts">
+      src/cli/commands/config/validate.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/cli/createRulesRuntimeProvider.ts">
+      src/cli/createRulesRuntimeProvider.ts
+      <small>1 function</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/cli/standalone.ts">
@@ -137,49 +142,59 @@
       <small>3 functions</small>
     </button>
   </li><li>
-    <button class="nav-button" type="button" data-target="src/createRuleRegistry.ts">
-      src/createRuleRegistry.ts
+    <button class="nav-button" type="button" data-target="src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts">
+      src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts">
+      src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/configuration/application/validateRulesConfigFileAsync.ts">
+      src/features/configuration/application/validateRulesConfigFileAsync.ts
+      <small>3 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/configuration/composition/readRulesConfigAsync.ts">
+      src/features/configuration/composition/readRulesConfigAsync.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/configuration/domain/validateRulesConfig.ts">
+      src/features/configuration/domain/validateRulesConfig.ts
+      <small>10 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/createRuleRegistry.ts">
+      src/features/evaluation/domain/createRuleRegistry.ts
       <small>4 functions</small>
     </button>
   </li><li>
-    <button class="nav-button" type="button" data-target="src/evaluateConfiguredRules.ts">
-      src/evaluateConfiguredRules.ts
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/evaluateConfiguredRules.ts">
+      src/features/evaluation/domain/evaluateConfiguredRules.ts
       <small>3 functions</small>
     </button>
   </li><li>
-    <button class="nav-button" type="button" data-target="src/evaluateRules.ts">
-      src/evaluateRules.ts
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/evaluateRules.ts">
+      src/features/evaluation/domain/evaluateRules.ts
       <small>3 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/resolveRulesStatus.ts">
+      src/features/evaluation/domain/resolveRulesStatus.ts
+      <small>1 function</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/index.test.ts">
       src/index.test.ts
-      <small>6 functions</small>
+      <small>8 functions</small>
     </button>
   </li><li>
-    <button class="nav-button" type="button" data-target="src/readRulesConfigAsync.ts">
-      src/readRulesConfigAsync.ts
-      <small>3 functions</small>
-    </button>
-  </li><li>
-    <button class="nav-button" type="button" data-target="src/resolveRulesStatus.ts">
-      src/resolveRulesStatus.ts
+    <button class="nav-button" type="button" data-target="src/utils/compareRuleEntityIds.ts">
+      src/utils/compareRuleEntityIds.ts
       <small>1 function</small>
-    </button>
-  </li><li>
-    <button class="nav-button" type="button" data-target="src/validateRulesConfig.ts">
-      src/validateRulesConfig.ts
-      <small>10 functions</small>
-    </button>
-  </li><li>
-    <button class="nav-button" type="button" data-target="src/validateRulesConfigFileAsync.ts">
-      src/validateRulesConfigFileAsync.ts
-      <small>1 function</small>
-    </button>
-  </li><li>
-    <button class="nav-button" type="button" data-target="src/writeRulesConfigAsync.ts">
-      src/writeRulesConfigAsync.ts
-      <small>2 functions</small>
     </button>
   </li>
           </ul>
@@ -191,9 +206,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>31</strong><span class="muted">public exports</span></div>
+        <div><strong>28</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>16</strong><span class="muted">modules</span></div>
+        <div><strong>20</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -212,7 +227,7 @@
     <p class="muted"><code>examples/config-validation/validate.ts</code></p>
     <p>Validate a repository rules.json file through the public generic Rules API.</p>
     
-    <pre>import { validateRulesConfigFileAsync } from &#39;@ankhorage/rules&#39;;</pre>
+    <pre>import { readRulesConfigAsync } from &#39;@ankhorage/rules&#39;;</pre>
   </article>
   </section>
     <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
@@ -228,135 +243,204 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/cli/index.ts src/packageMetadata.ts src/validateRulesConfigFileAsync.ts createRulesRuntimeProvider default renderConfigValidation runConfigValidateCommand">
+  </article><article class="item" data-search="src/cli/commands/config/validate.ts src/features/configuration/composition/readRulesConfigAsync.ts validate">
+    <h3>src/cli/commands/config/validate.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/configuration/composition/readRulesConfigAsync.ts</code></p>
+    <p><strong>Exports:</strong> <code>validate</code></p>
+  </article><article class="item" data-search="src/cli/createRulesRuntimeProvider.ts src/cli/commands/config/validate.ts src/constants/rules.ts createRulesRuntimeProvider">
+    <h3>src/cli/createRulesRuntimeProvider.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/cli/commands/config/validate.ts</code>, <code>src/constants/rules.ts</code></p>
+    <p><strong>Exports:</strong> <code>createRulesRuntimeProvider</code></p>
+  </article><article class="item" data-search="src/cli/index.ts src/cli/createRulesRuntimeProvider.ts createRulesRuntimeProvider default">
     <h3>src/cli/index.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/packageMetadata.ts</code>, <code>src/validateRulesConfigFileAsync.ts</code></p>
-    <p><strong>Exports:</strong> <code>createRulesRuntimeProvider</code>, <code>default</code>, <code>renderConfigValidation</code>, <code>runConfigValidateCommand</code></p>
-  </article><article class="item" data-search="src/cli/standalone.ts src/cli/index.ts runCli">
+    <p><strong>Dependencies:</strong> <code>src/cli/createRulesRuntimeProvider.ts</code></p>
+    <p><strong>Exports:</strong> <code>createRulesRuntimeProvider</code>, <code>default</code></p>
+  </article><article class="item" data-search="src/cli/standalone.ts src/cli/commands/config/validate.ts runCli">
     <h3>src/cli/standalone.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/cli/index.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/cli/commands/config/validate.ts</code></p>
     <p><strong>Exports:</strong> <code>runCli</code></p>
-  </article><article class="item" data-search="src/createRuleRegistry.ts src/types/rules.ts createRuleRegistry">
-    <h3>src/createRuleRegistry.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
-    <p><strong>Exports:</strong> <code>createRuleRegistry</code></p>
-  </article><article class="item" data-search="src/evaluateConfiguredRules.ts src/evaluateRules.ts src/types/rules.ts src/validateRulesConfig.ts evaluateConfiguredRules">
-    <h3>src/evaluateConfiguredRules.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/evaluateRules.ts</code>, <code>src/types/rules.ts</code>, <code>src/validateRulesConfig.ts</code></p>
-    <p><strong>Exports:</strong> <code>evaluateConfiguredRules</code></p>
-  </article><article class="item" data-search="src/evaluateRules.ts src/types/rules.ts evaluateRules">
-    <h3>src/evaluateRules.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
-    <p><strong>Exports:</strong> <code>evaluateRules</code></p>
-  </article><article class="item" data-search="src/index.test.ts src/index.ts">
-    <h3>src/index.test.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
-    <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/index.ts createRuleRegistry createRulesRuntimeProvider evaluateConfiguredRules EvaluateConfiguredRulesOptions evaluateRules EvaluateRulesOptions JsonValue readRulesConfigAsync resolveRulesStatus Rule RuleCapability RuleEvaluationDiagnostic RuleEvaluationResult RuleFinding RuleOptionDiagnostic RuleRegistry RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject runCli validateRulesConfig validateRulesConfigFileAsync writeRulesConfigAsync">
-    <h3>src/index.ts</h3>
-    <p class="muted">Configured entrypoint</p>
-    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>createRuleRegistry</code>, <code>createRulesRuntimeProvider</code>, <code>evaluateConfiguredRules</code>, <code>EvaluateConfiguredRulesOptions</code>, <code>evaluateRules</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>readRulesConfigAsync</code>, <code>resolveRulesStatus</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationResult</code>, <code>RuleFinding</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code>, <code>runCli</code>, <code>validateRulesConfig</code>, <code>validateRulesConfigFileAsync</code>, <code>writeRulesConfigAsync</code></p>
-  </article><article class="item" data-search="src/packageMetadata.ts package.json RULES_CAPABILITIES RULES_COMMAND_CATEGORY RULES_PACKAGE_VERSION">
-    <h3>src/packageMetadata.ts</h3>
+  </article><article class="item" data-search="src/constants/rules.ts package.json RULES_CAPABILITIES RULES_COMMAND_CATEGORY RULES_PACKAGE_VERSION">
+    <h3>src/constants/rules.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>package.json</code></p>
     <p><strong>Exports:</strong> <code>RULES_CAPABILITIES</code>, <code>RULES_COMMAND_CATEGORY</code>, <code>RULES_PACKAGE_VERSION</code></p>
-  </article><article class="item" data-search="src/readRulesConfigAsync.ts src/types/rules.ts src/validateRulesConfig.ts readRulesConfigAsync">
-    <h3>src/readRulesConfigAsync.ts</h3>
+  </article><article class="item" data-search="src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts readRulesConfigSourceAsync">
+    <h3>src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/validateRulesConfig.ts</code></p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>readRulesConfigSourceAsync</code></p>
+  </article><article class="item" data-search="src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts src/features/configuration/domain/validateRulesConfig.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts writeRulesConfigAsync">
+    <h3>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/configuration/domain/validateRulesConfig.ts</code>, <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
+    <p><strong>Exports:</strong> <code>writeRulesConfigAsync</code></p>
+  </article><article class="item" data-search="src/features/configuration/application/validateRulesConfigFileAsync.ts src/features/configuration/domain/validateRulesConfig.ts src/types/rules.ts validateRulesConfigFileAsync">
+    <h3>src/features/configuration/application/validateRulesConfigFileAsync.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/configuration/domain/validateRulesConfig.ts</code>, <code>src/types/rules.ts</code></p>
+    <p><strong>Exports:</strong> <code>validateRulesConfigFileAsync</code></p>
+  </article><article class="item" data-search="src/features/configuration/composition/readRulesConfigAsync.ts src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts src/features/configuration/application/validateRulesConfigFileAsync.ts src/types/rules.ts readRulesConfigAsync">
+    <h3>src/features/configuration/composition/readRulesConfigAsync.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts</code>, <code>src/features/configuration/application/validateRulesConfigFileAsync.ts</code>, <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>readRulesConfigAsync</code></p>
-  </article><article class="item" data-search="src/resolveRulesStatus.ts src/types/rules.ts resolveRulesStatus">
-    <h3>src/resolveRulesStatus.ts</h3>
+  </article><article class="item" data-search="src/features/configuration/domain/validateRulesConfig.ts src/types/rules.ts validateRulesConfig">
+    <h3>src/features/configuration/domain/validateRulesConfig.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
+    <p><strong>Exports:</strong> <code>validateRulesConfig</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/createRuleRegistry.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts createRuleRegistry">
+    <h3>src/features/evaluation/domain/createRuleRegistry.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
+    <p><strong>Exports:</strong> <code>createRuleRegistry</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/evaluateConfiguredRules.ts src/features/configuration/domain/validateRulesConfig.ts src/features/evaluation/domain/evaluateRules.ts src/types/rules.ts evaluateConfiguredRules">
+    <h3>src/features/evaluation/domain/evaluateConfiguredRules.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/features/configuration/domain/validateRulesConfig.ts</code>, <code>src/features/evaluation/domain/evaluateRules.ts</code>, <code>src/types/rules.ts</code></p>
+    <p><strong>Exports:</strong> <code>evaluateConfiguredRules</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/evaluateRules.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts evaluateRules">
+    <h3>src/features/evaluation/domain/evaluateRules.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
+    <p><strong>Exports:</strong> <code>evaluateRules</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/resolveRulesStatus.ts src/types/rules.ts resolveRulesStatus">
+    <h3>src/features/evaluation/domain/resolveRulesStatus.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>resolveRulesStatus</code></p>
+  </article><article class="item" data-search="src/index.test.ts src/cli/index.ts src/cli/standalone.ts src/index.ts">
+    <h3>src/index.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/cli/index.ts</code>, <code>src/cli/standalone.ts</code>, <code>src/index.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/index.ts createRuleRegistry evaluateConfiguredRules EvaluateConfiguredRulesOptions evaluateRules EvaluateRulesOptions JsonValue readRulesConfigAsync resolveRulesStatus Rule RuleCapability RuleEvaluationDiagnostic RuleEvaluationResult RuleFinding RuleOptionDiagnostic RuleRegistry RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject validateRulesConfig writeRulesConfigAsync">
+    <h3>src/index.ts</h3>
+    <p class="muted">Configured entrypoint</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>createRuleRegistry</code>, <code>evaluateConfiguredRules</code>, <code>EvaluateConfiguredRulesOptions</code>, <code>evaluateRules</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>readRulesConfigAsync</code>, <code>resolveRulesStatus</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationResult</code>, <code>RuleFinding</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code>, <code>validateRulesConfig</code>, <code>writeRulesConfigAsync</code></p>
   </article><article class="item" data-search="src/types/rules.ts EvaluateConfiguredRulesOptions EvaluateRulesOptions JsonValue Rule RuleCapability RuleEvaluationDiagnostic RuleEvaluationResult RuleFinding RuleOptionDiagnostic RuleRegistry RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject">
     <h3>src/types/rules.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <code>EvaluateConfiguredRulesOptions</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationResult</code>, <code>RuleFinding</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code></p>
-  </article><article class="item" data-search="src/validateRulesConfig.ts src/types/rules.ts validateRulesConfig">
-    <h3>src/validateRulesConfig.ts</h3>
+  </article><article class="item" data-search="src/utils/compareRuleEntityIds.ts compareRuleEntityIds">
+    <h3>src/utils/compareRuleEntityIds.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
-    <p><strong>Exports:</strong> <code>validateRulesConfig</code></p>
-  </article><article class="item" data-search="src/validateRulesConfigFileAsync.ts src/readRulesConfigAsync.ts src/types/rules.ts validateRulesConfigFileAsync">
-    <h3>src/validateRulesConfigFileAsync.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/readRulesConfigAsync.ts</code>, <code>src/types/rules.ts</code></p>
-    <p><strong>Exports:</strong> <code>validateRulesConfigFileAsync</code></p>
-  </article><article class="item" data-search="src/writeRulesConfigAsync.ts src/types/rules.ts src/validateRulesConfig.ts writeRulesConfigAsync">
-    <h3>src/writeRulesConfigAsync.ts</h3>
-    <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/validateRulesConfig.ts</code></p>
-    <p><strong>Exports:</strong> <code>writeRulesConfigAsync</code></p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>compareRuleEntityIds</code></p>
   </article>
     </section>
     <section class="panel">
       <h2>Public API</h2>
       
             <section>
-              <h3>src/cli/index.ts</h3>
-              <article class="item" id="symbol-createrulesruntimeprovider" data-search="createRulesRuntimeProvider  function src/cli/index.ts Create the Ankh provider that exposes the generic JSON config validation operation. () =&gt; AnkhRuntimeCommandProvider">
-    <h4>createRulesRuntimeProvider</h4>
+              <h3>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts</h3>
+              <article class="item" id="symbol-writerulesconfigasync" data-search="writeRulesConfigAsync  function src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts Validate and atomically write canonical rules.json configuration through the filesystem adapter. RulesConfig (path: string, config: RulesConfig) =&gt; Promise&lt;void&gt;">
+    <h4>writeRulesConfigAsync</h4>
     
-    <p class="muted">function • <code>src/cli/index.ts:11:1</code></p>
-    <p>Create the Ankh provider that exposes the generic JSON config validation operation.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
-    <div>
-        <h5>Signature</h5>
-        <pre>() =&gt; AnkhRuntimeCommandProvider</pre>
-        
-        <p><strong>Returns:</strong> <code>AnkhRuntimeCommandProvider</code></p>
-      </div>
-    
-  </article>
-            </section>
-            <section>
-              <h3>src/cli/standalone.ts</h3>
-              <article class="item" id="symbol-runcli" data-search="runCli  function src/cli/standalone.ts Run the standalone Rules config validator through the same public operation as the Ankh provider. (argv: readonly string[]) =&gt; Promise&lt;{ readonly exitCode: number; }&gt;">
-    <h4>runCli</h4>
-    
-    <p class="muted">function • <code>src/cli/standalone.ts:8:1</code></p>
-    <p>Run the standalone Rules config validator through the same public operation as the Ankh provider.</p>
+    <p class="muted">function • <code>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts:8:1</code></p>
+    <p>Validate and atomically write canonical rules.json configuration through the filesystem adapter.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfig</li></ul></div>
     <div>
         <h5>Signature</h5>
-        <pre>(argv: readonly string[]) =&gt; Promise&lt;{ readonly exitCode: number; }&gt;</pre>
+        <pre>(path: string, config: RulesConfig) =&gt; Promise&lt;void&gt;</pre>
         <table>
                 <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
                 <tbody>
                   <tr>
-                        <td><code>argv</code></td>
-                        <td><code>readonly string[]</code></td>
+                        <td><code>config</code></td>
+                        <td><code>RulesConfig</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>path</code></td>
+                        <td><code>string</code></td>
                         <td>yes</td>
                         <td></td>
                       </tr>
                 </tbody>
               </table>
-        <p><strong>Returns:</strong> <code>Promise&lt;{ readonly exitCode: number; }&gt;</code></p>
+        <p><strong>Returns:</strong> <code>Promise&lt;void&gt;</code></p>
       </div>
     
   </article>
             </section>
             <section>
-              <h3>src/createRuleRegistry.ts</h3>
-              <article class="item" id="symbol-createruleregistry" data-search="createRuleRegistry  function src/createRuleRegistry.ts Create a deterministic registry from independently owned RuleSets. RuleRegistry RuleSet (ruleSets: readonly RuleSet&lt;TContext&gt;[]) =&gt; RuleRegistry&lt;TContext&gt;">
+              <h3>src/features/configuration/composition/readRulesConfigAsync.ts</h3>
+              <article class="item" id="symbol-readrulesconfigasync" data-search="readRulesConfigAsync  function src/features/configuration/composition/readRulesConfigAsync.ts Wire the configuration source reader into the public file-validation operation. RulesConfigReadResult (path: string) =&gt; Promise&lt;RulesConfigReadResult&gt;">
+    <h4>readRulesConfigAsync</h4>
+    
+    <p class="muted">function • <code>src/features/configuration/composition/readRulesConfigAsync.ts:6:1</code></p>
+    <p>Wire the configuration source reader into the public file-validation operation.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfigReadResult</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(path: string) =&gt; Promise&lt;RulesConfigReadResult&gt;</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>path</code></td>
+                        <td><code>string</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>Promise&lt;RulesConfigReadResult&gt;</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/configuration/domain/validateRulesConfig.ts</h3>
+              <article class="item" id="symbol-validaterulesconfig" data-search="validateRulesConfig  function src/features/configuration/domain/validateRulesConfig.ts Validate canonical rules.json data, optionally against a concrete rule registry. RulesConfigValidationOptions RulesConfigValidationResult (value: unknown, options?: RulesConfigValidationOptions&lt;TContext&gt;) =&gt; RulesConfigValidationResult">
+    <h4>validateRulesConfig</h4>
+    
+    <p class="muted">function • <code>src/features/configuration/domain/validateRulesConfig.ts:14:1</code></p>
+    <p>Validate canonical rules.json data, optionally against a concrete rule registry.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfigValidationOptions</li><li class="chip">RulesConfigValidationResult</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(value: unknown, options?: RulesConfigValidationOptions&lt;TContext&gt;) =&gt; RulesConfigValidationResult</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>options</code></td>
+                        <td><code>RulesConfigValidationOptions&lt;TContext&gt;</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>value</code></td>
+                        <td><code>unknown</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>RulesConfigValidationResult</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
+              <h3>src/features/evaluation/domain/createRuleRegistry.ts</h3>
+              <article class="item" id="symbol-createruleregistry" data-search="createRuleRegistry  function src/features/evaluation/domain/createRuleRegistry.ts Create a deterministic registry from independently owned RuleSets. RuleRegistry RuleSet (ruleSets: readonly RuleSet&lt;TContext&gt;[]) =&gt; RuleRegistry&lt;TContext&gt;">
     <h4>createRuleRegistry</h4>
     
-    <p class="muted">function • <code>src/createRuleRegistry.ts:4:1</code></p>
+    <p class="muted">function • <code>src/features/evaluation/domain/createRuleRegistry.ts:5:1</code></p>
     <p>Create a deterministic registry from independently owned RuleSets.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -381,11 +465,11 @@
   </article>
             </section>
             <section>
-              <h3>src/evaluateConfiguredRules.ts</h3>
-              <article class="item" id="symbol-evaluateconfiguredrules" data-search="evaluateConfiguredRules  function src/evaluateConfiguredRules.ts Resolve a configured Rule registry and evaluate its enabled rules without provider branches. EvaluateConfiguredRulesOptions RuleEvaluationResult RuleRegistry RulesConfig (context: TContext, config: RulesConfig, registry: RuleRegistry&lt;TContext&gt;, options?: EvaluateConfiguredRulesOptions) =&gt; RuleEvaluationResult">
+              <h3>src/features/evaluation/domain/evaluateConfiguredRules.ts</h3>
+              <article class="item" id="symbol-evaluateconfiguredrules" data-search="evaluateConfiguredRules  function src/features/evaluation/domain/evaluateConfiguredRules.ts Resolve a configured Rule registry and evaluate its enabled rules without provider branches. EvaluateConfiguredRulesOptions RuleEvaluationResult RuleRegistry RulesConfig (context: TContext, config: RulesConfig, registry: RuleRegistry&lt;TContext&gt;, options?: EvaluateConfiguredRulesOptions) =&gt; RuleEvaluationResult">
     <h4>evaluateConfiguredRules</h4>
     
-    <p class="muted">function • <code>src/evaluateConfiguredRules.ts:13:1</code></p>
+    <p class="muted">function • <code>src/features/evaluation/domain/evaluateConfiguredRules.ts:14:1</code></p>
     <p>Resolve a configured Rule registry and evaluate its enabled rules without provider branches.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -425,18 +509,18 @@
   </article>
             </section>
             <section>
-              <h3>src/evaluateRules.ts</h3>
-              <article class="item" id="symbol-evaluaterules" data-search="evaluateRules  function src/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism. EvaluateRulesOptions JsonValue Rule RuleEvaluationResult (context: TContext, rules: readonly Rule&lt;TContext, import(&quot;./index.js&quot;).JsonValue, import(&quot;./index.js&quot;).JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult">
+              <h3>src/features/evaluation/domain/evaluateRules.ts</h3>
+              <article class="item" id="symbol-evaluaterules" data-search="evaluateRules  function src/features/evaluation/domain/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism. EvaluateRulesOptions JsonValue Rule RuleEvaluationResult (context: TContext, rules: readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult">
     <h4>evaluateRules</h4>
     
-    <p class="muted">function • <code>src/evaluateRules.ts:11:1</code></p>
+    <p class="muted">function • <code>src/features/evaluation/domain/evaluateRules.ts:12:1</code></p>
     <p>Evaluate unrelated rules in deterministic identifier order through one generic mechanism.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">EvaluateRulesOptions</li><li class="chip">JsonValue</li><li class="chip">Rule</li><li class="chip">RuleEvaluationResult</li></ul></div>
     <div>
         <h5>Signature</h5>
-        <pre>(context: TContext, rules: readonly Rule&lt;TContext, import(&quot;./index.js&quot;).JsonValue, import(&quot;./index.js&quot;).JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult</pre>
+        <pre>(context: TContext, rules: readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult</pre>
         <table>
                 <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
                 <tbody>
@@ -452,7 +536,7 @@
                         <td></td>
                       </tr><tr>
                         <td><code>rules</code></td>
-                        <td><code>readonly Rule&lt;TContext, import(&quot;./index.js&quot;).JsonValue, import(&quot;./index.js&quot;).JsonValue&gt;[]</code></td>
+                        <td><code>readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[]</code></td>
                         <td>yes</td>
                         <td></td>
                       </tr>
@@ -464,53 +548,24 @@
   </article>
             </section>
             <section>
-              <h3>src/readRulesConfigAsync.ts</h3>
-              <article class="item" id="symbol-readrulesconfigasync" data-search="readRulesConfigAsync  function src/readRulesConfigAsync.ts Read and structurally validate a repository rules.json file. RulesConfigReadResult (path: string) =&gt; Promise&lt;RulesConfigReadResult&gt;">
-    <h4>readRulesConfigAsync</h4>
-    
-    <p class="muted">function • <code>src/readRulesConfigAsync.ts:7:1</code></p>
-    <p>Read and structurally validate a repository rules.json file.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfigReadResult</li></ul></div>
-    <div>
-        <h5>Signature</h5>
-        <pre>(path: string) =&gt; Promise&lt;RulesConfigReadResult&gt;</pre>
-        <table>
-                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
-                <tbody>
-                  <tr>
-                        <td><code>path</code></td>
-                        <td><code>string</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                </tbody>
-              </table>
-        <p><strong>Returns:</strong> <code>Promise&lt;RulesConfigReadResult&gt;</code></p>
-      </div>
-    
-  </article>
-            </section>
-            <section>
-              <h3>src/resolveRulesStatus.ts</h3>
-              <article class="item" id="symbol-resolverulesstatus" data-search="resolveRulesStatus  function src/resolveRulesStatus.ts Summarize generic rule findings using the reusable status semantics formerly owned by Policy. JsonValue RuleFinding RulesStatusDescriptor (findings: readonly Pick&lt;RuleFinding&lt;import(&quot;./index.js&quot;).JsonValue&gt;, &quot;severity&quot;&gt;[]) =&gt; RulesStatusDescriptor">
+              <h3>src/features/evaluation/domain/resolveRulesStatus.ts</h3>
+              <article class="item" id="symbol-resolverulesstatus" data-search="resolveRulesStatus  function src/features/evaluation/domain/resolveRulesStatus.ts Summarize the complete Rules evaluation result without treating failed evaluation as canonical. RuleEvaluationResult RulesStatusDescriptor (result: Pick&lt;RuleEvaluationResult, &quot;diagnostics&quot; | &quot;findings&quot;&gt;) =&gt; RulesStatusDescriptor">
     <h4>resolveRulesStatus</h4>
     
-    <p class="muted">function • <code>src/resolveRulesStatus.ts:4:1</code></p>
-    <p>Summarize generic rule findings using the reusable status semantics formerly owned by Policy.</p>
+    <p class="muted">function • <code>src/features/evaluation/domain/resolveRulesStatus.ts:4:1</code></p>
+    <p>Summarize the complete Rules evaluation result without treating failed evaluation as canonical.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">JsonValue</li><li class="chip">RuleFinding</li><li class="chip">RulesStatusDescriptor</li></ul></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RuleEvaluationResult</li><li class="chip">RulesStatusDescriptor</li></ul></div>
     <div>
         <h5>Signature</h5>
-        <pre>(findings: readonly Pick&lt;RuleFinding&lt;import(&quot;./index.js&quot;).JsonValue&gt;, &quot;severity&quot;&gt;[]) =&gt; RulesStatusDescriptor</pre>
+        <pre>(result: Pick&lt;RuleEvaluationResult, &quot;diagnostics&quot; | &quot;findings&quot;&gt;) =&gt; RulesStatusDescriptor</pre>
         <table>
                 <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
                 <tbody>
                   <tr>
-                        <td><code>findings</code></td>
-                        <td><code>readonly Pick&lt;RuleFinding&lt;import(&quot;./index.js&quot;).JsonValue&gt;, &quot;severity&quot;&gt;[]</code></td>
+                        <td><code>result</code></td>
+                        <td><code>Pick&lt;RuleEvaluationResult, &quot;diagnostics&quot; | &quot;findings&quot;&gt;</code></td>
                         <td>yes</td>
                         <td></td>
                       </tr>
@@ -526,7 +581,7 @@
               <article class="item" id="symbol-evaluateconfiguredrulesoptions" data-search="EvaluateConfiguredRulesOptions  type src/types/rules.ts Configured evaluator inputs that preserve the caller&#39;s explicit capability set.">
     <h4>EvaluateConfiguredRulesOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:142:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:141:1</code></p>
     <p>Configured evaluator inputs that preserve the caller&#39;s explicit capability set.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -547,7 +602,7 @@
   </article><article class="item" id="symbol-evaluaterulesoptions" data-search="EvaluateRulesOptions  type src/types/rules.ts Direct evaluator inputs that are independent of any repository configuration format. JsonValue">
     <h4>EvaluateRulesOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:136:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:135:1</code></p>
     <p>Direct evaluator inputs that are independent of any repository configuration format.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -645,7 +700,7 @@
   </article><article class="item" id="symbol-ruleevaluationdiagnostic" data-search="RuleEvaluationDiagnostic  type src/types/rules.ts One execution diagnostic that explains why a configured rule could not run.">
     <h4>RuleEvaluationDiagnostic</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:123:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:122:1</code></p>
     <p>One execution diagnostic that explains why a configured rule could not run.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -678,7 +733,7 @@
   </article><article class="item" id="symbol-ruleevaluationresult" data-search="RuleEvaluationResult  type src/types/rules.ts The deterministic generic result shared by every Rules consumer. JsonValue RuleEvaluationDiagnostic RuleFinding">
     <h4>RuleEvaluationResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:130:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:129:1</code></p>
     <p>The deterministic generic result shared by every Rules consumer.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -861,7 +916,7 @@
       <tr>
             <td><code>code</code></td>
             <td>property</td>
-            <td><code>&quot;invalid-config&quot; | &quot;invalid-options&quot; | &quot;missing-capability&quot; | &quot;unknown-rule&quot; | &quot;invalid-capability&quot; | &quot;invalid-rule-id&quot; | &quot;invalid-severity&quot;</code></td>
+            <td><code>&quot;invalid-config&quot; | &quot;invalid-options&quot; | &quot;missing-capability&quot; | &quot;unknown-rule&quot; | &quot;invalid-rule-id&quot; | &quot;invalid-severity&quot;</code></td>
             <td>yes</td>
             <td></td>
           </tr><tr>
@@ -888,7 +943,7 @@
   </article><article class="item" id="symbol-rulesconfigreadresult" data-search="RulesConfigReadResult  type src/types/rules.ts The result of reading a repository rules.json file without hiding parse failures. RulesConfig RulesConfigDiagnostic">
     <h4>RulesConfigReadResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:116:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:115:1</code></p>
     <p>The result of reading a repository rules.json file without hiding parse failures.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -960,7 +1015,7 @@
   </article><article class="item" id="symbol-rulesconfigvalidationoptions" data-search="RulesConfigValidationOptions  type src/types/rules.ts Extra facts used to validate configured rule IDs, options, and required capabilities. RuleRegistry">
     <h4>RulesConfigValidationOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:110:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:109:1</code></p>
     <p>Extra facts used to validate configured rule IDs, options, and required capabilities.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -987,7 +1042,7 @@
   </article><article class="item" id="symbol-rulesconfigvalidationresult" data-search="RulesConfigValidationResult  type src/types/rules.ts The result of validating a raw JSON configuration against optional provider knowledge. RulesConfig RulesConfigDiagnostic">
     <h4>RulesConfigValidationResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:104:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:103:1</code></p>
     <p>The result of validating a raw JSON configuration against optional provider knowledge.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1096,7 +1151,7 @@
   </article><article class="item" id="symbol-rulesstatusdescriptor" data-search="RulesStatusDescriptor  type src/types/rules.ts A stable status summary suitable for consumer-specific presentation.">
     <h4>RulesStatusDescriptor</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:147:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:146:1</code></p>
     <p>A stable status summary suitable for consumer-specific presentation.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1155,108 +1210,6 @@
   </table>
   </article>
             </section>
-            <section>
-              <h3>src/validateRulesConfig.ts</h3>
-              <article class="item" id="symbol-validaterulesconfig" data-search="validateRulesConfig  function src/validateRulesConfig.ts Validate canonical rules.json data, optionally against a concrete rule registry. RulesConfigValidationOptions RulesConfigValidationResult (value: unknown, options?: RulesConfigValidationOptions&lt;TContext&gt;) =&gt; RulesConfigValidationResult">
-    <h4>validateRulesConfig</h4>
-    
-    <p class="muted">function • <code>src/validateRulesConfig.ts:14:1</code></p>
-    <p>Validate canonical rules.json data, optionally against a concrete rule registry.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfigValidationOptions</li><li class="chip">RulesConfigValidationResult</li></ul></div>
-    <div>
-        <h5>Signature</h5>
-        <pre>(value: unknown, options?: RulesConfigValidationOptions&lt;TContext&gt;) =&gt; RulesConfigValidationResult</pre>
-        <table>
-                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
-                <tbody>
-                  <tr>
-                        <td><code>options</code></td>
-                        <td><code>RulesConfigValidationOptions&lt;TContext&gt;</code></td>
-                        <td>no</td>
-                        <td></td>
-                      </tr><tr>
-                        <td><code>value</code></td>
-                        <td><code>unknown</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                </tbody>
-              </table>
-        <p><strong>Returns:</strong> <code>RulesConfigValidationResult</code></p>
-      </div>
-    
-  </article>
-            </section>
-            <section>
-              <h3>src/validateRulesConfigFileAsync.ts</h3>
-              <article class="item" id="symbol-validaterulesconfigfileasync" data-search="validateRulesConfigFileAsync  function src/validateRulesConfigFileAsync.ts Validate one explicit or default rules.json path through the public configuration operation. RulesConfigReadResult (inputPath: string | undefined, cwd: string) =&gt; Promise&lt;RulesConfigReadResult&gt;">
-    <h4>validateRulesConfigFileAsync</h4>
-    
-    <p class="muted">function • <code>src/validateRulesConfigFileAsync.ts:7:1</code></p>
-    <p>Validate one explicit or default rules.json path through the public configuration operation.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfigReadResult</li></ul></div>
-    <div>
-        <h5>Signature</h5>
-        <pre>(inputPath: string | undefined, cwd: string) =&gt; Promise&lt;RulesConfigReadResult&gt;</pre>
-        <table>
-                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
-                <tbody>
-                  <tr>
-                        <td><code>cwd</code></td>
-                        <td><code>string</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr><tr>
-                        <td><code>inputPath</code></td>
-                        <td><code>string | undefined</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                </tbody>
-              </table>
-        <p><strong>Returns:</strong> <code>Promise&lt;RulesConfigReadResult&gt;</code></p>
-      </div>
-    
-  </article>
-            </section>
-            <section>
-              <h3>src/writeRulesConfigAsync.ts</h3>
-              <article class="item" id="symbol-writerulesconfigasync" data-search="writeRulesConfigAsync  function src/writeRulesConfigAsync.ts Validate and atomically write canonical rules.json configuration. RulesConfig (path: string, config: RulesConfig) =&gt; Promise&lt;void&gt;">
-    <h4>writeRulesConfigAsync</h4>
-    
-    <p class="muted">function • <code>src/writeRulesConfigAsync.ts:7:1</code></p>
-    <p>Validate and atomically write canonical rules.json configuration.</p>
-    
-    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RulesConfig</li></ul></div>
-    <div>
-        <h5>Signature</h5>
-        <pre>(path: string, config: RulesConfig) =&gt; Promise&lt;void&gt;</pre>
-        <table>
-                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
-                <tbody>
-                  <tr>
-                        <td><code>config</code></td>
-                        <td><code>RulesConfig</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr><tr>
-                        <td><code>path</code></td>
-                        <td><code>string</code></td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                </tbody>
-              </table>
-        <p><strong>Returns:</strong> <code>Promise&lt;void&gt;</code></p>
-      </div>
-    
-  </article>
-            </section>
     </section>
     <section class="panel">
       <h2>Component registry</h2>
@@ -1276,51 +1229,67 @@
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_package_json[&quot;package.json&quot;]
   package__ankhorage_rules -.-&gt; module_package_json
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_index_ts
-  module_src_cli_index_ts --&gt; module_src_packageMetadata_ts
-  module_src_cli_index_ts --&gt; module_src_validateRulesConfigFileAsync_ts
+  module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_standalone_ts
-  module_src_cli_standalone_ts --&gt; module_src_cli_index_ts
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_createRuleRegistry_ts
-  module_src_createRuleRegistry_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_evaluateConfiguredRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_evaluateRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_evaluateRules_ts
-  module_src_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_cli_standalone_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_constants_rules_ts
+  module_src_constants_rules_ts --&gt; module_package_json
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateConfiguredRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_resolveRulesStatus_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_index_test_ts
+  module_src_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_packageMetadata_ts
-  module_src_packageMetadata_ts --&gt; module_package_json
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_readRulesConfigAsync_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_resolveRulesStatus_ts
-  module_src_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_types_rules_ts
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_validateRulesConfig_ts
-  module_src_validateRulesConfig_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_validateRulesConfigFileAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_readRulesConfigAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_writeRulesConfigAsync_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_utils_compareRuleEntityIds_ts
 </div>
     <details>
       <summary>View Mermaid source</summary>
@@ -1333,51 +1302,67 @@
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_package_json[&quot;package.json&quot;]
   package__ankhorage_rules -.-&gt; module_package_json
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_index_ts
-  module_src_cli_index_ts --&gt; module_src_packageMetadata_ts
-  module_src_cli_index_ts --&gt; module_src_validateRulesConfigFileAsync_ts
+  module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_standalone_ts
-  module_src_cli_standalone_ts --&gt; module_src_cli_index_ts
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_createRuleRegistry_ts
-  module_src_createRuleRegistry_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_evaluateConfiguredRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_evaluateRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_evaluateRules_ts
-  module_src_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_cli_standalone_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_constants_rules_ts
+  module_src_constants_rules_ts --&gt; module_package_json
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateConfiguredRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_resolveRulesStatus_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_index_test_ts
+  module_src_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_packageMetadata_ts
-  module_src_packageMetadata_ts --&gt; module_package_json
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_readRulesConfigAsync_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_resolveRulesStatus_ts
-  module_src_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_types_rules_ts
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_validateRulesConfig_ts
-  module_src_validateRulesConfig_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_validateRulesConfigFileAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_readRulesConfigAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
-  package__ankhorage_rules -.-&gt; module_src_writeRulesConfigAsync_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_utils_compareRuleEntityIds_ts
 </pre>
     </details>
   </article><article class="item" data-search="Module relationships diagrams/module-relationships.mmd">
@@ -1386,78 +1371,102 @@
     <div class="mermaid">graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
-  module_src_cli_index_ts --&gt; module_src_packageMetadata_ts
-  module_src_cli_index_ts --&gt; module_src_validateRulesConfigFileAsync_ts
-  module_src_cli_standalone_ts --&gt; module_src_cli_index_ts
-  module_src_createRuleRegistry_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_evaluateRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
+  module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_standalone_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_constants_rules_ts --&gt; module_package_json
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
+  module_src_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
-  module_src_packageMetadata_ts --&gt; module_package_json
-  module_src_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfig_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_readRulesConfigAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
 </div>
     <details>
       <summary>View Mermaid source</summary>
       <pre>graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
-  module_src_cli_index_ts --&gt; module_src_packageMetadata_ts
-  module_src_cli_index_ts --&gt; module_src_validateRulesConfigFileAsync_ts
-  module_src_cli_standalone_ts --&gt; module_src_cli_index_ts
-  module_src_createRuleRegistry_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_evaluateRules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
+  module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_standalone_ts --&gt; module_src_cli_commands_config_validate_ts
+  module_src_constants_rules_ts --&gt; module_package_json
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
+  module_src_index_test_ts --&gt; module_src_cli_index_ts
+  module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
-  module_src_packageMetadata_ts --&gt; module_package_json
-  module_src_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_readRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
-  module_src_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfig_ts --&gt; module_src_types_rules_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_readRulesConfigAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --&gt; module_src_validateRulesConfig_ts
 </pre>
     </details>
   </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
@@ -1466,28 +1475,30 @@
     <div class="mermaid">graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   export_createRuleRegistry[&quot;createRuleRegistry&quot;]
-  module_src_createRuleRegistry_ts --&gt; export_createRuleRegistry
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; export_createRuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleSet
-  export_createRulesRuntimeProvider[&quot;createRulesRuntimeProvider&quot;]
-  module_src_cli_index_ts --&gt; export_createRulesRuntimeProvider
   export_evaluateConfiguredRules[&quot;evaluateConfiguredRules&quot;]
-  module_src_evaluateConfiguredRules_ts --&gt; export_evaluateConfiguredRules
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; export_evaluateConfiguredRules
   export_evaluateConfiguredRules -.-&gt; export_EvaluateConfiguredRulesOptions
   export_evaluateConfiguredRules -.-&gt; export_RuleEvaluationResult
   export_evaluateConfiguredRules -.-&gt; export_RuleRegistry
@@ -1495,7 +1506,7 @@
   export_EvaluateConfiguredRulesOptions[&quot;EvaluateConfiguredRulesOptions&quot;]
   module_src_types_rules_ts --&gt; export_EvaluateConfiguredRulesOptions
   export_evaluateRules[&quot;evaluateRules&quot;]
-  module_src_evaluateRules_ts --&gt; export_evaluateRules
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; export_evaluateRules
   export_evaluateRules -.-&gt; export_EvaluateRulesOptions
   export_evaluateRules -.-&gt; export_JsonValue
   export_evaluateRules -.-&gt; export_Rule
@@ -1506,12 +1517,11 @@
   export_JsonValue[&quot;JsonValue&quot;]
   module_src_types_rules_ts --&gt; export_JsonValue
   export_readRulesConfigAsync[&quot;readRulesConfigAsync&quot;]
-  module_src_readRulesConfigAsync_ts --&gt; export_readRulesConfigAsync
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; export_readRulesConfigAsync
   export_readRulesConfigAsync -.-&gt; export_RulesConfigReadResult
   export_resolveRulesStatus[&quot;resolveRulesStatus&quot;]
-  module_src_resolveRulesStatus_ts --&gt; export_resolveRulesStatus
-  export_resolveRulesStatus -.-&gt; export_JsonValue
-  export_resolveRulesStatus -.-&gt; export_RuleFinding
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; export_resolveRulesStatus
+  export_resolveRulesStatus -.-&gt; export_RuleEvaluationResult
   export_resolveRulesStatus -.-&gt; export_RulesStatusDescriptor
   export_Rule[&quot;Rule&quot;]
   module_src_types_rules_ts --&gt; export_Rule
@@ -1572,17 +1582,12 @@
   module_src_types_rules_ts --&gt; export_RulesStatusDescriptor
   export_RuleSubject[&quot;RuleSubject&quot;]
   module_src_types_rules_ts --&gt; export_RuleSubject
-  export_runCli[&quot;runCli&quot;]
-  module_src_cli_standalone_ts --&gt; export_runCli
   export_validateRulesConfig[&quot;validateRulesConfig&quot;]
-  module_src_validateRulesConfig_ts --&gt; export_validateRulesConfig
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; export_validateRulesConfig
   export_validateRulesConfig -.-&gt; export_RulesConfigValidationOptions
   export_validateRulesConfig -.-&gt; export_RulesConfigValidationResult
-  export_validateRulesConfigFileAsync[&quot;validateRulesConfigFileAsync&quot;]
-  module_src_validateRulesConfigFileAsync_ts --&gt; export_validateRulesConfigFileAsync
-  export_validateRulesConfigFileAsync -.-&gt; export_RulesConfigReadResult
   export_writeRulesConfigAsync[&quot;writeRulesConfigAsync&quot;]
-  module_src_writeRulesConfigAsync_ts --&gt; export_writeRulesConfigAsync
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; export_writeRulesConfigAsync
   export_writeRulesConfigAsync -.-&gt; export_RulesConfig
 </div>
     <details>
@@ -1590,28 +1595,30 @@
       <pre>graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
-  module_src_createRuleRegistry_ts[&quot;src/createRuleRegistry.ts&quot;]
-  module_src_evaluateConfiguredRules_ts[&quot;src/evaluateConfiguredRules.ts&quot;]
-  module_src_evaluateRules_ts[&quot;src/evaluateRules.ts&quot;]
+  module_src_constants_rules_ts[&quot;src/constants/rules.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts[&quot;src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts&quot;]
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts[&quot;src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
+  module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
+  module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
-  module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
-  module_src_readRulesConfigAsync_ts[&quot;src/readRulesConfigAsync.ts&quot;]
-  module_src_resolveRulesStatus_ts[&quot;src/resolveRulesStatus.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
-  module_src_validateRulesConfig_ts[&quot;src/validateRulesConfig.ts&quot;]
-  module_src_validateRulesConfigFileAsync_ts[&quot;src/validateRulesConfigFileAsync.ts&quot;]
-  module_src_writeRulesConfigAsync_ts[&quot;src/writeRulesConfigAsync.ts&quot;]
+  module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   export_createRuleRegistry[&quot;createRuleRegistry&quot;]
-  module_src_createRuleRegistry_ts --&gt; export_createRuleRegistry
+  module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; export_createRuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleSet
-  export_createRulesRuntimeProvider[&quot;createRulesRuntimeProvider&quot;]
-  module_src_cli_index_ts --&gt; export_createRulesRuntimeProvider
   export_evaluateConfiguredRules[&quot;evaluateConfiguredRules&quot;]
-  module_src_evaluateConfiguredRules_ts --&gt; export_evaluateConfiguredRules
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; export_evaluateConfiguredRules
   export_evaluateConfiguredRules -.-&gt; export_EvaluateConfiguredRulesOptions
   export_evaluateConfiguredRules -.-&gt; export_RuleEvaluationResult
   export_evaluateConfiguredRules -.-&gt; export_RuleRegistry
@@ -1619,7 +1626,7 @@
   export_EvaluateConfiguredRulesOptions[&quot;EvaluateConfiguredRulesOptions&quot;]
   module_src_types_rules_ts --&gt; export_EvaluateConfiguredRulesOptions
   export_evaluateRules[&quot;evaluateRules&quot;]
-  module_src_evaluateRules_ts --&gt; export_evaluateRules
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; export_evaluateRules
   export_evaluateRules -.-&gt; export_EvaluateRulesOptions
   export_evaluateRules -.-&gt; export_JsonValue
   export_evaluateRules -.-&gt; export_Rule
@@ -1630,12 +1637,11 @@
   export_JsonValue[&quot;JsonValue&quot;]
   module_src_types_rules_ts --&gt; export_JsonValue
   export_readRulesConfigAsync[&quot;readRulesConfigAsync&quot;]
-  module_src_readRulesConfigAsync_ts --&gt; export_readRulesConfigAsync
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; export_readRulesConfigAsync
   export_readRulesConfigAsync -.-&gt; export_RulesConfigReadResult
   export_resolveRulesStatus[&quot;resolveRulesStatus&quot;]
-  module_src_resolveRulesStatus_ts --&gt; export_resolveRulesStatus
-  export_resolveRulesStatus -.-&gt; export_JsonValue
-  export_resolveRulesStatus -.-&gt; export_RuleFinding
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; export_resolveRulesStatus
+  export_resolveRulesStatus -.-&gt; export_RuleEvaluationResult
   export_resolveRulesStatus -.-&gt; export_RulesStatusDescriptor
   export_Rule[&quot;Rule&quot;]
   module_src_types_rules_ts --&gt; export_Rule
@@ -1696,17 +1702,12 @@
   module_src_types_rules_ts --&gt; export_RulesStatusDescriptor
   export_RuleSubject[&quot;RuleSubject&quot;]
   module_src_types_rules_ts --&gt; export_RuleSubject
-  export_runCli[&quot;runCli&quot;]
-  module_src_cli_standalone_ts --&gt; export_runCli
   export_validateRulesConfig[&quot;validateRulesConfig&quot;]
-  module_src_validateRulesConfig_ts --&gt; export_validateRulesConfig
+  module_src_features_configuration_domain_validateRulesConfig_ts --&gt; export_validateRulesConfig
   export_validateRulesConfig -.-&gt; export_RulesConfigValidationOptions
   export_validateRulesConfig -.-&gt; export_RulesConfigValidationResult
-  export_validateRulesConfigFileAsync[&quot;validateRulesConfigFileAsync&quot;]
-  module_src_validateRulesConfigFileAsync_ts --&gt; export_validateRulesConfigFileAsync
-  export_validateRulesConfigFileAsync -.-&gt; export_RulesConfigReadResult
   export_writeRulesConfigAsync[&quot;writeRulesConfigAsync&quot;]
-  module_src_writeRulesConfigAsync_ts --&gt; export_writeRulesConfigAsync
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --&gt; export_writeRulesConfigAsync
   export_writeRulesConfigAsync -.-&gt; export_RulesConfig
 </pre>
     </details>
@@ -1714,42 +1715,30 @@
     <h3>ankhorage-rules sequence</h3>
     <p class="muted"><code>diagrams/sequences/ankhorage-rules.mmd</code></p>
     <div class="mermaid">sequenceDiagram
-  participant participant_createDefaultCommandContext as createDefaultCommandContext
   participant participant_isHelpToken as isHelpToken
-  participant participant_renderConfigValidation as renderConfigValidation
   participant participant_renderHelp as renderHelp
   participant participant_runCli as runCli
-  participant participant_runConfigValidateCommand as runConfigValidateCommand
-  participant_runCli-&gt;&gt;participant_createDefaultCommandContext: createDefaultCommandContext()
-  participant_createDefaultCommandContext--&gt;&gt;participant_runCli: return
+  participant participant_validate as validate
   participant_runCli-&gt;&gt;participant_isHelpToken: isHelpToken()
   participant_isHelpToken--&gt;&gt;participant_runCli: return
   participant_runCli-&gt;&gt;participant_renderHelp: renderHelp()
   participant_renderHelp--&gt;&gt;participant_runCli: return
-  participant_runCli-&gt;&gt;participant_runConfigValidateCommand: runConfigValidateCommand()
-  participant_runConfigValidateCommand--&gt;&gt;participant_runCli: return
-  participant_runCli-&gt;&gt;participant_renderConfigValidation: renderConfigValidation()
-  participant_renderConfigValidation--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_validate: validate()
+  participant_validate--&gt;&gt;participant_runCli: return
 </div>
     <details>
       <summary>View Mermaid source</summary>
       <pre>sequenceDiagram
-  participant participant_createDefaultCommandContext as createDefaultCommandContext
   participant participant_isHelpToken as isHelpToken
-  participant participant_renderConfigValidation as renderConfigValidation
   participant participant_renderHelp as renderHelp
   participant participant_runCli as runCli
-  participant participant_runConfigValidateCommand as runConfigValidateCommand
-  participant_runCli-&gt;&gt;participant_createDefaultCommandContext: createDefaultCommandContext()
-  participant_createDefaultCommandContext--&gt;&gt;participant_runCli: return
+  participant participant_validate as validate
   participant_runCli-&gt;&gt;participant_isHelpToken: isHelpToken()
   participant_isHelpToken--&gt;&gt;participant_runCli: return
   participant_runCli-&gt;&gt;participant_renderHelp: renderHelp()
   participant_renderHelp--&gt;&gt;participant_runCli: return
-  participant_runCli-&gt;&gt;participant_runConfigValidateCommand: runConfigValidateCommand()
-  participant_runConfigValidateCommand--&gt;&gt;participant_runCli: return
-  participant_runCli-&gt;&gt;participant_renderConfigValidation: renderConfigValidation()
-  participant_renderConfigValidation--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_validate: validate()
+  participant_validate--&gt;&gt;participant_runCli: return
 </pre>
     </details>
   </article><article class="item" data-search="createRuleRegistry sequence diagrams/sequences/create-rule-registry.mmd">
@@ -1831,108 +1820,233 @@
   </article>
     </section>
         </section>
-        <section id="view-src-cli-index-ts" class="view" data-view="src/cli/index.ts" hidden>
+        <section id="view-src-cli-commands-config-validate-ts" class="view" data-view="src/cli/commands/config/validate.ts" hidden>
     <section class="panel">
-      <h2>src/cli/index.ts</h2>
-      <article class="item" data-search="createRulesRuntimeProvider src/cli/index.ts Create the Ankh provider that exposes the generic JSON config validation operation.">
-    <h3>createRulesRuntimeProvider</h3>
-    <p class="muted"><code>src/cli/index.ts:11:1</code></p>
-    <p>Create the Ankh provider that exposes the generic JSON config validation operation.</p>
+      <h2>src/cli/commands/config/validate.ts</h2>
+      <article class="item" data-search="validate src/cli/commands/config/validate.ts Execute the public `ankh rules config validate` command through the configuration feature.">
+    <h3>validate</h3>
+    <p class="muted"><code>src/cli/commands/config/validate.ts:6:1</code></p>
+    <p>Execute the public `ankh rules config validate` command through the configuration feature.</p>
     
-  </article><article class="item" data-search="runConfigValidateCommand src/cli/index.ts Validate an Ankh command invocation without creating a separate CLI implementation path.">
-    <h3>runConfigValidateCommand</h3>
-    <p class="muted"><code>src/cli/index.ts:38:1</code></p>
-    <p>Validate an Ankh command invocation without creating a separate CLI implementation path.</p>
-    
-  </article><article class="item" data-search="renderConfigValidation src/cli/index.ts Render a compact, transport-neutral report for standalone and Ankh CLI callers.">
+  </article><article class="item" data-search="renderConfigValidation src/cli/commands/config/validate.ts Render the command result without coupling the configuration feature to a transport.">
     <h3>renderConfigValidation</h3>
-    <p class="muted"><code>src/cli/index.ts:48:1</code></p>
-    <p>Render a compact, transport-neutral report for standalone and Ankh CLI callers.</p>
+    <p class="muted"><code>src/cli/commands/config/validate.ts:22:1</code></p>
+    <p>Render the command result without coupling the configuration feature to a transport.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-cli-createrulesruntimeprovider-ts" class="view" data-view="src/cli/createRulesRuntimeProvider.ts" hidden>
+    <section class="panel">
+      <h2>src/cli/createRulesRuntimeProvider.ts</h2>
+      <article class="item" data-search="createRulesRuntimeProvider src/cli/createRulesRuntimeProvider.ts Create the Ankh provider that registers the generic Rules configuration command.">
+    <h3>createRulesRuntimeProvider</h3>
+    <p class="muted"><code>src/cli/createRulesRuntimeProvider.ts:11:1</code></p>
+    <p>Create the Ankh provider that registers the generic Rules configuration command.</p>
     
   </article>
     </section>
   </section><section id="view-src-cli-standalone-ts" class="view" data-view="src/cli/standalone.ts" hidden>
     <section class="panel">
       <h2>src/cli/standalone.ts</h2>
-      <article class="item" data-search="runCli src/cli/standalone.ts Run the standalone Rules config validator through the same public operation as the Ankh provider.">
+      <article class="item" data-search="runCli src/cli/standalone.ts Run the standalone Rules CLI without depending on the Ankh runtime package.">
     <h3>runCli</h3>
-    <p class="muted"><code>src/cli/standalone.ts:8:1</code></p>
-    <p>Run the standalone Rules config validator through the same public operation as the Ankh provider.</p>
+    <p class="muted"><code>src/cli/standalone.ts:6:1</code></p>
+    <p>Run the standalone Rules CLI without depending on the Ankh runtime package.</p>
     
-  </article><article class="item" data-search="isHelpToken src/cli/standalone.ts Identify help tokens accepted by the small standalone command adapter.">
+  </article><article class="item" data-search="isHelpToken src/cli/standalone.ts Identify help tokens accepted by the standalone delivery adapter.">
     <h3>isHelpToken</h3>
-    <p class="muted"><code>src/cli/standalone.ts:31:1</code></p>
-    <p>Identify help tokens accepted by the small standalone command adapter.</p>
+    <p class="muted"><code>src/cli/standalone.ts:28:1</code></p>
+    <p>Identify help tokens accepted by the standalone delivery adapter.</p>
     
-  </article><article class="item" data-search="renderHelp src/cli/standalone.ts Render the standalone command contract without implying provider discovery.">
+  </article><article class="item" data-search="renderHelp src/cli/standalone.ts Render standalone help without introducing a second command implementation.">
     <h3>renderHelp</h3>
-    <p class="muted"><code>src/cli/standalone.ts:36:1</code></p>
-    <p>Render the standalone command contract without implying provider discovery.</p>
+    <p class="muted"><code>src/cli/standalone.ts:33:1</code></p>
+    <p>Render standalone help without introducing a second command implementation.</p>
     
   </article>
     </section>
-  </section><section id="view-src-createruleregistry-ts" class="view" data-view="src/createRuleRegistry.ts" hidden>
+  </section><section id="view-src-features-configuration-adapters-filesystem-readrulesconfigsourceasync-ts" class="view" data-view="src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts" hidden>
     <section class="panel">
-      <h2>src/createRuleRegistry.ts</h2>
-      <article class="item" data-search="createRuleRegistry src/createRuleRegistry.ts Create a deterministic registry from independently owned RuleSets.">
+      <h2>src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts</h2>
+      <article class="item" data-search="readRulesConfigSourceAsync src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts Read serialized Rules configuration at the filesystem edge.">
+    <h3>readRulesConfigSourceAsync</h3>
+    <p class="muted"><code>src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts:4:1</code></p>
+    <p>Read serialized Rules configuration at the filesystem edge.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-configuration-adapters-filesystem-writerulesconfigasync-ts" class="view" data-view="src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts" hidden>
+    <section class="panel">
+      <h2>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts</h2>
+      <article class="item" data-search="writeRulesConfigAsync src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts Validate and atomically write canonical rules.json configuration through the filesystem adapter.">
+    <h3>writeRulesConfigAsync</h3>
+    <p class="muted"><code>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts:8:1</code></p>
+    <p>Validate and atomically write canonical rules.json configuration through the filesystem adapter.</p>
+    
+  </article><article class="item" data-search="canonicalizeRulesConfig src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts Canonicalize rule selection order so writing preserves deterministic configuration composition.">
+    <h3>canonicalizeRulesConfig</h3>
+    <p class="muted"><code>src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts:18:1</code></p>
+    <p>Canonicalize rule selection order so writing preserves deterministic configuration composition.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-configuration-application-validaterulesconfigfileasync-ts" class="view" data-view="src/features/configuration/application/validateRulesConfigFileAsync.ts" hidden>
+    <section class="panel">
+      <h2>src/features/configuration/application/validateRulesConfigFileAsync.ts</h2>
+      <article class="item" data-search="validateRulesConfigFileAsync src/features/configuration/application/validateRulesConfigFileAsync.ts Read and validate one Rules configuration through a caller supplied source reader.">
+    <h3>validateRulesConfigFileAsync</h3>
+    <p class="muted"><code>src/features/configuration/application/validateRulesConfigFileAsync.ts:5:1</code></p>
+    <p>Read and validate one Rules configuration through a caller supplied source reader.</p>
+    
+  </article><article class="item" data-search="parseJson src/features/configuration/application/validateRulesConfigFileAsync.ts Parse JSON without conflating a syntax failure with a valid null configuration.">
+    <h3>parseJson</h3>
+    <p class="muted"><code>src/features/configuration/application/validateRulesConfigFileAsync.ts:22:1</code></p>
+    <p>Parse JSON without conflating a syntax failure with a valid null configuration.</p>
+    
+  </article><article class="item" data-search="createReadDiagnostic src/features/configuration/application/validateRulesConfigFileAsync.ts Convert source and JSON failures into a portable configuration diagnostic.">
+    <h3>createReadDiagnostic</h3>
+    <p class="muted"><code>src/features/configuration/application/validateRulesConfigFileAsync.ts:27:1</code></p>
+    <p>Convert source and JSON failures into a portable configuration diagnostic.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-configuration-composition-readrulesconfigasync-ts" class="view" data-view="src/features/configuration/composition/readRulesConfigAsync.ts" hidden>
+    <section class="panel">
+      <h2>src/features/configuration/composition/readRulesConfigAsync.ts</h2>
+      <article class="item" data-search="readRulesConfigAsync src/features/configuration/composition/readRulesConfigAsync.ts Wire the configuration source reader into the public file-validation operation.">
+    <h3>readRulesConfigAsync</h3>
+    <p class="muted"><code>src/features/configuration/composition/readRulesConfigAsync.ts:6:1</code></p>
+    <p>Wire the configuration source reader into the public file-validation operation.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-configuration-domain-validaterulesconfig-ts" class="view" data-view="src/features/configuration/domain/validateRulesConfig.ts" hidden>
+    <section class="panel">
+      <h2>src/features/configuration/domain/validateRulesConfig.ts</h2>
+      <article class="item" data-search="validateRulesConfig src/features/configuration/domain/validateRulesConfig.ts Validate canonical rules.json data, optionally against a concrete rule registry.">
+    <h3>validateRulesConfig</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:14:1</code></p>
+    <p>Validate canonical rules.json data, optionally against a concrete rule registry.</p>
+    
+  </article><article class="item" data-search="validateRulesConfigStructure src/features/configuration/domain/validateRulesConfig.ts Validate the JSON-only shape before any provider-specific interpretation occurs.">
+    <h3>validateRulesConfigStructure</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:29:1</code></p>
+    <p>Validate the JSON-only shape before any provider-specific interpretation occurs.</p>
+    
+  </article><article class="item" data-search="validateRulesConfigRule src/features/configuration/domain/validateRulesConfig.ts Validate one serialized rule selection while retaining its original options exactly.">
+    <h3>validateRulesConfigRule</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:58:1</code></p>
+    <p>Validate one serialized rule selection while retaining its original options exactly.</p>
+    
+  </article><article class="item" data-search="validateConfiguredRules src/features/configuration/domain/validateRulesConfig.ts Apply optional registry and capability knowledge without creating provider-specific engine paths.">
+    <h3>validateConfiguredRules</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:109:1</code></p>
+    <p>Apply optional registry and capability knowledge without creating provider-specific engine paths.</p>
+    
+  </article><article class="item" data-search="invalidConfig src/features/configuration/domain/validateRulesConfig.ts Create a consistent structural configuration diagnostic.">
+    <h3>invalidConfig</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:159:1</code></p>
+    <p>Create a consistent structural configuration diagnostic.</p>
+    
+  </article><article class="item" data-search="invalidRuleField src/features/configuration/domain/validateRulesConfig.ts Create a field-specific diagnostic for one invalid configured rule.">
+    <h3>invalidRuleField</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:167:1</code></p>
+    <p>Create a field-specific diagnostic for one invalid configured rule.</p>
+    
+  </article><article class="item" data-search="findDuplicateRuleIds src/features/configuration/domain/validateRulesConfig.ts Find duplicate explicit rule selections without relying on object-key ordering.">
+    <h3>findDuplicateRuleIds</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:187:1</code></p>
+    <p>Find duplicate explicit rule selections without relying on object-key ordering.</p>
+    
+  </article><article class="item" data-search="isRuleSeverity src/features/configuration/domain/validateRulesConfig.ts Determine whether a value is a supported generic severity.">
+    <h3>isRuleSeverity</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:197:1</code></p>
+    <p>Determine whether a value is a supported generic severity.</p>
+    
+  </article><article class="item" data-search="isJsonValue src/features/configuration/domain/validateRulesConfig.ts Determine whether a value can be preserved losslessly in JSON configuration.">
+    <h3>isJsonValue</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:202:1</code></p>
+    <p>Determine whether a value can be preserved losslessly in JSON configuration.</p>
+    
+  </article><article class="item" data-search="isNonEmptyString src/features/configuration/domain/validateRulesConfig.ts Determine whether a raw configuration field is a non-empty identifier.">
+    <h3>isNonEmptyString</h3>
+    <p class="muted"><code>src/features/configuration/domain/validateRulesConfig.ts:210:1</code></p>
+    <p>Determine whether a raw configuration field is a non-empty identifier.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-evaluation-domain-createruleregistry-ts" class="view" data-view="src/features/evaluation/domain/createRuleRegistry.ts" hidden>
+    <section class="panel">
+      <h2>src/features/evaluation/domain/createRuleRegistry.ts</h2>
+      <article class="item" data-search="createRuleRegistry src/features/evaluation/domain/createRuleRegistry.ts Create a deterministic registry from independently owned RuleSets.">
     <h3>createRuleRegistry</h3>
-    <p class="muted"><code>src/createRuleRegistry.ts:4:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleRegistry.ts:5:1</code></p>
     <p>Create a deterministic registry from independently owned RuleSets.</p>
     
-  </article><article class="item" data-search="assertUniqueRuleSetIds src/createRuleRegistry.ts Reject ambiguous provider composition before evaluating a registry.">
+  </article><article class="item" data-search="assertUniqueRuleSetIds src/features/evaluation/domain/createRuleRegistry.ts Reject ambiguous provider composition before evaluating a registry.">
     <h3>assertUniqueRuleSetIds</h3>
-    <p class="muted"><code>src/createRuleRegistry.ts:22:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleRegistry.ts:21:1</code></p>
     <p>Reject ambiguous provider composition before evaluating a registry.</p>
     
-  </article><article class="item" data-search="assertUniqueRuleIds src/createRuleRegistry.ts Reject multiple providers that claim the same public rule identifier.">
+  </article><article class="item" data-search="assertUniqueRuleIds src/features/evaluation/domain/createRuleRegistry.ts Reject multiple providers that claim the same public rule identifier.">
     <h3>assertUniqueRuleIds</h3>
-    <p class="muted"><code>src/createRuleRegistry.ts:28:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleRegistry.ts:27:1</code></p>
     <p>Reject multiple providers that claim the same public rule identifier.</p>
     
-  </article><article class="item" data-search="findDuplicateId src/createRuleRegistry.ts Find the first duplicate in an already deterministic sequence of identifiers.">
+  </article><article class="item" data-search="findDuplicateId src/features/evaluation/domain/createRuleRegistry.ts Find the first duplicate in an already deterministic sequence of identifiers.">
     <h3>findDuplicateId</h3>
-    <p class="muted"><code>src/createRuleRegistry.ts:34:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleRegistry.ts:33:1</code></p>
     <p>Find the first duplicate in an already deterministic sequence of identifiers.</p>
     
   </article>
     </section>
-  </section><section id="view-src-evaluateconfiguredrules-ts" class="view" data-view="src/evaluateConfiguredRules.ts" hidden>
+  </section><section id="view-src-features-evaluation-domain-evaluateconfiguredrules-ts" class="view" data-view="src/features/evaluation/domain/evaluateConfiguredRules.ts" hidden>
     <section class="panel">
-      <h2>src/evaluateConfiguredRules.ts</h2>
-      <article class="item" data-search="evaluateConfiguredRules src/evaluateConfiguredRules.ts Resolve a configured Rule registry and evaluate its enabled rules without provider branches.">
+      <h2>src/features/evaluation/domain/evaluateConfiguredRules.ts</h2>
+      <article class="item" data-search="evaluateConfiguredRules src/features/evaluation/domain/evaluateConfiguredRules.ts Resolve a configured Rule registry and evaluate its enabled rules without provider branches.">
     <h3>evaluateConfiguredRules</h3>
-    <p class="muted"><code>src/evaluateConfiguredRules.ts:13:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:14:1</code></p>
     <p>Resolve a configured Rule registry and evaluate its enabled rules without provider branches.</p>
     
-  </article><article class="item" data-search="toEvaluationDiagnostic src/evaluateConfiguredRules.ts Translate config validation failures into the evaluator&#39;s portable diagnostic shape.">
+  </article><article class="item" data-search="toEvaluationDiagnostic src/features/evaluation/domain/evaluateConfiguredRules.ts Translate config validation failures into the evaluator&#39;s portable diagnostic shape.">
     <h3>toEvaluationDiagnostic</h3>
-    <p class="muted"><code>src/evaluateConfiguredRules.ts:50:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:51:1</code></p>
     <p>Translate config validation failures into the evaluator&#39;s portable diagnostic shape.</p>
     
-  </article><article class="item" data-search="applyConfiguredSeverities src/evaluateConfiguredRules.ts Apply configured severity overrides after providers have produced neutral findings.">
+  </article><article class="item" data-search="applyConfiguredSeverities src/features/evaluation/domain/evaluateConfiguredRules.ts Apply configured severity overrides after providers have produced neutral findings.">
     <h3>applyConfiguredSeverities</h3>
-    <p class="muted"><code>src/evaluateConfiguredRules.ts:71:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:67:1</code></p>
     <p>Apply configured severity overrides after providers have produced neutral findings.</p>
     
   </article>
     </section>
-  </section><section id="view-src-evaluaterules-ts" class="view" data-view="src/evaluateRules.ts" hidden>
+  </section><section id="view-src-features-evaluation-domain-evaluaterules-ts" class="view" data-view="src/features/evaluation/domain/evaluateRules.ts" hidden>
     <section class="panel">
-      <h2>src/evaluateRules.ts</h2>
-      <article class="item" data-search="evaluateRules src/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism.">
+      <h2>src/features/evaluation/domain/evaluateRules.ts</h2>
+      <article class="item" data-search="evaluateRules src/features/evaluation/domain/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism.">
     <h3>evaluateRules</h3>
-    <p class="muted"><code>src/evaluateRules.ts:11:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:12:1</code></p>
     <p>Evaluate unrelated rules in deterministic identifier order through one generic mechanism.</p>
     
-  </article><article class="item" data-search="evaluateRule src/evaluateRules.ts Evaluate one rule only when its declared input capabilities are available.">
+  </article><article class="item" data-search="evaluateRule src/features/evaluation/domain/evaluateRules.ts Evaluate one rule only when its declared input capabilities are available.">
     <h3>evaluateRule</h3>
-    <p class="muted"><code>src/evaluateRules.ts:29:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:30:1</code></p>
     <p>Evaluate one rule only when its declared input capabilities are available.</p>
     
-  </article><article class="item" data-search="canonicalizeFinding src/evaluateRules.ts Preserve provider evidence while making identifier and severity engine-controlled facts.">
+  </article><article class="item" data-search="canonicalizeFinding src/features/evaluation/domain/evaluateRules.ts Preserve provider evidence while making identifier and severity engine-controlled facts.">
     <h3>canonicalizeFinding</h3>
-    <p class="muted"><code>src/evaluateRules.ts:74:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:75:1</code></p>
     <p>Preserve provider evidence while making identifier and severity engine-controlled facts.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-evaluation-domain-resolverulesstatus-ts" class="view" data-view="src/features/evaluation/domain/resolveRulesStatus.ts" hidden>
+    <section class="panel">
+      <h2>src/features/evaluation/domain/resolveRulesStatus.ts</h2>
+      <article class="item" data-search="resolveRulesStatus src/features/evaluation/domain/resolveRulesStatus.ts Summarize the complete Rules evaluation result without treating failed evaluation as canonical.">
+    <h3>resolveRulesStatus</h3>
+    <p class="muted"><code>src/features/evaluation/domain/resolveRulesStatus.ts:4:1</code></p>
+    <p>Summarize the complete Rules evaluation result without treating failed evaluation as canonical.</p>
     
   </article>
     </section>
@@ -1941,143 +2055,53 @@
       <h2>src/index.test.ts</h2>
       <article class="item" data-search="isMinimumOptions src/index.test.ts Identify the serializable option object used by the unrelated content fixture provider.">
     <h3>isMinimumOptions</h3>
-    <p class="muted"><code>src/index.test.ts:96:1</code></p>
+    <p class="muted"><code>src/index.test.ts:95:1</code></p>
     <p>Identify the serializable option object used by the unrelated content fixture provider.</p>
     
   </article><article class="item" data-search="testProviderComposition src/index.test.ts ">
     <h3>testProviderComposition</h3>
-    <p class="muted"><code>src/index.test.ts:114:1</code></p>
+    <p class="muted"><code>src/index.test.ts:115:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testConfiguredRules src/index.test.ts ">
     <h3>testConfiguredRules</h3>
-    <p class="muted"><code>src/index.test.ts:133:1</code></p>
+    <p class="muted"><code>src/index.test.ts:134:1</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="testSubjectOrdering src/index.test.ts ">
+    <h3>testSubjectOrdering</h3>
+    <p class="muted"><code>src/index.test.ts:152:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testInvalidConfigDiagnostics src/index.test.ts ">
     <h3>testInvalidConfigDiagnostics</h3>
-    <p class="muted"><code>src/index.test.ts:151:1</code></p>
+    <p class="muted"><code>src/index.test.ts:179:1</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="testStructuralConfigDiagnostics src/index.test.ts ">
+    <h3>testStructuralConfigDiagnostics</h3>
+    <p class="muted"><code>src/index.test.ts:223:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testConfigFileOperations src/index.test.ts ">
     <h3>testConfigFileOperations</h3>
-    <p class="muted"><code>src/index.test.ts:193:1</code></p>
+    <p class="muted"><code>src/index.test.ts:244:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testCliContract src/index.test.ts ">
     <h3>testCliContract</h3>
-    <p class="muted"><code>src/index.test.ts:210:1</code></p>
+    <p class="muted"><code>src/index.test.ts:267:1</code></p>
     <p class="empty">No description available.</p>
     
   </article>
     </section>
-  </section><section id="view-src-readrulesconfigasync-ts" class="view" data-view="src/readRulesConfigAsync.ts" hidden>
+  </section><section id="view-src-utils-compareruleentityids-ts" class="view" data-view="src/utils/compareRuleEntityIds.ts" hidden>
     <section class="panel">
-      <h2>src/readRulesConfigAsync.ts</h2>
-      <article class="item" data-search="readRulesConfigAsync src/readRulesConfigAsync.ts Read and structurally validate a repository rules.json file.">
-    <h3>readRulesConfigAsync</h3>
-    <p class="muted"><code>src/readRulesConfigAsync.ts:7:1</code></p>
-    <p>Read and structurally validate a repository rules.json file.</p>
-    
-  </article><article class="item" data-search="parseJson src/readRulesConfigAsync.ts Parse JSON without conflating a syntax failure with a valid null configuration.">
-    <h3>parseJson</h3>
-    <p class="muted"><code>src/readRulesConfigAsync.ts:21:1</code></p>
-    <p>Parse JSON without conflating a syntax failure with a valid null configuration.</p>
-    
-  </article><article class="item" data-search="createReadDiagnostic src/readRulesConfigAsync.ts Convert filesystem and JSON failures into a portable configuration diagnostic.">
-    <h3>createReadDiagnostic</h3>
-    <p class="muted"><code>src/readRulesConfigAsync.ts:26:1</code></p>
-    <p>Convert filesystem and JSON failures into a portable configuration diagnostic.</p>
-    
-  </article>
-    </section>
-  </section><section id="view-src-resolverulesstatus-ts" class="view" data-view="src/resolveRulesStatus.ts" hidden>
-    <section class="panel">
-      <h2>src/resolveRulesStatus.ts</h2>
-      <article class="item" data-search="resolveRulesStatus src/resolveRulesStatus.ts Summarize generic rule findings using the reusable status semantics formerly owned by Policy.">
-    <h3>resolveRulesStatus</h3>
-    <p class="muted"><code>src/resolveRulesStatus.ts:4:1</code></p>
-    <p>Summarize generic rule findings using the reusable status semantics formerly owned by Policy.</p>
-    
-  </article>
-    </section>
-  </section><section id="view-src-validaterulesconfig-ts" class="view" data-view="src/validateRulesConfig.ts" hidden>
-    <section class="panel">
-      <h2>src/validateRulesConfig.ts</h2>
-      <article class="item" data-search="validateRulesConfig src/validateRulesConfig.ts Validate canonical rules.json data, optionally against a concrete rule registry.">
-    <h3>validateRulesConfig</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:14:1</code></p>
-    <p>Validate canonical rules.json data, optionally against a concrete rule registry.</p>
-    
-  </article><article class="item" data-search="validateRulesConfigStructure src/validateRulesConfig.ts Validate the JSON-only shape before any provider-specific interpretation occurs.">
-    <h3>validateRulesConfigStructure</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:33:1</code></p>
-    <p>Validate the JSON-only shape before any provider-specific interpretation occurs.</p>
-    
-  </article><article class="item" data-search="validateRulesConfigRule src/validateRulesConfig.ts Validate one serialized rule selection while retaining its original options exactly.">
-    <h3>validateRulesConfigRule</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:61:1</code></p>
-    <p>Validate one serialized rule selection while retaining its original options exactly.</p>
-    
-  </article><article class="item" data-search="validateConfiguredRules src/validateRulesConfig.ts Apply optional registry and capability knowledge without creating provider-specific engine paths.">
-    <h3>validateConfiguredRules</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:92:1</code></p>
-    <p>Apply optional registry and capability knowledge without creating provider-specific engine paths.</p>
-    
-  </article><article class="item" data-search="invalidConfig src/validateRulesConfig.ts Create a consistent structural configuration diagnostic.">
-    <h3>invalidConfig</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:141:1</code></p>
-    <p>Create a consistent structural configuration diagnostic.</p>
-    
-  </article><article class="item" data-search="invalidRule src/validateRulesConfig.ts Create a consistent invalid-rule diagnostic at the configured rule location.">
-    <h3>invalidRule</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:149:1</code></p>
-    <p>Create a consistent invalid-rule diagnostic at the configured rule location.</p>
-    
-  </article><article class="item" data-search="findDuplicateRuleIds src/validateRulesConfig.ts Find duplicate explicit rule selections without relying on object-key ordering.">
-    <h3>findDuplicateRuleIds</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:160:1</code></p>
-    <p>Find duplicate explicit rule selections without relying on object-key ordering.</p>
-    
-  </article><article class="item" data-search="isRuleSeverity src/validateRulesConfig.ts Determine whether a value is a supported generic severity.">
-    <h3>isRuleSeverity</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:170:1</code></p>
-    <p>Determine whether a value is a supported generic severity.</p>
-    
-  </article><article class="item" data-search="isJsonValue src/validateRulesConfig.ts Determine whether a value can be preserved losslessly in JSON configuration.">
-    <h3>isJsonValue</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:175:1</code></p>
-    <p>Determine whether a value can be preserved losslessly in JSON configuration.</p>
-    
-  </article><article class="item" data-search="isNonEmptyString src/validateRulesConfig.ts Determine whether a raw configuration field is a non-empty identifier.">
-    <h3>isNonEmptyString</h3>
-    <p class="muted"><code>src/validateRulesConfig.ts:183:1</code></p>
-    <p>Determine whether a raw configuration field is a non-empty identifier.</p>
-    
-  </article>
-    </section>
-  </section><section id="view-src-validaterulesconfigfileasync-ts" class="view" data-view="src/validateRulesConfigFileAsync.ts" hidden>
-    <section class="panel">
-      <h2>src/validateRulesConfigFileAsync.ts</h2>
-      <article class="item" data-search="validateRulesConfigFileAsync src/validateRulesConfigFileAsync.ts Validate one explicit or default rules.json path through the public configuration operation.">
-    <h3>validateRulesConfigFileAsync</h3>
-    <p class="muted"><code>src/validateRulesConfigFileAsync.ts:7:1</code></p>
-    <p>Validate one explicit or default rules.json path through the public configuration operation.</p>
-    
-  </article>
-    </section>
-  </section><section id="view-src-writerulesconfigasync-ts" class="view" data-view="src/writeRulesConfigAsync.ts" hidden>
-    <section class="panel">
-      <h2>src/writeRulesConfigAsync.ts</h2>
-      <article class="item" data-search="writeRulesConfigAsync src/writeRulesConfigAsync.ts Validate and atomically write canonical rules.json configuration.">
-    <h3>writeRulesConfigAsync</h3>
-    <p class="muted"><code>src/writeRulesConfigAsync.ts:7:1</code></p>
-    <p>Validate and atomically write canonical rules.json configuration.</p>
-    
-  </article><article class="item" data-search="canonicalizeRulesConfig src/writeRulesConfigAsync.ts Canonicalize rule selection order so writing preserves deterministic configuration composition.">
-    <h3>canonicalizeRulesConfig</h3>
-    <p class="muted"><code>src/writeRulesConfigAsync.ts:17:1</code></p>
-    <p>Canonicalize rule selection order so writing preserves deterministic configuration composition.</p>
+      <h2>src/utils/compareRuleEntityIds.ts</h2>
+      <article class="item" data-search="compareRuleEntityIds src/utils/compareRuleEntityIds.ts Compare Rules-domain entities by identifier using locale-independent code-unit ordering.">
+    <h3>compareRuleEntityIds</h3>
+    <p class="muted"><code>src/utils/compareRuleEntityIds.ts:2:1</code></p>
+    <p>Compare Rules-domain entities by identifier using locale-independent code-unit ordering.</p>
     
   </article>
     </section>

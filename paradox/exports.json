@@ -7,10 +7,10 @@
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/createRuleRegistry.ts",
+    "modulePath": "src/features/evaluation/domain/createRuleRegistry.ts",
     "sourceLocation": {
-      "filePath": "src/createRuleRegistry.ts",
-      "line": 4,
+      "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+      "line": 5,
       "column": 1
     },
     "exportPaths": [
@@ -39,35 +39,6 @@
     "structuredRows": []
   },
   {
-    "name": "createRulesRuntimeProvider",
-    "title": null,
-    "description": "Create the Ankh provider that exposes the generic JSON config validation operation.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "function",
-    "modulePath": "src/cli/index.ts",
-    "sourceLocation": {
-      "filePath": "src/cli/index.ts",
-      "line": 11,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [],
-    "signatures": [
-      {
-        "label": "() => AnkhRuntimeCommandProvider",
-        "parameters": [],
-        "returnType": "AnkhRuntimeCommandProvider",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "evaluateConfiguredRules",
     "title": null,
     "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
@@ -75,10 +46,10 @@
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/evaluateConfiguredRules.ts",
+    "modulePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
     "sourceLocation": {
-      "filePath": "src/evaluateConfiguredRules.ts",
-      "line": 13,
+      "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+      "line": 14,
       "column": 1
     },
     "exportPaths": [
@@ -137,7 +108,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 142,
+      "line": 141,
       "column": 1
     },
     "exportPaths": [
@@ -164,10 +135,10 @@
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/evaluateRules.ts",
+    "modulePath": "src/features/evaluation/domain/evaluateRules.ts",
     "sourceLocation": {
-      "filePath": "src/evaluateRules.ts",
-      "line": 11,
+      "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+      "line": 12,
       "column": 1
     },
     "exportPaths": [
@@ -181,7 +152,7 @@
     ],
     "signatures": [
       {
-        "label": "(context: TContext, rules: readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult",
+        "label": "(context: TContext, rules: readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult",
         "parameters": [
           {
             "name": "context",
@@ -197,7 +168,7 @@
           },
           {
             "name": "rules",
-            "type": "readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[]",
+            "type": "readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[]",
             "required": true,
             "description": null
           }
@@ -220,7 +191,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 136,
+      "line": 135,
       "column": 1
     },
     "exportPaths": [
@@ -273,15 +244,15 @@
   {
     "name": "readRulesConfigAsync",
     "title": null,
-    "description": "Read and structurally validate a repository rules.json file.",
+    "description": "Wire the configuration source reader into the public file-validation operation.",
     "isReadme": false,
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/readRulesConfigAsync.ts",
+    "modulePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
     "sourceLocation": {
-      "filePath": "src/readRulesConfigAsync.ts",
-      "line": 7,
+      "filePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+      "line": 6,
       "column": 1
     },
     "exportPaths": [
@@ -311,14 +282,14 @@
   {
     "name": "resolveRulesStatus",
     "title": null,
-    "description": "Summarize generic rule findings using the reusable status semantics formerly owned by Policy.",
+    "description": "Summarize the complete Rules evaluation result without treating failed evaluation as canonical.",
     "isReadme": false,
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/resolveRulesStatus.ts",
+    "modulePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
     "sourceLocation": {
-      "filePath": "src/resolveRulesStatus.ts",
+      "filePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
       "line": 4,
       "column": 1
     },
@@ -326,17 +297,16 @@
       "src/index.ts"
     ],
     "relatedSymbols": [
-      "JsonValue",
-      "RuleFinding",
+      "RuleEvaluationResult",
       "RulesStatusDescriptor"
     ],
     "signatures": [
       {
-        "label": "(findings: readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]) => RulesStatusDescriptor",
+        "label": "(result: Pick<RuleEvaluationResult, \"diagnostics\" | \"findings\">) => RulesStatusDescriptor",
         "parameters": [
           {
-            "name": "findings",
-            "type": "readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]",
+            "name": "result",
+            "type": "Pick<RuleEvaluationResult, \"diagnostics\" | \"findings\">",
             "required": true,
             "description": null
           }
@@ -451,7 +421,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 123,
+      "line": 122,
       "column": 1
     },
     "exportPaths": [
@@ -495,7 +465,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 130,
+      "line": 129,
       "column": 1
     },
     "exportPaths": [
@@ -748,7 +718,7 @@
       {
         "name": "code",
         "kind": "property",
-        "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\" | \"invalid-capability\" | \"invalid-rule-id\" | \"invalid-severity\"",
+        "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\" | \"invalid-rule-id\" | \"invalid-severity\"",
         "required": true,
         "description": null
       },
@@ -787,7 +757,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 116,
+      "line": 115,
       "column": 1
     },
     "exportPaths": [
@@ -888,7 +858,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 110,
+      "line": 109,
       "column": 1
     },
     "exportPaths": [
@@ -927,7 +897,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 104,
+      "line": 103,
       "column": 1
     },
     "exportPaths": [
@@ -1087,7 +1057,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 147,
+      "line": 146,
       "column": 1
     },
     "exportPaths": [
@@ -1158,42 +1128,6 @@
     "structuredRows": []
   },
   {
-    "name": "runCli",
-    "title": null,
-    "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "function",
-    "modulePath": "src/cli/standalone.ts",
-    "sourceLocation": {
-      "filePath": "src/cli/standalone.ts",
-      "line": 8,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [],
-    "signatures": [
-      {
-        "label": "(argv: readonly string[]) => Promise<{ readonly exitCode: number; }>",
-        "parameters": [
-          {
-            "name": "argv",
-            "type": "readonly string[]",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "Promise<{ readonly exitCode: number; }>",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "validateRulesConfig",
     "title": null,
     "description": "Validate canonical rules.json data, optionally against a concrete rule registry.",
@@ -1201,9 +1135,9 @@
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/validateRulesConfig.ts",
+    "modulePath": "src/features/configuration/domain/validateRulesConfig.ts",
     "sourceLocation": {
-      "filePath": "src/validateRulesConfig.ts",
+      "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
       "line": 14,
       "column": 1
     },
@@ -1239,61 +1173,17 @@
     "structuredRows": []
   },
   {
-    "name": "validateRulesConfigFileAsync",
-    "title": null,
-    "description": "Validate one explicit or default rules.json path through the public configuration operation.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "function",
-    "modulePath": "src/validateRulesConfigFileAsync.ts",
-    "sourceLocation": {
-      "filePath": "src/validateRulesConfigFileAsync.ts",
-      "line": 7,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "RulesConfigReadResult"
-    ],
-    "signatures": [
-      {
-        "label": "(inputPath: string | undefined, cwd: string) => Promise<RulesConfigReadResult>",
-        "parameters": [
-          {
-            "name": "cwd",
-            "type": "string",
-            "required": true,
-            "description": null
-          },
-          {
-            "name": "inputPath",
-            "type": "string | undefined",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "Promise<RulesConfigReadResult>",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "writeRulesConfigAsync",
     "title": null,
-    "description": "Validate and atomically write canonical rules.json configuration.",
+    "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
     "isReadme": false,
     "see": [],
     "security": [],
     "kind": "function",
-    "modulePath": "src/writeRulesConfigAsync.ts",
+    "modulePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
     "sourceLocation": {
-      "filePath": "src/writeRulesConfigAsync.ts",
-      "line": 7,
+      "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+      "line": 8,
       "column": 1
     },
     "exportPaths": [

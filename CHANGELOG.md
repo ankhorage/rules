@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.2.0
+
+### Minor Changes
+
+- 94f1dfb: Restore feature-first Rules ownership, canonical CLI command layout, standalone runtime independence, precise configuration diagnostics, and complete evaluation status semantics.
+
 ## 0.1.0
 
 ### Minor Changes

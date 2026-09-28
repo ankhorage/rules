@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.0",
+      "value": "v0.2.0",
       "color": "cb3837"
     },
     {
@@ -70,7 +70,7 @@
       "title": "Validate Rules Configuration",
       "description": "Validate a repository rules.json file through the public generic Rules API.",
       "language": "ts",
-      "code": "import { validateRulesConfigFileAsync } from '@ankhorage/rules';",
+      "code": "import { readRulesConfigAsync } from '@ankhorage/rules';",
       "sourcePath": "examples/config-validation/validate.ts",
       "isReadme": true,
       "see": [],
@@ -104,65 +104,162 @@
       "exports": []
     },
     {
+      "path": "src/cli/commands/config/validate.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/configuration/composition/readRulesConfigAsync.ts"
+      ],
+      "exports": [
+        "validate"
+      ]
+    },
+    {
+      "path": "src/cli/createRulesRuntimeProvider.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/cli/commands/config/validate.ts",
+        "src/constants/rules.ts"
+      ],
+      "exports": [
+        "createRulesRuntimeProvider"
+      ]
+    },
+    {
       "path": "src/cli/index.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/packageMetadata.ts",
-        "src/validateRulesConfigFileAsync.ts"
+        "src/cli/createRulesRuntimeProvider.ts"
       ],
       "exports": [
         "createRulesRuntimeProvider",
-        "default",
-        "renderConfigValidation",
-        "runConfigValidateCommand"
+        "default"
       ]
     },
     {
       "path": "src/cli/standalone.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/cli/index.ts"
+        "src/cli/commands/config/validate.ts"
       ],
       "exports": [
         "runCli"
       ]
     },
     {
-      "path": "src/createRuleRegistry.ts",
+      "path": "src/constants/rules.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "package.json"
+      ],
+      "exports": [
+        "RULES_CAPABILITIES",
+        "RULES_COMMAND_CATEGORY",
+        "RULES_PACKAGE_VERSION"
+      ]
+    },
+    {
+      "path": "src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "readRulesConfigSourceAsync"
+      ]
+    },
+    {
+      "path": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/configuration/domain/validateRulesConfig.ts",
+        "src/types/rules.ts",
+        "src/utils/compareRuleEntityIds.ts"
+      ],
+      "exports": [
+        "writeRulesConfigAsync"
+      ]
+    },
+    {
+      "path": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/configuration/domain/validateRulesConfig.ts",
+        "src/types/rules.ts"
+      ],
+      "exports": [
+        "validateRulesConfigFileAsync"
+      ]
+    },
+    {
+      "path": "src/features/configuration/composition/readRulesConfigAsync.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts",
+        "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "src/types/rules.ts"
+      ],
+      "exports": [
+        "readRulesConfigAsync"
+      ]
+    },
+    {
+      "path": "src/features/configuration/domain/validateRulesConfig.ts",
       "isEntrypoint": false,
       "dependencies": [
         "src/types/rules.ts"
+      ],
+      "exports": [
+        "validateRulesConfig"
+      ]
+    },
+    {
+      "path": "src/features/evaluation/domain/createRuleRegistry.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts",
+        "src/utils/compareRuleEntityIds.ts"
       ],
       "exports": [
         "createRuleRegistry"
       ]
     },
     {
-      "path": "src/evaluateConfiguredRules.ts",
+      "path": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/evaluateRules.ts",
-        "src/types/rules.ts",
-        "src/validateRulesConfig.ts"
+        "src/features/configuration/domain/validateRulesConfig.ts",
+        "src/features/evaluation/domain/evaluateRules.ts",
+        "src/types/rules.ts"
       ],
       "exports": [
         "evaluateConfiguredRules"
       ]
     },
     {
-      "path": "src/evaluateRules.ts",
+      "path": "src/features/evaluation/domain/evaluateRules.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/types/rules.ts"
+        "src/types/rules.ts",
+        "src/utils/compareRuleEntityIds.ts"
       ],
       "exports": [
         "evaluateRules"
       ]
     },
     {
+      "path": "src/features/evaluation/domain/resolveRulesStatus.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts"
+      ],
+      "exports": [
+        "resolveRulesStatus"
+      ]
+    },
+    {
       "path": "src/index.test.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/cli/index.ts",
+        "src/cli/standalone.ts",
         "src/index.ts"
       ],
       "exports": []
@@ -173,7 +270,6 @@
       "dependencies": [],
       "exports": [
         "createRuleRegistry",
-        "createRulesRuntimeProvider",
         "evaluateConfiguredRules",
         "EvaluateConfiguredRulesOptions",
         "evaluateRules",
@@ -199,43 +295,8 @@
         "RuleSourceLocation",
         "RulesStatusDescriptor",
         "RuleSubject",
-        "runCli",
         "validateRulesConfig",
-        "validateRulesConfigFileAsync",
         "writeRulesConfigAsync"
-      ]
-    },
-    {
-      "path": "src/packageMetadata.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "package.json"
-      ],
-      "exports": [
-        "RULES_CAPABILITIES",
-        "RULES_COMMAND_CATEGORY",
-        "RULES_PACKAGE_VERSION"
-      ]
-    },
-    {
-      "path": "src/readRulesConfigAsync.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/types/rules.ts",
-        "src/validateRulesConfig.ts"
-      ],
-      "exports": [
-        "readRulesConfigAsync"
-      ]
-    },
-    {
-      "path": "src/resolveRulesStatus.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/types/rules.ts"
-      ],
-      "exports": [
-        "resolveRulesStatus"
       ]
     },
     {
@@ -267,35 +328,11 @@
       ]
     },
     {
-      "path": "src/validateRulesConfig.ts",
+      "path": "src/utils/compareRuleEntityIds.ts",
       "isEntrypoint": false,
-      "dependencies": [
-        "src/types/rules.ts"
-      ],
+      "dependencies": [],
       "exports": [
-        "validateRulesConfig"
-      ]
-    },
-    {
-      "path": "src/validateRulesConfigFileAsync.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/readRulesConfigAsync.ts",
-        "src/types/rules.ts"
-      ],
-      "exports": [
-        "validateRulesConfigFileAsync"
-      ]
-    },
-    {
-      "path": "src/writeRulesConfigAsync.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/types/rules.ts",
-        "src/validateRulesConfig.ts"
-      ],
-      "exports": [
-        "writeRulesConfigAsync"
+        "compareRuleEntityIds"
       ]
     }
   ],
@@ -308,10 +345,10 @@
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/createRuleRegistry.ts",
+      "modulePath": "src/features/evaluation/domain/createRuleRegistry.ts",
       "sourceLocation": {
-        "filePath": "src/createRuleRegistry.ts",
-        "line": 4,
+        "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "line": 5,
         "column": 1
       },
       "exportPaths": [
@@ -340,35 +377,6 @@
       "structuredRows": []
     },
     {
-      "name": "createRulesRuntimeProvider",
-      "title": null,
-      "description": "Create the Ankh provider that exposes the generic JSON config validation operation.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "function",
-      "modulePath": "src/cli/index.ts",
-      "sourceLocation": {
-        "filePath": "src/cli/index.ts",
-        "line": 11,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [],
-      "signatures": [
-        {
-          "label": "() => AnkhRuntimeCommandProvider",
-          "parameters": [],
-          "returnType": "AnkhRuntimeCommandProvider",
-          "returnDescription": null
-        }
-      ],
-      "members": [],
-      "structuredRows": []
-    },
-    {
       "name": "evaluateConfiguredRules",
       "title": null,
       "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
@@ -376,10 +384,10 @@
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/evaluateConfiguredRules.ts",
+      "modulePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
       "sourceLocation": {
-        "filePath": "src/evaluateConfiguredRules.ts",
-        "line": 13,
+        "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "line": 14,
         "column": 1
       },
       "exportPaths": [
@@ -438,7 +446,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 142,
+        "line": 141,
         "column": 1
       },
       "exportPaths": [
@@ -465,10 +473,10 @@
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/evaluateRules.ts",
+      "modulePath": "src/features/evaluation/domain/evaluateRules.ts",
       "sourceLocation": {
-        "filePath": "src/evaluateRules.ts",
-        "line": 11,
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 12,
         "column": 1
       },
       "exportPaths": [
@@ -482,7 +490,7 @@
       ],
       "signatures": [
         {
-          "label": "(context: TContext, rules: readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult",
+          "label": "(context: TContext, rules: readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[], options?: EvaluateRulesOptions) => RuleEvaluationResult",
           "parameters": [
             {
               "name": "context",
@@ -498,7 +506,7 @@
             },
             {
               "name": "rules",
-              "type": "readonly Rule<TContext, import(\"./index.js\").JsonValue, import(\"./index.js\").JsonValue>[]",
+              "type": "readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[]",
               "required": true,
               "description": null
             }
@@ -521,7 +529,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 136,
+        "line": 135,
         "column": 1
       },
       "exportPaths": [
@@ -574,15 +582,15 @@
     {
       "name": "readRulesConfigAsync",
       "title": null,
-      "description": "Read and structurally validate a repository rules.json file.",
+      "description": "Wire the configuration source reader into the public file-validation operation.",
       "isReadme": false,
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/readRulesConfigAsync.ts",
+      "modulePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
       "sourceLocation": {
-        "filePath": "src/readRulesConfigAsync.ts",
-        "line": 7,
+        "filePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "line": 6,
         "column": 1
       },
       "exportPaths": [
@@ -612,14 +620,14 @@
     {
       "name": "resolveRulesStatus",
       "title": null,
-      "description": "Summarize generic rule findings using the reusable status semantics formerly owned by Policy.",
+      "description": "Summarize the complete Rules evaluation result without treating failed evaluation as canonical.",
       "isReadme": false,
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/resolveRulesStatus.ts",
+      "modulePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
       "sourceLocation": {
-        "filePath": "src/resolveRulesStatus.ts",
+        "filePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
         "line": 4,
         "column": 1
       },
@@ -627,17 +635,16 @@
         "src/index.ts"
       ],
       "relatedSymbols": [
-        "JsonValue",
-        "RuleFinding",
+        "RuleEvaluationResult",
         "RulesStatusDescriptor"
       ],
       "signatures": [
         {
-          "label": "(findings: readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]) => RulesStatusDescriptor",
+          "label": "(result: Pick<RuleEvaluationResult, \"diagnostics\" | \"findings\">) => RulesStatusDescriptor",
           "parameters": [
             {
-              "name": "findings",
-              "type": "readonly Pick<RuleFinding<import(\"./index.js\").JsonValue>, \"severity\">[]",
+              "name": "result",
+              "type": "Pick<RuleEvaluationResult, \"diagnostics\" | \"findings\">",
               "required": true,
               "description": null
             }
@@ -752,7 +759,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 123,
+        "line": 122,
         "column": 1
       },
       "exportPaths": [
@@ -796,7 +803,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 130,
+        "line": 129,
         "column": 1
       },
       "exportPaths": [
@@ -1049,7 +1056,7 @@
         {
           "name": "code",
           "kind": "property",
-          "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\" | \"invalid-capability\" | \"invalid-rule-id\" | \"invalid-severity\"",
+          "type": "\"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"unknown-rule\" | \"invalid-rule-id\" | \"invalid-severity\"",
           "required": true,
           "description": null
         },
@@ -1088,7 +1095,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 116,
+        "line": 115,
         "column": 1
       },
       "exportPaths": [
@@ -1189,7 +1196,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 110,
+        "line": 109,
         "column": 1
       },
       "exportPaths": [
@@ -1228,7 +1235,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 104,
+        "line": 103,
         "column": 1
       },
       "exportPaths": [
@@ -1388,7 +1395,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 147,
+        "line": 146,
         "column": 1
       },
       "exportPaths": [
@@ -1459,42 +1466,6 @@
       "structuredRows": []
     },
     {
-      "name": "runCli",
-      "title": null,
-      "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "function",
-      "modulePath": "src/cli/standalone.ts",
-      "sourceLocation": {
-        "filePath": "src/cli/standalone.ts",
-        "line": 8,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [],
-      "signatures": [
-        {
-          "label": "(argv: readonly string[]) => Promise<{ readonly exitCode: number; }>",
-          "parameters": [
-            {
-              "name": "argv",
-              "type": "readonly string[]",
-              "required": true,
-              "description": null
-            }
-          ],
-          "returnType": "Promise<{ readonly exitCode: number; }>",
-          "returnDescription": null
-        }
-      ],
-      "members": [],
-      "structuredRows": []
-    },
-    {
       "name": "validateRulesConfig",
       "title": null,
       "description": "Validate canonical rules.json data, optionally against a concrete rule registry.",
@@ -1502,9 +1473,9 @@
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/validateRulesConfig.ts",
+      "modulePath": "src/features/configuration/domain/validateRulesConfig.ts",
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
         "line": 14,
         "column": 1
       },
@@ -1540,61 +1511,17 @@
       "structuredRows": []
     },
     {
-      "name": "validateRulesConfigFileAsync",
-      "title": null,
-      "description": "Validate one explicit or default rules.json path through the public configuration operation.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "function",
-      "modulePath": "src/validateRulesConfigFileAsync.ts",
-      "sourceLocation": {
-        "filePath": "src/validateRulesConfigFileAsync.ts",
-        "line": 7,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [
-        "RulesConfigReadResult"
-      ],
-      "signatures": [
-        {
-          "label": "(inputPath: string | undefined, cwd: string) => Promise<RulesConfigReadResult>",
-          "parameters": [
-            {
-              "name": "cwd",
-              "type": "string",
-              "required": true,
-              "description": null
-            },
-            {
-              "name": "inputPath",
-              "type": "string | undefined",
-              "required": true,
-              "description": null
-            }
-          ],
-          "returnType": "Promise<RulesConfigReadResult>",
-          "returnDescription": null
-        }
-      ],
-      "members": [],
-      "structuredRows": []
-    },
-    {
       "name": "writeRulesConfigAsync",
       "title": null,
-      "description": "Validate and atomically write canonical rules.json configuration.",
+      "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
       "isReadme": false,
       "see": [],
       "security": [],
       "kind": "function",
-      "modulePath": "src/writeRulesConfigAsync.ts",
+      "modulePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
       "sourceLocation": {
-        "filePath": "src/writeRulesConfigAsync.ts",
-        "line": 7,
+        "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "line": 8,
         "column": 1
       },
       "exportPaths": [
@@ -1631,255 +1558,112 @@
   "components": [],
   "sourceFunctions": [
     {
-      "name": "createRulesRuntimeProvider",
-      "description": "Create the Ankh provider that exposes the generic JSON config validation operation.",
+      "name": "validate",
+      "description": "Execute the public `ankh rules config validate` command through the configuration feature.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/cli/index.ts",
-        "line": 11,
-        "column": 1
-      }
-    },
-    {
-      "name": "runConfigValidateCommand",
-      "description": "Validate an Ankh command invocation without creating a separate CLI implementation path.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/cli/index.ts",
-        "line": 38,
+        "filePath": "src/cli/commands/config/validate.ts",
+        "line": 6,
         "column": 1
       }
     },
     {
       "name": "renderConfigValidation",
-      "description": "Render a compact, transport-neutral report for standalone and Ankh CLI callers.",
+      "description": "Render the command result without coupling the configuration feature to a transport.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/cli/index.ts",
-        "line": 48,
-        "column": 1
-      }
-    },
-    {
-      "name": "runCli",
-      "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/cli/standalone.ts",
-        "line": 8,
-        "column": 1
-      }
-    },
-    {
-      "name": "isHelpToken",
-      "description": "Identify help tokens accepted by the small standalone command adapter.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/cli/standalone.ts",
-        "line": 31,
-        "column": 1
-      }
-    },
-    {
-      "name": "renderHelp",
-      "description": "Render the standalone command contract without implying provider discovery.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/cli/standalone.ts",
-        "line": 36,
-        "column": 1
-      }
-    },
-    {
-      "name": "createRuleRegistry",
-      "description": "Create a deterministic registry from independently owned RuleSets.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/createRuleRegistry.ts",
-        "line": 4,
-        "column": 1
-      }
-    },
-    {
-      "name": "assertUniqueRuleSetIds",
-      "description": "Reject ambiguous provider composition before evaluating a registry.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/createRuleRegistry.ts",
+        "filePath": "src/cli/commands/config/validate.ts",
         "line": 22,
         "column": 1
       }
     },
     {
-      "name": "assertUniqueRuleIds",
-      "description": "Reject multiple providers that claim the same public rule identifier.",
+      "name": "createRulesRuntimeProvider",
+      "description": "Create the Ankh provider that registers the generic Rules configuration command.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/createRuleRegistry.ts",
-        "line": 28,
-        "column": 1
-      }
-    },
-    {
-      "name": "findDuplicateId",
-      "description": "Find the first duplicate in an already deterministic sequence of identifiers.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/createRuleRegistry.ts",
-        "line": 34,
-        "column": 1
-      }
-    },
-    {
-      "name": "evaluateConfiguredRules",
-      "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/evaluateConfiguredRules.ts",
-        "line": 13,
-        "column": 1
-      }
-    },
-    {
-      "name": "toEvaluationDiagnostic",
-      "description": "Translate config validation failures into the evaluator's portable diagnostic shape.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/evaluateConfiguredRules.ts",
-        "line": 50,
-        "column": 1
-      }
-    },
-    {
-      "name": "applyConfiguredSeverities",
-      "description": "Apply configured severity overrides after providers have produced neutral findings.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/evaluateConfiguredRules.ts",
-        "line": 71,
-        "column": 1
-      }
-    },
-    {
-      "name": "evaluateRules",
-      "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/evaluateRules.ts",
+        "filePath": "src/cli/createRulesRuntimeProvider.ts",
         "line": 11,
         "column": 1
       }
     },
     {
-      "name": "evaluateRule",
-      "description": "Evaluate one rule only when its declared input capabilities are available.",
+      "name": "runCli",
+      "description": "Run the standalone Rules CLI without depending on the Ankh runtime package.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/evaluateRules.ts",
-        "line": 29,
+        "filePath": "src/cli/standalone.ts",
+        "line": 6,
         "column": 1
       }
     },
     {
-      "name": "canonicalizeFinding",
-      "description": "Preserve provider evidence while making identifier and severity engine-controlled facts.",
+      "name": "isHelpToken",
+      "description": "Identify help tokens accepted by the standalone delivery adapter.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/evaluateRules.ts",
-        "line": 74,
+        "filePath": "src/cli/standalone.ts",
+        "line": 28,
         "column": 1
       }
     },
     {
-      "name": "isMinimumOptions",
-      "description": "Identify the serializable option object used by the unrelated content fixture provider.",
+      "name": "renderHelp",
+      "description": "Render standalone help without introducing a second command implementation.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 96,
+        "filePath": "src/cli/standalone.ts",
+        "line": 33,
         "column": 1
       }
     },
     {
-      "name": "testProviderComposition",
-      "description": null,
+      "name": "readRulesConfigSourceAsync",
+      "description": "Read serialized Rules configuration at the filesystem edge.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 114,
+        "filePath": "src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts",
+        "line": 4,
         "column": 1
       }
     },
     {
-      "name": "testConfiguredRules",
-      "description": null,
+      "name": "writeRulesConfigAsync",
+      "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 133,
+        "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "line": 8,
         "column": 1
       }
     },
     {
-      "name": "testInvalidConfigDiagnostics",
-      "description": null,
+      "name": "canonicalizeRulesConfig",
+      "description": "Canonicalize rule selection order so writing preserves deterministic configuration composition.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 151,
+        "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "line": 18,
         "column": 1
       }
     },
     {
-      "name": "testConfigFileOperations",
-      "description": null,
+      "name": "validateRulesConfigFileAsync",
+      "description": "Read and validate one Rules configuration through a caller supplied source reader.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 193,
-        "column": 1
-      }
-    },
-    {
-      "name": "testCliContract",
-      "description": null,
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 210,
-        "column": 1
-      }
-    },
-    {
-      "name": "readRulesConfigAsync",
-      "description": "Read and structurally validate a repository rules.json file.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/readRulesConfigAsync.ts",
-        "line": 7,
+        "filePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "line": 5,
         "column": 1
       }
     },
@@ -1889,30 +1673,30 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/readRulesConfigAsync.ts",
-        "line": 21,
+        "filePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "line": 22,
         "column": 1
       }
     },
     {
       "name": "createReadDiagnostic",
-      "description": "Convert filesystem and JSON failures into a portable configuration diagnostic.",
+      "description": "Convert source and JSON failures into a portable configuration diagnostic.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/readRulesConfigAsync.ts",
-        "line": 26,
+        "filePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "line": 27,
         "column": 1
       }
     },
     {
-      "name": "resolveRulesStatus",
-      "description": "Summarize generic rule findings using the reusable status semantics formerly owned by Policy.",
+      "name": "readRulesConfigAsync",
+      "description": "Wire the configuration source reader into the public file-validation operation.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/resolveRulesStatus.ts",
-        "line": 4,
+        "filePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "line": 6,
         "column": 1
       }
     },
@@ -1922,7 +1706,7 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
         "line": 14,
         "column": 1
       }
@@ -1933,8 +1717,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 33,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 29,
         "column": 1
       }
     },
@@ -1944,8 +1728,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 61,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 58,
         "column": 1
       }
     },
@@ -1955,8 +1739,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 92,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 109,
         "column": 1
       }
     },
@@ -1966,19 +1750,19 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 141,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 159,
         "column": 1
       }
     },
     {
-      "name": "invalidRule",
-      "description": "Create a consistent invalid-rule diagnostic at the configured rule location.",
+      "name": "invalidRuleField",
+      "description": "Create a field-specific diagnostic for one invalid configured rule.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 149,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 167,
         "column": 1
       }
     },
@@ -1988,8 +1772,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 160,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 187,
         "column": 1
       }
     },
@@ -1999,8 +1783,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 170,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 197,
         "column": 1
       }
     },
@@ -2010,8 +1794,8 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 175,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 202,
         "column": 1
       }
     },
@@ -2021,41 +1805,228 @@
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfig.ts",
-        "line": 183,
+        "filePath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "line": 210,
         "column": 1
       }
     },
     {
-      "name": "validateRulesConfigFileAsync",
-      "description": "Validate one explicit or default rules.json path through the public configuration operation.",
+      "name": "createRuleRegistry",
+      "description": "Create a deterministic registry from independently owned RuleSets.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/validateRulesConfigFileAsync.ts",
-        "line": 7,
+        "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "line": 5,
         "column": 1
       }
     },
     {
-      "name": "writeRulesConfigAsync",
-      "description": "Validate and atomically write canonical rules.json configuration.",
+      "name": "assertUniqueRuleSetIds",
+      "description": "Reject ambiguous provider composition before evaluating a registry.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/writeRulesConfigAsync.ts",
-        "line": 7,
+        "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "line": 21,
         "column": 1
       }
     },
     {
-      "name": "canonicalizeRulesConfig",
-      "description": "Canonicalize rule selection order so writing preserves deterministic configuration composition.",
+      "name": "assertUniqueRuleIds",
+      "description": "Reject multiple providers that claim the same public rule identifier.",
       "see": [],
       "security": [],
       "sourceLocation": {
-        "filePath": "src/writeRulesConfigAsync.ts",
-        "line": 17,
+        "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "line": 27,
+        "column": 1
+      }
+    },
+    {
+      "name": "findDuplicateId",
+      "description": "Find the first duplicate in an already deterministic sequence of identifiers.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "line": 33,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateConfiguredRules",
+      "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "toEvaluationDiagnostic",
+      "description": "Translate config validation failures into the evaluator's portable diagnostic shape.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "line": 51,
+        "column": 1
+      }
+    },
+    {
+      "name": "applyConfiguredSeverities",
+      "description": "Apply configured severity overrides after providers have produced neutral findings.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "line": 67,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateRules",
+      "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 12,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateRule",
+      "description": "Evaluate one rule only when its declared input capabilities are available.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 30,
+        "column": 1
+      }
+    },
+    {
+      "name": "canonicalizeFinding",
+      "description": "Preserve provider evidence while making identifier and severity engine-controlled facts.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 75,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveRulesStatus",
+      "description": "Summarize the complete Rules evaluation result without treating failed evaluation as canonical.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
+        "line": 4,
+        "column": 1
+      }
+    },
+    {
+      "name": "isMinimumOptions",
+      "description": "Identify the serializable option object used by the unrelated content fixture provider.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 95,
+        "column": 1
+      }
+    },
+    {
+      "name": "testProviderComposition",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 115,
+        "column": 1
+      }
+    },
+    {
+      "name": "testConfiguredRules",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 134,
+        "column": 1
+      }
+    },
+    {
+      "name": "testSubjectOrdering",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 152,
+        "column": 1
+      }
+    },
+    {
+      "name": "testInvalidConfigDiagnostics",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 179,
+        "column": 1
+      }
+    },
+    {
+      "name": "testStructuralConfigDiagnostics",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 223,
+        "column": 1
+      }
+    },
+    {
+      "name": "testConfigFileOperations",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 244,
+        "column": 1
+      }
+    },
+    {
+      "name": "testCliContract",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/index.test.ts",
+        "line": 267,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareRuleEntityIds",
+      "description": "Compare Rules-domain entities by identifier using locale-independent code-unit ordering.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/utils/compareRuleEntityIds.ts",
+        "line": 2,
         "column": 1
       }
     }
@@ -2066,29 +2037,21 @@
       "name": "ankhorage-rules",
       "sourcePath": "src/cli/standalone.ts",
       "symbolName": "runCli",
-      "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
+      "description": "Run the standalone Rules CLI without depending on the Ankh runtime package.",
       "isReadme": false
     },
     {
       "kind": "export",
       "name": "createRuleRegistry",
-      "sourcePath": "src/createRuleRegistry.ts",
+      "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts",
       "symbolName": "createRuleRegistry",
       "description": "Create a deterministic registry from independently owned RuleSets.",
       "isReadme": false
     },
     {
       "kind": "export",
-      "name": "createRulesRuntimeProvider",
-      "sourcePath": "src/cli/index.ts",
-      "symbolName": "createRulesRuntimeProvider",
-      "description": "Create the Ankh provider that exposes the generic JSON config validation operation.",
-      "isReadme": false
-    },
-    {
-      "kind": "export",
       "name": "evaluateConfiguredRules",
-      "sourcePath": "src/evaluateConfiguredRules.ts",
+      "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
       "symbolName": "evaluateConfiguredRules",
       "description": "Resolve a configured Rule registry and evaluate its enabled rules without provider branches.",
       "isReadme": false
@@ -2096,7 +2059,7 @@
     {
       "kind": "export",
       "name": "evaluateRules",
-      "sourcePath": "src/evaluateRules.ts",
+      "sourcePath": "src/features/evaluation/domain/evaluateRules.ts",
       "symbolName": "evaluateRules",
       "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
       "isReadme": false
@@ -2104,78 +2067,47 @@
     {
       "kind": "export",
       "name": "readRulesConfigAsync",
-      "sourcePath": "src/readRulesConfigAsync.ts",
+      "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
       "symbolName": "readRulesConfigAsync",
-      "description": "Read and structurally validate a repository rules.json file.",
+      "description": "Wire the configuration source reader into the public file-validation operation.",
       "isReadme": false
     },
     {
       "kind": "export",
       "name": "resolveRulesStatus",
-      "sourcePath": "src/resolveRulesStatus.ts",
+      "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
       "symbolName": "resolveRulesStatus",
-      "description": "Summarize generic rule findings using the reusable status semantics formerly owned by Policy.",
-      "isReadme": false
-    },
-    {
-      "kind": "export",
-      "name": "runCli",
-      "sourcePath": "src/cli/standalone.ts",
-      "symbolName": "runCli",
-      "description": "Run the standalone Rules config validator through the same public operation as the Ankh provider.",
+      "description": "Summarize the complete Rules evaluation result without treating failed evaluation as canonical.",
       "isReadme": false
     },
     {
       "kind": "export",
       "name": "validateRulesConfig",
-      "sourcePath": "src/validateRulesConfig.ts",
+      "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts",
       "symbolName": "validateRulesConfig",
       "description": "Validate canonical rules.json data, optionally against a concrete rule registry.",
       "isReadme": false
     },
     {
       "kind": "export",
-      "name": "validateRulesConfigFileAsync",
-      "sourcePath": "src/validateRulesConfigFileAsync.ts",
-      "symbolName": "validateRulesConfigFileAsync",
-      "description": "Validate one explicit or default rules.json path through the public configuration operation.",
-      "isReadme": false
-    },
-    {
-      "kind": "export",
       "name": "writeRulesConfigAsync",
-      "sourcePath": "src/writeRulesConfigAsync.ts",
+      "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
       "symbolName": "writeRulesConfigAsync",
-      "description": "Validate and atomically write canonical rules.json configuration.",
+      "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
       "isReadme": false
     }
   ],
   "graphs": {
     "imports": [
       {
-        "fromPath": "src/createRuleRegistry.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/createRuleRegistry.ts"
+        "fromPath": "src/index.test.ts",
+        "toPath": "src/cli/index.ts",
+        "sourcePath": "src/index.test.ts"
       },
       {
-        "fromPath": "src/evaluateConfiguredRules.ts",
-        "toPath": "src/evaluateRules.ts",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromPath": "src/evaluateConfiguredRules.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromPath": "src/evaluateConfiguredRules.ts",
-        "toPath": "src/validateRulesConfig.ts",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromPath": "src/evaluateRules.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/evaluateRules.ts"
+        "fromPath": "src/index.test.ts",
+        "toPath": "src/cli/standalone.ts",
+        "sourcePath": "src/index.test.ts"
       },
       {
         "fromPath": "src/index.test.ts",
@@ -2184,103 +2116,43 @@
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/cli/index.ts",
+        "toPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/cli/standalone.ts",
+        "toPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/createRuleRegistry.ts",
+        "toPath": "src/features/configuration/domain/validateRulesConfig.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/evaluateConfiguredRules.ts",
+        "toPath": "src/features/evaluation/domain/createRuleRegistry.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/evaluateRules.ts",
+        "toPath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/readRulesConfigAsync.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRules.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/resolveRulesStatus.ts",
+        "toPath": "src/features/evaluation/domain/resolveRulesStatus.ts",
         "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
         "toPath": "src/types/rules.ts",
         "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
-        "toPath": "src/validateRulesConfig.ts",
-        "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
-        "toPath": "src/validateRulesConfigFileAsync.ts",
-        "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
-        "toPath": "src/writeRulesConfigAsync.ts",
-        "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/packageMetadata.ts",
-        "toPath": "package.json",
-        "sourcePath": "src/packageMetadata.ts"
-      },
-      {
-        "fromPath": "src/readRulesConfigAsync.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromPath": "src/readRulesConfigAsync.ts",
-        "toPath": "src/validateRulesConfig.ts",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromPath": "src/resolveRulesStatus.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/resolveRulesStatus.ts"
-      },
-      {
-        "fromPath": "src/validateRulesConfig.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromPath": "src/validateRulesConfigFileAsync.ts",
-        "toPath": "src/readRulesConfigAsync.ts",
-        "sourcePath": "src/validateRulesConfigFileAsync.ts"
-      },
-      {
-        "fromPath": "src/validateRulesConfigFileAsync.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/validateRulesConfigFileAsync.ts"
-      },
-      {
-        "fromPath": "src/writeRulesConfigAsync.ts",
-        "toPath": "src/types/rules.ts",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
-      },
-      {
-        "fromPath": "src/writeRulesConfigAsync.ts",
-        "toPath": "src/validateRulesConfig.ts",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
       },
       {
         "fromPath": "examples/config-validation/validate.ts",
@@ -2288,88 +2160,122 @@
         "sourcePath": "examples/config-validation/validate.ts"
       },
       {
-        "fromPath": "src/cli/index.ts",
-        "toPath": "src/packageMetadata.ts",
-        "sourcePath": "src/cli/index.ts"
+        "fromPath": "src/cli/createRulesRuntimeProvider.ts",
+        "toPath": "src/constants/rules.ts",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.ts"
+      },
+      {
+        "fromPath": "src/cli/createRulesRuntimeProvider.ts",
+        "toPath": "src/cli/commands/config/validate.ts",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.ts"
       },
       {
         "fromPath": "src/cli/index.ts",
-        "toPath": "src/validateRulesConfigFileAsync.ts",
+        "toPath": "src/cli/createRulesRuntimeProvider.ts",
         "sourcePath": "src/cli/index.ts"
       },
       {
         "fromPath": "src/cli/standalone.ts",
-        "toPath": "src/cli/index.ts",
+        "toPath": "src/cli/commands/config/validate.ts",
         "sourcePath": "src/cli/standalone.ts"
+      },
+      {
+        "fromPath": "src/constants/rules.ts",
+        "toPath": "package.json",
+        "sourcePath": "src/constants/rules.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/config/validate.ts",
+        "toPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "sourcePath": "src/cli/commands/config/validate.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "toPath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "toPath": "src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts",
+        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "toPath": "src/features/configuration/application/validateRulesConfigFileAsync.ts",
+        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/createRuleRegistry.ts",
+        "toPath": "src/utils/compareRuleEntityIds.ts",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "toPath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "toPath": "src/utils/compareRuleEntityIds.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/resolveRulesStatus.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "toPath": "src/utils/compareRuleEntityIds.ts",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
+      },
+      {
+        "fromPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "toPath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
       }
     ],
     "calls": [
-      {
-        "fromSymbol": "createRuleRegistry",
-        "toSymbol": "assertUniqueRuleSetIds",
-        "callExpression": "assertUniqueRuleSetIds",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "createRuleRegistry",
-        "toSymbol": "assertUniqueRuleIds",
-        "callExpression": "assertUniqueRuleIds",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "assertUniqueRuleSetIds",
-        "toSymbol": "findDuplicateId",
-        "callExpression": "findDuplicateId",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "assertUniqueRuleIds",
-        "toSymbol": "findDuplicateId",
-        "callExpression": "findDuplicateId",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toSymbol": "validateRulesConfig",
-        "callExpression": "validateRulesConfig",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toSymbol": "evaluateRules",
-        "callExpression": "evaluateRules",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toSymbol": "applyConfiguredSeverities",
-        "callExpression": "applyConfiguredSeverities",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "src/evaluateRules.ts",
-        "toSymbol": "evaluateRule",
-        "callExpression": "evaluateRule",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRule",
-        "toSymbol": "validateOptions",
-        "callExpression": "rule.validateOptions",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRule",
-        "toSymbol": "evaluate",
-        "callExpression": "rule\n      .evaluate",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "src/evaluateRules.ts",
-        "toSymbol": "canonicalizeFinding",
-        "callExpression": "canonicalizeFinding",
-        "sourcePath": "src/evaluateRules.ts"
-      },
       {
         "fromSymbol": "validateOptions",
         "toSymbol": "isMinimumOptions",
@@ -2443,6 +2349,18 @@
         "sourcePath": "src/index.test.ts"
       },
       {
+        "fromSymbol": "testSubjectOrdering",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromSymbol": "testSubjectOrdering",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
         "fromSymbol": "testInvalidConfigDiagnostics",
         "toSymbol": "createRuleRegistry",
         "callExpression": "createRuleRegistry",
@@ -2464,6 +2382,24 @@
         "fromSymbol": "testInvalidConfigDiagnostics",
         "toSymbol": "evaluateConfiguredRules",
         "callExpression": "evaluateConfiguredRules",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromSymbol": "testInvalidConfigDiagnostics",
+        "toSymbol": "resolveRulesStatus",
+        "callExpression": "resolveRulesStatus",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromSymbol": "testStructuralConfigDiagnostics",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromSymbol": "testStructuralConfigDiagnostics",
+        "toSymbol": "validateRulesConfig",
+        "callExpression": "validateRulesConfig",
         "sourcePath": "src/index.test.ts"
       },
       {
@@ -2504,20 +2440,8 @@
       },
       {
         "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "validateRulesConfigFileAsync",
-        "callExpression": "validateRulesConfigFileAsync",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
         "toSymbol": "rm",
         "callExpression": "rm",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testCliContract",
-        "toSymbol": "createRulesRuntimeProvider",
-        "callExpression": "createRulesRuntimeProvider",
         "sourcePath": "src/index.test.ts"
       },
       {
@@ -2528,177 +2452,33 @@
       },
       {
         "fromSymbol": "testCliContract",
+        "toSymbol": "createRulesRuntimeProvider",
+        "callExpression": "createRulesRuntimeProvider",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromSymbol": "testCliContract",
         "toSymbol": "runCli",
         "callExpression": "runCli",
         "sourcePath": "src/index.test.ts"
       },
       {
-        "fromSymbol": "readRulesConfigAsync",
-        "toSymbol": "readFile",
-        "callExpression": "readFile",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "readRulesConfigAsync",
-        "toSymbol": "validateRulesConfig",
-        "callExpression": "validateRulesConfig",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "readRulesConfigAsync",
-        "toSymbol": "parseJson",
-        "callExpression": "parseJson",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "readRulesConfigAsync",
-        "toSymbol": "createReadDiagnostic",
-        "callExpression": "createReadDiagnostic",
-        "sourcePath": "src/readRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfig",
-        "toSymbol": "validateRulesConfigStructure",
-        "callExpression": "validateRulesConfigStructure",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfig",
-        "toSymbol": "validateConfiguredRules",
-        "callExpression": "validateConfiguredRules",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigStructure",
-        "toSymbol": "isRecord",
-        "callExpression": "isRecord",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigStructure",
-        "toSymbol": "invalidConfig",
-        "callExpression": "invalidConfig",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "src/validateRulesConfig.ts",
-        "toSymbol": "validateRulesConfigRule",
-        "callExpression": "validateRulesConfigRule",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigStructure",
-        "toSymbol": "findDuplicateRuleIds",
-        "callExpression": "findDuplicateRuleIds",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigRule",
-        "toSymbol": "isRecord",
-        "callExpression": "isRecord",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigRule",
-        "toSymbol": "invalidRule",
-        "callExpression": "invalidRule",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigRule",
-        "toSymbol": "isNonEmptyString",
-        "callExpression": "isNonEmptyString",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigRule",
-        "toSymbol": "isRuleSeverity",
-        "callExpression": "isRuleSeverity",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigRule",
-        "toSymbol": "isJsonValue",
-        "callExpression": "isJsonValue",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "src/validateRulesConfig.ts",
-        "toSymbol": "validateOptions",
-        "callExpression": "rule.validateOptions",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "isJsonValue",
-        "toSymbol": "isRecord",
-        "callExpression": "isRecord",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigFileAsync",
+        "fromSymbol": "examples/config-validation/validate.ts",
         "toSymbol": "readRulesConfigAsync",
         "callExpression": "readRulesConfigAsync",
-        "sourcePath": "src/validateRulesConfigFileAsync.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigFileAsync",
-        "toSymbol": "resolve",
-        "callExpression": "resolve",
-        "sourcePath": "src/validateRulesConfigFileAsync.ts"
-      },
-      {
-        "fromSymbol": "writeRulesConfigAsync",
-        "toSymbol": "validateRulesConfig",
-        "callExpression": "validateRulesConfig",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "writeRulesConfigAsync",
-        "toSymbol": "writeJsonFileAtomic",
-        "callExpression": "writeJsonFileAtomic",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "writeRulesConfigAsync",
-        "toSymbol": "canonicalizeRulesConfig",
-        "callExpression": "canonicalizeRulesConfig",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "examples/config-validation/validate.ts",
-        "toSymbol": "validateRulesConfigFileAsync",
-        "callExpression": "validateRulesConfigFileAsync",
         "sourcePath": "examples/config-validation/validate.ts"
       },
       {
         "fromSymbol": "handler",
-        "toSymbol": "runConfigValidateCommand",
-        "callExpression": "runConfigValidateCommand",
-        "sourcePath": "src/cli/index.ts"
-      },
-      {
-        "fromSymbol": "handler",
-        "toSymbol": "renderConfigValidation",
-        "callExpression": "renderConfigValidation",
-        "sourcePath": "src/cli/index.ts"
-      },
-      {
-        "fromSymbol": "runConfigValidateCommand",
-        "toSymbol": "validateRulesConfigFileAsync",
-        "callExpression": "validateRulesConfigFileAsync",
-        "sourcePath": "src/cli/index.ts"
+        "toSymbol": "validate",
+        "callExpression": "validate",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.ts"
       },
       {
         "fromSymbol": "src/cli/index.ts",
         "toSymbol": "createRulesRuntimeProvider",
         "callExpression": "createRulesRuntimeProvider",
         "sourcePath": "src/cli/index.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "createDefaultCommandContext",
-        "callExpression": "createDefaultCommandContext",
-        "sourcePath": "src/cli/standalone.ts"
       },
       {
         "fromSymbol": "runCli",
@@ -2714,14 +2494,8 @@
       },
       {
         "fromSymbol": "runCli",
-        "toSymbol": "runConfigValidateCommand",
-        "callExpression": "runConfigValidateCommand",
-        "sourcePath": "src/cli/standalone.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "renderConfigValidation",
-        "callExpression": "renderConfigValidation",
+        "toSymbol": "validate",
+        "callExpression": "validate",
         "sourcePath": "src/cli/standalone.ts"
       },
       {
@@ -2729,103 +2503,329 @@
         "toSymbol": "runCli",
         "callExpression": "runCli",
         "sourcePath": "src/cli/standalone.ts"
+      },
+      {
+        "fromSymbol": "validate",
+        "toSymbol": "readRulesConfigAsync",
+        "callExpression": "readRulesConfigAsync",
+        "sourcePath": "src/cli/commands/config/validate.ts"
+      },
+      {
+        "fromSymbol": "validate",
+        "toSymbol": "resolve",
+        "callExpression": "resolve",
+        "sourcePath": "src/cli/commands/config/validate.ts"
+      },
+      {
+        "fromSymbol": "validate",
+        "toSymbol": "renderConfigValidation",
+        "callExpression": "renderConfigValidation",
+        "sourcePath": "src/cli/commands/config/validate.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigFileAsync",
+        "toSymbol": "readSourceAsync",
+        "callExpression": "readSourceAsync",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigFileAsync",
+        "toSymbol": "validateRulesConfig",
+        "callExpression": "validateRulesConfig",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigFileAsync",
+        "toSymbol": "parseJson",
+        "callExpression": "parseJson",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigFileAsync",
+        "toSymbol": "createReadDiagnostic",
+        "callExpression": "createReadDiagnostic",
+        "sourcePath": "src/features/configuration/application/validateRulesConfigFileAsync.ts"
+      },
+      {
+        "fromSymbol": "readRulesConfigAsync",
+        "toSymbol": "validateRulesConfigFileAsync",
+        "callExpression": "validateRulesConfigFileAsync",
+        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfig",
+        "toSymbol": "validateRulesConfigStructure",
+        "callExpression": "validateRulesConfigStructure",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfig",
+        "toSymbol": "validateConfiguredRules",
+        "callExpression": "validateConfiguredRules",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigStructure",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigStructure",
+        "toSymbol": "invalidConfig",
+        "callExpression": "invalidConfig",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "src/features/configuration/domain/validateRulesConfig.ts",
+        "toSymbol": "validateRulesConfigRule",
+        "callExpression": "validateRulesConfigRule",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigStructure",
+        "toSymbol": "findDuplicateRuleIds",
+        "callExpression": "findDuplicateRuleIds",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigRule",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigRule",
+        "toSymbol": "invalidRuleField",
+        "callExpression": "invalidRuleField",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigRule",
+        "toSymbol": "isNonEmptyString",
+        "callExpression": "isNonEmptyString",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigRule",
+        "toSymbol": "isRuleSeverity",
+        "callExpression": "isRuleSeverity",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfigRule",
+        "toSymbol": "isJsonValue",
+        "callExpression": "isJsonValue",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "src/features/configuration/domain/validateRulesConfig.ts",
+        "toSymbol": "validateOptions",
+        "callExpression": "rule.validateOptions",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "isJsonValue",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "createRuleRegistry",
+        "toSymbol": "assertUniqueRuleSetIds",
+        "callExpression": "assertUniqueRuleSetIds",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "createRuleRegistry",
+        "toSymbol": "assertUniqueRuleIds",
+        "callExpression": "assertUniqueRuleIds",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "assertUniqueRuleSetIds",
+        "toSymbol": "findDuplicateId",
+        "callExpression": "findDuplicateId",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "assertUniqueRuleIds",
+        "toSymbol": "findDuplicateId",
+        "callExpression": "findDuplicateId",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toSymbol": "validateRulesConfig",
+        "callExpression": "validateRulesConfig",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toSymbol": "applyConfiguredSeverities",
+        "callExpression": "applyConfiguredSeverities",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRules.ts",
+        "toSymbol": "evaluateRule",
+        "callExpression": "evaluateRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRule",
+        "toSymbol": "validateOptions",
+        "callExpression": "rule.validateOptions",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRule",
+        "toSymbol": "evaluate",
+        "callExpression": "rule\n      .evaluate",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRules.ts",
+        "toSymbol": "canonicalizeFinding",
+        "callExpression": "canonicalizeFinding",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "readRulesConfigSourceAsync",
+        "toSymbol": "readFile",
+        "callExpression": "readFile",
+        "sourcePath": "src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts"
+      },
+      {
+        "fromSymbol": "writeRulesConfigAsync",
+        "toSymbol": "validateRulesConfig",
+        "callExpression": "validateRulesConfig",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
+      },
+      {
+        "fromSymbol": "writeRulesConfigAsync",
+        "toSymbol": "writeJsonFileAtomic",
+        "callExpression": "writeJsonFileAtomic",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
+      },
+      {
+        "fromSymbol": "writeRulesConfigAsync",
+        "toSymbol": "canonicalizeRulesConfig",
+        "callExpression": "canonicalizeRulesConfig",
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
       }
     ],
     "typeReferences": [
       {
-        "fromSymbol": "createRulesRuntimeProvider",
-        "toType": "AnkhRuntimeCommandProvider",
-        "sourcePath": "src/cli/index.ts"
-      },
-      {
-        "fromSymbol": "createRuleRegistry",
-        "toType": "RuleRegistry",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "createRuleRegistry",
-        "toType": "RuleSet",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "createRuleRegistry",
-        "toType": "TContext",
-        "sourcePath": "src/createRuleRegistry.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toType": "EvaluateConfiguredRulesOptions",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toType": "RuleEvaluationResult",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toType": "RuleRegistry",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
+        "fromSymbol": "writeRulesConfigAsync",
         "toType": "RulesConfig",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateConfiguredRules",
-        "toType": "TContext",
-        "sourcePath": "src/evaluateConfiguredRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRules",
-        "toType": "EvaluateRulesOptions",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRules",
-        "toType": "JsonValue",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRules",
-        "toType": "Rule",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRules",
-        "toType": "RuleEvaluationResult",
-        "sourcePath": "src/evaluateRules.ts"
-      },
-      {
-        "fromSymbol": "evaluateRules",
-        "toType": "TContext",
-        "sourcePath": "src/evaluateRules.ts"
+        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
       },
       {
         "fromSymbol": "readRulesConfigAsync",
         "toType": "RulesConfigReadResult",
-        "sourcePath": "src/readRulesConfigAsync.ts"
+        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
       },
       {
-        "fromSymbol": "resolveRulesStatus",
+        "fromSymbol": "validateRulesConfig",
+        "toType": "RulesConfigValidationOptions",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfig",
+        "toType": "RulesConfigValidationResult",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "validateRulesConfig",
+        "toType": "TContext",
+        "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "createRuleRegistry",
+        "toType": "RuleRegistry",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "createRuleRegistry",
+        "toType": "RuleSet",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "createRuleRegistry",
+        "toType": "TContext",
+        "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toType": "EvaluateConfiguredRulesOptions",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toType": "RuleEvaluationResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toType": "RuleRegistry",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toType": "RulesConfig",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateConfiguredRules",
+        "toType": "TContext",
+        "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRules",
+        "toType": "EvaluateRulesOptions",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRules",
         "toType": "JsonValue",
-        "sourcePath": "src/resolveRulesStatus.ts"
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRules",
+        "toType": "Rule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRules",
+        "toType": "RuleEvaluationResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluateRules",
+        "toType": "TContext",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
         "fromSymbol": "resolveRulesStatus",
         "toType": "Pick",
-        "sourcePath": "src/resolveRulesStatus.ts"
+        "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts"
       },
       {
         "fromSymbol": "resolveRulesStatus",
-        "toType": "RuleFinding",
-        "sourcePath": "src/resolveRulesStatus.ts"
+        "toType": "RuleEvaluationResult",
+        "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts"
       },
       {
         "fromSymbol": "resolveRulesStatus",
         "toType": "RulesStatusDescriptor",
-        "sourcePath": "src/resolveRulesStatus.ts"
+        "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts"
       },
       {
         "fromSymbol": "EvaluateRulesOptions",
@@ -2991,31 +2991,6 @@
         "fromSymbol": "RuleSet",
         "toType": "TContext",
         "sourcePath": "src/types/rules.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfig",
-        "toType": "RulesConfigValidationOptions",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfig",
-        "toType": "RulesConfigValidationResult",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfig",
-        "toType": "TContext",
-        "sourcePath": "src/validateRulesConfig.ts"
-      },
-      {
-        "fromSymbol": "validateRulesConfigFileAsync",
-        "toType": "RulesConfigReadResult",
-        "sourcePath": "src/validateRulesConfigFileAsync.ts"
-      },
-      {
-        "fromSymbol": "writeRulesConfigAsync",
-        "toType": "RulesConfig",
-        "sourcePath": "src/writeRulesConfigAsync.ts"
       }
     ],
     "componentComposition": []

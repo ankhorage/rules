@@ -7,48 +7,64 @@ graph TD
   module_examples_config_validation_validate_ts --> module_src_index_ts
   module_package_json["package.json"]
   package__ankhorage_rules -.-> module_package_json
+  module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
+  package__ankhorage_rules -.-> module_src_cli_commands_config_validate_ts
+  module_src_cli_commands_config_validate_ts --> module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_ts["src/cli/createRulesRuntimeProvider.ts"]
+  package__ankhorage_rules -.-> module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --> module_src_cli_commands_config_validate_ts
+  module_src_cli_createRulesRuntimeProvider_ts --> module_src_constants_rules_ts
   module_src_cli_index_ts["src/cli/index.ts"]
   package__ankhorage_rules -.-> module_src_cli_index_ts
-  module_src_cli_index_ts --> module_src_packageMetadata_ts
-  module_src_cli_index_ts --> module_src_validateRulesConfigFileAsync_ts
+  module_src_cli_index_ts --> module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
   package__ankhorage_rules -.-> module_src_cli_standalone_ts
-  module_src_cli_standalone_ts --> module_src_cli_index_ts
-  module_src_createRuleRegistry_ts["src/createRuleRegistry.ts"]
-  package__ankhorage_rules -.-> module_src_createRuleRegistry_ts
-  module_src_createRuleRegistry_ts --> module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts["src/evaluateConfiguredRules.ts"]
-  package__ankhorage_rules -.-> module_src_evaluateConfiguredRules_ts
-  module_src_evaluateConfiguredRules_ts --> module_src_evaluateRules_ts
-  module_src_evaluateConfiguredRules_ts --> module_src_types_rules_ts
-  module_src_evaluateConfiguredRules_ts --> module_src_validateRulesConfig_ts
-  module_src_evaluateRules_ts["src/evaluateRules.ts"]
-  package__ankhorage_rules -.-> module_src_evaluateRules_ts
-  module_src_evaluateRules_ts --> module_src_types_rules_ts
+  module_src_cli_standalone_ts --> module_src_cli_commands_config_validate_ts
+  module_src_constants_rules_ts["src/constants/rules.ts"]
+  package__ankhorage_rules -.-> module_src_constants_rules_ts
+  module_src_constants_rules_ts --> module_package_json
+  module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts["src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts"]
+  package__ankhorage_rules -.-> module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts["src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"]
+  package__ankhorage_rules -.-> module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --> module_src_types_rules_ts
+  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts["src/features/configuration/application/validateRulesConfigFileAsync.ts"]
+  package__ankhorage_rules -.-> module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_application_validateRulesConfigFileAsync_ts --> module_src_types_rules_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts["src/features/configuration/composition/readRulesConfigAsync.ts"]
+  package__ankhorage_rules -.-> module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --> module_src_features_configuration_adapters_filesystem_readRulesConfigSourceAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --> module_src_features_configuration_application_validateRulesConfigFileAsync_ts
+  module_src_features_configuration_composition_readRulesConfigAsync_ts --> module_src_types_rules_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts["src/features/configuration/domain/validateRulesConfig.ts"]
+  package__ankhorage_rules -.-> module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_configuration_domain_validateRulesConfig_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts["src/features/evaluation/domain/createRuleRegistry.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_createRuleRegistry_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleRegistry_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts["src/features/evaluation/domain/evaluateConfiguredRules.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateConfiguredRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts["src/features/evaluation/domain/resolveRulesStatus.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_resolveRulesStatus_ts
+  module_src_features_evaluation_domain_resolveRulesStatus_ts --> module_src_types_rules_ts
   module_src_index_test_ts["src/index.test.ts"]
   package__ankhorage_rules -.-> module_src_index_test_ts
+  module_src_index_test_ts --> module_src_cli_index_ts
+  module_src_index_test_ts --> module_src_cli_standalone_ts
   module_src_index_test_ts --> module_src_index_ts
   module_src_index_ts["src/index.ts"]
-  module_src_packageMetadata_ts["src/packageMetadata.ts"]
-  package__ankhorage_rules -.-> module_src_packageMetadata_ts
-  module_src_packageMetadata_ts --> module_package_json
-  module_src_readRulesConfigAsync_ts["src/readRulesConfigAsync.ts"]
-  package__ankhorage_rules -.-> module_src_readRulesConfigAsync_ts
-  module_src_readRulesConfigAsync_ts --> module_src_types_rules_ts
-  module_src_readRulesConfigAsync_ts --> module_src_validateRulesConfig_ts
-  module_src_resolveRulesStatus_ts["src/resolveRulesStatus.ts"]
-  package__ankhorage_rules -.-> module_src_resolveRulesStatus_ts
-  module_src_resolveRulesStatus_ts --> module_src_types_rules_ts
   module_src_types_rules_ts["src/types/rules.ts"]
   package__ankhorage_rules -.-> module_src_types_rules_ts
-  module_src_validateRulesConfig_ts["src/validateRulesConfig.ts"]
-  package__ankhorage_rules -.-> module_src_validateRulesConfig_ts
-  module_src_validateRulesConfig_ts --> module_src_types_rules_ts
-  module_src_validateRulesConfigFileAsync_ts["src/validateRulesConfigFileAsync.ts"]
-  package__ankhorage_rules -.-> module_src_validateRulesConfigFileAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --> module_src_readRulesConfigAsync_ts
-  module_src_validateRulesConfigFileAsync_ts --> module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts["src/writeRulesConfigAsync.ts"]
-  package__ankhorage_rules -.-> module_src_writeRulesConfigAsync_ts
-  module_src_writeRulesConfigAsync_ts --> module_src_types_rules_ts
-  module_src_writeRulesConfigAsync_ts --> module_src_validateRulesConfig_ts
+  module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
+  package__ankhorage_rules -.-> module_src_utils_compareRuleEntityIds_ts
