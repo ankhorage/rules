@@ -191,7 +191,6 @@ function testInvalidConfigDiagnostics(): void {
     expect.objectContaining({ code: 'unknown-rule', ruleId: 'missing.rule' }),
   ]);
   expect(resolveRulesStatus(failedEvaluation)).toEqual({ status: 'invalid', color: 'red' });
-
 }
 
 function testStructuralConfigDiagnostics(): void {
