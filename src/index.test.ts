@@ -21,12 +21,17 @@ import {
   writeRulesConfigAsync,
 } from './index.js';
 
-interface FixtureContext {
-  readonly blockers: number;
+interface ContentContext {
   readonly words: readonly string[];
 }
 
-const contentRule = {
+interface ReleaseContext {
+  readonly blockers: number;
+}
+
+interface FixtureContext extends ContentContext, ReleaseContext {}
+
+const contentRule: Rule<ContentContext, { readonly minimum: number }> = {
   id: 'content.minimum-words',
   summary: 'Require a configurable number of words.',
   defaultSeverity: 'error',
@@ -35,13 +40,13 @@ const contentRule = {
     isMinimumOptions(options)
       ? []
       : [{ code: 'minimum-required', message: 'options.minimum must be a number.' }],
-  evaluate: ({
+  evaluate({
     context,
     options,
   }: {
-    readonly context: FixtureContext;
+    readonly context: ContentContext;
     readonly options: { readonly minimum: number } | undefined;
-  }) => {
+  }) {
     const minimum = isMinimumOptions(options) ? options.minimum : undefined;
     return typeof minimum === 'number' && context.words.length < minimum
       ? [
@@ -55,20 +60,20 @@ const contentRule = {
         ]
       : [];
   },
-} satisfies Rule<FixtureContext, { readonly minimum: number }>;
+};
 
-const releaseRule = {
+const releaseRule: Rule<ReleaseContext> = {
   id: 'release.no-blockers',
   summary: 'Report release blockers from a different domain context.',
   defaultSeverity: 'error',
   requiredCapabilities: ['release-state'] as const,
-  evaluate: ({
+  evaluate({
     context,
   }: {
-    readonly context: FixtureContext;
+    readonly context: ReleaseContext;
     readonly options: JsonValue | undefined;
-  }) =>
-    context.blockers > 0
+  }) {
+    return context.blockers > 0
       ? [
           {
             ruleId: 'ignored-by-engine',
@@ -78,13 +83,14 @@ const releaseRule = {
             evidence: { blockers: context.blockers },
           },
         ]
-      : [],
-} satisfies Rule<FixtureContext>;
+      : [];
+  },
+};
 
-const fixtureRuleSets = [
+const fixtureRuleSets: readonly RuleSet<FixtureContext>[] = [
   { id: 'release-provider', rules: [releaseRule] },
   { id: 'content-provider', rules: [contentRule] },
-] as const satisfies readonly RuleSet<FixtureContext>[];
+];
 
 /*** Identify the serializable option object used by the unrelated content fixture provider. */
 function isMinimumOptions(value: JsonValue | undefined): value is { readonly minimum: number } {
@@ -95,8 +101,9 @@ describe('public Rules contract', () => {
   test('composes unrelated providers through one deterministic evaluator', testProviderComposition);
   test(
     'validates configured IDs, options, and required capabilities explicitly',
-    testConfiguredRules,
+    testInvalidConfigDiagnostics,
   );
+  test('applies configured options and severity overrides', testConfiguredRules);
   test(
     'reads, validates, writes, and validates the JSON-only configuration through public APIs',
     testConfigFileOperations,
@@ -133,10 +140,21 @@ function testConfiguredRules(): void {
     ],
   } as const;
 
+  const result = evaluateConfiguredRules({ blockers: 1, words: ['one'] }, config, registry, {
+    capabilities: ['text', 'release-state'],
+  });
+  expect(result.diagnostics).toEqual([]);
+  expect(result.findings.map((finding) => finding.severity)).toEqual(['error', 'warning']);
+  expect(resolveRulesStatus(result.findings)).toEqual({ status: 'invalid', color: 'red' });
+}
+
+function testInvalidConfigDiagnostics(): void {
+  const registry = createRuleRegistry(fixtureRuleSets);
   expect(
-    validateRulesConfig(config, { registry, capabilities: ['text'] }).diagnostics.map(
-      (diagnostic) => diagnostic.code,
-    ),
+    validateRulesConfig(
+      { version: 1, rules: [{ id: 'release.no-blockers', enabled: true }] },
+      { registry, capabilities: ['text'] },
+    ).diagnostics.map((diagnostic) => diagnostic.code),
   ).toEqual(['missing-capability']);
   expect(
     validateRulesConfig(
@@ -162,13 +180,14 @@ function testConfiguredRules(): void {
       { registry, capabilities: ['text'] },
     ).diagnostics.map((diagnostic) => diagnostic.code),
   ).toEqual(['invalid-options', 'unknown-rule']);
-
-  const result = evaluateConfiguredRules({ blockers: 1, words: ['one'] }, config, registry, {
-    capabilities: ['text', 'release-state'],
-  });
-  expect(result.diagnostics).toEqual([]);
-  expect(result.findings.map((finding) => finding.severity)).toEqual(['error', 'warning']);
-  expect(resolveRulesStatus(result.findings)).toEqual({ status: 'invalid', color: 'red' });
+  expect(
+    evaluateConfiguredRules(
+      { blockers: 0, words: [] },
+      { version: 1, rules: [{ id: 'missing.rule', enabled: true }] },
+      registry,
+      { capabilities: ['text', 'release-state'] },
+    ).diagnostics,
+  ).toEqual([expect.objectContaining({ code: 'unknown-rule', ruleId: 'missing.rule' })]);
 }
 
 async function testConfigFileOperations(): Promise<void> {

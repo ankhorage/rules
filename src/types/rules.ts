@@ -55,7 +55,7 @@ export interface Rule<
   readonly id: string;
   readonly requiredCapabilities?: readonly RuleCapability[];
   readonly summary: string;
-  validateOptions?(options: TOptions | undefined): readonly RuleOptionDiagnostic[];
+  validateOptions?(options: JsonValue | undefined): readonly RuleOptionDiagnostic[];
 }
 
 /*** A named collection of independently supplied rules that can compose with other providers. */
@@ -97,6 +97,7 @@ export interface RulesConfigDiagnostic {
     | 'unknown-rule';
   readonly message: string;
   readonly path?: string;
+  readonly ruleId?: string;
 }
 
 /*** The result of validating a raw JSON configuration against optional provider knowledge. */

@@ -51,6 +51,7 @@ function toEvaluationDiagnostic(diagnostic: {
   readonly code: string;
   readonly message: string;
   readonly path?: string;
+  readonly ruleId?: string;
 }): RuleEvaluationDiagnostic {
   return {
     code:
@@ -61,7 +62,7 @@ function toEvaluationDiagnostic(diagnostic: {
           : diagnostic.code === 'invalid-config'
             ? 'invalid-config'
             : 'invalid-options',
-    ruleId: diagnostic.path ?? 'rules.config',
+    ruleId: diagnostic.ruleId ?? 'rules.config',
     message: diagnostic.message,
   };
 }

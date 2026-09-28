@@ -49,6 +49,7 @@ function validateRulesConfigStructure(value: unknown): RulesConfigValidationResu
         code: 'invalid-rule-id',
         message: `rules.json configures rule "${id}" more than once.`,
         path: 'rules',
+        ruleId: id,
       })),
     };
   }
@@ -105,6 +106,7 @@ function validateConfiguredRules<TContext>(
           code: 'unknown-rule' as const,
           message: `rules.json configures unknown rule "${configuredRule.id}".`,
           path: `rules[${index}].id`,
+          ruleId: configuredRule.id,
         },
       ];
     }
@@ -119,11 +121,13 @@ function validateConfiguredRules<TContext>(
       code: 'missing-capability' as const,
       message: `Rule "${rule.id}" requires unavailable capability "${capability}".`,
       path: `rules[${index}]`,
+      ruleId: rule.id,
     }));
     const optionDiagnostics = (rule.validateOptions?.(configuredRule.options) ?? []).map(
       (diagnostic) => ({
         code: 'invalid-options' as const,
         message: `Rule "${rule.id}": ${diagnostic.message}`,
+        ruleId: rule.id,
         ...(diagnostic.path === undefined
           ? {}
           : { path: `rules[${index}].options.${diagnostic.path}` }),
