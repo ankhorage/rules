@@ -15,9 +15,7 @@ export function evaluateRules<TContext>(
   options: EvaluateRulesOptions = {},
 ): RuleEvaluationResult {
   const availableCapabilities = new Set(options.capabilities ?? []);
-  const orderedRules = [...rules].sort((left, right) =>
-    compareRuleIdentifier(left.id, right.id),
-  );
+  const orderedRules = [...rules].sort((left, right) => compareRuleIdentifier(left.id, right.id));
   const results = orderedRules.map((rule) =>
     evaluateRule(context, rule, availableCapabilities, options),
   );
@@ -83,8 +81,6 @@ function canonicalizeFinding(
     ...finding,
     ruleId,
     severity,
-    subjects: [...finding.subjects].sort((left, right) =>
-      compareRuleIdentifier(left.id, right.id),
-    ),
+    subjects: [...finding.subjects].sort((left, right) => compareRuleIdentifier(left.id, right.id)),
   };
 }
