@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { isRecord } from '@ankhorage/utility/object';
 import { describe, expect, test } from 'bun:test';
 
+import { createRulesRuntimeProvider } from './cli/index.js';
+import { runCli } from './cli/standalone.js';
 import {
   createRuleRegistry,
   evaluateConfiguredRules,
@@ -18,8 +20,6 @@ import {
   validateRulesConfigFileAsync,
   writeRulesConfigAsync,
 } from './index.js';
-import { createRulesRuntimeProvider } from './cli/index.js';
-import { runCli } from './cli/standalone.js';
 
 interface ContentContext {
   readonly words: readonly string[];
@@ -104,6 +104,7 @@ describe('public Rules contract', () => {
     testInvalidConfigDiagnostics,
   );
   test('applies configured options and severity overrides', testConfiguredRules);
+  test('reports structural configuration field diagnostics', testStructuralConfigDiagnostics);
   test(
     'reads, validates, writes, and validates the JSON-only configuration through public APIs',
     testConfigFileOperations,
@@ -191,6 +192,9 @@ function testInvalidConfigDiagnostics(): void {
   ]);
   expect(resolveRulesStatus(failedEvaluation)).toEqual({ status: 'invalid', color: 'red' });
 
+}
+
+function testStructuralConfigDiagnostics(): void {
   expect(
     validateRulesConfig({
       version: 1,
