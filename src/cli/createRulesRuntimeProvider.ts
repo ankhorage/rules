@@ -1,10 +1,8 @@
 import type { AnkhRuntimeCommandProvider } from '@ankhorage/ankh';
+import type { Capability } from '@ankhorage/contracts/capabilities';
 
-import {
-  RULES_CAPABILITIES,
-  RULES_COMMAND_CATEGORY,
-  RULES_PACKAGE_VERSION,
-} from '../constants/rules.js';
+import { CAPABILITIES } from '../capabilities/index.js';
+import { RULES_COMMAND_CATEGORY, RULES_PACKAGE_VERSION } from '../constants/rules.js';
 import { validate } from './commands/config/validate.js';
 
 /*** Create the Ankh provider that registers the generic Rules configuration command. */
@@ -13,11 +11,11 @@ export function createRulesRuntimeProvider(): AnkhRuntimeCommandProvider {
     id: '@ankhorage/rules',
     category: RULES_COMMAND_CATEGORY,
     version: RULES_PACKAGE_VERSION,
-    capabilities: [...RULES_CAPABILITIES],
+    capabilities: CAPABILITIES,
     commands: [
       {
         path: ['config', 'validate'],
-        capability: RULES_CAPABILITIES[0],
+        capability: 'rules.config.validate' satisfies Capability['id'],
         summary: 'Validate the generic JSON shape of a repository rules.json file.',
       },
     ],
