@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { isRecord } from '@ankhorage/utility/object';
 import { describe, expect, test } from 'bun:test';
 
+import { CAPABILITIES } from './capabilities/index.js';
 import { createRulesRuntimeProvider } from './cli/index.js';
 import { runCli } from './cli/standalone.js';
 import {
@@ -270,7 +271,7 @@ async function testCliContract(): Promise<void> {
   expect('runCli' in rootApi).toBe(false);
 
   const provider = createRulesRuntimeProvider();
-  expect(provider.capabilities).toEqual(['rules.config.validate']);
+  expect(provider.capabilities).toBe(CAPABILITIES);
   expect(provider.commands).toEqual([
     expect.objectContaining({ path: ['config', 'validate'], capability: 'rules.config.validate' }),
   ]);
