@@ -7,11 +7,19 @@ graph TD
   module_examples_config_validation_validate_ts --> module_src_index_ts
   module_package_json["package.json"]
   package__ankhorage_rules -.-> module_package_json
+  module_src_capabilities_index_ts["src/capabilities/index.ts"]
+  package__ankhorage_rules -.-> module_src_capabilities_index_ts
   module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
   package__ankhorage_rules -.-> module_src_cli_commands_config_validate_ts
   module_src_cli_commands_config_validate_ts --> module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts["src/cli/createRulesRuntimeProvider.test.ts"]
+  package__ankhorage_rules -.-> module_src_cli_createRulesRuntimeProvider_test_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --> module_package_json
+  module_src_cli_createRulesRuntimeProvider_test_ts --> module_src_capabilities_index_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --> module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_createRulesRuntimeProvider_ts["src/cli/createRulesRuntimeProvider.ts"]
   package__ankhorage_rules -.-> module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --> module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_ts --> module_src_cli_commands_config_validate_ts
   module_src_cli_createRulesRuntimeProvider_ts --> module_src_constants_rules_ts
   module_src_cli_index_ts["src/cli/index.ts"]
@@ -60,6 +68,7 @@ graph TD
   module_src_features_evaluation_domain_resolveRulesStatus_ts --> module_src_types_rules_ts
   module_src_index_test_ts["src/index.test.ts"]
   package__ankhorage_rules -.-> module_src_index_test_ts
+  module_src_index_test_ts --> module_src_capabilities_index_ts
   module_src_index_test_ts --> module_src_cli_index_ts
   module_src_index_test_ts --> module_src_cli_standalone_ts
   module_src_index_test_ts --> module_src_index_ts

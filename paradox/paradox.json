@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.0",
+      "value": "v0.2.1",
       "color": "cb3837"
     },
     {
@@ -104,6 +104,14 @@
       "exports": []
     },
     {
+      "path": "src/capabilities/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "CAPABILITIES"
+      ]
+    },
+    {
       "path": "src/cli/commands/config/validate.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -114,9 +122,20 @@
       ]
     },
     {
+      "path": "src/cli/createRulesRuntimeProvider.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "package.json",
+        "src/capabilities/index.ts",
+        "src/cli/createRulesRuntimeProvider.ts"
+      ],
+      "exports": []
+    },
+    {
       "path": "src/cli/createRulesRuntimeProvider.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/capabilities/index.ts",
         "src/cli/commands/config/validate.ts",
         "src/constants/rules.ts"
       ],
@@ -152,7 +171,6 @@
         "package.json"
       ],
       "exports": [
-        "RULES_CAPABILITIES",
         "RULES_COMMAND_CATEGORY",
         "RULES_PACKAGE_VERSION"
       ]
@@ -258,6 +276,7 @@
       "path": "src/index.test.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/capabilities/index.ts",
         "src/cli/index.ts",
         "src/cli/standalone.ts",
         "src/index.ts"
@@ -1586,7 +1605,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/cli/createRulesRuntimeProvider.ts",
-        "line": 11,
+        "line": 9,
         "column": 1
       }
     },
@@ -1938,7 +1957,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 95,
+        "line": 96,
         "column": 1
       }
     },
@@ -1949,7 +1968,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 115,
+        "line": 116,
         "column": 1
       }
     },
@@ -1960,7 +1979,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 134,
+        "line": 135,
         "column": 1
       }
     },
@@ -1971,7 +1990,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 152,
+        "line": 153,
         "column": 1
       }
     },
@@ -1982,7 +2001,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 179,
+        "line": 180,
         "column": 1
       }
     },
@@ -1993,7 +2012,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 223,
+        "line": 224,
         "column": 1
       }
     },
@@ -2004,7 +2023,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 244,
+        "line": 245,
         "column": 1
       }
     },
@@ -2015,7 +2034,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 267,
+        "line": 268,
         "column": 1
       }
     },
@@ -2101,6 +2120,11 @@
     "imports": [
       {
         "fromPath": "src/index.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/index.test.ts"
+      },
+      {
+        "fromPath": "src/index.test.ts",
         "toPath": "src/cli/index.ts",
         "sourcePath": "src/index.test.ts"
       },
@@ -2158,6 +2182,26 @@
         "fromPath": "examples/config-validation/validate.ts",
         "toPath": "src/index.ts",
         "sourcePath": "examples/config-validation/validate.ts"
+      },
+      {
+        "fromPath": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toPath": "package.json",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromPath": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromPath": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toPath": "src/cli/createRulesRuntimeProvider.ts",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromPath": "src/cli/createRulesRuntimeProvider.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.ts"
       },
       {
         "fromPath": "src/cli/createRulesRuntimeProvider.ts",
@@ -2467,6 +2511,36 @@
         "toSymbol": "readRulesConfigAsync",
         "callExpression": "readRulesConfigAsync",
         "sourcePath": "examples/config-validation/validate.ts"
+      },
+      {
+        "fromSymbol": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toSymbol": "isCapability",
+        "callExpression": "isCapability",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toSymbol": "areCapabilitiesEqual",
+        "callExpression": "areCapabilitiesEqual",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
+      },
+      {
+        "fromSymbol": "src/cli/createRulesRuntimeProvider.test.ts",
+        "toSymbol": "createRulesRuntimeProvider",
+        "callExpression": "createRulesRuntimeProvider",
+        "sourcePath": "src/cli/createRulesRuntimeProvider.test.ts"
       },
       {
         "fromSymbol": "handler",

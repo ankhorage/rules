@@ -208,7 +208,7 @@
       <div class="summary">
         <div><strong>28</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>20</strong><span class="muted">modules</span></div>
+        <div><strong>22</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -243,15 +243,25 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/capabilities/index.ts CAPABILITIES">
+    <h3>src/capabilities/index.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>CAPABILITIES</code></p>
   </article><article class="item" data-search="src/cli/commands/config/validate.ts src/features/configuration/composition/readRulesConfigAsync.ts validate">
     <h3>src/cli/commands/config/validate.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/configuration/composition/readRulesConfigAsync.ts</code></p>
     <p><strong>Exports:</strong> <code>validate</code></p>
-  </article><article class="item" data-search="src/cli/createRulesRuntimeProvider.ts src/cli/commands/config/validate.ts src/constants/rules.ts createRulesRuntimeProvider">
+  </article><article class="item" data-search="src/cli/createRulesRuntimeProvider.test.ts package.json src/capabilities/index.ts src/cli/createRulesRuntimeProvider.ts">
+    <h3>src/cli/createRulesRuntimeProvider.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/capabilities/index.ts</code>, <code>src/cli/createRulesRuntimeProvider.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/cli/createRulesRuntimeProvider.ts src/capabilities/index.ts src/cli/commands/config/validate.ts src/constants/rules.ts createRulesRuntimeProvider">
     <h3>src/cli/createRulesRuntimeProvider.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/cli/commands/config/validate.ts</code>, <code>src/constants/rules.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/capabilities/index.ts</code>, <code>src/cli/commands/config/validate.ts</code>, <code>src/constants/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>createRulesRuntimeProvider</code></p>
   </article><article class="item" data-search="src/cli/index.ts src/cli/createRulesRuntimeProvider.ts createRulesRuntimeProvider default">
     <h3>src/cli/index.ts</h3>
@@ -263,11 +273,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/cli/commands/config/validate.ts</code></p>
     <p><strong>Exports:</strong> <code>runCli</code></p>
-  </article><article class="item" data-search="src/constants/rules.ts package.json RULES_CAPABILITIES RULES_COMMAND_CATEGORY RULES_PACKAGE_VERSION">
+  </article><article class="item" data-search="src/constants/rules.ts package.json RULES_COMMAND_CATEGORY RULES_PACKAGE_VERSION">
     <h3>src/constants/rules.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>package.json</code></p>
-    <p><strong>Exports:</strong> <code>RULES_CAPABILITIES</code>, <code>RULES_COMMAND_CATEGORY</code>, <code>RULES_PACKAGE_VERSION</code></p>
+    <p><strong>Exports:</strong> <code>RULES_COMMAND_CATEGORY</code>, <code>RULES_PACKAGE_VERSION</code></p>
   </article><article class="item" data-search="src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts readRulesConfigSourceAsync">
     <h3>src/features/configuration/adapters/filesystem/readRulesConfigSourceAsync.ts</h3>
     <p class="muted">Referenced module</p>
@@ -313,10 +323,10 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>resolveRulesStatus</code></p>
-  </article><article class="item" data-search="src/index.test.ts src/cli/index.ts src/cli/standalone.ts src/index.ts">
+  </article><article class="item" data-search="src/index.test.ts src/capabilities/index.ts src/cli/index.ts src/cli/standalone.ts src/index.ts">
     <h3>src/index.test.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/cli/index.ts</code>, <code>src/cli/standalone.ts</code>, <code>src/index.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/capabilities/index.ts</code>, <code>src/cli/index.ts</code>, <code>src/cli/standalone.ts</code>, <code>src/index.ts</code></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
   </article><article class="item" data-search="src/index.ts createRuleRegistry evaluateConfiguredRules EvaluateConfiguredRulesOptions evaluateRules EvaluateRulesOptions JsonValue readRulesConfigAsync resolveRulesStatus Rule RuleCapability RuleEvaluationDiagnostic RuleEvaluationResult RuleFinding RuleOptionDiagnostic RuleRegistry RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject validateRulesConfig writeRulesConfigAsync">
     <h3>src/index.ts</h3>
@@ -1229,11 +1239,19 @@
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_package_json[&quot;package.json&quot;]
   package__ankhorage_rules -.-&gt; module_package_json
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_capabilities_index_ts
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_test_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_package_json
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
@@ -1282,6 +1300,7 @@
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_index_test_ts
+  module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
   module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
@@ -1302,11 +1321,19 @@
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_package_json[&quot;package.json&quot;]
   package__ankhorage_rules -.-&gt; module_package_json
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_capabilities_index_ts
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_test_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_package_json
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
@@ -1355,6 +1382,7 @@
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_index_test_ts
+  module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
   module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
@@ -1371,7 +1399,9 @@
     <div class="mermaid">graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -1391,6 +1421,10 @@
   module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_package_json
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
@@ -1413,6 +1447,7 @@
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
+  module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
   module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
@@ -1422,7 +1457,9 @@
       <pre>graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -1442,6 +1479,10 @@
   module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
   module_examples_config_validation_validate_ts --&gt; module_src_index_ts
   module_src_cli_commands_config_validate_ts --&gt; module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_package_json
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_capabilities_index_ts
+  module_src_cli_createRulesRuntimeProvider_test_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
+  module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_cli_commands_config_validate_ts
   module_src_cli_createRulesRuntimeProvider_ts --&gt; module_src_constants_rules_ts
   module_src_cli_index_ts --&gt; module_src_cli_createRulesRuntimeProvider_ts
@@ -1464,6 +1505,7 @@
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
+  module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
   module_src_index_test_ts --&gt; module_src_cli_standalone_ts
   module_src_index_test_ts --&gt; module_src_index_ts
@@ -1475,7 +1517,9 @@
     <div class="mermaid">graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -1595,7 +1639,9 @@
       <pre>graph LR
   module_examples_config_validation_validate_ts[&quot;examples/config-validation/validate.ts&quot;]
   module_package_json[&quot;package.json&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_cli_commands_config_validate_ts[&quot;src/cli/commands/config/validate.ts&quot;]
+  module_src_cli_createRulesRuntimeProvider_test_ts[&quot;src/cli/createRulesRuntimeProvider.test.ts&quot;]
   module_src_cli_createRulesRuntimeProvider_ts[&quot;src/cli/createRulesRuntimeProvider.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -1840,7 +1886,7 @@
       <h2>src/cli/createRulesRuntimeProvider.ts</h2>
       <article class="item" data-search="createRulesRuntimeProvider src/cli/createRulesRuntimeProvider.ts Create the Ankh provider that registers the generic Rules configuration command.">
     <h3>createRulesRuntimeProvider</h3>
-    <p class="muted"><code>src/cli/createRulesRuntimeProvider.ts:11:1</code></p>
+    <p class="muted"><code>src/cli/createRulesRuntimeProvider.ts:9:1</code></p>
     <p>Create the Ankh provider that registers the generic Rules configuration command.</p>
     
   </article>
@@ -2055,42 +2101,42 @@
       <h2>src/index.test.ts</h2>
       <article class="item" data-search="isMinimumOptions src/index.test.ts Identify the serializable option object used by the unrelated content fixture provider.">
     <h3>isMinimumOptions</h3>
-    <p class="muted"><code>src/index.test.ts:95:1</code></p>
+    <p class="muted"><code>src/index.test.ts:96:1</code></p>
     <p>Identify the serializable option object used by the unrelated content fixture provider.</p>
     
   </article><article class="item" data-search="testProviderComposition src/index.test.ts ">
     <h3>testProviderComposition</h3>
-    <p class="muted"><code>src/index.test.ts:115:1</code></p>
+    <p class="muted"><code>src/index.test.ts:116:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testConfiguredRules src/index.test.ts ">
     <h3>testConfiguredRules</h3>
-    <p class="muted"><code>src/index.test.ts:134:1</code></p>
+    <p class="muted"><code>src/index.test.ts:135:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testSubjectOrdering src/index.test.ts ">
     <h3>testSubjectOrdering</h3>
-    <p class="muted"><code>src/index.test.ts:152:1</code></p>
+    <p class="muted"><code>src/index.test.ts:153:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testInvalidConfigDiagnostics src/index.test.ts ">
     <h3>testInvalidConfigDiagnostics</h3>
-    <p class="muted"><code>src/index.test.ts:179:1</code></p>
+    <p class="muted"><code>src/index.test.ts:180:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testStructuralConfigDiagnostics src/index.test.ts ">
     <h3>testStructuralConfigDiagnostics</h3>
-    <p class="muted"><code>src/index.test.ts:223:1</code></p>
+    <p class="muted"><code>src/index.test.ts:224:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testConfigFileOperations src/index.test.ts ">
     <h3>testConfigFileOperations</h3>
-    <p class="muted"><code>src/index.test.ts:244:1</code></p>
+    <p class="muted"><code>src/index.test.ts:245:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="testCliContract src/index.test.ts ">
     <h3>testCliContract</h3>
-    <p class="muted"><code>src/index.test.ts:267:1</code></p>
+    <p class="muted"><code>src/index.test.ts:268:1</code></p>
     <p class="empty">No description available.</p>
     
   </article>
