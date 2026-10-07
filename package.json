@@ -33,7 +33,11 @@
       "types": "./dist/cli/index.d.ts",
       "import": "./dist/cli/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./capabilities": {
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
+    }
   },
   "bin": {
     "ankhorage-rules": "./dist/cli/standalone.js"
@@ -42,11 +46,24 @@
     "category": "rules",
     "provider": "./dist/cli/index.js",
     "capabilities": [
-      "rules.config.validate"
+      {
+        "id": "rules.config.validate",
+        "owner": "@ankhorage/rules",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Validate rules configuration",
+        "description": "Validate the generic JSON shape of a repository rules.json file."
+      }
     ]
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.10.4",
     "@ankhorage/devtools": "^2.0.8",
     "@ankhorage/paradox": "^0.2.6",
     "@types/bun": "^1.4.2",
@@ -54,6 +71,8 @@
     "typescript": "~6.0.3"
   },
   "dependencies": {
+    "@ankhorage/ankh": "^0.12.0",
+    "@ankhorage/contracts": "^24.1.0",
     "@ankhorage/utility": "^1.9.0"
   },
   "packageManager": "bun@1.4.2",
