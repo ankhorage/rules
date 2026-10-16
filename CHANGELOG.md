@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.2.2
+
+### Patch Changes
+
+- 1c43375: Migrate the published capability catalog and CLI provider to Contracts 26 and the shared capability toolkit.
+
 ## 0.2.1
 
 ### Patch Changes
