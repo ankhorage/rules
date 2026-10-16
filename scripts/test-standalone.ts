@@ -34,7 +34,7 @@ async function verifyPackedPackageAsync(): Promise<void> {
           "if (typeof rules.validateRulesConfig !== 'function') throw new Error('missing root API');",
           "if ('runCli' in rules || 'createRulesRuntimeProvider' in rules) throw new Error('CLI leaked into root API');",
           "const cli = await import('@ankhorage/rules/cli');",
-          "if (cli.createRulesRuntimeProvider().capabilities.at(0) !== 'rules.config.validate') throw new Error('missing CLI capability');",
+          "if (cli.createRulesRuntimeProvider().capabilities.at(0)?.id !== 'rules.config.validate') throw new Error('missing CLI capability');",
         ].join(' '),
       ],
       consumerDirectory,
