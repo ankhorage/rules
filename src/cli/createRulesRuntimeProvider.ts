@@ -1,5 +1,5 @@
 import type { AnkhRuntimeCommandProvider } from '@ankhorage/ankh';
-import type { Capability } from '@ankhorage/contracts/capabilities';
+import type { Capability } from '@ankhorage/contracts/capability';
 
 import { CAPABILITIES } from '../capabilities/index.js';
 import { RULES_COMMAND_CATEGORY, RULES_PACKAGE_VERSION } from '../constants/rules.js';
