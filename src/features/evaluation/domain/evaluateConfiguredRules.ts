@@ -61,7 +61,9 @@ function toEvaluationDiagnostic(diagnostic: RulesConfigDiagnostic): RuleEvaluati
           ? 'unknown-rule'
           : diagnostic.code === 'invalid-options'
             ? 'invalid-options'
-            : 'invalid-config',
+            : diagnostic.code === 'rule-error'
+              ? 'rule-error'
+              : 'invalid-config',
     ruleId: diagnostic.ruleId ?? 'rules.config',
     message: diagnostic.message,
   };

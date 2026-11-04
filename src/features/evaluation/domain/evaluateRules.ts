@@ -46,21 +46,25 @@ function evaluateRule<TContext>(
   const prerequisiteResult = evaluatePrerequisites(rule, scope, availableCapabilities, ruleOptions);
   if (prerequisiteResult !== null) return prerequisiteResult;
 
-  const outcome = rule.evaluate({
-    context,
-    dependencyResults: [],
-    options: ruleOptions,
-    scope,
-  });
-  return createRuleResult(
-    rule,
-    scope,
-    outcome.status,
-    outcome.findings.map((finding) =>
-      canonicalizeFinding(finding, rule.identity.id, rule.defaultSeverity),
-    ),
-    [],
-  );
+  try {
+    const outcome = rule.evaluate({
+      context,
+      dependencyResults: [],
+      options: ruleOptions,
+      scope,
+    });
+    return createRuleResult(
+      rule,
+      scope,
+      outcome.status,
+      outcome.findings.map((finding) =>
+        canonicalizeFinding(finding, rule.identity.id, rule.defaultSeverity),
+      ),
+      [],
+    );
+  } catch {
+    return createRuleResult(rule, scope, 'ERROR', [], [createRuleErrorDiagnostic(rule)]);
+  }
 }
 
 /*** Stop a flat evaluation before a rule runs when its required execution facts are unavailable. */
@@ -92,20 +96,33 @@ function evaluatePrerequisites<TContext>(
     );
   }
 
-  const optionDiagnostics = rule.validateOptions?.(ruleOptions) ?? [];
-  return optionDiagnostics.length === 0
-    ? null
-    : createRuleResult(
-        rule,
-        scope,
-        'ERROR',
-        [],
-        optionDiagnostics.map((diagnostic) => ({
-          code: 'invalid-options',
-          ruleId: rule.identity.id,
-          message: `Rule "${rule.identity.id}": ${diagnostic.message}`,
-        })),
-      );
+  try {
+    const optionDiagnostics = rule.validateOptions?.(ruleOptions) ?? [];
+    return optionDiagnostics.length === 0
+      ? null
+      : createRuleResult(
+          rule,
+          scope,
+          'ERROR',
+          [],
+          optionDiagnostics.map((diagnostic) => ({
+            code: 'invalid-options',
+            ruleId: rule.identity.id,
+            message: `Rule "${rule.identity.id}": ${diagnostic.message}`,
+          })),
+        );
+  } catch {
+    return createRuleResult(rule, scope, 'ERROR', [], [createRuleErrorDiagnostic(rule)]);
+  }
+}
+
+/*** Create a stable diagnostic when a provider throws while the evaluator invokes it. */
+function createRuleErrorDiagnostic<TContext>(rule: Rule<TContext>): RuleResultDiagnostic {
+  return {
+    code: 'rule-error',
+    ruleId: rule.identity.id,
+    message: `Rule "${rule.identity.id}" threw while the evaluator invoked it.`,
+  };
 }
 
 /*** Reject dependency-bearing rules until the DAG evaluator resolves their complete closure. */

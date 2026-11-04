@@ -2,6 +2,7 @@ import { isRecord } from '@ankhorage/utility/object';
 
 import type {
   JsonValue,
+  Rule,
   RulesConfig,
   RulesConfigDiagnostic,
   RulesConfigRule,
@@ -141,18 +142,36 @@ function validateConfiguredRules<TContext>(
       path: `rules[${index}]`,
       ruleId: rule.identity.id,
     }));
-    const optionDiagnostics = (rule.validateOptions?.(configuredRule.options) ?? []).map(
-      (diagnostic) => ({
-        code: 'invalid-options' as const,
-        message: `Rule "${rule.identity.id}": ${diagnostic.message}`,
-        ruleId: rule.identity.id,
-        ...(diagnostic.path === undefined
-          ? {}
-          : { path: `rules[${index}].options.${diagnostic.path}` }),
-      }),
-    );
+    const optionDiagnostics = validateConfiguredRuleOptions(rule, configuredRule, index);
     return [...diagnostics, ...capabilityDiagnostics, ...optionDiagnostics];
   }, []);
+}
+
+/*** Translate provider option validation into deterministic configuration diagnostics. */
+function validateConfiguredRuleOptions<TContext>(
+  rule: Rule<TContext>,
+  configuredRule: RulesConfigRule,
+  index: number,
+): readonly RulesConfigDiagnostic[] {
+  try {
+    return (rule.validateOptions?.(configuredRule.options) ?? []).map((diagnostic) => ({
+      code: 'invalid-options' as const,
+      message: `Rule "${rule.identity.id}": ${diagnostic.message}`,
+      ruleId: rule.identity.id,
+      ...(diagnostic.path === undefined
+        ? {}
+        : { path: `rules[${index}].options.${diagnostic.path}` }),
+    }));
+  } catch {
+    return [
+      {
+        code: 'rule-error',
+        message: `Rule "${rule.identity.id}" threw while validating its options.`,
+        path: `rules[${index}].options`,
+        ruleId: rule.identity.id,
+      },
+    ];
+  }
 }
 
 /*** Create a consistent structural configuration diagnostic. */

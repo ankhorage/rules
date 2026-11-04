@@ -164,6 +164,7 @@ export interface RulesConfigDiagnostic {
     | 'invalid-rule-id'
     | 'invalid-severity'
     | 'missing-capability'
+    | 'rule-error'
     | 'unknown-rule';
   readonly message: string;
   readonly path?: string;
