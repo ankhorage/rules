@@ -12,6 +12,7 @@ import type {
 } from '../../../types/rules.js';
 import { compareRuleEntityIds } from '../../../utils/compareRuleEntityIds.js';
 import { createRuleEvaluationPlan } from './createRuleEvaluationPlan.js';
+import { freezeRuleResult } from './freezeRuleResult.js';
 
 /*** Evaluate a deterministic dependency plan once, passing completed child results to each provider. */
 export function evaluateRules<TContext>(
@@ -269,9 +270,9 @@ function createRuleResult<TContext>(
   findings: readonly RuleFinding[],
   diagnostics: readonly RuleResultDiagnostic[],
 ): RuleResult {
-  return Object.freeze({
-    diagnostics: Object.freeze([...diagnostics]),
-    findings: Object.freeze([...findings]),
+  return freezeRuleResult({
+    diagnostics,
+    findings,
     rule: Object.freeze({ ...rule.identity }),
     scope: Object.freeze({ ...node.scope }),
     status,

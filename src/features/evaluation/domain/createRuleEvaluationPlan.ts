@@ -125,27 +125,67 @@ function createPlanNode<TContext>(rule: Rule<TContext>, scope: RuleScope): RuleE
 function findCycleRuleIds(
   nodesById: ReadonlyMap<string, RuleEvaluationPlanNode>,
 ): ReadonlySet<string> {
-  const visitingRuleIds = new Set<string>();
-  const visitedRuleIds = new Set<string>();
-  const cyclicRuleIds = new Set<string>();
-  const traversal = (ruleId: string, path: readonly string[]): void => {
-    if (visitingRuleIds.has(ruleId)) {
-      const cycleStart = path.indexOf(ruleId);
-      for (const cyclicRuleId of path.slice(cycleStart)) cyclicRuleIds.add(cyclicRuleId);
-      return;
-    }
-    if (visitedRuleIds.has(ruleId)) return;
-    visitingRuleIds.add(ruleId);
-    const node = nodesById.get(ruleId);
-    for (const dependencyRuleId of node?.dependencyRuleIds ?? []) {
-      if (nodesById.has(dependencyRuleId)) traversal(dependencyRuleId, [...path, ruleId]);
-    }
-    visitingRuleIds.delete(ruleId);
-    visitedRuleIds.add(ruleId);
-  };
+  const components = findStronglyConnectedComponents(nodesById);
+  return new Set(components.filter((component) => isCyclicComponent(component, nodesById)).flat());
+}
 
-  for (const ruleId of [...nodesById.keys()].sort(compareStrings)) traversal(ruleId, []);
-  return cyclicRuleIds;
+/*** Partition the graph into deterministic strongly connected components with Tarjan traversal. */
+function findStronglyConnectedComponents(
+  nodesById: ReadonlyMap<string, RuleEvaluationPlanNode>,
+): readonly (readonly string[])[] {
+  const activeRuleIds = new Set<string>();
+  const indicesByRuleId = new Map<string, number>();
+  const lowLinksByRuleId = new Map<string, number>();
+  const stack: string[] = [];
+  const components: string[][] = [];
+  const visit = (ruleId: string): void => {
+    const index = indicesByRuleId.size;
+    indicesByRuleId.set(ruleId, index);
+    lowLinksByRuleId.set(ruleId, index);
+    stack.push(ruleId);
+    activeRuleIds.add(ruleId);
+    for (const dependencyRuleId of nodesById.get(ruleId)?.dependencyRuleIds ?? []) {
+      if (!nodesById.has(dependencyRuleId)) continue;
+      const dependencyIndex = indicesByRuleId.get(dependencyRuleId);
+      if (dependencyIndex === undefined) {
+        visit(dependencyRuleId);
+        lowLinksByRuleId.set(
+          ruleId,
+          Math.min(
+            lowLinksByRuleId.get(ruleId) ?? index,
+            lowLinksByRuleId.get(dependencyRuleId) ?? index,
+          ),
+        );
+      } else if (activeRuleIds.has(dependencyRuleId)) {
+        lowLinksByRuleId.set(
+          ruleId,
+          Math.min(lowLinksByRuleId.get(ruleId) ?? index, dependencyIndex),
+        );
+      }
+    }
+    if (lowLinksByRuleId.get(ruleId) !== index) return;
+    const component = stack.splice(stack.lastIndexOf(ruleId));
+    for (const memberRuleId of component) {
+      activeRuleIds.delete(memberRuleId);
+    }
+    components.push(component.sort(compareStrings));
+  };
+  for (const ruleId of [...nodesById.keys()].sort(compareStrings)) {
+    if (!indicesByRuleId.has(ruleId)) visit(ruleId);
+  }
+  return components;
+}
+
+/*** Treat multi-member components and explicit self-references as dependency cycles. */
+function isCyclicComponent(
+  component: readonly string[],
+  nodesById: ReadonlyMap<string, RuleEvaluationPlanNode>,
+): boolean {
+  if (component.length > 1) return true;
+  const [ruleId] = component;
+  return (
+    ruleId !== undefined && (nodesById.get(ruleId)?.dependencyRuleIds.includes(ruleId) ?? false)
+  );
 }
 
 /*** Return a stable child-before-parent ordering for every acyclic node in the plan. */
