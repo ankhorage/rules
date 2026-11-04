@@ -2,10 +2,11 @@ import type { RuleEvaluationResult, RulesStatusDescriptor } from '../../../types
 
 /*** Summarize the complete Rules evaluation result without treating failed evaluation as canonical. */
 export function resolveRulesStatus(
-  result: Pick<RuleEvaluationResult, 'diagnostics' | 'findings'>,
+  result: Pick<RuleEvaluationResult, 'diagnostics' | 'findings' | 'results'>,
 ): RulesStatusDescriptor {
   if (
     result.diagnostics.length > 0 ||
+    result.results.some((rule) => rule.status !== 'PASS') ||
     result.findings.some((finding) => finding.severity === 'error')
   ) {
     return { status: 'invalid', color: 'red' };

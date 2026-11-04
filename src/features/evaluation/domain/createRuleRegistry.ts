@@ -7,13 +7,15 @@ export function createRuleRegistry<TContext>(
 ): RuleRegistry<TContext> {
   const sortedRuleSets = [...ruleSets].sort(compareRuleEntityIds);
   assertUniqueRuleSetIds(sortedRuleSets);
-  const rules = sortedRuleSets.flatMap((ruleSet) => ruleSet.rules).sort(compareRuleEntityIds);
+  const rules = sortedRuleSets
+    .flatMap((ruleSet) => ruleSet.rules)
+    .sort((left, right) => compareRuleEntityIds(left.identity, right.identity));
   assertUniqueRuleIds(rules);
 
   return {
     ruleSets: sortedRuleSets,
     rules,
-    ruleById: new Map(rules.map((rule) => [rule.id, rule])),
+    ruleById: new Map(rules.map((rule) => [rule.identity.id, rule])),
   };
 }
 
@@ -25,7 +27,7 @@ function assertUniqueRuleSetIds<TContext>(ruleSets: readonly RuleSet<TContext>[]
 
 /*** Reject multiple providers that claim the same public rule identifier. */
 function assertUniqueRuleIds<TContext>(rules: readonly Rule<TContext>[]): void {
-  const duplicateId = findDuplicateId(rules.map((rule) => rule.id));
+  const duplicateId = findDuplicateId(rules.map((rule) => rule.identity.id));
   if (duplicateId !== null) throw new Error(`Duplicate rule ID: ${duplicateId}`);
 }
 

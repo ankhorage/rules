@@ -2,8 +2,8 @@ import type {
   EvaluateConfiguredRulesOptions,
   RuleEvaluationDiagnostic,
   RuleEvaluationResult,
-  RuleFinding,
   RuleRegistry,
+  RuleResult,
   RulesConfig,
   RulesConfigDiagnostic,
 } from '../../../types/rules.js';
@@ -25,6 +25,7 @@ export function evaluateConfiguredRules<TContext>(
     return {
       findings: [],
       diagnostics: validation.diagnostics.map(toEvaluationDiagnostic),
+      results: [],
     };
   }
 
@@ -39,11 +40,14 @@ export function evaluateConfiguredRules<TContext>(
   const result = evaluateRules(context, selectedRules, {
     capabilities: options.capabilities,
     optionsByRuleId,
+    scope: options.scope,
   });
 
+  const results = applyConfiguredSeverities(result.results, validation.config);
   return {
     diagnostics: result.diagnostics,
-    findings: applyConfiguredSeverities(result.findings, validation.config),
+    findings: results.flatMap((result) => result.findings),
+    results,
   };
 }
 
@@ -57,7 +61,9 @@ function toEvaluationDiagnostic(diagnostic: RulesConfigDiagnostic): RuleEvaluati
           ? 'unknown-rule'
           : diagnostic.code === 'invalid-options'
             ? 'invalid-options'
-            : 'invalid-config',
+            : diagnostic.code === 'rule-error'
+              ? 'rule-error'
+              : 'invalid-config',
     ruleId: diagnostic.ruleId ?? 'rules.config',
     message: diagnostic.message,
   };
@@ -65,12 +71,15 @@ function toEvaluationDiagnostic(diagnostic: RulesConfigDiagnostic): RuleEvaluati
 
 /*** Apply configured severity overrides after providers have produced neutral findings. */
 function applyConfiguredSeverities(
-  findings: readonly RuleFinding[],
+  results: readonly RuleResult[],
   config: RulesConfig,
-): readonly RuleFinding[] {
+): readonly RuleResult[] {
   const severityByRuleId = new Map(config.rules.map((rule) => [rule.id, rule.severity] as const));
-  return findings.map((finding) => ({
-    ...finding,
-    severity: severityByRuleId.get(finding.ruleId) ?? finding.severity,
+  return results.map((result) => ({
+    ...result,
+    findings: result.findings.map((finding) => ({
+      ...finding,
+      severity: severityByRuleId.get(finding.ruleId) ?? finding.severity,
+    })),
   }));
 }
