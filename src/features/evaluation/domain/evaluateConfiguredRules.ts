@@ -39,6 +39,7 @@ export function evaluateConfiguredRules<TContext>(
   const result = evaluateRules(context, selectedRules, {
     capabilities: options.capabilities,
     optionsByRuleId,
+    scope: options.scope,
   });
 
   return {

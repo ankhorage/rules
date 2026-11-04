@@ -8,6 +8,8 @@ import type {
 } from '../../../types/rules.js';
 import { compareRuleEntityIds } from '../../../utils/compareRuleEntityIds.js';
 
+const defaultRuleScope = { id: 'global', kind: 'global' } as const;
+
 /*** Evaluate unrelated rules in deterministic identifier order through one generic mechanism. */
 export function evaluateRules<TContext>(
   context: TContext,
@@ -15,7 +17,9 @@ export function evaluateRules<TContext>(
   options: EvaluateRulesOptions = {},
 ): RuleEvaluationResult {
   const availableCapabilities = new Set(options.capabilities ?? []);
-  const orderedRules = [...rules].sort(compareRuleEntityIds);
+  const orderedRules = [...rules].sort((left, right) =>
+    compareRuleEntityIds(left.identity, right.identity),
+  );
   const results = orderedRules.map((rule) =>
     evaluateRule(context, rule, availableCapabilities, options),
   );
@@ -36,6 +40,9 @@ function evaluateRule<TContext>(
   readonly diagnostics: readonly RuleEvaluationDiagnostic[];
   readonly findings: readonly RuleFinding[];
 } {
+  const dependencyResult = rejectUnresolvedDependencies(rule);
+  if (dependencyResult !== null) return dependencyResult;
+
   const missingCapabilities = (rule.requiredCapabilities ?? []).filter(
     (capability) => !availableCapabilities.has(capability),
   );
@@ -44,21 +51,21 @@ function evaluateRule<TContext>(
       findings: [],
       diagnostics: missingCapabilities.map((capability) => ({
         code: 'missing-capability',
-        ruleId: rule.id,
-        message: `Rule "${rule.id}" requires unavailable capability "${capability}".`,
+        ruleId: rule.identity.id,
+        message: `Rule "${rule.identity.id}" requires unavailable capability "${capability}".`,
       })),
     };
   }
 
-  const ruleOptions = options.optionsByRuleId?.get(rule.id);
+  const ruleOptions = options.optionsByRuleId?.get(rule.identity.id);
   const optionDiagnostics = rule.validateOptions?.(ruleOptions) ?? [];
   if (optionDiagnostics.length > 0) {
     return {
       findings: [],
       diagnostics: optionDiagnostics.map((diagnostic) => ({
         code: 'invalid-options',
-        ruleId: rule.id,
-        message: `Rule "${rule.id}": ${diagnostic.message}`,
+        ruleId: rule.identity.id,
+        message: `Rule "${rule.identity.id}": ${diagnostic.message}`,
       })),
     };
   }
@@ -66,8 +73,33 @@ function evaluateRule<TContext>(
   return {
     diagnostics: [],
     findings: rule
-      .evaluate({ context, options: ruleOptions })
-      .map((finding) => canonicalizeFinding(finding, rule.id, rule.defaultSeverity)),
+      .evaluate({
+        context,
+        dependencyResults: [],
+        options: ruleOptions,
+        scope: options.scope ?? defaultRuleScope,
+      })
+      .findings.map((finding) =>
+        canonicalizeFinding(finding, rule.identity.id, rule.defaultSeverity),
+      ),
+  };
+}
+
+/*** Reject dependency-bearing rules until the DAG evaluator resolves their complete closure. */
+function rejectUnresolvedDependencies<TContext>(rule: Rule<TContext>): {
+  readonly diagnostics: readonly RuleEvaluationDiagnostic[];
+  readonly findings: readonly RuleFinding[];
+} | null {
+  if (rule.dependencies.length === 0) return null;
+  return {
+    findings: [],
+    diagnostics: [
+      {
+        code: 'unresolved-dependencies',
+        ruleId: rule.identity.id,
+        message: `Rule "${rule.identity.id}" declares dependencies and requires DAG evaluation.`,
+      },
+    ],
   };
 }
 

@@ -5,6 +5,37 @@ export type JsonValue =
 /*** A capability that a rule needs from the context supplied by its consumer. */
 export type RuleCapability = string;
 
+/*** A stable, versioned identity for one provider-owned policy definition. */
+export interface RuleIdentity {
+  readonly id: string;
+  readonly version: string;
+}
+
+/*** A provider-owned, stable facet used to classify rules without prescribing presentation. */
+export interface RuleFacet {
+  readonly id: string;
+  readonly value: string;
+}
+
+/*** One dependency declared by stable rule ID and resolved by the generic evaluator. */
+export interface RuleDependency {
+  readonly ruleId: string;
+}
+
+/*** Explicit roots selected for a run; dependency closure is evaluator-owned and never provider-owned. */
+export interface RuleSelection {
+  readonly rootRuleIds: readonly string[];
+}
+
+/*** The semantic target for a rule execution, independent of host tenancy or storage. */
+export interface RuleScope {
+  readonly id: string;
+  readonly kind: string;
+}
+
+/*** The complete deterministic state of one evaluated rule instance. */
+export type RuleResultStatus = 'ERROR' | 'FAIL' | 'INCOMPLETE' | 'PASS' | 'SKIPPED';
+
 /*** The canonical impact levels used by every Rules provider. */
 export type RuleSeverity = 'error' | 'info' | 'warning';
 
@@ -41,6 +72,45 @@ export interface RuleOptionDiagnostic {
   readonly path?: string;
 }
 
+/*** One provider result that is independent of evaluation failure and later policy decisions. */
+export interface RuleEvaluationOutcome<TEvidence extends JsonValue = JsonValue> {
+  readonly findings: readonly RuleFinding<TEvidence>[];
+  readonly status: 'FAIL' | 'INCOMPLETE' | 'PASS';
+}
+
+/*** A serializable diagnostic emitted by the evaluator while resolving a rule instance. */
+export interface RuleResultDiagnostic {
+  readonly code:
+    | 'ambiguous-rule-id'
+    | 'cycle'
+    | 'dependency-error'
+    | 'dependency-incomplete'
+    | 'dependency-scope-mismatch'
+    | 'disabled-dependency'
+    | 'missing-capability'
+    | 'missing-dependency'
+    | 'rule-error';
+  readonly message: string;
+  readonly ruleId?: string;
+}
+
+/*** One serializable evaluation result for a versioned rule at one exact semantic scope. */
+export interface RuleResult {
+  readonly diagnostics: readonly RuleResultDiagnostic[];
+  readonly findings: readonly RuleFinding[];
+  readonly rule: RuleIdentity;
+  readonly scope: RuleScope;
+  readonly status: RuleResultStatus;
+}
+
+/*** The immutable input supplied to a rule after the evaluator has resolved its dependencies. */
+export interface RuleEvaluationInput<TContext = unknown, TOptions extends JsonValue = JsonValue> {
+  readonly context: TContext;
+  readonly dependencyResults: readonly RuleResult[];
+  readonly options: TOptions | undefined;
+  readonly scope: RuleScope;
+}
+
 /*** A deterministic, provider-owned policy unit evaluated by the generic engine. */
 export interface Rule<
   TContext = unknown,
@@ -48,11 +118,10 @@ export interface Rule<
   TEvidence extends JsonValue = JsonValue,
 > {
   readonly defaultSeverity: RuleSeverity;
-  evaluate(input: {
-    readonly context: TContext;
-    readonly options: TOptions | undefined;
-  }): readonly RuleFinding<TEvidence>[];
-  readonly id: string;
+  readonly dependencies: readonly RuleDependency[];
+  evaluate(input: RuleEvaluationInput<TContext, TOptions>): RuleEvaluationOutcome<TEvidence>;
+  readonly facets?: readonly RuleFacet[];
+  readonly identity: RuleIdentity;
   readonly requiredCapabilities?: readonly RuleCapability[];
   readonly summary: string;
   validateOptions?(options: JsonValue | undefined): readonly RuleOptionDiagnostic[];
@@ -120,7 +189,12 @@ export interface RulesConfigReadResult {
 
 /*** One execution diagnostic that explains why a configured rule could not run. */
 export interface RuleEvaluationDiagnostic {
-  readonly code: 'invalid-config' | 'invalid-options' | 'missing-capability' | 'unknown-rule';
+  readonly code:
+    | 'invalid-config'
+    | 'invalid-options'
+    | 'missing-capability'
+    | 'unresolved-dependencies'
+    | 'unknown-rule';
   readonly message: string;
   readonly ruleId: string;
 }
@@ -135,11 +209,13 @@ export interface RuleEvaluationResult {
 export interface EvaluateRulesOptions {
   readonly capabilities?: readonly RuleCapability[];
   readonly optionsByRuleId?: ReadonlyMap<string, JsonValue | undefined>;
+  readonly scope?: RuleScope;
 }
 
 /*** Configured evaluator inputs that preserve the caller's explicit capability set. */
 export interface EvaluateConfiguredRulesOptions {
   readonly capabilities?: readonly RuleCapability[];
+  readonly scope?: RuleScope;
 }
 
 /*** A stable status summary suitable for consumer-specific presentation. */

@@ -24,17 +24,16 @@ import {
 interface ContentContext {
   readonly words: readonly string[];
 }
-
 interface ReleaseContext {
   readonly blockers: number;
 }
-
 interface FixtureContext extends ContentContext, ReleaseContext {}
-
+const fixtureScope = { id: 'fixture-project', kind: 'project' } as const;
 const contentRule: Rule<ContentContext, { readonly minimum: number }> = {
-  id: 'content.minimum-words',
+  identity: { id: 'content.minimum-words', version: '1.0.0' },
   summary: 'Require a configurable number of words.',
   defaultSeverity: 'error',
+  dependencies: [],
   requiredCapabilities: ['text'] as const,
   validateOptions: (options: JsonValue | undefined) =>
     isMinimumOptions(options)
@@ -48,24 +47,28 @@ const contentRule: Rule<ContentContext, { readonly minimum: number }> = {
     readonly options: { readonly minimum: number } | undefined;
   }) {
     const minimum = isMinimumOptions(options) ? options.minimum : undefined;
-    return typeof minimum === 'number' && context.words.length < minimum
-      ? [
-          {
-            ruleId: 'ignored-by-engine',
-            severity: 'info',
-            message: `Expected at least ${minimum} words.`,
-            subjects: [{ id: 'document', kind: 'document' }],
-            evidence: { actual: context.words.length, minimum },
-          },
-        ]
-      : [];
+    return {
+      status: typeof minimum === 'number' && context.words.length < minimum ? 'FAIL' : 'PASS',
+      findings:
+        typeof minimum === 'number' && context.words.length < minimum
+          ? [
+              {
+                ruleId: 'ignored-by-engine',
+                severity: 'info',
+                message: `Expected at least ${minimum} words.`,
+                subjects: [{ id: 'document', kind: 'document' }],
+                evidence: { actual: context.words.length, minimum },
+              },
+            ]
+          : [],
+    };
   },
 };
-
 const releaseRule: Rule<ReleaseContext> = {
-  id: 'release.no-blockers',
+  identity: { id: 'release.no-blockers', version: '1.0.0' },
   summary: 'Report release blockers from a different domain context.',
   defaultSeverity: 'error',
+  dependencies: [],
   requiredCapabilities: ['release-state'] as const,
   evaluate({
     context,
@@ -73,20 +76,23 @@ const releaseRule: Rule<ReleaseContext> = {
     readonly context: ReleaseContext;
     readonly options: JsonValue | undefined;
   }) {
-    return context.blockers > 0
-      ? [
-          {
-            ruleId: 'ignored-by-engine',
-            severity: 'info',
-            message: `${context.blockers} release blocker(s) remain.`,
-            subjects: [{ id: 'release', kind: 'release' }],
-            evidence: { blockers: context.blockers },
-          },
-        ]
-      : [];
+    return {
+      status: context.blockers > 0 ? 'FAIL' : 'PASS',
+      findings:
+        context.blockers > 0
+          ? [
+              {
+                ruleId: 'ignored-by-engine',
+                severity: 'info',
+                message: `${context.blockers} release blocker(s) remain.`,
+                subjects: [{ id: 'release', kind: 'release' }],
+                evidence: { blockers: context.blockers },
+              },
+            ]
+          : [],
+    };
   },
 };
-
 const fixtureRuleSets: readonly RuleSet<FixtureContext>[] = [
   { id: 'release-provider', rules: [releaseRule] },
   { id: 'content-provider', rules: [contentRule] },
@@ -118,6 +124,7 @@ function testProviderComposition(): void {
   const result = evaluateRules({ blockers: 1, words: ['one'] }, registry.rules, {
     capabilities: ['text', 'release-state'],
     optionsByRuleId: new Map([['content.minimum-words', { minimum: 2 }]]),
+    scope: fixtureScope,
   });
 
   expect(registry.ruleSets.map((ruleSet) => ruleSet.id)).toEqual([
@@ -144,6 +151,7 @@ function testConfiguredRules(): void {
 
   const result = evaluateConfiguredRules({ blockers: 1, words: ['one'] }, config, registry, {
     capabilities: ['text', 'release-state'],
+    scope: fixtureScope,
   });
   expect(result.diagnostics).toEqual([]);
   expect(result.findings.map((finding) => finding.severity)).toEqual(['error', 'warning']);
@@ -152,25 +160,32 @@ function testConfiguredRules(): void {
 
 function testSubjectOrdering(): void {
   const rule: Rule<FixtureContext> = {
-    id: 'content.subject-order',
+    identity: { id: 'content.subject-order', version: '1.0.0' },
     summary: 'Exercise deterministic subject ordering.',
     defaultSeverity: 'info',
-    evaluate: () => [
-      {
-        ruleId: 'content.subject-order',
-        severity: 'info',
-        message: 'Subjects were observed.',
-        subjects: [
-          { id: 'ä', kind: 'document' },
-          { id: 'b', kind: 'document' },
-          { id: 'a', kind: 'document' },
-        ],
-        evidence: {},
-      },
-    ],
+    dependencies: [],
+    evaluate: () => ({
+      status: 'FAIL',
+      findings: [
+        {
+          ruleId: 'content.subject-order',
+          severity: 'info',
+          message: 'Subjects were observed.',
+          subjects: [
+            { id: 'ä', kind: 'document' },
+            { id: 'b', kind: 'document' },
+            { id: 'a', kind: 'document' },
+          ],
+          evidence: {},
+        },
+      ],
+    }),
   };
 
-  expect(evaluateRules({ blockers: 0, words: [] }, [rule]).findings[0]?.subjects).toEqual([
+  expect(
+    evaluateRules({ blockers: 0, words: [] }, [rule], { scope: fixtureScope }).findings[0]
+      ?.subjects,
+  ).toEqual([
     { id: 'a', kind: 'document' },
     { id: 'b', kind: 'document' },
     { id: 'ä', kind: 'document' },
@@ -213,7 +228,7 @@ function testInvalidConfigDiagnostics(): void {
     { blockers: 0, words: [] },
     { version: 1, rules: [{ id: 'missing.rule', enabled: true }] },
     registry,
-    { capabilities: ['text', 'release-state'] },
+    { capabilities: ['text', 'release-state'], scope: fixtureScope },
   );
   expect(failedEvaluation.diagnostics).toEqual([
     expect.objectContaining({ code: 'unknown-rule', ruleId: 'missing.rule' }),
