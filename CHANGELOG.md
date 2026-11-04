@@ -1,5 +1,12 @@
 # @ankhorage/rules
 
+## 0.3.0
+
+### Minor Changes
+
+- d42cc59: Freeze the composable rule contract with versioned identities, scopes, dependencies, result
+  statuses, dependency-result inputs, and provider-owned facets.
+
 ## 0.2.2
 
 ### Patch Changes

@@ -28,6 +28,9 @@ graph TD
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
   package__ankhorage_rules -.-> module_src_cli_standalone_ts
   module_src_cli_standalone_ts --> module_src_cli_commands_config_validate_ts
+  module_src_composableRuleContract_test_ts["src/composableRuleContract.test.ts"]
+  package__ankhorage_rules -.-> module_src_composableRuleContract_test_ts
+  module_src_composableRuleContract_test_ts --> module_src_index_ts
   module_src_constants_rules_ts["src/constants/rules.ts"]
   package__ankhorage_rules -.-> module_src_constants_rules_ts
   module_src_constants_rules_ts --> module_package_json
@@ -59,6 +62,13 @@ graph TD
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_test_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_evaluation_domain_createRuleRegistry_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_evaluation_domain_evaluateConfiguredRules_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --> module_src_types_rules_ts
