@@ -87,9 +87,11 @@ export interface RuleResultDiagnostic {
     | 'dependency-incomplete'
     | 'dependency-scope-mismatch'
     | 'disabled-dependency'
+    | 'invalid-options'
     | 'missing-capability'
     | 'missing-dependency'
-    | 'rule-error';
+    | 'rule-error'
+    | 'unresolved-dependencies';
   readonly message: string;
   readonly ruleId?: string;
 }
@@ -190,9 +192,17 @@ export interface RulesConfigReadResult {
 /*** One execution diagnostic that explains why a configured rule could not run. */
 export interface RuleEvaluationDiagnostic {
   readonly code:
+    | 'ambiguous-rule-id'
+    | 'cycle'
+    | 'dependency-error'
+    | 'dependency-incomplete'
+    | 'dependency-scope-mismatch'
+    | 'disabled-dependency'
     | 'invalid-config'
     | 'invalid-options'
     | 'missing-capability'
+    | 'missing-dependency'
+    | 'rule-error'
     | 'unresolved-dependencies'
     | 'unknown-rule';
   readonly message: string;
@@ -203,6 +213,7 @@ export interface RuleEvaluationDiagnostic {
 export interface RuleEvaluationResult {
   readonly diagnostics: readonly RuleEvaluationDiagnostic[];
   readonly findings: readonly RuleFinding[];
+  readonly results: readonly RuleResult[];
 }
 
 /*** Direct evaluator inputs that are independent of any repository configuration format. */
