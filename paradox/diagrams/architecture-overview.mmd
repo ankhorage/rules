@@ -53,6 +53,10 @@ graph TD
   module_src_features_configuration_domain_validateRulesConfig_ts["src/features/configuration/domain/validateRulesConfig.ts"]
   package__ankhorage_rules -.-> module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_configuration_domain_validateRulesConfig_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts["src/features/evaluation/domain/createRuleEvaluationPlan.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --> module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts["src/features/evaluation/domain/createRuleRegistry.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --> module_src_types_rules_ts
@@ -62,6 +66,9 @@ graph TD
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts["src/features/evaluation/domain/evaluateDependencyGraph.test.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts --> module_src_index_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_test_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
@@ -71,8 +78,13 @@ graph TD
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --> module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --> module_src_features_evaluation_domain_freezeRuleResult_ts
   module_src_features_evaluation_domain_evaluateRules_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts["src/features/evaluation/domain/freezeRuleResult.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_freezeRuleResult_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts["src/features/evaluation/domain/resolveRulesStatus.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_resolveRulesStatus_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --> module_src_types_rules_ts

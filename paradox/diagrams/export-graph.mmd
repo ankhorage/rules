@@ -14,15 +14,24 @@ graph LR
   module_src_features_configuration_application_validateRulesConfigFileAsync_ts["src/features/configuration/application/validateRulesConfigFileAsync.ts"]
   module_src_features_configuration_composition_readRulesConfigAsync_ts["src/features/configuration/composition/readRulesConfigAsync.ts"]
   module_src_features_configuration_domain_validateRulesConfig_ts["src/features/configuration/domain/validateRulesConfig.ts"]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts["src/features/evaluation/domain/createRuleEvaluationPlan.ts"]
   module_src_features_evaluation_domain_createRuleRegistry_ts["src/features/evaluation/domain/createRuleRegistry.ts"]
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts["src/features/evaluation/domain/evaluateConfiguredRules.ts"]
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts["src/features/evaluation/domain/evaluateDependencyGraph.test.ts"]
   module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
   module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
+  module_src_features_evaluation_domain_freezeRuleResult_ts["src/features/evaluation/domain/freezeRuleResult.ts"]
   module_src_features_evaluation_domain_resolveRulesStatus_ts["src/features/evaluation/domain/resolveRulesStatus.ts"]
   module_src_index_test_ts["src/index.test.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_types_rules_ts["src/types/rules.ts"]
   module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
+  export_createRuleEvaluationPlan["createRuleEvaluationPlan"]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --> export_createRuleEvaluationPlan
+  export_createRuleEvaluationPlan -.-> export_EvaluateRulesOptions
+  export_createRuleEvaluationPlan -.-> export_JsonValue
+  export_createRuleEvaluationPlan -.-> export_Rule
+  export_createRuleEvaluationPlan -.-> export_RuleEvaluationPlan
   export_createRuleRegistry["createRuleRegistry"]
   module_src_features_evaluation_domain_createRuleRegistry_ts --> export_createRuleRegistry
   export_createRuleRegistry -.-> export_RuleRegistry
@@ -46,6 +55,7 @@ graph LR
   module_src_types_rules_ts --> export_EvaluateRulesOptions
   export_EvaluateRulesOptions -.-> export_JsonValue
   export_EvaluateRulesOptions -.-> export_RuleScope
+  export_EvaluateRulesOptions -.-> export_RuleSelection
   export_JsonValue["JsonValue"]
   module_src_types_rules_ts --> export_JsonValue
   export_readRulesConfigAsync["readRulesConfigAsync"]
@@ -78,10 +88,19 @@ graph LR
   export_RuleEvaluationOutcome["RuleEvaluationOutcome"]
   module_src_types_rules_ts --> export_RuleEvaluationOutcome
   export_RuleEvaluationOutcome -.-> export_RuleFinding
+  export_RuleEvaluationPlan["RuleEvaluationPlan"]
+  module_src_types_rules_ts --> export_RuleEvaluationPlan
+  export_RuleEvaluationPlan -.-> export_RuleEvaluationDiagnostic
+  export_RuleEvaluationPlan -.-> export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode["RuleEvaluationPlanNode"]
+  module_src_types_rules_ts --> export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode -.-> export_RuleIdentity
+  export_RuleEvaluationPlanNode -.-> export_RuleScope
   export_RuleEvaluationResult["RuleEvaluationResult"]
   module_src_types_rules_ts --> export_RuleEvaluationResult
   export_RuleEvaluationResult -.-> export_JsonValue
   export_RuleEvaluationResult -.-> export_RuleEvaluationDiagnostic
+  export_RuleEvaluationResult -.-> export_RuleEvaluationPlan
   export_RuleEvaluationResult -.-> export_RuleFinding
   export_RuleEvaluationResult -.-> export_RuleResult
   export_RuleFacet["RuleFacet"]

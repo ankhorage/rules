@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.0",
+      "value": "v0.4.0",
       "color": "cb3837"
     },
     {
@@ -232,6 +232,17 @@
       ]
     },
     {
+      "path": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts",
+        "src/utils/compareRuleEntityIds.ts"
+      ],
+      "exports": [
+        "createRuleEvaluationPlan"
+      ]
+    },
+    {
       "path": "src/features/evaluation/domain/createRuleRegistry.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -255,6 +266,14 @@
       ]
     },
     {
+      "path": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/index.ts"
+      ],
+      "exports": []
+    },
+    {
       "path": "src/features/evaluation/domain/evaluateRules.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -270,11 +289,23 @@
       "path": "src/features/evaluation/domain/evaluateRules.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "src/features/evaluation/domain/freezeRuleResult.ts",
         "src/types/rules.ts",
         "src/utils/compareRuleEntityIds.ts"
       ],
       "exports": [
         "evaluateRules"
+      ]
+    },
+    {
+      "path": "src/features/evaluation/domain/freezeRuleResult.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts"
+      ],
+      "exports": [
+        "freezeRuleResult"
       ]
     },
     {
@@ -303,6 +334,7 @@
       "isEntrypoint": true,
       "dependencies": [],
       "exports": [
+        "createRuleEvaluationPlan",
         "createRuleRegistry",
         "evaluateConfiguredRules",
         "EvaluateConfiguredRulesOptions",
@@ -317,6 +349,8 @@
         "RuleEvaluationDiagnostic",
         "RuleEvaluationInput",
         "RuleEvaluationOutcome",
+        "RuleEvaluationPlan",
+        "RuleEvaluationPlanNode",
         "RuleEvaluationResult",
         "RuleFacet",
         "RuleFinding",
@@ -357,6 +391,8 @@
         "RuleEvaluationDiagnostic",
         "RuleEvaluationInput",
         "RuleEvaluationOutcome",
+        "RuleEvaluationPlan",
+        "RuleEvaluationPlanNode",
         "RuleEvaluationResult",
         "RuleFacet",
         "RuleFinding",
@@ -391,6 +427,53 @@
     }
   ],
   "exports": [
+    {
+      "name": "createRuleEvaluationPlan",
+      "title": null,
+      "description": "Project selected Rules and their complete dependency closure into a deterministic serializable graph.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 14,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "EvaluateRulesOptions",
+        "JsonValue",
+        "Rule",
+        "RuleEvaluationPlan"
+      ],
+      "signatures": [
+        {
+          "label": "(rules: readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[], options?: Pick<EvaluateRulesOptions, \"scope\" | \"selection\">) => RuleEvaluationPlan",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "Pick<EvaluateRulesOptions, \"scope\" | \"selection\">",
+              "required": false,
+              "description": null
+            },
+            {
+              "name": "rules",
+              "type": "readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[]",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "RuleEvaluationPlan",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
     {
       "name": "createRuleRegistry",
       "title": null,
@@ -500,7 +583,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 228,
+        "line": 247,
         "column": 1
       },
       "exportPaths": [
@@ -531,7 +614,7 @@
     {
       "name": "evaluateRules",
       "title": null,
-      "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+      "description": "Evaluate a deterministic dependency plan once, passing completed child results to each provider.",
       "isReadme": false,
       "see": [],
       "security": [],
@@ -539,7 +622,7 @@
       "modulePath": "src/features/evaluation/domain/evaluateRules.ts",
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 17,
+        "line": 18,
         "column": 1
       },
       "exportPaths": [
@@ -592,7 +675,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 221,
+        "line": 238,
         "column": 1
       },
       "exportPaths": [
@@ -600,12 +683,20 @@
       ],
       "relatedSymbols": [
         "JsonValue",
-        "RuleScope"
+        "RuleScope",
+        "RuleSelection"
       ],
       "signatures": [],
       "members": [
         {
           "name": "capabilities",
+          "kind": "property",
+          "type": "readonly string[] | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "disabledRuleIds",
           "kind": "property",
           "type": "readonly string[] | undefined",
           "required": false,
@@ -622,6 +713,13 @@
           "name": "scope",
           "kind": "property",
           "type": "RuleScope | undefined",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "selection",
+          "kind": "property",
+          "type": "RuleSelection | undefined",
           "required": false,
           "description": null
         }
@@ -738,7 +836,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 117,
+        "line": 133,
         "column": 1
       },
       "exportPaths": [
@@ -878,7 +976,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 194,
+        "line": 210,
         "column": 1
       },
       "exportPaths": [
@@ -922,7 +1020,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 109,
+        "line": 125,
         "column": 1
       },
       "exportPaths": [
@@ -1005,6 +1103,100 @@
       "structuredRows": []
     },
     {
+      "name": "RuleEvaluationPlan",
+      "title": null,
+      "description": "A consumer-neutral projection of selected rule roots and their resolved dependency closure.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 118,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RuleEvaluationDiagnostic",
+        "RuleEvaluationPlanNode"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "diagnostics",
+          "kind": "property",
+          "type": "readonly RuleEvaluationDiagnostic[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "nodes",
+          "kind": "property",
+          "type": "readonly RuleEvaluationPlanNode[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rootRuleIds",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RuleEvaluationPlanNode",
+      "title": null,
+      "description": "One serializable node in the deterministic execution graph for a scoped Rules run.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 111,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RuleIdentity",
+        "RuleScope"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "dependencyRuleIds",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rule",
+          "kind": "property",
+          "type": "RuleIdentity",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "scope",
+          "kind": "property",
+          "type": "RuleScope",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "RuleEvaluationResult",
       "title": null,
       "description": "The deterministic generic result shared by every Rules consumer.",
@@ -1015,7 +1207,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 214,
+        "line": 230,
         "column": 1
       },
       "exportPaths": [
@@ -1024,6 +1216,7 @@
       "relatedSymbols": [
         "JsonValue",
         "RuleEvaluationDiagnostic",
+        "RuleEvaluationPlan",
         "RuleFinding",
         "RuleResult"
       ],
@@ -1040,6 +1233,13 @@
           "name": "findings",
           "kind": "property",
           "type": "readonly RuleFinding<JsonValue>[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "plan",
+          "kind": "property",
+          "type": "RuleEvaluationPlan",
           "required": true,
           "description": null
         },
@@ -1251,7 +1451,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 139,
+        "line": 155,
         "column": 1
       },
       "exportPaths": [
@@ -1299,7 +1499,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 100,
+        "line": 102,
         "column": 1
       },
       "exportPaths": [
@@ -1376,7 +1576,7 @@
         {
           "name": "code",
           "kind": "property",
-          "type": "\"ambiguous-rule-id\" | \"cycle\" | \"dependency-error\" | \"dependency-incomplete\" | \"dependency-scope-mismatch\" | \"disabled-dependency\" | \"invalid-options\" | \"missing-capability\" | \"missing-dependency\" | \"rule-error\" | \"unresolved-dependencies\"",
+          "type": "\"ambiguous-rule-id\" | \"cycle\" | \"dependency-error\" | \"dependency-incomplete\" | \"dependency-scope-mismatch\" | \"disabled-dependency\" | \"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"missing-dependency\" | \"rule-error\" | \"unresolved-dependencies\" | \"unknown-rule\"",
           "required": true,
           "description": null
         },
@@ -1430,7 +1630,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 154,
+        "line": 170,
         "column": 1
       },
       "exportPaths": [
@@ -1469,7 +1669,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 160,
+        "line": 176,
         "column": 1
       },
       "exportPaths": [
@@ -1520,7 +1720,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 187,
+        "line": 203,
         "column": 1
       },
       "exportPaths": [
@@ -1567,7 +1767,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 146,
+        "line": 162,
         "column": 1
       },
       "exportPaths": [
@@ -1621,7 +1821,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 181,
+        "line": 197,
         "column": 1
       },
       "exportPaths": [
@@ -1660,7 +1860,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 175,
+        "line": 191,
         "column": 1
       },
       "exportPaths": [
@@ -1767,7 +1967,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 133,
+        "line": 149,
         "column": 1
       },
       "exportPaths": [
@@ -1887,7 +2087,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 234,
+        "line": 253,
         "column": 1
       },
       "exportPaths": [
@@ -2325,6 +2525,204 @@
       }
     },
     {
+      "name": "createRuleEvaluationPlan",
+      "description": "Project selected Rules and their complete dependency closure into a deterministic serializable graph.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "groupRulesById",
+      "description": "Group supplied providers by stable ID so ambiguity remains visible to the plan.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 41,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveRootRuleIds",
+      "description": "Use every supplied rule as a root unless the caller explicitly narrows the run.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 53,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveRule",
+      "description": "Resolve a stable rule ID only when exactly one provider defines it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 61,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveDependencyClosure",
+      "description": "Discover the selected transitive closure without executing provider code.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 70,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPlanNode",
+      "description": "Create the serializable graph node for one uniquely resolved provider rule.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 114,
+        "column": 1
+      }
+    },
+    {
+      "name": "findCycleRuleIds",
+      "description": "Identify only cyclic nodes so dependent nodes are not misreported as cycle members.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 125,
+        "column": 1
+      }
+    },
+    {
+      "name": "findStronglyConnectedComponents",
+      "description": "Partition the graph into deterministic strongly connected components with Tarjan traversal.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 133,
+        "column": 1
+      }
+    },
+    {
+      "name": "visit",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 141,
+        "column": 9
+      }
+    },
+    {
+      "name": "isCyclicComponent",
+      "description": "Treat multi-member components and explicit self-references as dependency cycles.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 180,
+        "column": 1
+      }
+    },
+    {
+      "name": "orderPlanNodes",
+      "description": "Return a stable child-before-parent ordering for every acyclic node in the plan.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 192,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMissingRuleDiagnostic",
+      "description": "Describe an unknown root or child rule without treating it as a provider finding.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 241,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMissingDependencyDiagnostic",
+      "description": "Describe an unknown child on the provider that declared it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 252,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAmbiguousRuleDiagnostic",
+      "description": "Describe an ambiguous selected root.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 264,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAmbiguousDependencyDiagnostic",
+      "description": "Describe an ambiguous child on the provider that declared it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 273,
+        "column": 1
+      }
+    },
+    {
+      "name": "createCycleDiagnostics",
+      "description": "Emit a deterministic error for every provider that participates in a dependency cycle.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 285,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareDiagnostics",
+      "description": "Sort diagnostics by their affected rule and then their stable code.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 296,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareStrings",
+      "description": "Compare identifiers without locale-dependent ordering.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "line": 304,
+        "column": 1
+      }
+    },
+    {
       "name": "createRuleRegistry",
       "description": "Create a deterministic registry from independently owned RuleSets.",
       "see": [],
@@ -2386,7 +2784,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
-        "line": 55,
+        "line": 60,
         "column": 1
       }
     },
@@ -2397,7 +2795,18 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
-        "line": 73,
+        "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRule",
+      "description": null,
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "line": 249,
         "column": 1
       }
     },
@@ -2441,7 +2850,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.test.ts",
-        "line": 120,
+        "line": 121,
         "column": 1
       }
     },
@@ -2452,84 +2861,139 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.test.ts",
-        "line": 145,
+        "line": 146,
         "column": 1
       }
     },
     {
       "name": "evaluateRules",
-      "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+      "description": "Evaluate a deterministic dependency plan once, passing completed child results to each provider.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 17,
+        "line": 18,
         "column": 1
       }
     },
     {
-      "name": "evaluateRule",
-      "description": "Evaluate one rule only when its declared input capabilities are available.",
+      "name": "evaluatePlanNode",
+      "description": "Evaluate one planned rule only after plan, dependency, and provider prerequisites are complete.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 38,
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPlanFailureResult",
+      "description": "Convert planner failures into an evaluator error without invoking provider code.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 103,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDisabledResult",
+      "description": "Mark an explicitly disabled closure member incomplete without treating it as an executed provider.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 119,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveDependencyResults",
+      "description": "Collect completed direct child results in the plan's stable dependency order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 138,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDependencyFailureResult",
+      "description": "Prevent a provider from running when a child could not establish complete execution evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 149,
+        "column": 1
+      }
+    },
+    {
+      "name": "createIncompleteDependencyResult",
+      "description": "Stop a parent after a child reports incomplete execution evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 190,
         "column": 1
       }
     },
     {
       "name": "evaluatePrerequisites",
-      "description": "Stop a flat evaluation before a rule runs when its required execution facts are unavailable.",
+      "description": "Stop execution before a provider runs when its required direct inputs are unavailable.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 71,
+        "line": 214,
         "column": 1
       }
     },
     {
       "name": "createRuleErrorDiagnostic",
-      "description": "Create a stable diagnostic when a provider throws while the evaluator invokes it.",
+      "description": "Create a stable diagnostic when the evaluator catches a provider exception.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 120,
-        "column": 1
-      }
-    },
-    {
-      "name": "rejectUnresolvedDependencies",
-      "description": "Reject dependency-bearing rules until the DAG evaluator resolves their complete closure.",
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 129,
+        "line": 257,
         "column": 1
       }
     },
     {
       "name": "createRuleResult",
-      "description": "Assemble one canonical rule result without inferring a status from the presence of findings.",
+      "description": "Assemble an immutable serializable result without inferring status from findings.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 139,
+        "line": 266,
+        "column": 1
+      }
+    },
+    {
+      "name": "groupDiagnosticsByRuleId",
+      "description": "Group plan diagnostics by affected rule for constant-time node evaluation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 283,
         "column": 1
       }
     },
     {
       "name": "toEvaluationDiagnostics",
-      "description": "Expose per-rule diagnostics through the legacy aggregate result without dropping rule identity.",
+      "description": "Expose per-rule diagnostics through the aggregate result without dropping identity.",
       "see": [],
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 150,
+        "line": 295,
         "column": 1
       }
     },
@@ -2540,7 +3004,62 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-        "line": 158,
+        "line": 303,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareDiagnostics",
+      "description": "Sort aggregate diagnostics by stable rule identifier and diagnostic code.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRules.ts",
+        "line": 317,
+        "column": 1
+      }
+    },
+    {
+      "name": "freezeRuleResult",
+      "description": "Snapshot a result into an immutable JSON-only value before dependent providers receive it.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "line": 9,
+        "column": 1
+      }
+    },
+    {
+      "name": "copyDiagnostic",
+      "description": "Copy a diagnostic so providers cannot retain a mutable reference to evaluator state.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "copyFinding",
+      "description": "Snapshot every nested provider finding value before sharing it with dependent providers.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "line": 25,
+        "column": 1
+      }
+    },
+    {
+      "name": "copyJsonValue",
+      "description": "Copy and deeply freeze the JSON-only evidence contract at the dependency boundary.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "line": 38,
         "column": 1
       }
     },
@@ -2666,6 +3185,14 @@
     },
     {
       "kind": "export",
+      "name": "createRuleEvaluationPlan",
+      "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+      "symbolName": "createRuleEvaluationPlan",
+      "description": "Project selected Rules and their complete dependency closure into a deterministic serializable graph.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "createRuleRegistry",
       "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts",
       "symbolName": "createRuleRegistry",
@@ -2685,7 +3212,7 @@
       "name": "evaluateRules",
       "sourcePath": "src/features/evaluation/domain/evaluateRules.ts",
       "symbolName": "evaluateRules",
-      "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+      "description": "Evaluate a deterministic dependency plan once, passing completed child results to each provider.",
       "isReadme": false
     },
     {
@@ -2761,6 +3288,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/features/configuration/domain/validateRulesConfig.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -2874,6 +3406,16 @@
         "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
       },
       {
+        "fromPath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "toPath": "src/utils/compareRuleEntityIds.ts",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
         "fromPath": "src/features/evaluation/domain/createRuleRegistry.ts",
         "toPath": "src/types/rules.ts",
         "sourcePath": "src/features/evaluation/domain/createRuleRegistry.ts"
@@ -2897,6 +3439,11 @@
         "fromPath": "src/features/evaluation/domain/evaluateConfiguredRules.ts",
         "toPath": "src/features/evaluation/domain/evaluateRules.ts",
         "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toPath": "src/index.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
       },
       {
         "fromPath": "src/features/evaluation/domain/evaluateRules.test.ts",
@@ -2932,6 +3479,21 @@
         "fromPath": "src/features/evaluation/domain/evaluateRules.ts",
         "toPath": "src/utils/compareRuleEntityIds.ts",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "toPath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "toPath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/freezeRuleResult.ts"
       },
       {
         "fromPath": "src/features/evaluation/domain/resolveRulesStatus.ts",
@@ -3376,6 +3938,114 @@
         "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
       },
       {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "groupRulesById",
+        "callExpression": "groupRulesById",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "resolveRootRuleIds",
+        "callExpression": "resolveRootRuleIds",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "resolveDependencyClosure",
+        "callExpression": "resolveDependencyClosure",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "toSymbol": "resolveRule",
+        "callExpression": "resolveRule",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "toSymbol": "createPlanNode",
+        "callExpression": "createPlanNode",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "findCycleRuleIds",
+        "callExpression": "findCycleRuleIds",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "orderPlanNodes",
+        "callExpression": "orderPlanNodes",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toSymbol": "createCycleDiagnostics",
+        "callExpression": "createCycleDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "resolveDependencyClosure",
+        "toSymbol": "createMissingRuleDiagnostic",
+        "callExpression": "createMissingRuleDiagnostic",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "resolveDependencyClosure",
+        "toSymbol": "createAmbiguousRuleDiagnostic",
+        "callExpression": "createAmbiguousRuleDiagnostic",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "resolveDependencyClosure",
+        "toSymbol": "createMissingDependencyDiagnostic",
+        "callExpression": "createMissingDependencyDiagnostic",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "resolveDependencyClosure",
+        "toSymbol": "createAmbiguousDependencyDiagnostic",
+        "callExpression": "createAmbiguousDependencyDiagnostic",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "findCycleRuleIds",
+        "toSymbol": "findStronglyConnectedComponents",
+        "callExpression": "findStronglyConnectedComponents",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+        "toSymbol": "isCyclicComponent",
+        "callExpression": "isCyclicComponent",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "visit",
+        "toSymbol": "visit",
+        "callExpression": "visit",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "findStronglyConnectedComponents",
+        "toSymbol": "visit",
+        "callExpression": "visit",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "compareDiagnostics",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "compareRuleEntityIds",
+        "callExpression": "compareRuleEntityIds",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
         "fromSymbol": "createRuleRegistry",
         "toSymbol": "assertUniqueRuleSetIds",
         "callExpression": "assertUniqueRuleSetIds",
@@ -3422,6 +4092,36 @@
         "toSymbol": "applyConfiguredSeverities",
         "callExpression": "applyConfiguredSeverities",
         "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts",
+        "toSymbol": "createRuleEvaluationPlan",
+        "callExpression": "createRuleEvaluationPlan",
+        "sourcePath": "src/features/evaluation/domain/evaluateDependencyGraph.test.ts"
       },
       {
         "fromSymbol": "src/features/evaluation/domain/evaluateRules.test.ts",
@@ -3484,31 +4184,61 @@
         "sourcePath": "src/features/evaluation/domain/evaluateRules.test.ts"
       },
       {
-        "fromSymbol": "src/features/evaluation/domain/evaluateRules.ts",
-        "toSymbol": "compareRuleEntityIds",
-        "callExpression": "compareRuleEntityIds",
+        "fromSymbol": "evaluateRules",
+        "toSymbol": "createRuleEvaluationPlan",
+        "callExpression": "createRuleEvaluationPlan",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "src/features/evaluation/domain/evaluateRules.ts",
-        "toSymbol": "evaluateRule",
-        "callExpression": "evaluateRule",
+        "fromSymbol": "evaluateRules",
+        "toSymbol": "groupDiagnosticsByRuleId",
+        "callExpression": "groupDiagnosticsByRuleId",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "evaluateRule",
+        "fromSymbol": "evaluateRules",
+        "toSymbol": "evaluatePlanNode",
+        "callExpression": "evaluatePlanNode",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluatePlanNode",
+        "toSymbol": "createPlanFailureResult",
+        "callExpression": "createPlanFailureResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluatePlanNode",
+        "toSymbol": "createDisabledResult",
+        "callExpression": "createDisabledResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluatePlanNode",
+        "toSymbol": "resolveDependencyResults",
+        "callExpression": "resolveDependencyResults",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluatePlanNode",
+        "toSymbol": "createDependencyFailureResult",
+        "callExpression": "createDependencyFailureResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "evaluatePlanNode",
         "toSymbol": "evaluatePrerequisites",
         "callExpression": "evaluatePrerequisites",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "evaluateRule",
+        "fromSymbol": "evaluatePlanNode",
         "toSymbol": "evaluate",
         "callExpression": "rule.evaluate",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "evaluateRule",
+        "fromSymbol": "evaluatePlanNode",
         "toSymbol": "createRuleResult",
         "callExpression": "createRuleResult",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
@@ -3520,15 +4250,39 @@
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "evaluateRule",
+        "fromSymbol": "evaluatePlanNode",
         "toSymbol": "createRuleErrorDiagnostic",
         "callExpression": "createRuleErrorDiagnostic",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
-        "fromSymbol": "evaluatePrerequisites",
-        "toSymbol": "rejectUnresolvedDependencies",
-        "callExpression": "rejectUnresolvedDependencies",
+        "fromSymbol": "createPlanFailureResult",
+        "toSymbol": "createRuleResult",
+        "callExpression": "createRuleResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "createDisabledResult",
+        "toSymbol": "createRuleResult",
+        "callExpression": "createRuleResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "createDependencyFailureResult",
+        "toSymbol": "createRuleResult",
+        "callExpression": "createRuleResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "createDependencyFailureResult",
+        "toSymbol": "createIncompleteDependencyResult",
+        "callExpression": "createIncompleteDependencyResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "createIncompleteDependencyResult",
+        "toSymbol": "createRuleResult",
+        "callExpression": "createRuleResult",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
       },
       {
@@ -3548,6 +4302,30 @@
         "toSymbol": "createRuleErrorDiagnostic",
         "callExpression": "createRuleErrorDiagnostic",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "createRuleResult",
+        "toSymbol": "freezeRuleResult",
+        "callExpression": "freezeRuleResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "compareDiagnostics",
+        "toSymbol": "compareRuleEntityIds",
+        "callExpression": "compareRuleEntityIds",
+        "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
+      },
+      {
+        "fromSymbol": "copyFinding",
+        "toSymbol": "copyJsonValue",
+        "callExpression": "copyJsonValue",
+        "sourcePath": "src/features/evaluation/domain/freezeRuleResult.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/freezeRuleResult.ts",
+        "toSymbol": "copyJsonValue",
+        "callExpression": "copyJsonValue",
+        "sourcePath": "src/features/evaluation/domain/freezeRuleResult.ts"
       },
       {
         "fromSymbol": "readRulesConfigSourceAsync",
@@ -3599,6 +4377,36 @@
         "fromSymbol": "validateRulesConfig",
         "toType": "TContext",
         "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "EvaluateRulesOptions",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "JsonValue",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "Pick",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "Rule",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "RuleEvaluationPlan",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
+      },
+      {
+        "fromSymbol": "createRuleEvaluationPlan",
+        "toType": "TContext",
+        "sourcePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts"
       },
       {
         "fromSymbol": "createRuleRegistry",
@@ -3698,6 +4506,11 @@
       {
         "fromSymbol": "EvaluateRulesOptions",
         "toType": "RuleScope",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "EvaluateRulesOptions",
+        "toType": "RuleSelection",
         "sourcePath": "src/types/rules.ts"
       },
       {
@@ -3801,6 +4614,26 @@
         "sourcePath": "src/types/rules.ts"
       },
       {
+        "fromSymbol": "RuleEvaluationPlan",
+        "toType": "RuleEvaluationDiagnostic",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RuleEvaluationPlan",
+        "toType": "RuleEvaluationPlanNode",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RuleEvaluationPlanNode",
+        "toType": "RuleIdentity",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RuleEvaluationPlanNode",
+        "toType": "RuleScope",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
         "fromSymbol": "RuleEvaluationResult",
         "toType": "JsonValue",
         "sourcePath": "src/types/rules.ts"
@@ -3808,6 +4641,11 @@
       {
         "fromSymbol": "RuleEvaluationResult",
         "toType": "RuleEvaluationDiagnostic",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RuleEvaluationResult",
+        "toType": "RuleEvaluationPlan",
         "sourcePath": "src/types/rules.ts"
       },
       {

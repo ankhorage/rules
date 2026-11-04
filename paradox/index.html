@@ -172,6 +172,11 @@
       <small>11 functions</small>
     </button>
   </li><li>
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/createRuleEvaluationPlan.ts">
+      src/features/evaluation/domain/createRuleEvaluationPlan.ts
+      <small>18 functions</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/evaluation/domain/createRuleRegistry.ts">
       src/features/evaluation/domain/createRuleRegistry.ts
       <small>4 functions</small>
@@ -182,6 +187,11 @@
       <small>3 functions</small>
     </button>
   </li><li>
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/evaluateDependencyGraph.test.ts">
+      src/features/evaluation/domain/evaluateDependencyGraph.test.ts
+      <small>1 function</small>
+    </button>
+  </li><li>
     <button class="nav-button" type="button" data-target="src/features/evaluation/domain/evaluateRules.test.ts">
       src/features/evaluation/domain/evaluateRules.test.ts
       <small>5 functions</small>
@@ -189,7 +199,12 @@
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/evaluation/domain/evaluateRules.ts">
       src/features/evaluation/domain/evaluateRules.ts
-      <small>8 functions</small>
+      <small>14 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/features/evaluation/domain/freezeRuleResult.ts">
+      src/features/evaluation/domain/freezeRuleResult.ts
+      <small>4 functions</small>
     </button>
   </li><li>
     <button class="nav-button" type="button" data-target="src/features/evaluation/domain/resolveRulesStatus.ts">
@@ -216,9 +231,9 @@
     <section class="panel">
       <h2>Package overview</h2>
       <div class="summary">
-        <div><strong>38</strong><span class="muted">public exports</span></div>
+        <div><strong>41</strong><span class="muted">public exports</span></div>
         <div><strong>0</strong><span class="muted">components</span></div>
-        <div><strong>24</strong><span class="muted">modules</span></div>
+        <div><strong>27</strong><span class="muted">modules</span></div>
         <div><strong>1</strong><span class="muted">entrypoints</span></div>
       </div>
       <h3>Entrypoints</h3>
@@ -318,6 +333,11 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>validateRulesConfig</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/createRuleEvaluationPlan.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts createRuleEvaluationPlan">
+    <h3>src/features/evaluation/domain/createRuleEvaluationPlan.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
+    <p><strong>Exports:</strong> <code>createRuleEvaluationPlan</code></p>
   </article><article class="item" data-search="src/features/evaluation/domain/createRuleRegistry.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts createRuleRegistry">
     <h3>src/features/evaluation/domain/createRuleRegistry.ts</h3>
     <p class="muted">Referenced module</p>
@@ -328,16 +348,26 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/configuration/domain/validateRulesConfig.ts</code>, <code>src/features/evaluation/domain/evaluateRules.ts</code>, <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <code>evaluateConfiguredRules</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/evaluateDependencyGraph.test.ts src/index.ts">
+    <h3>src/features/evaluation/domain/evaluateDependencyGraph.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/index.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
   </article><article class="item" data-search="src/features/evaluation/domain/evaluateRules.test.ts src/features/configuration/domain/validateRulesConfig.ts src/features/evaluation/domain/createRuleRegistry.ts src/features/evaluation/domain/evaluateConfiguredRules.ts src/features/evaluation/domain/evaluateRules.ts src/types/rules.ts">
     <h3>src/features/evaluation/domain/evaluateRules.test.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/features/configuration/domain/validateRulesConfig.ts</code>, <code>src/features/evaluation/domain/createRuleRegistry.ts</code>, <code>src/features/evaluation/domain/evaluateConfiguredRules.ts</code>, <code>src/features/evaluation/domain/evaluateRules.ts</code>, <code>src/types/rules.ts</code></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/features/evaluation/domain/evaluateRules.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts evaluateRules">
+  </article><article class="item" data-search="src/features/evaluation/domain/evaluateRules.ts src/features/evaluation/domain/createRuleEvaluationPlan.ts src/features/evaluation/domain/freezeRuleResult.ts src/types/rules.ts src/utils/compareRuleEntityIds.ts evaluateRules">
     <h3>src/features/evaluation/domain/evaluateRules.ts</h3>
     <p class="muted">Referenced module</p>
-    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
+    <p><strong>Dependencies:</strong> <code>src/features/evaluation/domain/createRuleEvaluationPlan.ts</code>, <code>src/features/evaluation/domain/freezeRuleResult.ts</code>, <code>src/types/rules.ts</code>, <code>src/utils/compareRuleEntityIds.ts</code></p>
     <p><strong>Exports:</strong> <code>evaluateRules</code></p>
+  </article><article class="item" data-search="src/features/evaluation/domain/freezeRuleResult.ts src/types/rules.ts freezeRuleResult">
+    <h3>src/features/evaluation/domain/freezeRuleResult.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/types/rules.ts</code></p>
+    <p><strong>Exports:</strong> <code>freezeRuleResult</code></p>
   </article><article class="item" data-search="src/features/evaluation/domain/resolveRulesStatus.ts src/types/rules.ts resolveRulesStatus">
     <h3>src/features/evaluation/domain/resolveRulesStatus.ts</h3>
     <p class="muted">Referenced module</p>
@@ -348,16 +378,16 @@
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <code>src/capabilities/index.ts</code>, <code>src/cli/index.ts</code>, <code>src/cli/standalone.ts</code>, <code>src/index.ts</code></p>
     <p><strong>Exports:</strong> <span class="empty">None</span></p>
-  </article><article class="item" data-search="src/index.ts createRuleRegistry evaluateConfiguredRules EvaluateConfiguredRulesOptions evaluateRules EvaluateRulesOptions JsonValue readRulesConfigAsync resolveRulesStatus Rule RuleCapability RuleDependency RuleEvaluationDiagnostic RuleEvaluationInput RuleEvaluationOutcome RuleEvaluationResult RuleFacet RuleFinding RuleIdentity RuleOptionDiagnostic RuleRegistry RuleResult RuleResultDiagnostic RuleResultStatus RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleScope RuleSelection RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject validateRulesConfig writeRulesConfigAsync">
+  </article><article class="item" data-search="src/index.ts createRuleEvaluationPlan createRuleRegistry evaluateConfiguredRules EvaluateConfiguredRulesOptions evaluateRules EvaluateRulesOptions JsonValue readRulesConfigAsync resolveRulesStatus Rule RuleCapability RuleDependency RuleEvaluationDiagnostic RuleEvaluationInput RuleEvaluationOutcome RuleEvaluationPlan RuleEvaluationPlanNode RuleEvaluationResult RuleFacet RuleFinding RuleIdentity RuleOptionDiagnostic RuleRegistry RuleResult RuleResultDiagnostic RuleResultStatus RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleScope RuleSelection RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject validateRulesConfig writeRulesConfigAsync">
     <h3>src/index.ts</h3>
     <p class="muted">Configured entrypoint</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>createRuleRegistry</code>, <code>evaluateConfiguredRules</code>, <code>EvaluateConfiguredRulesOptions</code>, <code>evaluateRules</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>readRulesConfigAsync</code>, <code>resolveRulesStatus</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleDependency</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationInput</code>, <code>RuleEvaluationOutcome</code>, <code>RuleEvaluationResult</code>, <code>RuleFacet</code>, <code>RuleFinding</code>, <code>RuleIdentity</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RuleResult</code>, <code>RuleResultDiagnostic</code>, <code>RuleResultStatus</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleScope</code>, <code>RuleSelection</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code>, <code>validateRulesConfig</code>, <code>writeRulesConfigAsync</code></p>
-  </article><article class="item" data-search="src/types/rules.ts EvaluateConfiguredRulesOptions EvaluateRulesOptions JsonValue Rule RuleCapability RuleDependency RuleEvaluationDiagnostic RuleEvaluationInput RuleEvaluationOutcome RuleEvaluationResult RuleFacet RuleFinding RuleIdentity RuleOptionDiagnostic RuleRegistry RuleResult RuleResultDiagnostic RuleResultStatus RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleScope RuleSelection RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject">
+    <p><strong>Exports:</strong> <code>createRuleEvaluationPlan</code>, <code>createRuleRegistry</code>, <code>evaluateConfiguredRules</code>, <code>EvaluateConfiguredRulesOptions</code>, <code>evaluateRules</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>readRulesConfigAsync</code>, <code>resolveRulesStatus</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleDependency</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationInput</code>, <code>RuleEvaluationOutcome</code>, <code>RuleEvaluationPlan</code>, <code>RuleEvaluationPlanNode</code>, <code>RuleEvaluationResult</code>, <code>RuleFacet</code>, <code>RuleFinding</code>, <code>RuleIdentity</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RuleResult</code>, <code>RuleResultDiagnostic</code>, <code>RuleResultStatus</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleScope</code>, <code>RuleSelection</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code>, <code>validateRulesConfig</code>, <code>writeRulesConfigAsync</code></p>
+  </article><article class="item" data-search="src/types/rules.ts EvaluateConfiguredRulesOptions EvaluateRulesOptions JsonValue Rule RuleCapability RuleDependency RuleEvaluationDiagnostic RuleEvaluationInput RuleEvaluationOutcome RuleEvaluationPlan RuleEvaluationPlanNode RuleEvaluationResult RuleFacet RuleFinding RuleIdentity RuleOptionDiagnostic RuleRegistry RuleResult RuleResultDiagnostic RuleResultStatus RulesConfig RulesConfigDiagnostic RulesConfigReadResult RulesConfigRule RulesConfigValidationOptions RulesConfigValidationResult RuleScope RuleSelection RuleSet RuleSeverity RuleSourceLocation RulesStatusDescriptor RuleSubject">
     <h3>src/types/rules.ts</h3>
     <p class="muted">Referenced module</p>
     <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-    <p><strong>Exports:</strong> <code>EvaluateConfiguredRulesOptions</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleDependency</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationInput</code>, <code>RuleEvaluationOutcome</code>, <code>RuleEvaluationResult</code>, <code>RuleFacet</code>, <code>RuleFinding</code>, <code>RuleIdentity</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RuleResult</code>, <code>RuleResultDiagnostic</code>, <code>RuleResultStatus</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleScope</code>, <code>RuleSelection</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code></p>
+    <p><strong>Exports:</strong> <code>EvaluateConfiguredRulesOptions</code>, <code>EvaluateRulesOptions</code>, <code>JsonValue</code>, <code>Rule</code>, <code>RuleCapability</code>, <code>RuleDependency</code>, <code>RuleEvaluationDiagnostic</code>, <code>RuleEvaluationInput</code>, <code>RuleEvaluationOutcome</code>, <code>RuleEvaluationPlan</code>, <code>RuleEvaluationPlanNode</code>, <code>RuleEvaluationResult</code>, <code>RuleFacet</code>, <code>RuleFinding</code>, <code>RuleIdentity</code>, <code>RuleOptionDiagnostic</code>, <code>RuleRegistry</code>, <code>RuleResult</code>, <code>RuleResultDiagnostic</code>, <code>RuleResultStatus</code>, <code>RulesConfig</code>, <code>RulesConfigDiagnostic</code>, <code>RulesConfigReadResult</code>, <code>RulesConfigRule</code>, <code>RulesConfigValidationOptions</code>, <code>RulesConfigValidationResult</code>, <code>RuleScope</code>, <code>RuleSelection</code>, <code>RuleSet</code>, <code>RuleSeverity</code>, <code>RuleSourceLocation</code>, <code>RulesStatusDescriptor</code>, <code>RuleSubject</code></p>
   </article><article class="item" data-search="src/utils/compareRuleEntityIds.ts compareRuleEntityIds">
     <h3>src/utils/compareRuleEntityIds.ts</h3>
     <p class="muted">Referenced module</p>
@@ -466,6 +496,40 @@
   </article>
             </section>
             <section>
+              <h3>src/features/evaluation/domain/createRuleEvaluationPlan.ts</h3>
+              <article class="item" id="symbol-createruleevaluationplan" data-search="createRuleEvaluationPlan  function src/features/evaluation/domain/createRuleEvaluationPlan.ts Project selected Rules and their complete dependency closure into a deterministic serializable graph. EvaluateRulesOptions JsonValue Rule RuleEvaluationPlan (rules: readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[], options?: Pick&lt;EvaluateRulesOptions, &quot;scope&quot; | &quot;selection&quot;&gt;) =&gt; RuleEvaluationPlan">
+    <h4>createRuleEvaluationPlan</h4>
+    
+    <p class="muted">function • <code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:14:1</code></p>
+    <p>Project selected Rules and their complete dependency closure into a deterministic serializable graph.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">EvaluateRulesOptions</li><li class="chip">JsonValue</li><li class="chip">Rule</li><li class="chip">RuleEvaluationPlan</li></ul></div>
+    <div>
+        <h5>Signature</h5>
+        <pre>(rules: readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[], options?: Pick&lt;EvaluateRulesOptions, &quot;scope&quot; | &quot;selection&quot;&gt;) =&gt; RuleEvaluationPlan</pre>
+        <table>
+                <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                <tbody>
+                  <tr>
+                        <td><code>options</code></td>
+                        <td><code>Pick&lt;EvaluateRulesOptions, &quot;scope&quot; | &quot;selection&quot;&gt;</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr><tr>
+                        <td><code>rules</code></td>
+                        <td><code>readonly Rule&lt;TContext, import(&quot;../../../index.js&quot;).JsonValue, import(&quot;../../../index.js&quot;).JsonValue&gt;[]</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                </tbody>
+              </table>
+        <p><strong>Returns:</strong> <code>RuleEvaluationPlan</code></p>
+      </div>
+    
+  </article>
+            </section>
+            <section>
               <h3>src/features/evaluation/domain/createRuleRegistry.ts</h3>
               <article class="item" id="symbol-createruleregistry" data-search="createRuleRegistry  function src/features/evaluation/domain/createRuleRegistry.ts Create a deterministic registry from independently owned RuleSets. RuleRegistry RuleSet (ruleSets: readonly RuleSet&lt;TContext&gt;[]) =&gt; RuleRegistry&lt;TContext&gt;">
     <h4>createRuleRegistry</h4>
@@ -540,11 +604,11 @@
             </section>
             <section>
               <h3>src/features/evaluation/domain/evaluateRules.ts</h3>
-              <article class="item" id="symbol-evaluaterules" data-search="evaluateRules  function src/features/evaluation/domain/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism. EvaluateRulesOptions JsonValue Rule RuleEvaluationResult (context: TContext, rules: readonly Rule&lt;TContext, JsonValue, JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult">
+              <article class="item" id="symbol-evaluaterules" data-search="evaluateRules  function src/features/evaluation/domain/evaluateRules.ts Evaluate a deterministic dependency plan once, passing completed child results to each provider. EvaluateRulesOptions JsonValue Rule RuleEvaluationResult (context: TContext, rules: readonly Rule&lt;TContext, JsonValue, JsonValue&gt;[], options?: EvaluateRulesOptions) =&gt; RuleEvaluationResult">
     <h4>evaluateRules</h4>
     
-    <p class="muted">function • <code>src/features/evaluation/domain/evaluateRules.ts:17:1</code></p>
-    <p>Evaluate unrelated rules in deterministic identifier order through one generic mechanism.</p>
+    <p class="muted">function • <code>src/features/evaluation/domain/evaluateRules.ts:18:1</code></p>
+    <p>Evaluate a deterministic dependency plan once, passing completed child results to each provider.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
     <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">EvaluateRulesOptions</li><li class="chip">JsonValue</li><li class="chip">Rule</li><li class="chip">RuleEvaluationResult</li></ul></div>
@@ -611,7 +675,7 @@
               <article class="item" id="symbol-evaluateconfiguredrulesoptions" data-search="EvaluateConfiguredRulesOptions  type src/types/rules.ts Configured evaluator inputs that preserve the caller&#39;s explicit capability set. RuleScope">
     <h4>EvaluateConfiguredRulesOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:228:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:247:1</code></p>
     <p>Configured evaluator inputs that preserve the caller&#39;s explicit capability set.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -635,20 +699,26 @@
           </tr>
     </tbody>
   </table>
-  </article><article class="item" id="symbol-evaluaterulesoptions" data-search="EvaluateRulesOptions  type src/types/rules.ts Direct evaluator inputs that are independent of any repository configuration format. JsonValue RuleScope">
+  </article><article class="item" id="symbol-evaluaterulesoptions" data-search="EvaluateRulesOptions  type src/types/rules.ts Direct evaluator inputs that are independent of any repository configuration format. JsonValue RuleScope RuleSelection">
     <h4>EvaluateRulesOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:221:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:238:1</code></p>
     <p>Direct evaluator inputs that are independent of any repository configuration format.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">JsonValue</li><li class="chip">RuleScope</li></ul></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">JsonValue</li><li class="chip">RuleScope</li><li class="chip">RuleSelection</li></ul></div>
     
     <table>
     <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
     <tbody>
       <tr>
             <td><code>capabilities</code></td>
+            <td>property</td>
+            <td><code>readonly string[] | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>disabledRuleIds</code></td>
             <td>property</td>
             <td><code>readonly string[] | undefined</code></td>
             <td>no</td>
@@ -663,6 +733,12 @@
             <td><code>scope</code></td>
             <td>property</td>
             <td><code>RuleScope | undefined</code></td>
+            <td>no</td>
+            <td></td>
+          </tr><tr>
+            <td><code>selection</code></td>
+            <td>property</td>
+            <td><code>RuleSelection | undefined</code></td>
             <td>no</td>
             <td></td>
           </tr>
@@ -681,7 +757,7 @@
   </article><article class="item" id="symbol-rule" data-search="Rule  type src/types/rules.ts A deterministic, provider-owned policy unit evaluated by the generic engine. JsonValue RuleDependency RuleEvaluationInput RuleEvaluationOutcome RuleFacet RuleIdentity RuleOptionDiagnostic RuleSeverity">
     <h4>Rule</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:117:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:133:1</code></p>
     <p>A deterministic, provider-owned policy unit evaluated by the generic engine.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -775,7 +851,7 @@
   </article><article class="item" id="symbol-ruleevaluationdiagnostic" data-search="RuleEvaluationDiagnostic  type src/types/rules.ts One execution diagnostic that explains why a configured rule could not run.">
     <h4>RuleEvaluationDiagnostic</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:194:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:210:1</code></p>
     <p>One execution diagnostic that explains why a configured rule could not run.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -808,7 +884,7 @@
   </article><article class="item" id="symbol-ruleevaluationinput" data-search="RuleEvaluationInput  type src/types/rules.ts The immutable input supplied to a rule after the evaluator has resolved its dependencies. RuleResult RuleScope">
     <h4>RuleEvaluationInput</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:109:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:125:1</code></p>
     <p>The immutable input supplied to a rule after the evaluator has resolved its dependencies.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -871,14 +947,80 @@
           </tr>
     </tbody>
   </table>
-  </article><article class="item" id="symbol-ruleevaluationresult" data-search="RuleEvaluationResult  type src/types/rules.ts The deterministic generic result shared by every Rules consumer. JsonValue RuleEvaluationDiagnostic RuleFinding RuleResult">
+  </article><article class="item" id="symbol-ruleevaluationplan" data-search="RuleEvaluationPlan  type src/types/rules.ts A consumer-neutral projection of selected rule roots and their resolved dependency closure. RuleEvaluationDiagnostic RuleEvaluationPlanNode">
+    <h4>RuleEvaluationPlan</h4>
+    
+    <p class="muted">type • <code>src/types/rules.ts:118:1</code></p>
+    <p>A consumer-neutral projection of selected rule roots and their resolved dependency closure.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RuleEvaluationDiagnostic</li><li class="chip">RuleEvaluationPlanNode</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>diagnostics</code></td>
+            <td>property</td>
+            <td><code>readonly RuleEvaluationDiagnostic[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>nodes</code></td>
+            <td>property</td>
+            <td><code>readonly RuleEvaluationPlanNode[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>rootRuleIds</code></td>
+            <td>property</td>
+            <td><code>readonly string[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-ruleevaluationplannode" data-search="RuleEvaluationPlanNode  type src/types/rules.ts One serializable node in the deterministic execution graph for a scoped Rules run. RuleIdentity RuleScope">
+    <h4>RuleEvaluationPlanNode</h4>
+    
+    <p class="muted">type • <code>src/types/rules.ts:111:1</code></p>
+    <p>One serializable node in the deterministic execution graph for a scoped Rules run.</p>
+    
+    <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">RuleIdentity</li><li class="chip">RuleScope</li></ul></div>
+    
+    <table>
+    <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+            <td><code>dependencyRuleIds</code></td>
+            <td>property</td>
+            <td><code>readonly string[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>rule</code></td>
+            <td>property</td>
+            <td><code>RuleIdentity</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>scope</code></td>
+            <td>property</td>
+            <td><code>RuleScope</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr>
+    </tbody>
+  </table>
+  </article><article class="item" id="symbol-ruleevaluationresult" data-search="RuleEvaluationResult  type src/types/rules.ts The deterministic generic result shared by every Rules consumer. JsonValue RuleEvaluationDiagnostic RuleEvaluationPlan RuleFinding RuleResult">
     <h4>RuleEvaluationResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:214:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:230:1</code></p>
     <p>The deterministic generic result shared by every Rules consumer.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">JsonValue</li><li class="chip">RuleEvaluationDiagnostic</li><li class="chip">RuleFinding</li><li class="chip">RuleResult</li></ul></div>
+    <div><strong>Related symbols:</strong> <ul class="chips"><li class="chip">JsonValue</li><li class="chip">RuleEvaluationDiagnostic</li><li class="chip">RuleEvaluationPlan</li><li class="chip">RuleFinding</li><li class="chip">RuleResult</li></ul></div>
     
     <table>
     <thead><tr><th>Member</th><th>Kind</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
@@ -893,6 +1035,12 @@
             <td><code>findings</code></td>
             <td>property</td>
             <td><code>readonly RuleFinding&lt;JsonValue&gt;[]</code></td>
+            <td>yes</td>
+            <td></td>
+          </tr><tr>
+            <td><code>plan</code></td>
+            <td>property</td>
+            <td><code>RuleEvaluationPlan</code></td>
             <td>yes</td>
             <td></td>
           </tr><tr>
@@ -1045,7 +1193,7 @@
   </article><article class="item" id="symbol-ruleregistry" data-search="RuleRegistry  type src/types/rules.ts A registry that resolves rules without provider discovery or domain-specific branches. JsonValue Rule RuleSet">
     <h4>RuleRegistry</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:139:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:155:1</code></p>
     <p>A registry that resolves rules without provider discovery or domain-specific branches.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1078,7 +1226,7 @@
   </article><article class="item" id="symbol-ruleresult" data-search="RuleResult  type src/types/rules.ts One serializable evaluation result for a versioned rule at one exact semantic scope. JsonValue RuleFinding RuleIdentity RuleResultDiagnostic RuleResultStatus RuleScope">
     <h4>RuleResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:100:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:102:1</code></p>
     <p>One serializable evaluation result for a versioned rule at one exact semantic scope.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1135,7 +1283,7 @@
       <tr>
             <td><code>code</code></td>
             <td>property</td>
-            <td><code>&quot;ambiguous-rule-id&quot; | &quot;cycle&quot; | &quot;dependency-error&quot; | &quot;dependency-incomplete&quot; | &quot;dependency-scope-mismatch&quot; | &quot;disabled-dependency&quot; | &quot;invalid-options&quot; | &quot;missing-capability&quot; | &quot;missing-dependency&quot; | &quot;rule-error&quot; | &quot;unresolved-dependencies&quot;</code></td>
+            <td><code>&quot;ambiguous-rule-id&quot; | &quot;cycle&quot; | &quot;dependency-error&quot; | &quot;dependency-incomplete&quot; | &quot;dependency-scope-mismatch&quot; | &quot;disabled-dependency&quot; | &quot;invalid-config&quot; | &quot;invalid-options&quot; | &quot;missing-capability&quot; | &quot;missing-dependency&quot; | &quot;rule-error&quot; | &quot;unresolved-dependencies&quot; | &quot;unknown-rule&quot;</code></td>
             <td>yes</td>
             <td></td>
           </tr><tr>
@@ -1166,7 +1314,7 @@
   </article><article class="item" id="symbol-rulesconfig" data-search="RulesConfig  type src/types/rules.ts The canonical JSON-only configuration stored in a repository rules.json file. RulesConfigRule">
     <h4>RulesConfig</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:154:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:170:1</code></p>
     <p>The canonical JSON-only configuration stored in a repository rules.json file.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1193,7 +1341,7 @@
   </article><article class="item" id="symbol-rulesconfigdiagnostic" data-search="RulesConfigDiagnostic  type src/types/rules.ts A portable diagnostic emitted while parsing or applying a Rules configuration.">
     <h4>RulesConfigDiagnostic</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:160:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:176:1</code></p>
     <p>A portable diagnostic emitted while parsing or applying a Rules configuration.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1232,7 +1380,7 @@
   </article><article class="item" id="symbol-rulesconfigreadresult" data-search="RulesConfigReadResult  type src/types/rules.ts The result of reading a repository rules.json file without hiding parse failures. RulesConfig RulesConfigDiagnostic">
     <h4>RulesConfigReadResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:187:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:203:1</code></p>
     <p>The result of reading a repository rules.json file without hiding parse failures.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1265,7 +1413,7 @@
   </article><article class="item" id="symbol-rulesconfigrule" data-search="RulesConfigRule  type src/types/rules.ts One enabled/disabled rule selection with serializable provider options. JsonValue RuleSeverity">
     <h4>RulesConfigRule</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:146:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:162:1</code></p>
     <p>One enabled/disabled rule selection with serializable provider options.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1304,7 +1452,7 @@
   </article><article class="item" id="symbol-rulesconfigvalidationoptions" data-search="RulesConfigValidationOptions  type src/types/rules.ts Extra facts used to validate configured rule IDs, options, and required capabilities. RuleRegistry">
     <h4>RulesConfigValidationOptions</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:181:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:197:1</code></p>
     <p>Extra facts used to validate configured rule IDs, options, and required capabilities.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1331,7 +1479,7 @@
   </article><article class="item" id="symbol-rulesconfigvalidationresult" data-search="RulesConfigValidationResult  type src/types/rules.ts The result of validating a raw JSON configuration against optional provider knowledge. RulesConfig RulesConfigDiagnostic">
     <h4>RulesConfigValidationResult</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:175:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:191:1</code></p>
     <p>The result of validating a raw JSON configuration against optional provider knowledge.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1406,7 +1554,7 @@
   </article><article class="item" id="symbol-ruleset" data-search="RuleSet  type src/types/rules.ts A named collection of independently supplied rules that can compose with other providers. JsonValue Rule">
     <h4>RuleSet</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:133:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:149:1</code></p>
     <p>A named collection of independently supplied rules that can compose with other providers.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1488,7 +1636,7 @@
   </article><article class="item" id="symbol-rulesstatusdescriptor" data-search="RulesStatusDescriptor  type src/types/rules.ts A stable status summary suitable for consumer-specific presentation.">
     <h4>RulesStatusDescriptor</h4>
     
-    <p class="muted">type • <code>src/types/rules.ts:234:1</code></p>
+    <p class="muted">type • <code>src/types/rules.ts:253:1</code></p>
     <p>A stable status summary suitable for consumer-specific presentation.</p>
     
     <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1612,6 +1760,10 @@
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
@@ -1621,6 +1773,9 @@
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts --&gt; module_src_index_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_test_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
@@ -1630,8 +1785,13 @@
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_resolveRulesStatus_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
@@ -1704,6 +1864,10 @@
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
@@ -1713,6 +1877,9 @@
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts --&gt; module_src_index_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_test_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
@@ -1722,8 +1889,13 @@
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
+  package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   package__ankhorage_rules -.-&gt; module_src_features_evaluation_domain_resolveRulesStatus_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
@@ -1759,10 +1931,13 @@
   module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
   module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
@@ -1789,18 +1964,24 @@
   module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
   module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
   module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts --&gt; module_src_index_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_evaluateConfiguredRules_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
@@ -1825,10 +2006,13 @@
   module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
   module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
@@ -1855,18 +2039,24 @@
   module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_features_configuration_application_validateRulesConfigFileAsync_ts
   module_src_features_configuration_composition_readRulesConfigAsync_ts --&gt; module_src_types_rules_ts
   module_src_features_configuration_domain_validateRulesConfig_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts --&gt; module_src_index_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_evaluateConfiguredRules_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_features_evaluation_domain_evaluateRules_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --&gt; module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_createRuleEvaluationPlan_ts
+  module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_features_evaluation_domain_freezeRuleResult_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRules_ts --&gt; module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_freezeRuleResult_ts --&gt; module_src_types_rules_ts
   module_src_features_evaluation_domain_resolveRulesStatus_ts --&gt; module_src_types_rules_ts
   module_src_index_test_ts --&gt; module_src_capabilities_index_ts
   module_src_index_test_ts --&gt; module_src_cli_index_ts
@@ -1893,15 +2083,24 @@
   module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
   module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
   module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
+  export_createRuleEvaluationPlan[&quot;createRuleEvaluationPlan&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; export_createRuleEvaluationPlan
+  export_createRuleEvaluationPlan -.-&gt; export_EvaluateRulesOptions
+  export_createRuleEvaluationPlan -.-&gt; export_JsonValue
+  export_createRuleEvaluationPlan -.-&gt; export_Rule
+  export_createRuleEvaluationPlan -.-&gt; export_RuleEvaluationPlan
   export_createRuleRegistry[&quot;createRuleRegistry&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; export_createRuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleRegistry
@@ -1925,6 +2124,7 @@
   module_src_types_rules_ts --&gt; export_EvaluateRulesOptions
   export_EvaluateRulesOptions -.-&gt; export_JsonValue
   export_EvaluateRulesOptions -.-&gt; export_RuleScope
+  export_EvaluateRulesOptions -.-&gt; export_RuleSelection
   export_JsonValue[&quot;JsonValue&quot;]
   module_src_types_rules_ts --&gt; export_JsonValue
   export_readRulesConfigAsync[&quot;readRulesConfigAsync&quot;]
@@ -1957,10 +2157,19 @@
   export_RuleEvaluationOutcome[&quot;RuleEvaluationOutcome&quot;]
   module_src_types_rules_ts --&gt; export_RuleEvaluationOutcome
   export_RuleEvaluationOutcome -.-&gt; export_RuleFinding
+  export_RuleEvaluationPlan[&quot;RuleEvaluationPlan&quot;]
+  module_src_types_rules_ts --&gt; export_RuleEvaluationPlan
+  export_RuleEvaluationPlan -.-&gt; export_RuleEvaluationDiagnostic
+  export_RuleEvaluationPlan -.-&gt; export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode[&quot;RuleEvaluationPlanNode&quot;]
+  module_src_types_rules_ts --&gt; export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode -.-&gt; export_RuleIdentity
+  export_RuleEvaluationPlanNode -.-&gt; export_RuleScope
   export_RuleEvaluationResult[&quot;RuleEvaluationResult&quot;]
   module_src_types_rules_ts --&gt; export_RuleEvaluationResult
   export_RuleEvaluationResult -.-&gt; export_JsonValue
   export_RuleEvaluationResult -.-&gt; export_RuleEvaluationDiagnostic
+  export_RuleEvaluationResult -.-&gt; export_RuleEvaluationPlan
   export_RuleEvaluationResult -.-&gt; export_RuleFinding
   export_RuleEvaluationResult -.-&gt; export_RuleResult
   export_RuleFacet[&quot;RuleFacet&quot;]
@@ -2053,15 +2262,24 @@
   module_src_features_configuration_application_validateRulesConfigFileAsync_ts[&quot;src/features/configuration/application/validateRulesConfigFileAsync.ts&quot;]
   module_src_features_configuration_composition_readRulesConfigAsync_ts[&quot;src/features/configuration/composition/readRulesConfigAsync.ts&quot;]
   module_src_features_configuration_domain_validateRulesConfig_ts[&quot;src/features/configuration/domain/validateRulesConfig.ts&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts[&quot;src/features/evaluation/domain/createRuleEvaluationPlan.ts&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts[&quot;src/features/evaluation/domain/createRuleRegistry.ts&quot;]
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts[&quot;src/features/evaluation/domain/evaluateConfiguredRules.ts&quot;]
+  module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts[&quot;src/features/evaluation/domain/evaluateDependencyGraph.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_test_ts[&quot;src/features/evaluation/domain/evaluateRules.test.ts&quot;]
   module_src_features_evaluation_domain_evaluateRules_ts[&quot;src/features/evaluation/domain/evaluateRules.ts&quot;]
+  module_src_features_evaluation_domain_freezeRuleResult_ts[&quot;src/features/evaluation/domain/freezeRuleResult.ts&quot;]
   module_src_features_evaluation_domain_resolveRulesStatus_ts[&quot;src/features/evaluation/domain/resolveRulesStatus.ts&quot;]
   module_src_index_test_ts[&quot;src/index.test.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_types_rules_ts[&quot;src/types/rules.ts&quot;]
   module_src_utils_compareRuleEntityIds_ts[&quot;src/utils/compareRuleEntityIds.ts&quot;]
+  export_createRuleEvaluationPlan[&quot;createRuleEvaluationPlan&quot;]
+  module_src_features_evaluation_domain_createRuleEvaluationPlan_ts --&gt; export_createRuleEvaluationPlan
+  export_createRuleEvaluationPlan -.-&gt; export_EvaluateRulesOptions
+  export_createRuleEvaluationPlan -.-&gt; export_JsonValue
+  export_createRuleEvaluationPlan -.-&gt; export_Rule
+  export_createRuleEvaluationPlan -.-&gt; export_RuleEvaluationPlan
   export_createRuleRegistry[&quot;createRuleRegistry&quot;]
   module_src_features_evaluation_domain_createRuleRegistry_ts --&gt; export_createRuleRegistry
   export_createRuleRegistry -.-&gt; export_RuleRegistry
@@ -2085,6 +2303,7 @@
   module_src_types_rules_ts --&gt; export_EvaluateRulesOptions
   export_EvaluateRulesOptions -.-&gt; export_JsonValue
   export_EvaluateRulesOptions -.-&gt; export_RuleScope
+  export_EvaluateRulesOptions -.-&gt; export_RuleSelection
   export_JsonValue[&quot;JsonValue&quot;]
   module_src_types_rules_ts --&gt; export_JsonValue
   export_readRulesConfigAsync[&quot;readRulesConfigAsync&quot;]
@@ -2117,10 +2336,19 @@
   export_RuleEvaluationOutcome[&quot;RuleEvaluationOutcome&quot;]
   module_src_types_rules_ts --&gt; export_RuleEvaluationOutcome
   export_RuleEvaluationOutcome -.-&gt; export_RuleFinding
+  export_RuleEvaluationPlan[&quot;RuleEvaluationPlan&quot;]
+  module_src_types_rules_ts --&gt; export_RuleEvaluationPlan
+  export_RuleEvaluationPlan -.-&gt; export_RuleEvaluationDiagnostic
+  export_RuleEvaluationPlan -.-&gt; export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode[&quot;RuleEvaluationPlanNode&quot;]
+  module_src_types_rules_ts --&gt; export_RuleEvaluationPlanNode
+  export_RuleEvaluationPlanNode -.-&gt; export_RuleIdentity
+  export_RuleEvaluationPlanNode -.-&gt; export_RuleScope
   export_RuleEvaluationResult[&quot;RuleEvaluationResult&quot;]
   module_src_types_rules_ts --&gt; export_RuleEvaluationResult
   export_RuleEvaluationResult -.-&gt; export_JsonValue
   export_RuleEvaluationResult -.-&gt; export_RuleEvaluationDiagnostic
+  export_RuleEvaluationResult -.-&gt; export_RuleEvaluationPlan
   export_RuleEvaluationResult -.-&gt; export_RuleFinding
   export_RuleEvaluationResult -.-&gt; export_RuleResult
   export_RuleFacet[&quot;RuleFacet&quot;]
@@ -2475,6 +2703,101 @@
     
   </article>
     </section>
+  </section><section id="view-src-features-evaluation-domain-createruleevaluationplan-ts" class="view" data-view="src/features/evaluation/domain/createRuleEvaluationPlan.ts" hidden>
+    <section class="panel">
+      <h2>src/features/evaluation/domain/createRuleEvaluationPlan.ts</h2>
+      <article class="item" data-search="createRuleEvaluationPlan src/features/evaluation/domain/createRuleEvaluationPlan.ts Project selected Rules and their complete dependency closure into a deterministic serializable graph.">
+    <h3>createRuleEvaluationPlan</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:14:1</code></p>
+    <p>Project selected Rules and their complete dependency closure into a deterministic serializable graph.</p>
+    
+  </article><article class="item" data-search="groupRulesById src/features/evaluation/domain/createRuleEvaluationPlan.ts Group supplied providers by stable ID so ambiguity remains visible to the plan.">
+    <h3>groupRulesById</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:41:1</code></p>
+    <p>Group supplied providers by stable ID so ambiguity remains visible to the plan.</p>
+    
+  </article><article class="item" data-search="resolveRootRuleIds src/features/evaluation/domain/createRuleEvaluationPlan.ts Use every supplied rule as a root unless the caller explicitly narrows the run.">
+    <h3>resolveRootRuleIds</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:53:1</code></p>
+    <p>Use every supplied rule as a root unless the caller explicitly narrows the run.</p>
+    
+  </article><article class="item" data-search="resolveRule src/features/evaluation/domain/createRuleEvaluationPlan.ts Resolve a stable rule ID only when exactly one provider defines it.">
+    <h3>resolveRule</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:61:1</code></p>
+    <p>Resolve a stable rule ID only when exactly one provider defines it.</p>
+    
+  </article><article class="item" data-search="resolveDependencyClosure src/features/evaluation/domain/createRuleEvaluationPlan.ts Discover the selected transitive closure without executing provider code.">
+    <h3>resolveDependencyClosure</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:70:1</code></p>
+    <p>Discover the selected transitive closure without executing provider code.</p>
+    
+  </article><article class="item" data-search="createPlanNode src/features/evaluation/domain/createRuleEvaluationPlan.ts Create the serializable graph node for one uniquely resolved provider rule.">
+    <h3>createPlanNode</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:114:1</code></p>
+    <p>Create the serializable graph node for one uniquely resolved provider rule.</p>
+    
+  </article><article class="item" data-search="findCycleRuleIds src/features/evaluation/domain/createRuleEvaluationPlan.ts Identify only cyclic nodes so dependent nodes are not misreported as cycle members.">
+    <h3>findCycleRuleIds</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:125:1</code></p>
+    <p>Identify only cyclic nodes so dependent nodes are not misreported as cycle members.</p>
+    
+  </article><article class="item" data-search="findStronglyConnectedComponents src/features/evaluation/domain/createRuleEvaluationPlan.ts Partition the graph into deterministic strongly connected components with Tarjan traversal.">
+    <h3>findStronglyConnectedComponents</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:133:1</code></p>
+    <p>Partition the graph into deterministic strongly connected components with Tarjan traversal.</p>
+    
+  </article><article class="item" data-search="visit src/features/evaluation/domain/createRuleEvaluationPlan.ts ">
+    <h3>visit</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:141:9</code></p>
+    <p class="empty">No description available.</p>
+    
+  </article><article class="item" data-search="isCyclicComponent src/features/evaluation/domain/createRuleEvaluationPlan.ts Treat multi-member components and explicit self-references as dependency cycles.">
+    <h3>isCyclicComponent</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:180:1</code></p>
+    <p>Treat multi-member components and explicit self-references as dependency cycles.</p>
+    
+  </article><article class="item" data-search="orderPlanNodes src/features/evaluation/domain/createRuleEvaluationPlan.ts Return a stable child-before-parent ordering for every acyclic node in the plan.">
+    <h3>orderPlanNodes</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:192:1</code></p>
+    <p>Return a stable child-before-parent ordering for every acyclic node in the plan.</p>
+    
+  </article><article class="item" data-search="createMissingRuleDiagnostic src/features/evaluation/domain/createRuleEvaluationPlan.ts Describe an unknown root or child rule without treating it as a provider finding.">
+    <h3>createMissingRuleDiagnostic</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:241:1</code></p>
+    <p>Describe an unknown root or child rule without treating it as a provider finding.</p>
+    
+  </article><article class="item" data-search="createMissingDependencyDiagnostic src/features/evaluation/domain/createRuleEvaluationPlan.ts Describe an unknown child on the provider that declared it.">
+    <h3>createMissingDependencyDiagnostic</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:252:1</code></p>
+    <p>Describe an unknown child on the provider that declared it.</p>
+    
+  </article><article class="item" data-search="createAmbiguousRuleDiagnostic src/features/evaluation/domain/createRuleEvaluationPlan.ts Describe an ambiguous selected root.">
+    <h3>createAmbiguousRuleDiagnostic</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:264:1</code></p>
+    <p>Describe an ambiguous selected root.</p>
+    
+  </article><article class="item" data-search="createAmbiguousDependencyDiagnostic src/features/evaluation/domain/createRuleEvaluationPlan.ts Describe an ambiguous child on the provider that declared it.">
+    <h3>createAmbiguousDependencyDiagnostic</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:273:1</code></p>
+    <p>Describe an ambiguous child on the provider that declared it.</p>
+    
+  </article><article class="item" data-search="createCycleDiagnostics src/features/evaluation/domain/createRuleEvaluationPlan.ts Emit a deterministic error for every provider that participates in a dependency cycle.">
+    <h3>createCycleDiagnostics</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:285:1</code></p>
+    <p>Emit a deterministic error for every provider that participates in a dependency cycle.</p>
+    
+  </article><article class="item" data-search="compareDiagnostics src/features/evaluation/domain/createRuleEvaluationPlan.ts Sort diagnostics by their affected rule and then their stable code.">
+    <h3>compareDiagnostics</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:296:1</code></p>
+    <p>Sort diagnostics by their affected rule and then their stable code.</p>
+    
+  </article><article class="item" data-search="compareStrings src/features/evaluation/domain/createRuleEvaluationPlan.ts Compare identifiers without locale-dependent ordering.">
+    <h3>compareStrings</h3>
+    <p class="muted"><code>src/features/evaluation/domain/createRuleEvaluationPlan.ts:304:1</code></p>
+    <p>Compare identifiers without locale-dependent ordering.</p>
+    
+  </article>
+    </section>
   </section><section id="view-src-features-evaluation-domain-createruleregistry-ts" class="view" data-view="src/features/evaluation/domain/createRuleRegistry.ts" hidden>
     <section class="panel">
       <h2>src/features/evaluation/domain/createRuleRegistry.ts</h2>
@@ -2510,13 +2833,23 @@
     
   </article><article class="item" data-search="toEvaluationDiagnostic src/features/evaluation/domain/evaluateConfiguredRules.ts Translate config validation failures into the evaluator&#39;s portable diagnostic shape.">
     <h3>toEvaluationDiagnostic</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:55:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:60:1</code></p>
     <p>Translate config validation failures into the evaluator&#39;s portable diagnostic shape.</p>
     
   </article><article class="item" data-search="applyConfiguredSeverities src/features/evaluation/domain/evaluateConfiguredRules.ts Apply configured severity overrides after providers have produced neutral findings.">
     <h3>applyConfiguredSeverities</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:73:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateConfiguredRules.ts:78:1</code></p>
     <p>Apply configured severity overrides after providers have produced neutral findings.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-evaluation-domain-evaluatedependencygraph-test-ts" class="view" data-view="src/features/evaluation/domain/evaluateDependencyGraph.test.ts" hidden>
+    <section class="panel">
+      <h2>src/features/evaluation/domain/evaluateDependencyGraph.test.ts</h2>
+      <article class="item" data-search="createRule src/features/evaluation/domain/evaluateDependencyGraph.test.ts ">
+    <h3>createRule</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateDependencyGraph.test.ts:249:1</code></p>
+    <p class="empty">No description available.</p>
     
   </article>
     </section>
@@ -2540,12 +2873,12 @@
     
   </article><article class="item" data-search="createThrowingRule src/features/evaluation/domain/evaluateRules.test.ts ">
     <h3>createThrowingRule</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.test.ts:120:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.test.ts:121:1</code></p>
     <p class="empty">No description available.</p>
     
   </article><article class="item" data-search="createPassingRule src/features/evaluation/domain/evaluateRules.test.ts ">
     <h3>createPassingRule</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.test.ts:145:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.test.ts:146:1</code></p>
     <p class="empty">No description available.</p>
     
   </article>
@@ -2553,45 +2886,100 @@
   </section><section id="view-src-features-evaluation-domain-evaluaterules-ts" class="view" data-view="src/features/evaluation/domain/evaluateRules.ts" hidden>
     <section class="panel">
       <h2>src/features/evaluation/domain/evaluateRules.ts</h2>
-      <article class="item" data-search="evaluateRules src/features/evaluation/domain/evaluateRules.ts Evaluate unrelated rules in deterministic identifier order through one generic mechanism.">
+      <article class="item" data-search="evaluateRules src/features/evaluation/domain/evaluateRules.ts Evaluate a deterministic dependency plan once, passing completed child results to each provider.">
     <h3>evaluateRules</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:17:1</code></p>
-    <p>Evaluate unrelated rules in deterministic identifier order through one generic mechanism.</p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:18:1</code></p>
+    <p>Evaluate a deterministic dependency plan once, passing completed child results to each provider.</p>
     
-  </article><article class="item" data-search="evaluateRule src/features/evaluation/domain/evaluateRules.ts Evaluate one rule only when its declared input capabilities are available.">
-    <h3>evaluateRule</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:38:1</code></p>
-    <p>Evaluate one rule only when its declared input capabilities are available.</p>
+  </article><article class="item" data-search="evaluatePlanNode src/features/evaluation/domain/evaluateRules.ts Evaluate one planned rule only after plan, dependency, and provider prerequisites are complete.">
+    <h3>evaluatePlanNode</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:62:1</code></p>
+    <p>Evaluate one planned rule only after plan, dependency, and provider prerequisites are complete.</p>
     
-  </article><article class="item" data-search="evaluatePrerequisites src/features/evaluation/domain/evaluateRules.ts Stop a flat evaluation before a rule runs when its required execution facts are unavailable.">
+  </article><article class="item" data-search="createPlanFailureResult src/features/evaluation/domain/evaluateRules.ts Convert planner failures into an evaluator error without invoking provider code.">
+    <h3>createPlanFailureResult</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:103:1</code></p>
+    <p>Convert planner failures into an evaluator error without invoking provider code.</p>
+    
+  </article><article class="item" data-search="createDisabledResult src/features/evaluation/domain/evaluateRules.ts Mark an explicitly disabled closure member incomplete without treating it as an executed provider.">
+    <h3>createDisabledResult</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:119:1</code></p>
+    <p>Mark an explicitly disabled closure member incomplete without treating it as an executed provider.</p>
+    
+  </article><article class="item" data-search="resolveDependencyResults src/features/evaluation/domain/evaluateRules.ts Collect completed direct child results in the plan&#39;s stable dependency order.">
+    <h3>resolveDependencyResults</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:138:1</code></p>
+    <p>Collect completed direct child results in the plan&#39;s stable dependency order.</p>
+    
+  </article><article class="item" data-search="createDependencyFailureResult src/features/evaluation/domain/evaluateRules.ts Prevent a provider from running when a child could not establish complete execution evidence.">
+    <h3>createDependencyFailureResult</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:149:1</code></p>
+    <p>Prevent a provider from running when a child could not establish complete execution evidence.</p>
+    
+  </article><article class="item" data-search="createIncompleteDependencyResult src/features/evaluation/domain/evaluateRules.ts Stop a parent after a child reports incomplete execution evidence.">
+    <h3>createIncompleteDependencyResult</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:190:1</code></p>
+    <p>Stop a parent after a child reports incomplete execution evidence.</p>
+    
+  </article><article class="item" data-search="evaluatePrerequisites src/features/evaluation/domain/evaluateRules.ts Stop execution before a provider runs when its required direct inputs are unavailable.">
     <h3>evaluatePrerequisites</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:71:1</code></p>
-    <p>Stop a flat evaluation before a rule runs when its required execution facts are unavailable.</p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:214:1</code></p>
+    <p>Stop execution before a provider runs when its required direct inputs are unavailable.</p>
     
-  </article><article class="item" data-search="createRuleErrorDiagnostic src/features/evaluation/domain/evaluateRules.ts Create a stable diagnostic when a provider throws while the evaluator invokes it.">
+  </article><article class="item" data-search="createRuleErrorDiagnostic src/features/evaluation/domain/evaluateRules.ts Create a stable diagnostic when the evaluator catches a provider exception.">
     <h3>createRuleErrorDiagnostic</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:120:1</code></p>
-    <p>Create a stable diagnostic when a provider throws while the evaluator invokes it.</p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:257:1</code></p>
+    <p>Create a stable diagnostic when the evaluator catches a provider exception.</p>
     
-  </article><article class="item" data-search="rejectUnresolvedDependencies src/features/evaluation/domain/evaluateRules.ts Reject dependency-bearing rules until the DAG evaluator resolves their complete closure.">
-    <h3>rejectUnresolvedDependencies</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:129:1</code></p>
-    <p>Reject dependency-bearing rules until the DAG evaluator resolves their complete closure.</p>
-    
-  </article><article class="item" data-search="createRuleResult src/features/evaluation/domain/evaluateRules.ts Assemble one canonical rule result without inferring a status from the presence of findings.">
+  </article><article class="item" data-search="createRuleResult src/features/evaluation/domain/evaluateRules.ts Assemble an immutable serializable result without inferring status from findings.">
     <h3>createRuleResult</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:139:1</code></p>
-    <p>Assemble one canonical rule result without inferring a status from the presence of findings.</p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:266:1</code></p>
+    <p>Assemble an immutable serializable result without inferring status from findings.</p>
     
-  </article><article class="item" data-search="toEvaluationDiagnostics src/features/evaluation/domain/evaluateRules.ts Expose per-rule diagnostics through the legacy aggregate result without dropping rule identity.">
+  </article><article class="item" data-search="groupDiagnosticsByRuleId src/features/evaluation/domain/evaluateRules.ts Group plan diagnostics by affected rule for constant-time node evaluation.">
+    <h3>groupDiagnosticsByRuleId</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:283:1</code></p>
+    <p>Group plan diagnostics by affected rule for constant-time node evaluation.</p>
+    
+  </article><article class="item" data-search="toEvaluationDiagnostics src/features/evaluation/domain/evaluateRules.ts Expose per-rule diagnostics through the aggregate result without dropping identity.">
     <h3>toEvaluationDiagnostics</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:150:1</code></p>
-    <p>Expose per-rule diagnostics through the legacy aggregate result without dropping rule identity.</p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:295:1</code></p>
+    <p>Expose per-rule diagnostics through the aggregate result without dropping identity.</p>
     
   </article><article class="item" data-search="canonicalizeFinding src/features/evaluation/domain/evaluateRules.ts Preserve provider evidence while making identifier and severity engine-controlled facts.">
     <h3>canonicalizeFinding</h3>
-    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:158:1</code></p>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:303:1</code></p>
     <p>Preserve provider evidence while making identifier and severity engine-controlled facts.</p>
+    
+  </article><article class="item" data-search="compareDiagnostics src/features/evaluation/domain/evaluateRules.ts Sort aggregate diagnostics by stable rule identifier and diagnostic code.">
+    <h3>compareDiagnostics</h3>
+    <p class="muted"><code>src/features/evaluation/domain/evaluateRules.ts:317:1</code></p>
+    <p>Sort aggregate diagnostics by stable rule identifier and diagnostic code.</p>
+    
+  </article>
+    </section>
+  </section><section id="view-src-features-evaluation-domain-freezeruleresult-ts" class="view" data-view="src/features/evaluation/domain/freezeRuleResult.ts" hidden>
+    <section class="panel">
+      <h2>src/features/evaluation/domain/freezeRuleResult.ts</h2>
+      <article class="item" data-search="freezeRuleResult src/features/evaluation/domain/freezeRuleResult.ts Snapshot a result into an immutable JSON-only value before dependent providers receive it.">
+    <h3>freezeRuleResult</h3>
+    <p class="muted"><code>src/features/evaluation/domain/freezeRuleResult.ts:9:1</code></p>
+    <p>Snapshot a result into an immutable JSON-only value before dependent providers receive it.</p>
+    
+  </article><article class="item" data-search="copyDiagnostic src/features/evaluation/domain/freezeRuleResult.ts Copy a diagnostic so providers cannot retain a mutable reference to evaluator state.">
+    <h3>copyDiagnostic</h3>
+    <p class="muted"><code>src/features/evaluation/domain/freezeRuleResult.ts:20:1</code></p>
+    <p>Copy a diagnostic so providers cannot retain a mutable reference to evaluator state.</p>
+    
+  </article><article class="item" data-search="copyFinding src/features/evaluation/domain/freezeRuleResult.ts Snapshot every nested provider finding value before sharing it with dependent providers.">
+    <h3>copyFinding</h3>
+    <p class="muted"><code>src/features/evaluation/domain/freezeRuleResult.ts:25:1</code></p>
+    <p>Snapshot every nested provider finding value before sharing it with dependent providers.</p>
+    
+  </article><article class="item" data-search="copyJsonValue src/features/evaluation/domain/freezeRuleResult.ts Copy and deeply freeze the JSON-only evidence contract at the dependency boundary.">
+    <h3>copyJsonValue</h3>
+    <p class="muted"><code>src/features/evaluation/domain/freezeRuleResult.ts:38:1</code></p>
+    <p>Copy and deeply freeze the JSON-only evidence contract at the dependency boundary.</p>
     
   </article>
     </section>

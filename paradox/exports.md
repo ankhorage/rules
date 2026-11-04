@@ -1,5 +1,20 @@
 # Public API
 
+## createRuleEvaluationPlan
+
+Kind: `function`
+Module: `src/features/evaluation/domain/createRuleEvaluationPlan.ts`
+Source: `src/features/evaluation/domain/createRuleEvaluationPlan.ts:14:1`
+
+Project selected Rules and their complete dependency closure into a deterministic serializable graph.
+
+### Signatures
+
+- `(rules: readonly Rule<TContext, import("../../../index.js").JsonValue, import("../../../index.js").JsonValue>[], options?: Pick<EvaluateRulesOptions, "scope" | "selection">) => RuleEvaluationPlan`
+  - options: `Pick<EvaluateRulesOptions, "scope" | "selection">` (optional)
+  - rules: `readonly Rule<TContext, import("../../../index.js").JsonValue, import("../../../index.js").JsonValue>[]`
+  - returns: `RuleEvaluationPlan`
+
 ## createRuleRegistry
 
 Kind: `function`
@@ -35,7 +50,7 @@ Resolve a configured Rule registry and evaluate its enabled rules without provid
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:228:1`
+Source: `src/types/rules.ts:247:1`
 
 Configured evaluator inputs that preserve the caller's explicit capability set.
 
@@ -50,9 +65,9 @@ Configured evaluator inputs that preserve the caller's explicit capability set.
 
 Kind: `function`
 Module: `src/features/evaluation/domain/evaluateRules.ts`
-Source: `src/features/evaluation/domain/evaluateRules.ts:17:1`
+Source: `src/features/evaluation/domain/evaluateRules.ts:18:1`
 
-Evaluate unrelated rules in deterministic identifier order through one generic mechanism.
+Evaluate a deterministic dependency plan once, passing completed child results to each provider.
 
 ### Signatures
 
@@ -66,7 +81,7 @@ Evaluate unrelated rules in deterministic identifier order through one generic m
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:221:1`
+Source: `src/types/rules.ts:238:1`
 
 Direct evaluator inputs that are independent of any repository configuration format.
 
@@ -75,8 +90,10 @@ Direct evaluator inputs that are independent of any repository configuration for
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | capabilities | property | `readonly string[] \| undefined` | no |  |
+| disabledRuleIds | property | `readonly string[] \| undefined` | no |  |
 | optionsByRuleId | property | `ReadonlyMap<string, JsonValue \| undefined> \| undefined` | no |  |
 | scope | property | `RuleScope \| undefined` | no |  |
+| selection | property | `RuleSelection \| undefined` | no |  |
 
 ## JsonValue
 
@@ -118,7 +135,7 @@ Summarize the complete Rules evaluation result without treating failed evaluatio
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:117:1`
+Source: `src/types/rules.ts:133:1`
 
 A deterministic, provider-owned policy unit evaluated by the generic engine.
 
@@ -161,7 +178,7 @@ One dependency declared by stable rule ID and resolved by the generic evaluator.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:194:1`
+Source: `src/types/rules.ts:210:1`
 
 One execution diagnostic that explains why a configured rule could not run.
 
@@ -177,7 +194,7 @@ One execution diagnostic that explains why a configured rule could not run.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:109:1`
+Source: `src/types/rules.ts:125:1`
 
 The immutable input supplied to a rule after the evaluator has resolved its dependencies.
 
@@ -205,11 +222,43 @@ One provider result that is independent of evaluation failure and later policy d
 | findings | property | `readonly RuleFinding<TEvidence>[]` | yes |  |
 | status | property | `"FAIL" \| "INCOMPLETE" \| "PASS"` | yes |  |
 
+## RuleEvaluationPlan
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:118:1`
+
+A consumer-neutral projection of selected rule roots and their resolved dependency closure.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| diagnostics | property | `readonly RuleEvaluationDiagnostic[]` | yes |  |
+| nodes | property | `readonly RuleEvaluationPlanNode[]` | yes |  |
+| rootRuleIds | property | `readonly string[]` | yes |  |
+
+## RuleEvaluationPlanNode
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:111:1`
+
+One serializable node in the deterministic execution graph for a scoped Rules run.
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| dependencyRuleIds | property | `readonly string[]` | yes |  |
+| rule | property | `RuleIdentity` | yes |  |
+| scope | property | `RuleScope` | yes |  |
+
 ## RuleEvaluationResult
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:214:1`
+Source: `src/types/rules.ts:230:1`
 
 The deterministic generic result shared by every Rules consumer.
 
@@ -219,6 +268,7 @@ The deterministic generic result shared by every Rules consumer.
 | --- | --- | --- | --- | --- |
 | diagnostics | property | `readonly RuleEvaluationDiagnostic[]` | yes |  |
 | findings | property | `readonly RuleFinding<JsonValue>[]` | yes |  |
+| plan | property | `RuleEvaluationPlan` | yes |  |
 | results | property | `readonly RuleResult[]` | yes |  |
 
 ## RuleFacet
@@ -290,7 +340,7 @@ A validation error returned by a provider for its own serializable options.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:139:1`
+Source: `src/types/rules.ts:155:1`
 
 A registry that resolves rules without provider discovery or domain-specific branches.
 
@@ -306,7 +356,7 @@ A registry that resolves rules without provider discovery or domain-specific bra
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:100:1`
+Source: `src/types/rules.ts:102:1`
 
 One serializable evaluation result for a versioned rule at one exact semantic scope.
 
@@ -332,7 +382,7 @@ A serializable diagnostic emitted by the evaluator while resolving a rule instan
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| code | property | `"ambiguous-rule-id" \| "cycle" \| "dependency-error" \| "dependency-incomplete" \| "dependency-scope-mismatch" \| "disabled-dependency" \| "invalid-options" \| "missing-capability" \| "missing-dependency" \| "rule-error" \| "unresolved-dependencies"` | yes |  |
+| code | property | `"ambiguous-rule-id" \| "cycle" \| "dependency-error" \| "dependency-incomplete" \| "dependency-scope-mismatch" \| "disabled-dependency" \| "invalid-config" \| "invalid-options" \| "missing-capability" \| "missing-dependency" \| "rule-error" \| "unresolved-dependencies" \| "unknown-rule"` | yes |  |
 | message | property | `string` | yes |  |
 | ruleId | property | `string \| undefined` | no |  |
 
@@ -348,7 +398,7 @@ The complete deterministic state of one evaluated rule instance.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:154:1`
+Source: `src/types/rules.ts:170:1`
 
 The canonical JSON-only configuration stored in a repository rules.json file.
 
@@ -363,7 +413,7 @@ The canonical JSON-only configuration stored in a repository rules.json file.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:160:1`
+Source: `src/types/rules.ts:176:1`
 
 A portable diagnostic emitted while parsing or applying a Rules configuration.
 
@@ -380,7 +430,7 @@ A portable diagnostic emitted while parsing or applying a Rules configuration.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:187:1`
+Source: `src/types/rules.ts:203:1`
 
 The result of reading a repository rules.json file without hiding parse failures.
 
@@ -396,7 +446,7 @@ The result of reading a repository rules.json file without hiding parse failures
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:146:1`
+Source: `src/types/rules.ts:162:1`
 
 One enabled/disabled rule selection with serializable provider options.
 
@@ -413,7 +463,7 @@ One enabled/disabled rule selection with serializable provider options.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:181:1`
+Source: `src/types/rules.ts:197:1`
 
 Extra facts used to validate configured rule IDs, options, and required capabilities.
 
@@ -428,7 +478,7 @@ Extra facts used to validate configured rule IDs, options, and required capabili
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:175:1`
+Source: `src/types/rules.ts:191:1`
 
 The result of validating a raw JSON configuration against optional provider knowledge.
 
@@ -472,7 +522,7 @@ Explicit roots selected for a run; dependency closure is evaluator-owned and nev
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:133:1`
+Source: `src/types/rules.ts:149:1`
 
 A named collection of independently supplied rules that can compose with other providers.
 
@@ -513,7 +563,7 @@ An optional source location supplied as factual evidence by a provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:234:1`
+Source: `src/types/rules.ts:253:1`
 
 A stable status summary suitable for consumer-specific presentation.
 

@@ -1,5 +1,12 @@
 # @ankhorage/rules
 
+## 0.4.0
+
+### Minor Changes
+
+- 1d9bc5a: Execute selected Rule dependency DAGs once with deterministic plans, dependency-result inputs, and
+  fail-closed cycle, unknown, disabled, capability, and option handling.
+
 ## 0.3.0
 
 ### Minor Changes

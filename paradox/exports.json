@@ -1,5 +1,52 @@
 [
   {
+    "name": "createRuleEvaluationPlan",
+    "title": null,
+    "description": "Project selected Rules and their complete dependency closure into a deterministic serializable graph.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+    "sourceLocation": {
+      "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
+      "line": 14,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "EvaluateRulesOptions",
+      "JsonValue",
+      "Rule",
+      "RuleEvaluationPlan"
+    ],
+    "signatures": [
+      {
+        "label": "(rules: readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[], options?: Pick<EvaluateRulesOptions, \"scope\" | \"selection\">) => RuleEvaluationPlan",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "Pick<EvaluateRulesOptions, \"scope\" | \"selection\">",
+            "required": false,
+            "description": null
+          },
+          {
+            "name": "rules",
+            "type": "readonly Rule<TContext, import(\"../../../index.js\").JsonValue, import(\"../../../index.js\").JsonValue>[]",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleEvaluationPlan",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "createRuleRegistry",
     "title": null,
     "description": "Create a deterministic registry from independently owned RuleSets.",
@@ -108,7 +155,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 228,
+      "line": 247,
       "column": 1
     },
     "exportPaths": [
@@ -139,7 +186,7 @@
   {
     "name": "evaluateRules",
     "title": null,
-    "description": "Evaluate unrelated rules in deterministic identifier order through one generic mechanism.",
+    "description": "Evaluate a deterministic dependency plan once, passing completed child results to each provider.",
     "isReadme": false,
     "see": [],
     "security": [],
@@ -147,7 +194,7 @@
     "modulePath": "src/features/evaluation/domain/evaluateRules.ts",
     "sourceLocation": {
       "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-      "line": 17,
+      "line": 18,
       "column": 1
     },
     "exportPaths": [
@@ -200,7 +247,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 221,
+      "line": 238,
       "column": 1
     },
     "exportPaths": [
@@ -208,12 +255,20 @@
     ],
     "relatedSymbols": [
       "JsonValue",
-      "RuleScope"
+      "RuleScope",
+      "RuleSelection"
     ],
     "signatures": [],
     "members": [
       {
         "name": "capabilities",
+        "kind": "property",
+        "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "disabledRuleIds",
         "kind": "property",
         "type": "readonly string[] | undefined",
         "required": false,
@@ -230,6 +285,13 @@
         "name": "scope",
         "kind": "property",
         "type": "RuleScope | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "selection",
+        "kind": "property",
+        "type": "RuleSelection | undefined",
         "required": false,
         "description": null
       }
@@ -346,7 +408,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 117,
+      "line": 133,
       "column": 1
     },
     "exportPaths": [
@@ -486,7 +548,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 194,
+      "line": 210,
       "column": 1
     },
     "exportPaths": [
@@ -530,7 +592,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 109,
+      "line": 125,
       "column": 1
     },
     "exportPaths": [
@@ -613,6 +675,100 @@
     "structuredRows": []
   },
   {
+    "name": "RuleEvaluationPlan",
+    "title": null,
+    "description": "A consumer-neutral projection of selected rule roots and their resolved dependency closure.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 118,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleEvaluationDiagnostic",
+      "RuleEvaluationPlanNode"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "diagnostics",
+        "kind": "property",
+        "type": "readonly RuleEvaluationDiagnostic[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "nodes",
+        "kind": "property",
+        "type": "readonly RuleEvaluationPlanNode[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rootRuleIds",
+        "kind": "property",
+        "type": "readonly string[]",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleEvaluationPlanNode",
+    "title": null,
+    "description": "One serializable node in the deterministic execution graph for a scoped Rules run.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 111,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleIdentity",
+      "RuleScope"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "dependencyRuleIds",
+        "kind": "property",
+        "type": "readonly string[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rule",
+        "kind": "property",
+        "type": "RuleIdentity",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "scope",
+        "kind": "property",
+        "type": "RuleScope",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "RuleEvaluationResult",
     "title": null,
     "description": "The deterministic generic result shared by every Rules consumer.",
@@ -623,7 +779,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 214,
+      "line": 230,
       "column": 1
     },
     "exportPaths": [
@@ -632,6 +788,7 @@
     "relatedSymbols": [
       "JsonValue",
       "RuleEvaluationDiagnostic",
+      "RuleEvaluationPlan",
       "RuleFinding",
       "RuleResult"
     ],
@@ -648,6 +805,13 @@
         "name": "findings",
         "kind": "property",
         "type": "readonly RuleFinding<JsonValue>[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "plan",
+        "kind": "property",
+        "type": "RuleEvaluationPlan",
         "required": true,
         "description": null
       },
@@ -859,7 +1023,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 139,
+      "line": 155,
       "column": 1
     },
     "exportPaths": [
@@ -907,7 +1071,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 100,
+      "line": 102,
       "column": 1
     },
     "exportPaths": [
@@ -984,7 +1148,7 @@
       {
         "name": "code",
         "kind": "property",
-        "type": "\"ambiguous-rule-id\" | \"cycle\" | \"dependency-error\" | \"dependency-incomplete\" | \"dependency-scope-mismatch\" | \"disabled-dependency\" | \"invalid-options\" | \"missing-capability\" | \"missing-dependency\" | \"rule-error\" | \"unresolved-dependencies\"",
+        "type": "\"ambiguous-rule-id\" | \"cycle\" | \"dependency-error\" | \"dependency-incomplete\" | \"dependency-scope-mismatch\" | \"disabled-dependency\" | \"invalid-config\" | \"invalid-options\" | \"missing-capability\" | \"missing-dependency\" | \"rule-error\" | \"unresolved-dependencies\" | \"unknown-rule\"",
         "required": true,
         "description": null
       },
@@ -1038,7 +1202,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 154,
+      "line": 170,
       "column": 1
     },
     "exportPaths": [
@@ -1077,7 +1241,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 160,
+      "line": 176,
       "column": 1
     },
     "exportPaths": [
@@ -1128,7 +1292,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 187,
+      "line": 203,
       "column": 1
     },
     "exportPaths": [
@@ -1175,7 +1339,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 146,
+      "line": 162,
       "column": 1
     },
     "exportPaths": [
@@ -1229,7 +1393,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 181,
+      "line": 197,
       "column": 1
     },
     "exportPaths": [
@@ -1268,7 +1432,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 175,
+      "line": 191,
       "column": 1
     },
     "exportPaths": [
@@ -1375,7 +1539,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 133,
+      "line": 149,
       "column": 1
     },
     "exportPaths": [
@@ -1495,7 +1659,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 234,
+      "line": 253,
       "column": 1
     },
     "exportPaths": [
