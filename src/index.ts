@@ -1,6 +1,7 @@
 export { writeRulesConfigAsync } from './features/configuration/adapters/filesystem/writeRulesConfigAsync.js';
 export { readRulesConfigAsync } from './features/configuration/composition/readRulesConfigAsync.js';
 export { validateRulesConfig } from './features/configuration/domain/validateRulesConfig.js';
+export { createRuleEvaluationPlan } from './features/evaluation/domain/createRuleEvaluationPlan.js';
 export { createRuleRegistry } from './features/evaluation/domain/createRuleRegistry.js';
 export { evaluateConfiguredRules } from './features/evaluation/domain/evaluateConfiguredRules.js';
 export { evaluateRules } from './features/evaluation/domain/evaluateRules.js';
@@ -15,6 +16,8 @@ export type {
   RuleEvaluationDiagnostic,
   RuleEvaluationInput,
   RuleEvaluationOutcome,
+  RuleEvaluationPlan,
+  RuleEvaluationPlanNode,
   RuleEvaluationResult,
   RuleFacet,
   RuleFinding,

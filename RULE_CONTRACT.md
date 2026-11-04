@@ -14,7 +14,8 @@ the dependency-DAG planner and executor are owned by Rules issue #15.
   changes a rule's declared dependencies.
 - A dependency is a stable `ruleId`, declared on `Rule.dependencies`. The evaluator resolves the
   transitive closure, detects duplicate IDs and cycles, and invokes each scoped rule instance once.
-  Rules do not call child rules.
+  Rules do not call child rules. `createRuleEvaluationPlan` exposes the resolved roots, ordered
+  nodes, and dependency edges as a serializable, presentation-neutral graph.
 
 ## Evaluation and status
 

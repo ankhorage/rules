@@ -87,10 +87,12 @@ export interface RuleResultDiagnostic {
     | 'dependency-incomplete'
     | 'dependency-scope-mismatch'
     | 'disabled-dependency'
+    | 'invalid-config'
     | 'invalid-options'
     | 'missing-capability'
     | 'missing-dependency'
     | 'rule-error'
+    | 'unknown-rule'
     | 'unresolved-dependencies';
   readonly message: string;
   readonly ruleId?: string;
@@ -103,6 +105,20 @@ export interface RuleResult {
   readonly rule: RuleIdentity;
   readonly scope: RuleScope;
   readonly status: RuleResultStatus;
+}
+
+/*** One serializable node in the deterministic execution graph for a scoped Rules run. */
+export interface RuleEvaluationPlanNode {
+  readonly dependencyRuleIds: readonly string[];
+  readonly rule: RuleIdentity;
+  readonly scope: RuleScope;
+}
+
+/*** A consumer-neutral projection of selected rule roots and their resolved dependency closure. */
+export interface RuleEvaluationPlan {
+  readonly diagnostics: readonly RuleEvaluationDiagnostic[];
+  readonly nodes: readonly RuleEvaluationPlanNode[];
+  readonly rootRuleIds: readonly string[];
 }
 
 /*** The immutable input supplied to a rule after the evaluator has resolved its dependencies. */
@@ -214,13 +230,16 @@ export interface RuleEvaluationDiagnostic {
 export interface RuleEvaluationResult {
   readonly diagnostics: readonly RuleEvaluationDiagnostic[];
   readonly findings: readonly RuleFinding[];
+  readonly plan: RuleEvaluationPlan;
   readonly results: readonly RuleResult[];
 }
 
 /*** Direct evaluator inputs that are independent of any repository configuration format. */
 export interface EvaluateRulesOptions {
   readonly capabilities?: readonly RuleCapability[];
+  readonly disabledRuleIds?: readonly string[];
   readonly optionsByRuleId?: ReadonlyMap<string, JsonValue | undefined>;
+  readonly selection?: RuleSelection;
   readonly scope?: RuleScope;
 }
 

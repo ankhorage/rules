@@ -25,6 +25,7 @@ export function evaluateConfiguredRules<TContext>(
     return {
       findings: [],
       diagnostics: validation.diagnostics.map(toEvaluationDiagnostic),
+      plan: { diagnostics: [], nodes: [], rootRuleIds: [] },
       results: [],
     };
   }
@@ -33,13 +34,16 @@ export function evaluateConfiguredRules<TContext>(
   const optionsByRuleId = new Map(
     enabledConfigurations.map((rule) => [rule.id, rule.options] as const),
   );
-  const selectedRules = enabledConfigurations.flatMap((configuredRule) => {
-    const rule = registry.ruleById.get(configuredRule.id);
-    return rule === undefined ? [] : [rule];
-  });
-  const result = evaluateRules(context, selectedRules, {
+  const selectedRuleIds = enabledConfigurations
+    .map((configuredRule) => configuredRule.id)
+    .filter((ruleId) => registry.ruleById.has(ruleId));
+  const result = evaluateRules(context, registry.rules, {
     capabilities: options.capabilities,
+    disabledRuleIds: registry.rules
+      .map((rule) => rule.identity.id)
+      .filter((ruleId) => !selectedRuleIds.includes(ruleId)),
     optionsByRuleId,
+    selection: { rootRuleIds: selectedRuleIds },
     scope: options.scope,
   });
 
@@ -47,6 +51,7 @@ export function evaluateConfiguredRules<TContext>(
   return {
     diagnostics: result.diagnostics,
     findings: results.flatMap((result) => result.findings),
+    plan: result.plan,
     results,
   };
 }

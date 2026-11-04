@@ -113,6 +113,7 @@ function testOptionErrors(): void {
         ruleId: 'content.throwing-options',
       },
     ],
+    plan: { diagnostics: [], nodes: [], rootRuleIds: [] },
     results: [],
   });
 }

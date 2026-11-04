@@ -27,7 +27,7 @@ test('preserves provider PASS, FAIL, and INCOMPLETE statuses without findings', 
   expect(resolveRulesStatus(result)).toEqual({ status: 'invalid', color: 'red' });
 });
 
-test('fails closed for unresolved dependencies without evaluating the provider', () => {
+test('fails closed for an unknown dependency without evaluating the provider', () => {
   const dependentRule: Rule<FixtureContext> = {
     identity: { id: 'release.requires-content', version: '2.0.0' },
     summary: 'Require a completed content dependency.',
@@ -52,13 +52,13 @@ test('fails closed for unresolved dependencies without evaluating the provider',
 
   expect(result.diagnostics).toEqual([
     expect.objectContaining({
-      code: 'unresolved-dependencies',
+      code: 'missing-dependency',
       ruleId: 'release.requires-content',
     }),
   ]);
   expect(result.findings).toEqual([]);
   expect(result.results).toEqual([
-    expect.objectContaining({ rule: dependentRule.identity, status: 'INCOMPLETE' }),
+    expect.objectContaining({ rule: dependentRule.identity, status: 'ERROR' }),
   ]);
   expect(resolveRulesStatus(result)).toEqual({ status: 'invalid', color: 'red' });
 });
