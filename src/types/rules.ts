@@ -284,8 +284,11 @@ export interface EvaluateRulesOptions {
   readonly scope?: RuleScope;
 }
 
-/*** Configured evaluator inputs that preserve the caller's explicit capability set. */
-export interface EvaluateConfiguredRulesOptions {
+/*** Configured evaluator inputs that preserve caller capabilities and cache provenance. */
+export interface EvaluateConfiguredRulesOptions extends Pick<
+  EvaluateRulesOptions,
+  'cache' | 'cachePartition' | 'factsVersion'
+> {
   readonly capabilities?: readonly RuleCapability[];
   readonly scope?: RuleScope;
 }

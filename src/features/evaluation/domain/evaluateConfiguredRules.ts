@@ -38,12 +38,15 @@ export function evaluateConfiguredRules<TContext>(
     .map((configuredRule) => configuredRule.id)
     .filter((ruleId) => registry.ruleById.has(ruleId));
   const result = evaluateRules(context, registry.rules, {
+    cache: options.cache,
+    cachePartition: options.cachePartition,
     capabilities: options.capabilities,
     disabledRuleIds: registry.rules
       .map((rule) => rule.identity.id)
       .filter((ruleId) => !selectedRuleIds.includes(ruleId)),
     optionsByRuleId,
     selection: { rootRuleIds: selectedRuleIds },
+    factsVersion: options.factsVersion,
     scope: options.scope,
   });
 

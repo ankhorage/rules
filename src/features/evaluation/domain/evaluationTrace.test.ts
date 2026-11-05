@@ -2,6 +2,8 @@ import { describe, expect, test } from 'bun:test';
 
 import {
   createRuleEvaluationPlan,
+  createRuleRegistry,
+  evaluateConfiguredRules,
   evaluateRules,
   getRuleExecutionProvenance,
   type Rule,
@@ -27,6 +29,7 @@ describe('serialized evaluation trace', () => {
     'invalidates cache entries for fact or rule versions and isolates authenticated partitions',
     testInvalidation,
   );
+  test('preserves cache provenance through configured evaluation', testConfiguredProvenance);
   test('preserves PASS, FAIL, INCOMPLETE, and ERROR through JSON serialization', testOutcomes);
 });
 
@@ -78,6 +81,34 @@ function testInvalidation(): void {
     cachePartition: { tenantId: 'tenant-b', projectId: 'project-a' },
   });
   expect(evaluations).toBe(4);
+}
+
+function testConfiguredProvenance(): void {
+  const cache = createMemoryCache();
+  const rule = createFixtureRule('configured');
+  const config = { rules: [{ enabled: true, id: rule.identity.id }], version: 1 } as const;
+  const options = {
+    cache,
+    cachePartition,
+    factsVersion: 'facts-1',
+    scope,
+  };
+
+  const first = evaluateConfiguredRules(
+    { value: 'fixture' },
+    config,
+    createRuleRegistry([{ id: 'fixture', rules: [rule] }]),
+    options,
+  );
+  const second = evaluateConfiguredRules(
+    { value: 'fixture' },
+    config,
+    createRuleRegistry([{ id: 'fixture', rules: [rule] }]),
+    options,
+  );
+
+  expect(first.results[0]?.execution).toBe('evaluated');
+  expect(second.results[0]?.execution).toBe('cache-hit');
 }
 
 function testOutcomes(): void {
