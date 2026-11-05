@@ -200,7 +200,7 @@
   {
     "name": "EvaluateConfiguredRulesOptions",
     "title": null,
-    "description": "Configured evaluator inputs that preserve the caller's explicit capability set.",
+    "description": "Configured evaluator inputs that preserve caller capabilities and cache provenance.",
     "isReadme": false,
     "see": [],
     "security": [],
@@ -215,14 +215,37 @@
       "src/index.ts"
     ],
     "relatedSymbols": [
+      "RuleEvaluationCache",
+      "RuleEvaluationCachePartition",
       "RuleScope"
     ],
     "signatures": [],
     "members": [
       {
+        "name": "cache",
+        "kind": "property",
+        "type": "RuleEvaluationCache | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "cachePartition",
+        "kind": "property",
+        "type": "RuleEvaluationCachePartition | undefined",
+        "required": false,
+        "description": null
+      },
+      {
         "name": "capabilities",
         "kind": "property",
         "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "factsVersion",
+        "kind": "property",
+        "type": "string | undefined",
         "required": false,
         "description": null
       },
@@ -2025,7 +2048,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 294,
+      "line": 297,
       "column": 1
     },
     "exportPaths": [

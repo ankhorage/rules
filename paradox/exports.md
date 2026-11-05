@@ -68,13 +68,16 @@ Kind: `type`
 Module: `src/types/rules.ts`
 Source: `src/types/rules.ts:288:1`
 
-Configured evaluator inputs that preserve the caller's explicit capability set.
+Configured evaluator inputs that preserve caller capabilities and cache provenance.
 
 ### Members
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
+| cache | property | `RuleEvaluationCache \| undefined` | no |  |
+| cachePartition | property | `RuleEvaluationCachePartition \| undefined` | no |  |
 | capabilities | property | `readonly string[] \| undefined` | no |  |
+| factsVersion | property | `string \| undefined` | no |  |
 | scope | property | `RuleScope \| undefined` | no |  |
 
 ## evaluateRules
@@ -664,7 +667,7 @@ An optional source location supplied as factual evidence by a provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:294:1`
+Source: `src/types/rules.ts:297:1`
 
 A stable status summary suitable for consumer-specific presentation.
 

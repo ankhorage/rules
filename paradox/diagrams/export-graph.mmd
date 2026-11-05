@@ -57,6 +57,8 @@ graph LR
   export_evaluateConfiguredRules -.-> export_RulesConfig
   export_EvaluateConfiguredRulesOptions["EvaluateConfiguredRulesOptions"]
   module_src_types_rules_ts --> export_EvaluateConfiguredRulesOptions
+  export_EvaluateConfiguredRulesOptions -.-> export_RuleEvaluationCache
+  export_EvaluateConfiguredRulesOptions -.-> export_RuleEvaluationCachePartition
   export_EvaluateConfiguredRulesOptions -.-> export_RuleScope
   export_evaluateRules["evaluateRules"]
   module_src_features_evaluation_domain_evaluateRules_ts --> export_evaluateRules

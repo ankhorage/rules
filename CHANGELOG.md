@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.5.1
+
+### Patch Changes
+
+- 9781560: Forward optional cache inputs through configured Rules evaluation.
+
 ## 0.5.0
 
 ### Minor Changes
