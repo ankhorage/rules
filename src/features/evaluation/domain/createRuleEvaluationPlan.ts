@@ -3,6 +3,7 @@ import type {
   Rule,
   RuleEvaluationDiagnostic,
   RuleEvaluationPlan,
+  RuleEvaluationPlanFacet,
   RuleEvaluationPlanNode,
   RuleScope,
 } from '../../../types/rules.js';
@@ -116,9 +117,30 @@ function createPlanNode<TContext>(rule: Rule<TContext>, scope: RuleScope): RuleE
     dependencyRuleIds: [...new Set(rule.dependencies.map((dependency) => dependency.ruleId))].sort(
       compareStrings,
     ),
+    facets: createPlanFacets(rule),
+    id: JSON.stringify([rule.identity.id, rule.identity.version, scope.kind, scope.id]),
     rule: rule.identity,
     scope,
   };
+}
+
+/** Normalize provider facets into a versioned, deterministic plan projection. */
+function createPlanFacets<TContext>(rule: Rule<TContext>): readonly RuleEvaluationPlanFacet[] {
+  const facetsByIdentity = new Map<string, RuleEvaluationPlanFacet>();
+  for (const facet of rule.facets ?? []) {
+    const normalizedFacet = {
+      id: facet.id,
+      value: facet.value,
+      version: facet.version ?? rule.identity.version,
+    };
+    facetsByIdentity.set(JSON.stringify(normalizedFacet), normalizedFacet);
+  }
+  return [...facetsByIdentity.values()].sort(
+    (left, right) =>
+      compareStrings(left.id, right.id) ||
+      compareStrings(left.value, right.value) ||
+      compareStrings(left.version, right.version),
+  );
 }
 
 /*** Identify only cyclic nodes so dependent nodes are not misreported as cycle members. */
