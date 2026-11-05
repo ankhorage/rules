@@ -15,6 +15,7 @@ export interface RuleIdentity {
 export interface RuleFacet {
   readonly id: string;
   readonly value: string;
+  readonly version?: string;
 }
 
 /*** One dependency declared by stable rule ID and resolved by the generic evaluator. */
@@ -101,15 +102,29 @@ export interface RuleResultDiagnostic {
 /*** One serializable evaluation result for a versioned rule at one exact semantic scope. */
 export interface RuleResult {
   readonly diagnostics: readonly RuleResultDiagnostic[];
+  /** An absent value represents unknown provenance in a legacy or externally restored result. */
+  readonly execution?: RuleExecutionProvenance;
   readonly findings: readonly RuleFinding[];
   readonly rule: RuleIdentity;
   readonly scope: RuleScope;
   readonly status: RuleResultStatus;
 }
 
+/** Truthful evaluator provenance; consumers must never interpret unknown as cache reuse. */
+export type RuleExecutionProvenance = 'cache-hit' | 'evaluated' | 'not-executed' | 'unknown';
+
+/** A versioned facet projected from a provider rule into the serializable evaluation plan. */
+export interface RuleEvaluationPlanFacet {
+  readonly id: string;
+  readonly value: string;
+  readonly version: string;
+}
+
 /*** One serializable node in the deterministic execution graph for a scoped Rules run. */
 export interface RuleEvaluationPlanNode {
   readonly dependencyRuleIds: readonly string[];
+  readonly facets: readonly RuleEvaluationPlanFacet[];
+  readonly id: string;
   readonly rule: RuleIdentity;
   readonly scope: RuleScope;
 }
@@ -234,10 +249,36 @@ export interface RuleEvaluationResult {
   readonly results: readonly RuleResult[];
 }
 
+/** A host-authenticated partition that prevents cache reuse across tenants or projects. */
+export interface RuleEvaluationCachePartition {
+  readonly projectId: string;
+  readonly tenantId: string;
+}
+
+/** The complete serializable evaluator-owned identity for one reusable rule outcome. */
+export interface RuleEvaluationCacheKey {
+  readonly capabilities: readonly RuleCapability[];
+  readonly dependencyResults: readonly RuleResult[];
+  readonly factsVersion: string;
+  readonly options: JsonValue | undefined;
+  readonly partition: RuleEvaluationCachePartition;
+  readonly rule: RuleIdentity;
+  readonly scope: RuleScope;
+}
+
+/** Optional storage adapter; Rules owns cache-key construction and cache-hit provenance. */
+export interface RuleEvaluationCache {
+  read(key: RuleEvaluationCacheKey): RuleResult | undefined;
+  write(key: RuleEvaluationCacheKey, result: RuleResult): void;
+}
+
 /*** Direct evaluator inputs that are independent of any repository configuration format. */
 export interface EvaluateRulesOptions {
+  readonly cache?: RuleEvaluationCache;
+  readonly cachePartition?: RuleEvaluationCachePartition;
   readonly capabilities?: readonly RuleCapability[];
   readonly disabledRuleIds?: readonly string[];
+  readonly factsVersion?: string;
   readonly optionsByRuleId?: ReadonlyMap<string, JsonValue | undefined>;
   readonly selection?: RuleSelection;
   readonly scope?: RuleScope;

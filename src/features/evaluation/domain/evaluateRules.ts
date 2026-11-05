@@ -5,14 +5,16 @@ import type {
   RuleEvaluationDiagnostic,
   RuleEvaluationPlanNode,
   RuleEvaluationResult,
-  RuleFinding,
   RuleResult,
   RuleResultDiagnostic,
-  RuleSeverity,
 } from '../../../types/rules.js';
 import { compareRuleEntityIds } from '../../../utils/compareRuleEntityIds.js';
+import { createRuleEvaluationCacheKey } from './createRuleEvaluationCacheKey.js';
 import { createRuleEvaluationPlan } from './createRuleEvaluationPlan.js';
+import { createRuleResult } from './createRuleResult.js';
+import { evaluateRuleOutcome } from './evaluateRuleOutcome.js';
 import { freezeRuleResult } from './freezeRuleResult.js';
+import { readCachedRuleResult } from './readCachedRuleResult.js';
 
 /*** Evaluate a deterministic dependency plan once, passing completed child results to each provider. */
 export function evaluateRules<TContext>(
@@ -79,25 +81,23 @@ function evaluatePlanNode<TContext>(
   const prerequisiteResult = evaluatePrerequisites(rule, node, availableCapabilities, ruleOptions);
   if (prerequisiteResult !== null) return prerequisiteResult;
 
-  try {
-    const outcome = rule.evaluate({
-      context,
-      dependencyResults: Object.freeze([...dependencyResults]),
-      options: ruleOptions,
-      scope: node.scope,
-    });
-    return createRuleResult(
-      rule,
-      node,
-      outcome.status,
-      outcome.findings.map((finding) =>
-        canonicalizeFinding(finding, rule.identity.id, rule.defaultSeverity),
-      ),
-      [],
-    );
-  } catch {
-    return createRuleResult(rule, node, 'ERROR', [], [createRuleErrorDiagnostic(rule)]);
-  }
+  const cacheKey =
+    options.cache === undefined
+      ? null
+      : createRuleEvaluationCacheKey(node, dependencyResults, options);
+  const cachedResult =
+    cacheKey === null ? undefined : readCachedRuleResult(options.cache, cacheKey, node);
+  if (cachedResult !== undefined)
+    return freezeRuleResult({ ...cachedResult, execution: 'cache-hit' });
+  return evaluateRuleOutcome(
+    context,
+    rule,
+    node,
+    dependencyResults,
+    ruleOptions,
+    options.cache,
+    cacheKey,
+  );
 }
 /*** Convert planner failures into an evaluator error without invoking provider code. */
 function createPlanFailureResult<TContext>(
@@ -253,30 +253,13 @@ function evaluatePrerequisites<TContext>(
   }
 }
 
-/*** Create a stable diagnostic when the evaluator catches a provider exception. */
+/*** Create a stable diagnostic when provider option validation throws. */
 function createRuleErrorDiagnostic<TContext>(rule: Rule<TContext>): RuleResultDiagnostic {
   return {
     code: 'rule-error',
     ruleId: rule.identity.id,
     message: `Rule "${rule.identity.id}" threw while the evaluator invoked it.`,
   };
-}
-
-/*** Assemble an immutable serializable result without inferring status from findings. */
-function createRuleResult<TContext>(
-  rule: Rule<TContext>,
-  node: RuleEvaluationPlanNode,
-  status: RuleResult['status'],
-  findings: readonly RuleFinding[],
-  diagnostics: readonly RuleResultDiagnostic[],
-): RuleResult {
-  return freezeRuleResult({
-    diagnostics,
-    findings,
-    rule: Object.freeze({ ...rule.identity }),
-    scope: Object.freeze({ ...node.scope }),
-    status,
-  });
 }
 
 /*** Group plan diagnostics by affected rule for constant-time node evaluation. */
@@ -297,20 +280,6 @@ function toEvaluationDiagnostics(result: RuleResult): readonly RuleEvaluationDia
     ...diagnostic,
     ruleId: diagnostic.ruleId ?? result.rule.id,
   }));
-}
-
-/*** Preserve provider evidence while making identifier and severity engine-controlled facts. */
-function canonicalizeFinding(
-  finding: RuleFinding,
-  ruleId: string,
-  severity: RuleSeverity,
-): RuleFinding {
-  return {
-    ...finding,
-    ruleId,
-    severity,
-    subjects: [...finding.subjects].sort(compareRuleEntityIds),
-  };
 }
 
 /*** Sort aggregate diagnostics by stable rule identifier and diagnostic code. */

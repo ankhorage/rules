@@ -32,6 +32,7 @@ async function verifyPackedPackageAsync(): Promise<void> {
         [
           "const rules = await import('@ankhorage/rules');",
           "if (typeof rules.validateRulesConfig !== 'function') throw new Error('missing root API');",
+          "const rule = { identity: { id: 'fixture.rule', version: '1.0.0' }, summary: 'fixture', defaultSeverity: 'info', dependencies: [], facets: [{ id: 'kind', value: 'fixture' }], evaluate: () => ({ status: 'PASS', findings: [] }) }; const cache = new Map(); const options = { cache: { read: (key) => cache.get(JSON.stringify(key)), write: (key, result) => cache.set(JSON.stringify(key), result) }, cachePartition: { tenantId: 'tenant', projectId: 'project' }, factsVersion: 'facts', scope: { id: 'scope', kind: 'fixture' } }; const first = rules.evaluateRules({}, [rule], options); const second = rules.evaluateRules({}, [rule], options); if (first.plan.nodes[0]?.facets[0]?.version !== '1.0.0' || first.results[0]?.execution !== 'evaluated' || second.results[0]?.execution !== 'cache-hit') throw new Error('missing faceted trace API');",
           "if ('runCli' in rules || 'createRulesRuntimeProvider' in rules) throw new Error('CLI leaked into root API');",
           "const cli = await import('@ankhorage/rules/cli');",
           "if (cli.createRulesRuntimeProvider().capabilities.at(0)?.id !== 'rules.config.validate') throw new Error('missing CLI capability');",
