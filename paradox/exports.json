@@ -1,5 +1,58 @@
 [
   {
+    "name": "createRuleEvaluationCacheKey",
+    "title": null,
+    "description": "Build the complete cache identity only when callers provide both fact and authenticated partition versions.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/evaluation/domain/createRuleEvaluationCacheKey.ts",
+    "sourceLocation": {
+      "filePath": "src/features/evaluation/domain/createRuleEvaluationCacheKey.ts",
+      "line": 10,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "EvaluateRulesOptions",
+      "RuleEvaluationCacheKey",
+      "RuleEvaluationPlanNode",
+      "RuleResult"
+    ],
+    "signatures": [
+      {
+        "label": "(node: RuleEvaluationPlanNode, dependencyResults: readonly RuleResult[], options: Pick<EvaluateRulesOptions, \"cachePartition\" | \"capabilities\" | \"factsVersion\" | \"optionsByRuleId\">) => RuleEvaluationCacheKey | null",
+        "parameters": [
+          {
+            "name": "dependencyResults",
+            "type": "readonly RuleResult[]",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "node",
+            "type": "RuleEvaluationPlanNode",
+            "required": true,
+            "description": null
+          },
+          {
+            "name": "options",
+            "type": "Pick<EvaluateRulesOptions, \"cachePartition\" | \"capabilities\" | \"factsVersion\" | \"optionsByRuleId\">",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleEvaluationCacheKey | null",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "createRuleEvaluationPlan",
     "title": null,
     "description": "Project selected Rules and their complete dependency closure into a deterministic serializable graph.",
@@ -10,7 +63,7 @@
     "modulePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
     "sourceLocation": {
       "filePath": "src/features/evaluation/domain/createRuleEvaluationPlan.ts",
-      "line": 14,
+      "line": 15,
       "column": 1
     },
     "exportPaths": [
@@ -155,7 +208,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 247,
+      "line": 288,
       "column": 1
     },
     "exportPaths": [
@@ -194,7 +247,7 @@
     "modulePath": "src/features/evaluation/domain/evaluateRules.ts",
     "sourceLocation": {
       "filePath": "src/features/evaluation/domain/evaluateRules.ts",
-      "line": 18,
+      "line": 20,
       "column": 1
     },
     "exportPaths": [
@@ -247,7 +300,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 238,
+      "line": 276,
       "column": 1
     },
     "exportPaths": [
@@ -255,11 +308,27 @@
     ],
     "relatedSymbols": [
       "JsonValue",
+      "RuleEvaluationCache",
+      "RuleEvaluationCachePartition",
       "RuleScope",
       "RuleSelection"
     ],
     "signatures": [],
     "members": [
+      {
+        "name": "cache",
+        "kind": "property",
+        "type": "RuleEvaluationCache | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "cachePartition",
+        "kind": "property",
+        "type": "RuleEvaluationCachePartition | undefined",
+        "required": false,
+        "description": null
+      },
       {
         "name": "capabilities",
         "kind": "property",
@@ -271,6 +340,13 @@
         "name": "disabledRuleIds",
         "kind": "property",
         "type": "readonly string[] | undefined",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "factsVersion",
+        "kind": "property",
+        "type": "string | undefined",
         "required": false,
         "description": null
       },
@@ -296,6 +372,45 @@
         "description": null
       }
     ],
+    "structuredRows": []
+  },
+  {
+    "name": "getRuleExecutionProvenance",
+    "title": null,
+    "description": "Resolve absent legacy provenance truthfully instead of inferring cache reuse from result equality.",
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "function",
+    "modulePath": "src/features/evaluation/domain/getRuleExecutionProvenance.ts",
+    "sourceLocation": {
+      "filePath": "src/features/evaluation/domain/getRuleExecutionProvenance.ts",
+      "line": 4,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleExecutionProvenance",
+      "RuleResult"
+    ],
+    "signatures": [
+      {
+        "label": "(result: RuleResult) => RuleExecutionProvenance",
+        "parameters": [
+          {
+            "name": "result",
+            "type": "RuleResult",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "RuleExecutionProvenance",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
     "structuredRows": []
   },
   {
@@ -408,7 +523,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 133,
+      "line": 148,
       "column": 1
     },
     "exportPaths": [
@@ -518,7 +633,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 21,
+      "line": 22,
       "column": 1
     },
     "exportPaths": [
@@ -538,6 +653,161 @@
     "structuredRows": []
   },
   {
+    "name": "RuleEvaluationCache",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 270,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "RuleEvaluationCacheKey",
+      "RuleResult"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "read",
+        "kind": "method",
+        "type": "(key: RuleEvaluationCacheKey) => RuleResult | undefined",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "write",
+        "kind": "method",
+        "type": "(key: RuleEvaluationCacheKey, result: RuleResult) => void",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleEvaluationCacheKey",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 259,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [
+      "JsonValue",
+      "RuleEvaluationCachePartition",
+      "RuleIdentity",
+      "RuleResult",
+      "RuleScope"
+    ],
+    "signatures": [],
+    "members": [
+      {
+        "name": "capabilities",
+        "kind": "property",
+        "type": "readonly string[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "dependencyResults",
+        "kind": "property",
+        "type": "readonly RuleResult[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "factsVersion",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "options",
+        "kind": "property",
+        "type": "JsonValue | undefined",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "partition",
+        "kind": "property",
+        "type": "RuleEvaluationCachePartition",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "rule",
+        "kind": "property",
+        "type": "RuleIdentity",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "scope",
+        "kind": "property",
+        "type": "RuleScope",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "RuleEvaluationCachePartition",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 253,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "projectId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "tenantId",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "RuleEvaluationDiagnostic",
     "title": null,
     "description": "One execution diagnostic that explains why a configured rule could not run.",
@@ -548,7 +818,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 210,
+      "line": 225,
       "column": 1
     },
     "exportPaths": [
@@ -592,7 +862,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 125,
+      "line": 140,
       "column": 1
     },
     "exportPaths": [
@@ -646,7 +916,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 76,
+      "line": 77,
       "column": 1
     },
     "exportPaths": [
@@ -685,7 +955,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 118,
+      "line": 133,
       "column": 1
     },
     "exportPaths": [
@@ -722,6 +992,50 @@
     "structuredRows": []
   },
   {
+    "name": "RuleEvaluationPlanFacet",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "type",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 117,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "value",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "version",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
     "name": "RuleEvaluationPlanNode",
     "title": null,
     "description": "One serializable node in the deterministic execution graph for a scoped Rules run.",
@@ -732,13 +1046,14 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 111,
+      "line": 124,
       "column": 1
     },
     "exportPaths": [
       "src/index.ts"
     ],
     "relatedSymbols": [
+      "RuleEvaluationPlanFacet",
       "RuleIdentity",
       "RuleScope"
     ],
@@ -748,6 +1063,20 @@
         "name": "dependencyRuleIds",
         "kind": "property",
         "type": "readonly string[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "facets",
+        "kind": "property",
+        "type": "readonly RuleEvaluationPlanFacet[]",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "string",
         "required": true,
         "description": null
       },
@@ -779,7 +1108,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 230,
+      "line": 245,
       "column": 1
     },
     "exportPaths": [
@@ -826,6 +1155,28 @@
     "structuredRows": []
   },
   {
+    "name": "RuleExecutionProvenance",
+    "title": null,
+    "description": null,
+    "isReadme": false,
+    "see": [],
+    "security": [],
+    "kind": "unknown",
+    "modulePath": "src/types/rules.ts",
+    "sourceLocation": {
+      "filePath": "src/types/rules.ts",
+      "line": 114,
+      "column": 1
+    },
+    "exportPaths": [
+      "src/index.ts"
+    ],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
     "name": "RuleFacet",
     "title": null,
     "description": "A provider-owned, stable facet used to classify rules without prescribing presentation.",
@@ -858,6 +1209,13 @@
         "type": "string",
         "required": true,
         "description": null
+      },
+      {
+        "name": "version",
+        "kind": "property",
+        "type": "string | undefined",
+        "required": false,
+        "description": null
       }
     ],
     "structuredRows": []
@@ -873,7 +1231,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 59,
+      "line": 60,
       "column": 1
     },
     "exportPaths": [
@@ -979,7 +1337,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 69,
+      "line": 70,
       "column": 1
     },
     "exportPaths": [
@@ -1023,7 +1381,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 155,
+      "line": 170,
       "column": 1
     },
     "exportPaths": [
@@ -1071,7 +1429,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 102,
+      "line": 103,
       "column": 1
     },
     "exportPaths": [
@@ -1079,6 +1437,7 @@
     ],
     "relatedSymbols": [
       "JsonValue",
+      "RuleExecutionProvenance",
       "RuleFinding",
       "RuleIdentity",
       "RuleResultDiagnostic",
@@ -1092,6 +1451,13 @@
         "kind": "property",
         "type": "readonly RuleResultDiagnostic[]",
         "required": true,
+        "description": null
+      },
+      {
+        "name": "execution",
+        "kind": "property",
+        "type": "RuleExecutionProvenance | undefined",
+        "required": false,
         "description": null
       },
       {
@@ -1136,7 +1502,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 82,
+      "line": 83,
       "column": 1
     },
     "exportPaths": [
@@ -1180,7 +1546,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 37,
+      "line": 38,
       "column": 1
     },
     "exportPaths": [
@@ -1202,7 +1568,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 170,
+      "line": 185,
       "column": 1
     },
     "exportPaths": [
@@ -1241,7 +1607,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 176,
+      "line": 191,
       "column": 1
     },
     "exportPaths": [
@@ -1292,7 +1658,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 203,
+      "line": 218,
       "column": 1
     },
     "exportPaths": [
@@ -1339,7 +1705,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 162,
+      "line": 177,
       "column": 1
     },
     "exportPaths": [
@@ -1393,7 +1759,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 197,
+      "line": 212,
       "column": 1
     },
     "exportPaths": [
@@ -1432,7 +1798,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 191,
+      "line": 206,
       "column": 1
     },
     "exportPaths": [
@@ -1472,7 +1838,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 31,
+      "line": 32,
       "column": 1
     },
     "exportPaths": [
@@ -1509,7 +1875,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 26,
+      "line": 27,
       "column": 1
     },
     "exportPaths": [
@@ -1539,7 +1905,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 149,
+      "line": 164,
       "column": 1
     },
     "exportPaths": [
@@ -1579,7 +1945,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 40,
+      "line": 41,
       "column": 1
     },
     "exportPaths": [
@@ -1601,7 +1967,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 50,
+      "line": 51,
       "column": 1
     },
     "exportPaths": [
@@ -1659,7 +2025,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 253,
+      "line": 294,
       "column": 1
     },
     "exportPaths": [
@@ -1696,7 +2062,7 @@
     "modulePath": "src/types/rules.ts",
     "sourceLocation": {
       "filePath": "src/types/rules.ts",
-      "line": 43,
+      "line": 44,
       "column": 1
     },
     "exportPaths": [

@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.5.0
+
+### Minor Changes
+
+- a655319: Expose versioned faceted evaluation-plan nodes and truthful evaluator-owned execution provenance, with an optional isolated cache adapter for scoped incremental evaluation.
+
 ## 0.4.0
 
 ### Minor Changes

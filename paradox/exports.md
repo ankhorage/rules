@@ -1,10 +1,26 @@
 # Public API
 
+## createRuleEvaluationCacheKey
+
+Kind: `function`
+Module: `src/features/evaluation/domain/createRuleEvaluationCacheKey.ts`
+Source: `src/features/evaluation/domain/createRuleEvaluationCacheKey.ts:10:1`
+
+Build the complete cache identity only when callers provide both fact and authenticated partition versions.
+
+### Signatures
+
+- `(node: RuleEvaluationPlanNode, dependencyResults: readonly RuleResult[], options: Pick<EvaluateRulesOptions, "cachePartition" | "capabilities" | "factsVersion" | "optionsByRuleId">) => RuleEvaluationCacheKey | null`
+  - dependencyResults: `readonly RuleResult[]`
+  - node: `RuleEvaluationPlanNode`
+  - options: `Pick<EvaluateRulesOptions, "cachePartition" | "capabilities" | "factsVersion" | "optionsByRuleId">`
+  - returns: `RuleEvaluationCacheKey | null`
+
 ## createRuleEvaluationPlan
 
 Kind: `function`
 Module: `src/features/evaluation/domain/createRuleEvaluationPlan.ts`
-Source: `src/features/evaluation/domain/createRuleEvaluationPlan.ts:14:1`
+Source: `src/features/evaluation/domain/createRuleEvaluationPlan.ts:15:1`
 
 Project selected Rules and their complete dependency closure into a deterministic serializable graph.
 
@@ -50,7 +66,7 @@ Resolve a configured Rule registry and evaluate its enabled rules without provid
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:247:1`
+Source: `src/types/rules.ts:288:1`
 
 Configured evaluator inputs that preserve the caller's explicit capability set.
 
@@ -65,7 +81,7 @@ Configured evaluator inputs that preserve the caller's explicit capability set.
 
 Kind: `function`
 Module: `src/features/evaluation/domain/evaluateRules.ts`
-Source: `src/features/evaluation/domain/evaluateRules.ts:18:1`
+Source: `src/features/evaluation/domain/evaluateRules.ts:20:1`
 
 Evaluate a deterministic dependency plan once, passing completed child results to each provider.
 
@@ -81,7 +97,7 @@ Evaluate a deterministic dependency plan once, passing completed child results t
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:238:1`
+Source: `src/types/rules.ts:276:1`
 
 Direct evaluator inputs that are independent of any repository configuration format.
 
@@ -89,11 +105,28 @@ Direct evaluator inputs that are independent of any repository configuration for
 
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
+| cache | property | `RuleEvaluationCache \| undefined` | no |  |
+| cachePartition | property | `RuleEvaluationCachePartition \| undefined` | no |  |
 | capabilities | property | `readonly string[] \| undefined` | no |  |
 | disabledRuleIds | property | `readonly string[] \| undefined` | no |  |
+| factsVersion | property | `string \| undefined` | no |  |
 | optionsByRuleId | property | `ReadonlyMap<string, JsonValue \| undefined> \| undefined` | no |  |
 | scope | property | `RuleScope \| undefined` | no |  |
 | selection | property | `RuleSelection \| undefined` | no |  |
+
+## getRuleExecutionProvenance
+
+Kind: `function`
+Module: `src/features/evaluation/domain/getRuleExecutionProvenance.ts`
+Source: `src/features/evaluation/domain/getRuleExecutionProvenance.ts:4:1`
+
+Resolve absent legacy provenance truthfully instead of inferring cache reuse from result equality.
+
+### Signatures
+
+- `(result: RuleResult) => RuleExecutionProvenance`
+  - result: `RuleResult`
+  - returns: `RuleExecutionProvenance`
 
 ## JsonValue
 
@@ -135,7 +168,7 @@ Summarize the complete Rules evaluation result without treating failed evaluatio
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:133:1`
+Source: `src/types/rules.ts:148:1`
 
 A deterministic, provider-owned policy unit evaluated by the generic engine.
 
@@ -164,7 +197,7 @@ A capability that a rule needs from the context supplied by its consumer.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:21:1`
+Source: `src/types/rules.ts:22:1`
 
 One dependency declared by stable rule ID and resolved by the generic evaluator.
 
@@ -174,11 +207,55 @@ One dependency declared by stable rule ID and resolved by the generic evaluator.
 | --- | --- | --- | --- | --- |
 | ruleId | property | `string` | yes |  |
 
+## RuleEvaluationCache
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:270:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| read | method | `(key: RuleEvaluationCacheKey) => RuleResult \| undefined` | yes |  |
+| write | method | `(key: RuleEvaluationCacheKey, result: RuleResult) => void` | yes |  |
+
+## RuleEvaluationCacheKey
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:259:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| capabilities | property | `readonly string[]` | yes |  |
+| dependencyResults | property | `readonly RuleResult[]` | yes |  |
+| factsVersion | property | `string` | yes |  |
+| options | property | `JsonValue \| undefined` | yes |  |
+| partition | property | `RuleEvaluationCachePartition` | yes |  |
+| rule | property | `RuleIdentity` | yes |  |
+| scope | property | `RuleScope` | yes |  |
+
+## RuleEvaluationCachePartition
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:253:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| projectId | property | `string` | yes |  |
+| tenantId | property | `string` | yes |  |
+
 ## RuleEvaluationDiagnostic
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:210:1`
+Source: `src/types/rules.ts:225:1`
 
 One execution diagnostic that explains why a configured rule could not run.
 
@@ -194,7 +271,7 @@ One execution diagnostic that explains why a configured rule could not run.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:125:1`
+Source: `src/types/rules.ts:140:1`
 
 The immutable input supplied to a rule after the evaluator has resolved its dependencies.
 
@@ -211,7 +288,7 @@ The immutable input supplied to a rule after the evaluator has resolved its depe
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:76:1`
+Source: `src/types/rules.ts:77:1`
 
 One provider result that is independent of evaluation failure and later policy decisions.
 
@@ -226,7 +303,7 @@ One provider result that is independent of evaluation failure and later policy d
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:118:1`
+Source: `src/types/rules.ts:133:1`
 
 A consumer-neutral projection of selected rule roots and their resolved dependency closure.
 
@@ -238,11 +315,25 @@ A consumer-neutral projection of selected rule roots and their resolved dependen
 | nodes | property | `readonly RuleEvaluationPlanNode[]` | yes |  |
 | rootRuleIds | property | `readonly string[]` | yes |  |
 
+## RuleEvaluationPlanFacet
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:117:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `string` | yes |  |
+| value | property | `string` | yes |  |
+| version | property | `string` | yes |  |
+
 ## RuleEvaluationPlanNode
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:111:1`
+Source: `src/types/rules.ts:124:1`
 
 One serializable node in the deterministic execution graph for a scoped Rules run.
 
@@ -251,6 +342,8 @@ One serializable node in the deterministic execution graph for a scoped Rules ru
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | dependencyRuleIds | property | `readonly string[]` | yes |  |
+| facets | property | `readonly RuleEvaluationPlanFacet[]` | yes |  |
+| id | property | `string` | yes |  |
 | rule | property | `RuleIdentity` | yes |  |
 | scope | property | `RuleScope` | yes |  |
 
@@ -258,7 +351,7 @@ One serializable node in the deterministic execution graph for a scoped Rules ru
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:230:1`
+Source: `src/types/rules.ts:245:1`
 
 The deterministic generic result shared by every Rules consumer.
 
@@ -270,6 +363,12 @@ The deterministic generic result shared by every Rules consumer.
 | findings | property | `readonly RuleFinding<JsonValue>[]` | yes |  |
 | plan | property | `RuleEvaluationPlan` | yes |  |
 | results | property | `readonly RuleResult[]` | yes |  |
+
+## RuleExecutionProvenance
+
+Kind: `unknown`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:114:1`
 
 ## RuleFacet
 
@@ -285,12 +384,13 @@ A provider-owned, stable facet used to classify rules without prescribing presen
 | --- | --- | --- | --- | --- |
 | id | property | `string` | yes |  |
 | value | property | `string` | yes |  |
+| version | property | `string \| undefined` | no |  |
 
 ## RuleFinding
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:59:1`
+Source: `src/types/rules.ts:60:1`
 
 One serializable, consumer-neutral result produced by a rule.
 
@@ -324,7 +424,7 @@ A stable, versioned identity for one provider-owned policy definition.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:69:1`
+Source: `src/types/rules.ts:70:1`
 
 A validation error returned by a provider for its own serializable options.
 
@@ -340,7 +440,7 @@ A validation error returned by a provider for its own serializable options.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:155:1`
+Source: `src/types/rules.ts:170:1`
 
 A registry that resolves rules without provider discovery or domain-specific branches.
 
@@ -356,7 +456,7 @@ A registry that resolves rules without provider discovery or domain-specific bra
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:102:1`
+Source: `src/types/rules.ts:103:1`
 
 One serializable evaluation result for a versioned rule at one exact semantic scope.
 
@@ -365,6 +465,7 @@ One serializable evaluation result for a versioned rule at one exact semantic sc
 | Name | Kind | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | diagnostics | property | `readonly RuleResultDiagnostic[]` | yes |  |
+| execution | property | `RuleExecutionProvenance \| undefined` | no |  |
 | findings | property | `readonly RuleFinding<JsonValue>[]` | yes |  |
 | rule | property | `RuleIdentity` | yes |  |
 | scope | property | `RuleScope` | yes |  |
@@ -374,7 +475,7 @@ One serializable evaluation result for a versioned rule at one exact semantic sc
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:82:1`
+Source: `src/types/rules.ts:83:1`
 
 A serializable diagnostic emitted by the evaluator while resolving a rule instance.
 
@@ -390,7 +491,7 @@ A serializable diagnostic emitted by the evaluator while resolving a rule instan
 
 Kind: `unknown`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:37:1`
+Source: `src/types/rules.ts:38:1`
 
 The complete deterministic state of one evaluated rule instance.
 
@@ -398,7 +499,7 @@ The complete deterministic state of one evaluated rule instance.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:170:1`
+Source: `src/types/rules.ts:185:1`
 
 The canonical JSON-only configuration stored in a repository rules.json file.
 
@@ -413,7 +514,7 @@ The canonical JSON-only configuration stored in a repository rules.json file.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:176:1`
+Source: `src/types/rules.ts:191:1`
 
 A portable diagnostic emitted while parsing or applying a Rules configuration.
 
@@ -430,7 +531,7 @@ A portable diagnostic emitted while parsing or applying a Rules configuration.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:203:1`
+Source: `src/types/rules.ts:218:1`
 
 The result of reading a repository rules.json file without hiding parse failures.
 
@@ -446,7 +547,7 @@ The result of reading a repository rules.json file without hiding parse failures
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:162:1`
+Source: `src/types/rules.ts:177:1`
 
 One enabled/disabled rule selection with serializable provider options.
 
@@ -463,7 +564,7 @@ One enabled/disabled rule selection with serializable provider options.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:197:1`
+Source: `src/types/rules.ts:212:1`
 
 Extra facts used to validate configured rule IDs, options, and required capabilities.
 
@@ -478,7 +579,7 @@ Extra facts used to validate configured rule IDs, options, and required capabili
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:191:1`
+Source: `src/types/rules.ts:206:1`
 
 The result of validating a raw JSON configuration against optional provider knowledge.
 
@@ -493,7 +594,7 @@ The result of validating a raw JSON configuration against optional provider know
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:31:1`
+Source: `src/types/rules.ts:32:1`
 
 The semantic target for a rule execution, independent of host tenancy or storage.
 
@@ -508,7 +609,7 @@ The semantic target for a rule execution, independent of host tenancy or storage
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:26:1`
+Source: `src/types/rules.ts:27:1`
 
 Explicit roots selected for a run; dependency closure is evaluator-owned and never provider-owned.
 
@@ -522,7 +623,7 @@ Explicit roots selected for a run; dependency closure is evaluator-owned and nev
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:149:1`
+Source: `src/types/rules.ts:164:1`
 
 A named collection of independently supplied rules that can compose with other providers.
 
@@ -537,7 +638,7 @@ A named collection of independently supplied rules that can compose with other p
 
 Kind: `unknown`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:40:1`
+Source: `src/types/rules.ts:41:1`
 
 The canonical impact levels used by every Rules provider.
 
@@ -545,7 +646,7 @@ The canonical impact levels used by every Rules provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:50:1`
+Source: `src/types/rules.ts:51:1`
 
 An optional source location supplied as factual evidence by a provider.
 
@@ -563,7 +664,7 @@ An optional source location supplied as factual evidence by a provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:253:1`
+Source: `src/types/rules.ts:294:1`
 
 A stable status summary suitable for consumer-specific presentation.
 
@@ -578,7 +679,7 @@ A stable status summary suitable for consumer-specific presentation.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:43:1`
+Source: `src/types/rules.ts:44:1`
 
 An affected semantic subject reported independently of any presentation consumer.
 
