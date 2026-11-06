@@ -29,7 +29,7 @@ function evaluateProfile(
 ): RulePolicyProfileReport {
   const closure = collectDependencyClosure(profile.rootRuleIds, options.evaluation.plan.nodes);
   const diagnostics = createProfileDiagnostics(profile, options, closure);
-  const results = selectProfileResults(options.evaluation.results, closure);
+  const results = selectProfileResults(options.evaluation.results, closure.nodes);
   const shouldBlock =
     profile.mode === 'required' &&
     (diagnostics.length > 0 || results.some((result) => isBlockingResult(result, profile)));
@@ -48,13 +48,14 @@ function evaluateProfile(
 function createProfileDiagnostics(
   profile: RulePolicyProfile,
   options: EvaluateRulePolicyOptions,
-  closure: ReadonlyMap<string, RuleEvaluationPlanNode>,
+  closure: RequiredDependencyClosure,
 ): readonly RulePolicyDiagnostic[] {
   if (profile.mode !== 'required') return [];
   return [
     ...createRootDiagnostics(profile, options),
-    ...createResultDiagnostics(profile, options.evaluation.results, closure),
-    ...createEvaluationDiagnostics(profile, options, closure),
+    ...createMissingPlanNodeDiagnostics(profile, closure.missingRuleIds),
+    ...createResultDiagnostics(profile, options.evaluation.results, closure.nodes),
+    ...createEvaluationDiagnostics(profile, options, closure.nodes),
   ].sort(comparePolicyDiagnostics);
 }
 
@@ -75,6 +76,16 @@ function createRootDiagnostics(
       ? []
       : [createPolicyDiagnostic('missing-required-root', profile, ruleId)];
   });
+}
+
+/*** Require every dependency edge in a Required plan closure to resolve to a plan node. */
+function createMissingPlanNodeDiagnostics(
+  profile: RulePolicyProfile,
+  missingRuleIds: ReadonlySet<string>,
+): readonly RulePolicyDiagnostic[] {
+  return [...missingRuleIds]
+    .sort(compareStrings)
+    .map((ruleId) => createPolicyDiagnostic('missing-required-plan-node', profile, ruleId));
 }
 
 /*** Require exactly one complete result that matches every planned member of the Required closure. */
@@ -152,6 +163,9 @@ function createPolicyDiagnosticMessage(
   if (code === 'missing-required-root') {
     return `Required profile "${profileId}" could not resolve root rule "${ruleId}".`;
   }
+  if (code === 'missing-required-plan-node') {
+    return `Required profile "${profileId}" has no plan node for dependency rule "${ruleId}".`;
+  }
   if (code === 'missing-required-result') {
     return `Required profile "${profileId}" has no result for planned rule "${ruleId}".`;
   }
@@ -178,19 +192,29 @@ function selectProfileResults(
 function collectDependencyClosure(
   rootRuleIds: readonly string[],
   planNodes: readonly RuleEvaluationPlanNode[],
-): ReadonlyMap<string, RuleEvaluationPlanNode> {
+): RequiredDependencyClosure {
   const nodesByRuleId = new Map(planNodes.map((node) => [node.rule.id, node] as const));
+  const rootRuleIdSet = new Set(rootRuleIds);
   const pendingRuleIds = [...rootRuleIds];
   const selectedNodesByRuleId = new Map<string, RuleEvaluationPlanNode>();
+  const missingRuleIds = new Set<string>();
   for (const ruleId of pendingRuleIds) {
     if (selectedNodesByRuleId.has(ruleId)) continue;
     const node = nodesByRuleId.get(ruleId);
-    if (node === undefined) continue;
+    if (node === undefined) {
+      if (!rootRuleIdSet.has(ruleId)) missingRuleIds.add(ruleId);
+      continue;
+    }
     selectedNodesByRuleId.set(ruleId, node);
     pendingRuleIds.push(...node.dependencyRuleIds);
   }
-  return selectedNodesByRuleId;
+  return { missingRuleIds, nodes: selectedNodesByRuleId };
 }
+
+type RequiredDependencyClosure = Readonly<{
+  readonly missingRuleIds: ReadonlySet<string>;
+  readonly nodes: ReadonlyMap<string, RuleEvaluationPlanNode>;
+}>;
 
 /*** Match portable result identity and scope to the exact node that the evaluator planned. */
 function matchesPlanNode(result: RuleResult, node: RuleEvaluationPlanNode): boolean {

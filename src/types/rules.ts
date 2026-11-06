@@ -282,6 +282,7 @@ export interface RulePolicyDiagnostic {
   readonly code:
     | 'ambiguous-required-result'
     | 'incomplete-required-result'
+    | 'missing-required-plan-node'
     | 'missing-required-result'
     | 'missing-required-root'
     | 'required-evaluation-diagnostic'
