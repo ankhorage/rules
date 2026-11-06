@@ -156,6 +156,106 @@ test('rejects a repository evaluation that omitted a centrally required root wit
   expect(Object.isFrozen(policy.profiles[0]?.rootRuleIds)).toBe(true);
 });
 
+test('fails closed when a Required planned dependency has no matching completed result', () => {
+  const evaluation = evaluateRules(
+    {},
+    [
+      createRule('required.child', { status: 'PASS', findings: [] }),
+      createRule('required.root', { status: 'PASS', findings: [] }, 'error', ['required.child']),
+    ],
+    { scope: fixtureScope, selection: { rootRuleIds: ['required.root'] } },
+  );
+  const [childResult] = evaluation.results;
+  if (childResult === undefined)
+    throw new Error('Fixture evaluation must contain the child result.');
+  const falsePassEvaluation = {
+    ...evaluation,
+    results: [
+      { ...childResult, scope: { id: 'wrong-project', kind: 'project' } },
+      ...evaluation.results.slice(1),
+    ],
+  };
+
+  const report = evaluateRulePolicy({
+    evaluation: falsePassEvaluation,
+    policy: createPolicy('required', ['required.root'], 'error'),
+    provenance: fixtureProvenance,
+  });
+
+  expect(report.decision).toBe('FAIL');
+  expect(report.profiles[0]).toMatchObject({
+    decision: 'BLOCK',
+    diagnostics: [
+      expect.objectContaining({ code: 'missing-required-result', ruleId: 'required.child' }),
+    ],
+  });
+});
+
+test('fails closed for ambiguous and incomplete Required child results', () => {
+  const evaluation = evaluateRequiredDependencyFixture();
+  const [childResult] = evaluation.results;
+  if (childResult === undefined)
+    throw new Error('Fixture evaluation must contain the child result.');
+
+  const ambiguousReport = evaluateRulePolicy({
+    evaluation: { ...evaluation, results: [...evaluation.results, childResult] },
+    policy: createPolicy('required', ['required.root'], 'error'),
+    provenance: fixtureProvenance,
+  });
+  const incompleteReport = evaluateRulePolicy({
+    evaluation: {
+      ...evaluation,
+      results: [{ ...childResult, status: 'INCOMPLETE' }, ...evaluation.results.slice(1)],
+    },
+    policy: createPolicy('required', ['required.root'], 'error'),
+    provenance: fixtureProvenance,
+  });
+
+  expect(ambiguousReport.decision).toBe('FAIL');
+  expect(ambiguousReport.profiles[0]?.diagnostics.map((diagnostic) => diagnostic.code)).toContain(
+    'ambiguous-required-result',
+  );
+  expect(incompleteReport.decision).toBe('FAIL');
+  expect(incompleteReport.profiles[0]?.diagnostics.map((diagnostic) => diagnostic.code)).toContain(
+    'incomplete-required-result',
+  );
+});
+
+test('fails closed for a Required planned child diagnostic despite a restored PASS result', () => {
+  const evaluation = evaluateRules(
+    {},
+    [createRule('required.root', { status: 'PASS', findings: [] }, 'error', ['missing.child'])],
+    { scope: fixtureScope, selection: { rootRuleIds: ['required.root'] } },
+  );
+  const [rootResult] = evaluation.results;
+  if (rootResult === undefined) throw new Error('Fixture evaluation must contain the root result.');
+  const report = evaluateRulePolicy({
+    evaluation: {
+      ...evaluation,
+      results: [{ ...rootResult, diagnostics: [], status: 'PASS' }],
+    },
+    policy: createPolicy('required', ['required.root'], 'error'),
+    provenance: fixtureProvenance,
+  });
+
+  expect(report.decision).toBe('FAIL');
+  expect(report.profiles[0]?.diagnostics.map((diagnostic) => diagnostic.code)).toContain(
+    'required-evaluation-diagnostic',
+  );
+});
+
+/*** Evaluate a Required root and its successful direct child for false-PASS regressions. */
+function evaluateRequiredDependencyFixture(): RuleEvaluationResult {
+  return evaluateRules(
+    {},
+    [
+      createRule('required.child', { status: 'PASS', findings: [] }),
+      createRule('required.root', { status: 'PASS', findings: [] }, 'error', ['required.child']),
+    ],
+    { scope: fixtureScope, selection: { rootRuleIds: ['required.root'] } },
+  );
+}
+
 /*** Evaluate one isolated fixture rule through the public deterministic evaluator. */
 function evaluateFixture(
   id: string,
@@ -172,11 +272,12 @@ function evaluateFixture(
 function createRule(
   id: string,
   outcome: RuleEvaluationOutcome,
-  defaultSeverity: RuleSeverity,
+  defaultSeverity: RuleSeverity = 'error',
+  dependencyRuleIds: readonly string[] = [],
 ): Rule {
   return {
     defaultSeverity,
-    dependencies: [],
+    dependencies: dependencyRuleIds.map((ruleId) => ({ ruleId })),
     evaluate: () => outcome,
     identity: { id, version: '1.0.0' },
     summary: id,

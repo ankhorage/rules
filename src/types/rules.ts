@@ -279,7 +279,13 @@ export interface EvaluateRulePolicyOptions {
 
 /** A policy-level diagnostic that cannot be attributed to a provider-owned rule result. */
 export interface RulePolicyDiagnostic {
-  readonly code: 'missing-required-root' | 'required-root-not-selected';
+  readonly code:
+    | 'ambiguous-required-result'
+    | 'incomplete-required-result'
+    | 'missing-required-result'
+    | 'missing-required-root'
+    | 'required-evaluation-diagnostic'
+    | 'required-root-not-selected';
   readonly message: string;
   readonly profile: Pick<RulePolicyProfile, 'id' | 'version'>;
   readonly ruleId: string;

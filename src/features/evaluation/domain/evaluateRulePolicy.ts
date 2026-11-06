@@ -27,8 +27,9 @@ function evaluateProfile(
   profile: RulePolicyProfile,
   options: EvaluateRulePolicyOptions,
 ): RulePolicyProfileReport {
-  const diagnostics = createRootDiagnostics(profile, options);
-  const results = selectProfileResults(profile, options);
+  const closure = collectDependencyClosure(profile.rootRuleIds, options.evaluation.plan.nodes);
+  const diagnostics = createProfileDiagnostics(profile, options, closure);
+  const results = selectProfileResults(options.evaluation.results, closure);
   const shouldBlock =
     profile.mode === 'required' &&
     (diagnostics.length > 0 || results.some((result) => isBlockingResult(result, profile)));
@@ -43,22 +44,84 @@ function evaluateProfile(
   };
 }
 
+/*** Establish the complete evidence set that a Required profile needs before it can pass. */
+function createProfileDiagnostics(
+  profile: RulePolicyProfile,
+  options: EvaluateRulePolicyOptions,
+  closure: ReadonlyMap<string, RuleEvaluationPlanNode>,
+): readonly RulePolicyDiagnostic[] {
+  if (profile.mode !== 'required') return [];
+  return [
+    ...createRootDiagnostics(profile, options),
+    ...createResultDiagnostics(profile, options.evaluation.results, closure),
+    ...createEvaluationDiagnostics(profile, options, closure),
+  ].sort(comparePolicyDiagnostics);
+}
+
 /*** Detect absent or unselected Required roots before interpreting provider-owned result statuses. */
 function createRootDiagnostics(
   profile: RulePolicyProfile,
   options: EvaluateRulePolicyOptions,
 ): readonly RulePolicyDiagnostic[] {
-  if (profile.mode !== 'required') return [];
-  const resultIds = new Set(options.evaluation.results.map((result) => result.rule.id));
   const selectedRootIds = new Set(options.evaluation.plan.rootRuleIds);
+  const nodesByRuleId = new Map(
+    options.evaluation.plan.nodes.map((node) => [node.rule.id, node] as const),
+  );
   return [...new Set(profile.rootRuleIds)].sort(compareStrings).flatMap((ruleId) => {
     if (!selectedRootIds.has(ruleId)) {
       return [createPolicyDiagnostic('required-root-not-selected', profile, ruleId)];
     }
-    return resultIds.has(ruleId)
+    return nodesByRuleId.has(ruleId)
       ? []
       : [createPolicyDiagnostic('missing-required-root', profile, ruleId)];
   });
+}
+
+/*** Require exactly one complete result that matches every planned member of the Required closure. */
+function createResultDiagnostics(
+  profile: RulePolicyProfile,
+  results: readonly RuleResult[],
+  closure: ReadonlyMap<string, RuleEvaluationPlanNode>,
+): readonly RulePolicyDiagnostic[] {
+  return [...closure.values()].flatMap((node) => {
+    const matchingResults = results.filter((result) => matchesPlanNode(result, node));
+    if (matchingResults.length === 0) {
+      return [createPolicyDiagnostic('missing-required-result', profile, node.rule.id)];
+    }
+    if (matchingResults.length > 1) {
+      return [createPolicyDiagnostic('ambiguous-required-result', profile, node.rule.id)];
+    }
+    const [result] = matchingResults;
+    return result !== undefined && isCompleteResult(result)
+      ? []
+      : [createPolicyDiagnostic('incomplete-required-result', profile, node.rule.id)];
+  });
+}
+
+/*** Block a Required decision when evaluator or planner evidence says a closure member was not trustworthy. */
+function createEvaluationDiagnostics(
+  profile: RulePolicyProfile,
+  options: EvaluateRulePolicyOptions,
+  closure: ReadonlyMap<string, RuleEvaluationPlanNode>,
+): readonly RulePolicyDiagnostic[] {
+  const diagnostics = [...options.evaluation.plan.diagnostics, ...options.evaluation.diagnostics];
+  const identities = new Set<string>();
+  return diagnostics
+    .filter((diagnostic) => closure.has(diagnostic.ruleId))
+    .sort(compareEvaluationDiagnostics)
+    .flatMap((diagnostic) => {
+      const identity = JSON.stringify([diagnostic.code, diagnostic.message, diagnostic.ruleId]);
+      if (identities.has(identity)) return [];
+      identities.add(identity);
+      return [
+        createPolicyDiagnostic(
+          'required-evaluation-diagnostic',
+          profile,
+          diagnostic.ruleId,
+          diagnostic.message,
+        ),
+      ];
+    });
 }
 
 /*** Construct a stable policy diagnostic without borrowing provider-specific error codes. */
@@ -66,50 +129,82 @@ function createPolicyDiagnostic(
   code: RulePolicyDiagnostic['code'],
   profile: RulePolicyProfile,
   ruleId: string,
+  cause?: string,
 ): RulePolicyDiagnostic {
   return {
     code,
-    message:
-      code === 'required-root-not-selected'
-        ? `Required profile "${profile.id}" must select root rule "${ruleId}".`
-        : `Required profile "${profile.id}" could not resolve root rule "${ruleId}".`,
+    message: createPolicyDiagnosticMessage(code, profile.id, ruleId, cause),
     profile: { id: profile.id, version: profile.version },
     ruleId,
   };
 }
 
-/*** Select every scoped result in the dependency closure of a profile's explicitly named roots. */
+/*** Describe policy-owned failures without conflating them with provider diagnostics. */
+function createPolicyDiagnosticMessage(
+  code: RulePolicyDiagnostic['code'],
+  profileId: string,
+  ruleId: string,
+  cause: string | undefined,
+): string {
+  if (code === 'required-root-not-selected') {
+    return `Required profile "${profileId}" must select root rule "${ruleId}".`;
+  }
+  if (code === 'missing-required-root') {
+    return `Required profile "${profileId}" could not resolve root rule "${ruleId}".`;
+  }
+  if (code === 'missing-required-result') {
+    return `Required profile "${profileId}" has no result for planned rule "${ruleId}".`;
+  }
+  if (code === 'ambiguous-required-result') {
+    return `Required profile "${profileId}" has multiple results for planned rule "${ruleId}".`;
+  }
+  if (code === 'incomplete-required-result') {
+    return `Required profile "${profileId}" has no complete result for planned rule "${ruleId}".`;
+  }
+  return `Required profile "${profileId}" cannot trust rule "${ruleId}": ${cause ?? 'unknown evaluator diagnostic'}`;
+}
+
+/*** Select matching planned results in deterministic plan order for the profile report. */
 function selectProfileResults(
-  profile: RulePolicyProfile,
-  options: EvaluateRulePolicyOptions,
+  results: readonly RuleResult[],
+  closure: ReadonlyMap<string, RuleEvaluationPlanNode>,
 ): readonly RuleResult[] {
-  const nodesByRuleId = new Map(
-    options.evaluation.plan.nodes.map((node) => [node.rule.id, node] as const),
-  );
-  const resultByRuleId = new Map(
-    options.evaluation.results.map((result) => [result.rule.id, result] as const),
-  );
-  const selectedRuleIds = collectDependencyClosure(profile.rootRuleIds, nodesByRuleId);
-  return [...selectedRuleIds].sort(compareStrings).flatMap((ruleId) => {
-    const result = resultByRuleId.get(ruleId);
-    return result === undefined ? [] : [result];
-  });
+  return [...closure.values()]
+    .sort((left, right) => compareStrings(left.rule.id, right.rule.id))
+    .flatMap((node) => results.filter((result) => matchesPlanNode(result, node)));
 }
 
 /*** Traverse only evaluator-owned plan edges so policy interpretation cannot cause a second rule execution. */
 function collectDependencyClosure(
   rootRuleIds: readonly string[],
-  nodesByRuleId: ReadonlyMap<string, RuleEvaluationPlanNode>,
-): ReadonlySet<string> {
+  planNodes: readonly RuleEvaluationPlanNode[],
+): ReadonlyMap<string, RuleEvaluationPlanNode> {
+  const nodesByRuleId = new Map(planNodes.map((node) => [node.rule.id, node] as const));
   const pendingRuleIds = [...rootRuleIds];
-  const selectedRuleIds = new Set<string>();
+  const selectedNodesByRuleId = new Map<string, RuleEvaluationPlanNode>();
   for (const ruleId of pendingRuleIds) {
-    if (selectedRuleIds.has(ruleId)) continue;
-    selectedRuleIds.add(ruleId);
+    if (selectedNodesByRuleId.has(ruleId)) continue;
     const node = nodesByRuleId.get(ruleId);
-    if (node !== undefined) pendingRuleIds.push(...node.dependencyRuleIds);
+    if (node === undefined) continue;
+    selectedNodesByRuleId.set(ruleId, node);
+    pendingRuleIds.push(...node.dependencyRuleIds);
   }
-  return selectedRuleIds;
+  return selectedNodesByRuleId;
+}
+
+/*** Match portable result identity and scope to the exact node that the evaluator planned. */
+function matchesPlanNode(result: RuleResult, node: RuleEvaluationPlanNode): boolean {
+  return (
+    result.rule.id === node.rule.id &&
+    result.rule.version === node.rule.version &&
+    result.scope.id === node.scope.id &&
+    result.scope.kind === node.scope.kind
+  );
+}
+
+/*** Treat only PASS and threshold-evaluated FAIL states as completed execution evidence. */
+function isCompleteResult(result: RuleResult): boolean {
+  return result.status === 'PASS' || result.status === 'FAIL';
 }
 
 /*** Fail closed for incomplete execution and only block findings at the profile's declared severity threshold. */
@@ -138,6 +233,27 @@ function severityRank(severity: RuleSeverity): number {
 /*** Sort profile reports into a stable wire representation regardless of caller array order. */
 function compareProfiles(left: RulePolicyProfile, right: RulePolicyProfile): number {
   return compareStrings(left.id, right.id) || compareStrings(left.version, right.version);
+}
+
+/*** Keep policy diagnostics stable regardless of evaluator input ordering. */
+function comparePolicyDiagnostics(left: RulePolicyDiagnostic, right: RulePolicyDiagnostic): number {
+  return (
+    compareStrings(left.ruleId, right.ruleId) ||
+    compareStrings(left.code, right.code) ||
+    compareStrings(left.message, right.message)
+  );
+}
+
+/*** Keep evaluator diagnostic interpretation stable before creating policy report entries. */
+function compareEvaluationDiagnostics(
+  left: { readonly code: string; readonly message: string; readonly ruleId: string },
+  right: { readonly code: string; readonly message: string; readonly ruleId: string },
+): number {
+  return (
+    compareStrings(left.ruleId, right.ruleId) ||
+    compareStrings(left.code, right.code) ||
+    compareStrings(left.message, right.message)
+  );
 }
 
 /*** Compare policy identities with the evaluator's canonical code-unit order. */
