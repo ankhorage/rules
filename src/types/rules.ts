@@ -249,6 +249,64 @@ export interface RuleEvaluationResult {
   readonly results: readonly RuleResult[];
 }
 
+/** A centrally owned policy profile that selects roots independently of repository configuration. */
+export interface RulePolicyProfile {
+  readonly id: string;
+  readonly mode: 'advisory' | 'required';
+  readonly rootRuleIds: readonly string[];
+  readonly severityThreshold: RuleSeverity;
+  readonly version: string;
+}
+
+/** The immutable caller-supplied policy that determines whether a completed run blocks CI. */
+export interface RulePolicy {
+  readonly profiles: readonly RulePolicyProfile[];
+}
+
+/** Provenance supplied by the host after it has acquired configuration and facts. */
+export interface RulePolicyProvenance {
+  readonly commitSha: string;
+  readonly configHash: string;
+  readonly factsHash: string;
+}
+
+/** The pure inputs required to turn an evaluation result into a portable CI decision. */
+export interface EvaluateRulePolicyOptions {
+  readonly evaluation: RuleEvaluationResult;
+  readonly policy: RulePolicy;
+  readonly provenance: RulePolicyProvenance;
+}
+
+/** A policy-level diagnostic that cannot be attributed to a provider-owned rule result. */
+export interface RulePolicyDiagnostic {
+  readonly code:
+    | 'ambiguous-required-result'
+    | 'incomplete-required-result'
+    | 'missing-required-plan-node'
+    | 'missing-required-result'
+    | 'missing-required-root'
+    | 'required-evaluation-diagnostic'
+    | 'required-root-not-selected';
+  readonly message: string;
+  readonly profile: Pick<RulePolicyProfile, 'id' | 'version'>;
+  readonly ruleId: string;
+}
+
+/** The scoped result set and deterministic decision for one selected policy profile. */
+export interface RulePolicyProfileReport {
+  readonly decision: 'ADVISORY' | 'BLOCK' | 'PASS';
+  readonly diagnostics: readonly RulePolicyDiagnostic[];
+  readonly profile: RulePolicyProfile;
+  readonly results: readonly RuleResult[];
+}
+
+/** A consumer-neutral report that contains all evidence used to make a CI gate decision. */
+export interface RulePolicyReport {
+  readonly decision: 'FAIL' | 'PASS';
+  readonly profiles: readonly RulePolicyProfileReport[];
+  readonly provenance: RulePolicyProvenance;
+}
+
 /** A host-authenticated partition that prevents cache reuse across tenants or projects. */
 export interface RuleEvaluationCachePartition {
   readonly projectId: string;

@@ -5,11 +5,13 @@ export { createRuleEvaluationCacheKey } from './features/evaluation/domain/creat
 export { createRuleEvaluationPlan } from './features/evaluation/domain/createRuleEvaluationPlan.js';
 export { createRuleRegistry } from './features/evaluation/domain/createRuleRegistry.js';
 export { evaluateConfiguredRules } from './features/evaluation/domain/evaluateConfiguredRules.js';
+export { evaluateRulePolicy } from './features/evaluation/domain/evaluateRulePolicy.js';
 export { evaluateRules } from './features/evaluation/domain/evaluateRules.js';
 export { getRuleExecutionProvenance } from './features/evaluation/domain/getRuleExecutionProvenance.js';
 export { resolveRulesStatus } from './features/evaluation/domain/resolveRulesStatus.js';
 export type {
   EvaluateConfiguredRulesOptions,
+  EvaluateRulePolicyOptions,
   EvaluateRulesOptions,
   JsonValue,
   Rule,
@@ -30,6 +32,12 @@ export type {
   RuleFinding,
   RuleIdentity,
   RuleOptionDiagnostic,
+  RulePolicy,
+  RulePolicyDiagnostic,
+  RulePolicyProfile,
+  RulePolicyProfileReport,
+  RulePolicyProvenance,
+  RulePolicyReport,
   RuleRegistry,
   RuleResult,
   RuleResultDiagnostic,
