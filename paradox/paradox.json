@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.5.1",
+      "value": "v0.6.0",
       "color": "cb3837"
     },
     {
@@ -117,6 +117,16 @@
       ]
     },
     {
+      "path": "src/cli/commands/gate.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts"
+      ],
+      "exports": [
+        "gate"
+      ]
+    },
+    {
       "path": "src/cli/createRulesRuntimeProvider.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -146,7 +156,8 @@
       ],
       "exports": [
         "createRulesRuntimeProvider",
-        "default"
+        "default",
+        "gate"
       ]
     },
     {
@@ -309,6 +320,38 @@
       ]
     },
     {
+      "path": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "src/features/evaluation/domain/evaluateRules.ts",
+        "src/types/rules.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/cli/commands/gate.ts",
+        "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "src/features/evaluation/domain/evaluateRules.ts",
+        "src/types/rules.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/types/rules.ts",
+        "src/utils/compareRuleEntityIds.ts"
+      ],
+      "exports": [
+        "evaluateRulePolicy"
+      ]
+    },
+    {
       "path": "src/features/evaluation/domain/evaluateRules.test.ts",
       "isEntrypoint": false,
       "dependencies": [
@@ -416,6 +459,8 @@
         "createRuleRegistry",
         "evaluateConfiguredRules",
         "EvaluateConfiguredRulesOptions",
+        "evaluateRulePolicy",
+        "EvaluateRulePolicyOptions",
         "evaluateRules",
         "EvaluateRulesOptions",
         "getRuleExecutionProvenance",
@@ -440,6 +485,12 @@
         "RuleFinding",
         "RuleIdentity",
         "RuleOptionDiagnostic",
+        "RulePolicy",
+        "RulePolicyDiagnostic",
+        "RulePolicyProfile",
+        "RulePolicyProfileReport",
+        "RulePolicyProvenance",
+        "RulePolicyReport",
         "RuleRegistry",
         "RuleResult",
         "RuleResultDiagnostic",
@@ -467,6 +518,7 @@
       "dependencies": [],
       "exports": [
         "EvaluateConfiguredRulesOptions",
+        "EvaluateRulePolicyOptions",
         "EvaluateRulesOptions",
         "JsonValue",
         "Rule",
@@ -487,6 +539,12 @@
         "RuleFinding",
         "RuleIdentity",
         "RuleOptionDiagnostic",
+        "RulePolicy",
+        "RulePolicyDiagnostic",
+        "RulePolicyProfile",
+        "RulePolicyProfileReport",
+        "RulePolicyProvenance",
+        "RulePolicyReport",
         "RuleRegistry",
         "RuleResult",
         "RuleResultDiagnostic",
@@ -725,7 +783,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 288,
+        "line": 346,
         "column": 1
       },
       "exportPaths": [
@@ -771,6 +829,93 @@
           "kind": "property",
           "type": "RuleScope | undefined",
           "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "evaluateRulePolicy",
+      "title": null,
+      "description": "Apply central Required and advisory profiles to a completed deterministic Rules evaluation.",
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "function",
+      "modulePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 14,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "EvaluateRulePolicyOptions",
+        "RulePolicyReport"
+      ],
+      "signatures": [
+        {
+          "label": "(options: EvaluateRulePolicyOptions) => RulePolicyReport",
+          "parameters": [
+            {
+              "name": "options",
+              "type": "EvaluateRulePolicyOptions",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "RulePolicyReport",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "EvaluateRulePolicyOptions",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 274,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RuleEvaluationResult",
+        "RulePolicy",
+        "RulePolicyProvenance"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "evaluation",
+          "kind": "property",
+          "type": "RuleEvaluationResult",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "policy",
+          "kind": "property",
+          "type": "RulePolicy",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "provenance",
+          "kind": "property",
+          "type": "RulePolicyProvenance",
+          "required": true,
           "description": null
         }
       ],
@@ -840,7 +985,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 276,
+        "line": 334,
         "column": 1
       },
       "exportPaths": [
@@ -1203,7 +1348,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 270,
+        "line": 328,
         "column": 1
       },
       "exportPaths": [
@@ -1243,7 +1388,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 259,
+        "line": 317,
         "column": 1
       },
       "exportPaths": [
@@ -1321,7 +1466,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 253,
+        "line": 311,
         "column": 1
       },
       "exportPaths": [
@@ -1905,6 +2050,297 @@
           "kind": "property",
           "type": "string | undefined",
           "required": false,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicy",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 262,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RulePolicyProfile"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "profiles",
+          "kind": "property",
+          "type": "readonly RulePolicyProfile[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicyDiagnostic",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 281,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RulePolicyProfile"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "code",
+          "kind": "property",
+          "type": "\"ambiguous-required-result\" | \"incomplete-required-result\" | \"missing-required-plan-node\" | \"missing-required-result\" | \"missing-required-root\" | \"required-evaluation-diagnostic\" | \"required-root-not-selected\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "message",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "profile",
+          "kind": "property",
+          "type": "Pick<RulePolicyProfile, \"id\" | \"version\">",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "ruleId",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicyProfile",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 253,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RuleSeverity"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "mode",
+          "kind": "property",
+          "type": "\"advisory\" | \"required\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "rootRuleIds",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "severityThreshold",
+          "kind": "property",
+          "type": "RuleSeverity",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "version",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicyProfileReport",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 296,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RulePolicyDiagnostic",
+        "RulePolicyProfile",
+        "RuleResult"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "decision",
+          "kind": "property",
+          "type": "\"PASS\" | \"ADVISORY\" | \"BLOCK\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "diagnostics",
+          "kind": "property",
+          "type": "readonly RulePolicyDiagnostic[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "profile",
+          "kind": "property",
+          "type": "RulePolicyProfile",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "results",
+          "kind": "property",
+          "type": "readonly RuleResult[]",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicyProvenance",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 267,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "commitSha",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "configHash",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "factsHash",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "RulePolicyReport",
+      "title": null,
+      "description": null,
+      "isReadme": false,
+      "see": [],
+      "security": [],
+      "kind": "type",
+      "modulePath": "src/types/rules.ts",
+      "sourceLocation": {
+        "filePath": "src/types/rules.ts",
+        "line": 304,
+        "column": 1
+      },
+      "exportPaths": [
+        "src/index.ts"
+      ],
+      "relatedSymbols": [
+        "RulePolicyProfileReport",
+        "RulePolicyProvenance"
+      ],
+      "signatures": [],
+      "members": [
+        {
+          "name": "decision",
+          "kind": "property",
+          "type": "\"FAIL\" | \"PASS\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "profiles",
+          "kind": "property",
+          "type": "readonly RulePolicyProfileReport[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "provenance",
+          "kind": "property",
+          "type": "RulePolicyProvenance",
+          "required": true,
           "description": null
         }
       ],
@@ -2565,7 +3001,7 @@
       "modulePath": "src/types/rules.ts",
       "sourceLocation": {
         "filePath": "src/types/rules.ts",
-        "line": 297,
+        "line": 355,
         "column": 1
       },
       "exportPaths": [
@@ -2746,6 +3182,17 @@
       "sourceLocation": {
         "filePath": "src/cli/commands/config/validate.ts",
         "line": 22,
+        "column": 1
+      }
+    },
+    {
+      "name": "gate",
+      "description": "Render a completed portable policy report for a CI host and return its matching process status.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/cli/commands/gate.ts",
+        "line": 4,
         "column": 1
       }
     },
@@ -3377,6 +3824,314 @@
       }
     },
     {
+      "name": "createRule",
+      "description": "Create a passing rule with an optional direct dependency for plan-integrity coverage.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "line": 45,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRequiredPolicy",
+      "description": "Create the Required profile that must prove the complete planned dependency closure.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "line": 56,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateRequiredDependencyFixture",
+      "description": "Evaluate a Required root and its successful direct child for false-PASS regressions.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 248,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateFixture",
+      "description": "Evaluate one isolated fixture rule through the public deterministic evaluator.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 260,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRule",
+      "description": "Create a minimal provider fixture whose status and findings are controlled by the policy test.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 272,
+        "column": 1
+      }
+    },
+    {
+      "name": "createFinding",
+      "description": "Create an engine-owned finding with a chosen policy severity.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 288,
+        "column": 1
+      }
+    },
+    {
+      "name": "replaceStatus",
+      "description": "Replace one result status to cover a restored SKIPPED result that the direct evaluator never emits.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 299,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPolicy",
+      "description": "Build a single explicit policy profile for a focused gate assertion.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "line": 309,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateRulePolicy",
+      "description": "Apply central Required and advisory profiles to a completed deterministic Rules evaluation.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 14,
+        "column": 1
+      }
+    },
+    {
+      "name": "evaluateProfile",
+      "description": "Evaluate the complete dependency closure of one profile without allowing repository configuration to alter its roots.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 26,
+        "column": 1
+      }
+    },
+    {
+      "name": "createProfileDiagnostics",
+      "description": "Establish the complete evidence set that a Required profile needs before it can pass.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 48,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRootDiagnostics",
+      "description": "Detect absent or unselected Required roots before interpreting provider-owned result statuses.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 63,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMissingPlanNodeDiagnostics",
+      "description": "Require every dependency edge in a Required plan closure to resolve to a plan node.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 82,
+        "column": 1
+      }
+    },
+    {
+      "name": "createResultDiagnostics",
+      "description": "Require exactly one complete result that matches every planned member of the Required closure.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 92,
+        "column": 1
+      }
+    },
+    {
+      "name": "createEvaluationDiagnostics",
+      "description": "Block a Required decision when evaluator or planner evidence says a closure member was not trustworthy.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 113,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPolicyDiagnostic",
+      "description": "Construct a stable policy diagnostic without borrowing provider-specific error codes.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 139,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPolicyDiagnosticMessage",
+      "description": "Describe policy-owned failures without conflating them with provider diagnostics.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 154,
+        "column": 1
+      }
+    },
+    {
+      "name": "selectProfileResults",
+      "description": "Select matching planned results in deterministic plan order for the profile report.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 182,
+        "column": 1
+      }
+    },
+    {
+      "name": "collectDependencyClosure",
+      "description": "Traverse only evaluator-owned plan edges so policy interpretation cannot cause a second rule execution.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 192,
+        "column": 1
+      }
+    },
+    {
+      "name": "matchesPlanNode",
+      "description": "Match portable result identity and scope to the exact node that the evaluator planned.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 220,
+        "column": 1
+      }
+    },
+    {
+      "name": "isCompleteResult",
+      "description": "Treat only PASS and threshold-evaluated FAIL states as completed execution evidence.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 230,
+        "column": 1
+      }
+    },
+    {
+      "name": "isBlockingResult",
+      "description": "Fail closed for incomplete execution and only block findings at the profile's declared severity threshold.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 235,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareSeverity",
+      "description": "Order severities by blocking impact without relying on locale-specific string comparison.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 248,
+        "column": 1
+      }
+    },
+    {
+      "name": "severityRank",
+      "description": "Assign the policy ordering used by every Required profile severity threshold.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 253,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareProfiles",
+      "description": "Sort profile reports into a stable wire representation regardless of caller array order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 258,
+        "column": 1
+      }
+    },
+    {
+      "name": "comparePolicyDiagnostics",
+      "description": "Keep policy diagnostics stable regardless of evaluator input ordering.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 263,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareEvaluationDiagnostics",
+      "description": "Keep evaluator diagnostic interpretation stable before creating policy report entries.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 272,
+        "column": 1
+      }
+    },
+    {
+      "name": "compareStrings",
+      "description": "Compare policy identities with the evaluator's canonical code-unit order.",
+      "see": [],
+      "security": [],
+      "sourceLocation": {
+        "filePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "line": 284,
+        "column": 1
+      }
+    },
+    {
       "name": "defineEvaluateRulesTests",
       "description": null,
       "see": [],
@@ -3948,6 +4703,14 @@
     },
     {
       "kind": "export",
+      "name": "evaluateRulePolicy",
+      "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+      "symbolName": "evaluateRulePolicy",
+      "description": "Apply central Required and advisory profiles to a completed deterministic Rules evaluation.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "evaluateRules",
       "sourcePath": "src/features/evaluation/domain/evaluateRules.ts",
       "symbolName": "evaluateRules",
@@ -4059,6 +4822,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/features/evaluation/domain/evaluateRules.ts",
         "sourcePath": "src/index.ts"
       },
@@ -4118,6 +4886,11 @@
         "sourcePath": "src/cli/index.ts"
       },
       {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/cli/commands/gate.ts",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
         "fromPath": "src/cli/standalone.ts",
         "toPath": "src/cli/commands/config/validate.ts",
         "sourcePath": "src/cli/standalone.ts"
@@ -4126,6 +4899,11 @@
         "fromPath": "src/constants/rules.ts",
         "toPath": "package.json",
         "sourcePath": "src/constants/rules.ts"
+      },
+      {
+        "fromPath": "src/cli/commands/gate.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/cli/commands/gate.ts"
       },
       {
         "fromPath": "src/cli/commands/config/validate.ts",
@@ -4241,6 +5019,51 @@
         "fromPath": "src/features/evaluation/domain/evaluateRuleOutcome.ts",
         "toPath": "src/features/evaluation/domain/writeCachedRuleResult.ts",
         "sourcePath": "src/features/evaluation/domain/evaluateRuleOutcome.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toPath": "src/cli/commands/gate.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toPath": "src/features/evaluation/domain/evaluateRules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toPath": "src/types/rules.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromPath": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toPath": "src/utils/compareRuleEntityIds.ts",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
       },
       {
         "fromPath": "src/features/evaluation/domain/evaluateRules.test.ts",
@@ -5015,6 +5838,252 @@
         "sourcePath": "src/features/evaluation/domain/evaluateRuleOutcome.ts"
       },
       {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "evaluateRulePolicy",
+        "callExpression": "evaluateRulePolicy",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "createRequiredPolicy",
+        "callExpression": "createRequiredPolicy",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "evaluateFixture",
+        "callExpression": "evaluateFixture",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "createFinding",
+        "callExpression": "createFinding",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "evaluateRulePolicy",
+        "callExpression": "evaluateRulePolicy",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "createPolicy",
+        "callExpression": "createPolicy",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "gate",
+        "callExpression": "gate",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "replaceStatus",
+        "callExpression": "replaceStatus",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.test.ts",
+        "toSymbol": "evaluateRequiredDependencyFixture",
+        "callExpression": "evaluateRequiredDependencyFixture",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateRequiredDependencyFixture",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateRequiredDependencyFixture",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateFixture",
+        "toSymbol": "evaluateRules",
+        "callExpression": "evaluateRules",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "evaluateFixture",
+        "toSymbol": "createRule",
+        "callExpression": "createRule",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.test.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "evaluateProfile",
+        "callExpression": "evaluateProfile",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "evaluateProfile",
+        "toSymbol": "collectDependencyClosure",
+        "callExpression": "collectDependencyClosure",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "evaluateProfile",
+        "toSymbol": "createProfileDiagnostics",
+        "callExpression": "createProfileDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "evaluateProfile",
+        "toSymbol": "selectProfileResults",
+        "callExpression": "selectProfileResults",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "isBlockingResult",
+        "callExpression": "isBlockingResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "createProfileDiagnostics",
+        "toSymbol": "createRootDiagnostics",
+        "callExpression": "createRootDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "createProfileDiagnostics",
+        "toSymbol": "createMissingPlanNodeDiagnostics",
+        "callExpression": "createMissingPlanNodeDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "createProfileDiagnostics",
+        "toSymbol": "createResultDiagnostics",
+        "callExpression": "createResultDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "createProfileDiagnostics",
+        "toSymbol": "createEvaluationDiagnostics",
+        "callExpression": "createEvaluationDiagnostics",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "createPolicyDiagnostic",
+        "callExpression": "createPolicyDiagnostic",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "matchesPlanNode",
+        "callExpression": "matchesPlanNode",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "isCompleteResult",
+        "callExpression": "isCompleteResult",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "createPolicyDiagnostic",
+        "toSymbol": "createPolicyDiagnosticMessage",
+        "callExpression": "createPolicyDiagnosticMessage",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "src/features/evaluation/domain/evaluateRulePolicy.ts",
+        "toSymbol": "compareSeverity",
+        "callExpression": "compareSeverity",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "compareSeverity",
+        "toSymbol": "severityRank",
+        "callExpression": "severityRank",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "compareProfiles",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "comparePolicyDiagnostics",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "compareEvaluationDiagnostics",
+        "toSymbol": "compareStrings",
+        "callExpression": "compareStrings",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "compareStrings",
+        "toSymbol": "compareRuleEntityIds",
+        "callExpression": "compareRuleEntityIds",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
         "fromSymbol": "src/features/evaluation/domain/evaluateRules.test.ts",
         "toSymbol": "describe",
         "callExpression": "describe",
@@ -5539,6 +6608,16 @@
         "sourcePath": "src/features/evaluation/domain/evaluateConfiguredRules.ts"
       },
       {
+        "fromSymbol": "evaluateRulePolicy",
+        "toType": "EvaluateRulePolicyOptions",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
+        "fromSymbol": "evaluateRulePolicy",
+        "toType": "RulePolicyReport",
+        "sourcePath": "src/features/evaluation/domain/evaluateRulePolicy.ts"
+      },
+      {
         "fromSymbol": "evaluateRules",
         "toType": "EvaluateRulesOptions",
         "sourcePath": "src/features/evaluation/domain/evaluateRules.ts"
@@ -5601,6 +6680,21 @@
       {
         "fromSymbol": "EvaluateConfiguredRulesOptions",
         "toType": "RuleScope",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "EvaluateRulePolicyOptions",
+        "toType": "RuleEvaluationResult",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "EvaluateRulePolicyOptions",
+        "toType": "RulePolicy",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "EvaluateRulePolicyOptions",
+        "toType": "RulePolicyProvenance",
         "sourcePath": "src/types/rules.ts"
       },
       {
@@ -5836,6 +6930,76 @@
       {
         "fromSymbol": "RuleFinding",
         "toType": "TEvidence",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicy",
+        "toType": "RulePolicyProfile",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyDiagnostic",
+        "toType": "Pick",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyDiagnostic",
+        "toType": "RulePolicyProfile",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfile",
+        "toType": "RuleSeverity",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "ADVISORY",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "BLOCK",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "PASS",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "RulePolicyDiagnostic",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "RulePolicyProfile",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyProfileReport",
+        "toType": "RuleResult",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyReport",
+        "toType": "FAIL",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyReport",
+        "toType": "PASS",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyReport",
+        "toType": "RulePolicyProfileReport",
+        "sourcePath": "src/types/rules.ts"
+      },
+      {
+        "fromSymbol": "RulePolicyReport",
+        "toType": "RulePolicyProvenance",
         "sourcePath": "src/types/rules.ts"
       },
       {

@@ -66,7 +66,7 @@ Resolve a configured Rule registry and evaluate its enabled rules without provid
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:288:1`
+Source: `src/types/rules.ts:346:1`
 
 Configured evaluator inputs that preserve caller capabilities and cache provenance.
 
@@ -79,6 +79,34 @@ Configured evaluator inputs that preserve caller capabilities and cache provenan
 | capabilities | property | `readonly string[] \| undefined` | no |  |
 | factsVersion | property | `string \| undefined` | no |  |
 | scope | property | `RuleScope \| undefined` | no |  |
+
+## evaluateRulePolicy
+
+Kind: `function`
+Module: `src/features/evaluation/domain/evaluateRulePolicy.ts`
+Source: `src/features/evaluation/domain/evaluateRulePolicy.ts:14:1`
+
+Apply central Required and advisory profiles to a completed deterministic Rules evaluation.
+
+### Signatures
+
+- `(options: EvaluateRulePolicyOptions) => RulePolicyReport`
+  - options: `EvaluateRulePolicyOptions`
+  - returns: `RulePolicyReport`
+
+## EvaluateRulePolicyOptions
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:274:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| evaluation | property | `RuleEvaluationResult` | yes |  |
+| policy | property | `RulePolicy` | yes |  |
+| provenance | property | `RulePolicyProvenance` | yes |  |
 
 ## evaluateRules
 
@@ -100,7 +128,7 @@ Evaluate a deterministic dependency plan once, passing completed child results t
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:276:1`
+Source: `src/types/rules.ts:334:1`
 
 Direct evaluator inputs that are independent of any repository configuration format.
 
@@ -214,7 +242,7 @@ One dependency declared by stable rule ID and resolved by the generic evaluator.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:270:1`
+Source: `src/types/rules.ts:328:1`
 
 ### Members
 
@@ -227,7 +255,7 @@ Source: `src/types/rules.ts:270:1`
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:259:1`
+Source: `src/types/rules.ts:317:1`
 
 ### Members
 
@@ -245,7 +273,7 @@ Source: `src/types/rules.ts:259:1`
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:253:1`
+Source: `src/types/rules.ts:311:1`
 
 ### Members
 
@@ -438,6 +466,92 @@ A validation error returned by a provider for its own serializable options.
 | code | property | `string` | yes |  |
 | message | property | `string` | yes |  |
 | path | property | `string \| undefined` | no |  |
+
+## RulePolicy
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:262:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| profiles | property | `readonly RulePolicyProfile[]` | yes |  |
+
+## RulePolicyDiagnostic
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:281:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| code | property | `"ambiguous-required-result" \| "incomplete-required-result" \| "missing-required-plan-node" \| "missing-required-result" \| "missing-required-root" \| "required-evaluation-diagnostic" \| "required-root-not-selected"` | yes |  |
+| message | property | `string` | yes |  |
+| profile | property | `Pick<RulePolicyProfile, "id" \| "version">` | yes |  |
+| ruleId | property | `string` | yes |  |
+
+## RulePolicyProfile
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:253:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| id | property | `string` | yes |  |
+| mode | property | `"advisory" \| "required"` | yes |  |
+| rootRuleIds | property | `readonly string[]` | yes |  |
+| severityThreshold | property | `RuleSeverity` | yes |  |
+| version | property | `string` | yes |  |
+
+## RulePolicyProfileReport
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:296:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| decision | property | `"PASS" \| "ADVISORY" \| "BLOCK"` | yes |  |
+| diagnostics | property | `readonly RulePolicyDiagnostic[]` | yes |  |
+| profile | property | `RulePolicyProfile` | yes |  |
+| results | property | `readonly RuleResult[]` | yes |  |
+
+## RulePolicyProvenance
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:267:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| commitSha | property | `string` | yes |  |
+| configHash | property | `string` | yes |  |
+| factsHash | property | `string` | yes |  |
+
+## RulePolicyReport
+
+Kind: `type`
+Module: `src/types/rules.ts`
+Source: `src/types/rules.ts:304:1`
+
+### Members
+
+| Name | Kind | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| decision | property | `"FAIL" \| "PASS"` | yes |  |
+| profiles | property | `readonly RulePolicyProfileReport[]` | yes |  |
+| provenance | property | `RulePolicyProvenance` | yes |  |
 
 ## RuleRegistry
 
@@ -667,7 +781,7 @@ An optional source location supplied as factual evidence by a provider.
 
 Kind: `type`
 Module: `src/types/rules.ts`
-Source: `src/types/rules.ts:297:1`
+Source: `src/types/rules.ts:355:1`
 
 A stable status summary suitable for consumer-specific presentation.
 

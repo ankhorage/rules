@@ -3,6 +3,7 @@ graph LR
   module_package_json["package.json"]
   module_src_capabilities_index_ts["src/capabilities/index.ts"]
   module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
+  module_src_cli_commands_gate_ts["src/cli/commands/gate.ts"]
   module_src_cli_createRulesRuntimeProvider_test_ts["src/cli/createRulesRuntimeProvider.test.ts"]
   module_src_cli_createRulesRuntimeProvider_ts["src/cli/createRulesRuntimeProvider.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
@@ -21,6 +22,9 @@ graph LR
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts["src/features/evaluation/domain/evaluateConfiguredRules.ts"]
   module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts["src/features/evaluation/domain/evaluateDependencyGraph.test.ts"]
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts["src/features/evaluation/domain/evaluateRuleOutcome.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts["src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts["src/features/evaluation/domain/evaluateRulePolicy.test.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts["src/features/evaluation/domain/evaluateRulePolicy.ts"]
   module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
   module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
   module_src_features_evaluation_domain_evaluationTrace_test_ts["src/features/evaluation/domain/evaluationTrace.test.ts"]
@@ -35,6 +39,7 @@ graph LR
   module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
   module_examples_config_validation_validate_ts --> module_src_index_ts
   module_src_cli_commands_config_validate_ts --> module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_commands_gate_ts --> module_src_types_rules_ts
   module_src_cli_createRulesRuntimeProvider_test_ts --> module_package_json
   module_src_cli_createRulesRuntimeProvider_test_ts --> module_src_capabilities_index_ts
   module_src_cli_createRulesRuntimeProvider_test_ts --> module_src_cli_createRulesRuntimeProvider_ts
@@ -70,6 +75,15 @@ graph LR
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_features_evaluation_domain_writeCachedRuleResult_ts
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_features_evaluation_domain_evaluateRulePolicy_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_cli_commands_gate_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_features_evaluation_domain_evaluateRulePolicy_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts --> module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_configuration_domain_validateRulesConfig_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_evaluation_domain_createRuleRegistry_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_evaluation_domain_evaluateConfiguredRules_ts

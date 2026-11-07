@@ -12,6 +12,9 @@ graph TD
   module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
   package__ankhorage_rules -.-> module_src_cli_commands_config_validate_ts
   module_src_cli_commands_config_validate_ts --> module_src_features_configuration_composition_readRulesConfigAsync_ts
+  module_src_cli_commands_gate_ts["src/cli/commands/gate.ts"]
+  package__ankhorage_rules -.-> module_src_cli_commands_gate_ts
+  module_src_cli_commands_gate_ts --> module_src_types_rules_ts
   module_src_cli_createRulesRuntimeProvider_test_ts["src/cli/createRulesRuntimeProvider.test.ts"]
   package__ankhorage_rules -.-> module_src_cli_createRulesRuntimeProvider_test_ts
   module_src_cli_createRulesRuntimeProvider_test_ts --> module_package_json
@@ -83,6 +86,21 @@ graph TD
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_features_evaluation_domain_writeCachedRuleResult_ts
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_types_rules_ts
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts --> module_src_utils_compareRuleEntityIds_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts["src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_features_evaluation_domain_evaluateRulePolicy_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts["src/features/evaluation/domain/evaluateRulePolicy.test.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRulePolicy_test_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_cli_commands_gate_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_features_evaluation_domain_evaluateRulePolicy_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_features_evaluation_domain_evaluateRules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts["src/features/evaluation/domain/evaluateRulePolicy.ts"]
+  package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRulePolicy_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts --> module_src_types_rules_ts
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts --> module_src_utils_compareRuleEntityIds_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
   package__ankhorage_rules -.-> module_src_features_evaluation_domain_evaluateRules_test_ts
   module_src_features_evaluation_domain_evaluateRules_test_ts --> module_src_features_configuration_domain_validateRulesConfig_ts

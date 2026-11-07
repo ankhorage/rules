@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.6.0
+
+### Minor Changes
+
+- 7b78b2d: Add portable Required and advisory CI policy evaluation with deterministic, scoped gate reports.
+
 ## 0.5.1
 
 ### Patch Changes

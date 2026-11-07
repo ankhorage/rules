@@ -3,6 +3,7 @@ graph LR
   module_package_json["package.json"]
   module_src_capabilities_index_ts["src/capabilities/index.ts"]
   module_src_cli_commands_config_validate_ts["src/cli/commands/config/validate.ts"]
+  module_src_cli_commands_gate_ts["src/cli/commands/gate.ts"]
   module_src_cli_createRulesRuntimeProvider_test_ts["src/cli/createRulesRuntimeProvider.test.ts"]
   module_src_cli_createRulesRuntimeProvider_ts["src/cli/createRulesRuntimeProvider.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
@@ -21,6 +22,9 @@ graph LR
   module_src_features_evaluation_domain_evaluateConfiguredRules_ts["src/features/evaluation/domain/evaluateConfiguredRules.ts"]
   module_src_features_evaluation_domain_evaluateDependencyGraph_test_ts["src/features/evaluation/domain/evaluateDependencyGraph.test.ts"]
   module_src_features_evaluation_domain_evaluateRuleOutcome_ts["src/features/evaluation/domain/evaluateRuleOutcome.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_planIntegrity_test_ts["src/features/evaluation/domain/evaluateRulePolicy.planIntegrity.test.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_test_ts["src/features/evaluation/domain/evaluateRulePolicy.test.ts"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts["src/features/evaluation/domain/evaluateRulePolicy.ts"]
   module_src_features_evaluation_domain_evaluateRules_test_ts["src/features/evaluation/domain/evaluateRules.test.ts"]
   module_src_features_evaluation_domain_evaluateRules_ts["src/features/evaluation/domain/evaluateRules.ts"]
   module_src_features_evaluation_domain_evaluationTrace_test_ts["src/features/evaluation/domain/evaluationTrace.test.ts"]
@@ -60,6 +64,15 @@ graph LR
   export_EvaluateConfiguredRulesOptions -.-> export_RuleEvaluationCache
   export_EvaluateConfiguredRulesOptions -.-> export_RuleEvaluationCachePartition
   export_EvaluateConfiguredRulesOptions -.-> export_RuleScope
+  export_evaluateRulePolicy["evaluateRulePolicy"]
+  module_src_features_evaluation_domain_evaluateRulePolicy_ts --> export_evaluateRulePolicy
+  export_evaluateRulePolicy -.-> export_EvaluateRulePolicyOptions
+  export_evaluateRulePolicy -.-> export_RulePolicyReport
+  export_EvaluateRulePolicyOptions["EvaluateRulePolicyOptions"]
+  module_src_types_rules_ts --> export_EvaluateRulePolicyOptions
+  export_EvaluateRulePolicyOptions -.-> export_RuleEvaluationResult
+  export_EvaluateRulePolicyOptions -.-> export_RulePolicy
+  export_EvaluateRulePolicyOptions -.-> export_RulePolicyProvenance
   export_evaluateRules["evaluateRules"]
   module_src_features_evaluation_domain_evaluateRules_ts --> export_evaluateRules
   export_evaluateRules -.-> export_EvaluateRulesOptions
@@ -153,6 +166,26 @@ graph LR
   module_src_types_rules_ts --> export_RuleIdentity
   export_RuleOptionDiagnostic["RuleOptionDiagnostic"]
   module_src_types_rules_ts --> export_RuleOptionDiagnostic
+  export_RulePolicy["RulePolicy"]
+  module_src_types_rules_ts --> export_RulePolicy
+  export_RulePolicy -.-> export_RulePolicyProfile
+  export_RulePolicyDiagnostic["RulePolicyDiagnostic"]
+  module_src_types_rules_ts --> export_RulePolicyDiagnostic
+  export_RulePolicyDiagnostic -.-> export_RulePolicyProfile
+  export_RulePolicyProfile["RulePolicyProfile"]
+  module_src_types_rules_ts --> export_RulePolicyProfile
+  export_RulePolicyProfile -.-> export_RuleSeverity
+  export_RulePolicyProfileReport["RulePolicyProfileReport"]
+  module_src_types_rules_ts --> export_RulePolicyProfileReport
+  export_RulePolicyProfileReport -.-> export_RulePolicyDiagnostic
+  export_RulePolicyProfileReport -.-> export_RulePolicyProfile
+  export_RulePolicyProfileReport -.-> export_RuleResult
+  export_RulePolicyProvenance["RulePolicyProvenance"]
+  module_src_types_rules_ts --> export_RulePolicyProvenance
+  export_RulePolicyReport["RulePolicyReport"]
+  module_src_types_rules_ts --> export_RulePolicyReport
+  export_RulePolicyReport -.-> export_RulePolicyProfileReport
+  export_RulePolicyReport -.-> export_RulePolicyProvenance
   export_RuleRegistry["RuleRegistry"]
   module_src_types_rules_ts --> export_RuleRegistry
   export_RuleRegistry -.-> export_JsonValue
