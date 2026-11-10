@@ -1,6 +1,3 @@
-import { createHash } from 'node:crypto';
-
-import type { AvailableFactEnvelope } from '@ankhorage/contracts/rules';
 import {
   createDesignRuleProvider,
   type DesignRuleProviderOptions,
@@ -10,16 +7,17 @@ import { expect, test } from 'bun:test';
 
 import type {
   RuleEvaluationCache,
-  RuleEvaluationCacheKey,
   RuleEvaluationResult,
   RulePolicy,
-  RuleResult,
 } from '../../../types/rules.js';
 import { evaluateRulePolicy } from './evaluateRulePolicy.js';
 import { evaluateRules } from './evaluateRules.js';
+import {
+  createDesignProfileParityFixture,
+  type DesignFact,
+} from './fixtures/designProfileParityFixture.js';
 
-const scope = { id: 'landing', kind: 'page' } as const;
-const factsVersion = 'design-fixtures/v1';
+const fixture = createDesignProfileParityFixture();
 const policy: DesignRuleProviderOptions = {
   color: {
     alphaCompositions: { 'ink/alpha': { 'surface/base': 'ink/on-base' } },
@@ -58,55 +56,102 @@ const policy: DesignRuleProviderOptions = {
 };
 const provider = createDesignRuleProvider(policy);
 
-test('keeps versioned PHP and TypeScript fixtures deterministic across both mandatory profiles', () => {
-  const phpFacts = createDesignFacts('tenant-a', 'project-a');
-  const typeScriptFacts = structuredClone(phpFacts);
+test('proves PHP and Studio Golden outputs have genuine adapter hashes and distinct provenance', () => {
+  assertAdapterOutput(fixture.phpFacts, 'ankhorage-wordpress');
+  assertAdapterOutput(fixture.studioFacts, '@ankhorage/studio');
 
-  expect(hash(phpFacts)).toBe(hash(typeScriptFacts));
-
-  for (const profileId of ['design.crap', 'design.60-30-10'] as const) {
-    const phpResult = evaluateProfile(profileId, phpFacts, 'tenant-a', 'project-a');
-    const typeScriptResult = evaluateProfile(profileId, typeScriptFacts, 'tenant-a', 'project-a');
-
-    expect(typeScriptResult).toEqual(phpResult);
-    expect(hash(typeScriptResult.results)).toBe(hash(phpResult.results));
-    expect(hash(typeScriptResult.findings)).toBe(hash(phpResult.findings));
-  }
-
-  const distribution = evaluateProfile('design.60-30-10', phpFacts, 'tenant-a', 'project-a');
-  expect(distribution.results).toEqual([
-    expect.objectContaining({
-      rule: { id: 'design.color.usage-distribution', version: '1.0.0' },
-      status: 'PASS',
-    }),
-  ]);
-  expect(distribution.findings).toHaveLength(36);
-
-  const crap = evaluateProfile('design.crap', phpFacts, 'tenant-a', 'project-a');
-  expect(crap.results.find((result) => result.rule.id === 'design.crap')?.status).toBe(
-    'INCOMPLETE',
+  expect(fixture.scenario.adapterSources.php.boundary).toBe(
+    'ANK_Design_Facts::color_usage_from_capture',
+  );
+  expect(fixture.scenario.adapterSources.studio.boundary).toBe('createStudioDesignFacts');
+  expect(fixture.phpFacts[0]?.scope.target.kind).toBe('wordpress-page');
+  expect(fixture.studioFacts[0]?.scope.target.kind).toBe('studio-screen');
+  expect(fixture.phpFacts[0]?.contentHash).not.toBe(fixture.studioFacts[0]?.contentHash);
+  expect(fixture.portableFacts(fixture.phpFacts)).toEqual(
+    fixture.portableFacts(fixture.studioFacts),
   );
 });
 
-test('fails closed for a missing required full-page sample while advisory policy remains non-blocking', () => {
-  const facts = createDesignFacts('tenant-a', 'project-a').filter(
-    (fact) =>
-      !(
-        fact.value.breakpointId === 'mobile' &&
-        fact.value.scope === 'page' &&
-        fact.value.themeId === 'dark'
-      ),
+test('keeps selection, closure, outcomes, and findings equal for both mandatory profiles', () => {
+  for (const profileId of ['design.crap', 'design.60-30-10'] as const) {
+    const phpResult = evaluateProfile(
+      profileId,
+      fixture.evaluationFacts(fixture.phpFacts),
+      'tenant-a',
+      'catalog',
+    );
+    const studioResult = evaluateProfile(
+      profileId,
+      fixture.evaluationFacts(fixture.studioFacts),
+      'tenant-a',
+      'catalog',
+    );
+
+    expect(phpResult.plan).toEqual(studioResult.plan);
+    expect(phpResult.results).toEqual(studioResult.results);
+    expect(phpResult.findings).toEqual(studioResult.findings);
+    expect(fixture.contentHash(phpResult)).toBe(fixture.contentHash(studioResult));
+  }
+
+  const distribution = evaluateProfile(
+    'design.60-30-10',
+    fixture.evaluationFacts(fixture.phpFacts),
+    'tenant-a',
+    'catalog',
   );
-  const evaluation = evaluateProfile('design.60-30-10', facts, 'tenant-a', 'project-a');
+  expect(distribution.results[0]).toMatchObject({
+    rule: { id: 'design.color.usage-distribution', version: '1.0.0' },
+    status: 'PASS',
+  });
+  expect(distribution.findings).toHaveLength(36);
+  expect(
+    evaluateProfile(
+      'design.crap',
+      fixture.evaluationFacts(fixture.phpFacts),
+      'tenant-a',
+      'catalog',
+    ).results.find((result) => result.rule.id === 'design.crap')?.status,
+  ).toBe('INCOMPLETE');
+});
+
+test('keeps supplemental viewport and scroll diagnostics non-blocking for a complete page', () => {
+  const evaluation = evaluateProfile(
+    'design.60-30-10',
+    fixture.evaluationFacts(fixture.phpFacts),
+    'tenant-a',
+    'catalog',
+  );
   const required = evaluateRulePolicy({
     evaluation,
     policy: createRulePolicy('required'),
-    provenance: { commitSha: 'fixture-commit', configHash: hash(policy), factsHash: hash(facts) },
+    provenance: policyProvenance(fixture.phpFacts),
+  });
+
+  expect(required.decision).toBe('PASS');
+  expect(evaluation.findings).toHaveLength(36);
+});
+
+test('fails closed for missing page evidence while advisory remains non-blocking', () => {
+  const facts = fixture
+    .evaluationFacts(fixture.phpFacts)
+    .filter(
+      (fact) =>
+        !(
+          fact.value.breakpointId === 'mobile' &&
+          fact.value.scope === 'page' &&
+          fact.value.themeId === 'dark'
+        ),
+    );
+  const evaluation = evaluateProfile('design.60-30-10', facts, 'tenant-a', 'catalog');
+  const required = evaluateRulePolicy({
+    evaluation,
+    policy: createRulePolicy('required'),
+    provenance: policyProvenance(facts),
   });
   const advisory = evaluateRulePolicy({
     evaluation,
     policy: createRulePolicy('advisory'),
-    provenance: { commitSha: 'fixture-commit', configHash: hash(policy), factsHash: hash(facts) },
+    provenance: policyProvenance(facts),
   });
 
   expect(evaluation.results[0]?.status).toBe('INCOMPLETE');
@@ -115,36 +160,46 @@ test('fails closed for a missing required full-page sample while advisory policy
   expect(advisory.profiles[0]?.decision).toBe('ADVISORY');
 });
 
-test('partitions identical scope identities by authenticated tenant and project cache keys', () => {
-  const cache = createCache();
+test('isolates same project and scope identities by host-authenticated tenant partitions', () => {
+  const cache = fixture.createCache();
   const tenantA = evaluateProfile(
     'design.60-30-10',
-    createDesignFacts('tenant-a', 'project-a'),
+    fixture.evaluationFacts(fixture.phpFacts),
     'tenant-a',
-    'project-a',
-    cache,
+    'catalog',
+    cache.cache,
   );
   const tenantB = evaluateProfile(
     'design.60-30-10',
-    createDesignFacts('tenant-b', 'project-b').filter(
-      (fact) =>
-        !(
-          fact.value.breakpointId === 'desktop' &&
-          fact.value.scope === 'page' &&
-          fact.value.themeId === 'light'
-        ),
-    ),
+    fixture
+      .evaluationFacts(fixture.studioFacts)
+      .filter(
+        (fact) =>
+          !(
+            fact.value.breakpointId === 'desktop' &&
+            fact.value.scope === 'page' &&
+            fact.value.themeId === 'light'
+          ),
+      ),
     'tenant-b',
-    'project-b',
-    cache,
+    'catalog',
+    cache.cache,
   );
+  const untrustedTenantOverride = fixture.evaluationFacts(fixture.studioFacts).map((fact) => ({
+    ...fact,
+    scope: { ...fact.scope, target: { ...fact.scope.target, tenantId: 'tenant-b' } },
+  }));
+  evaluateProfile('design.60-30-10', untrustedTenantOverride, 'tenant-a', 'catalog', cache.cache);
 
   expect(tenantA.results[0]).toMatchObject({ execution: 'evaluated', status: 'PASS' });
   expect(tenantB.results[0]).toMatchObject({ execution: 'evaluated', status: 'INCOMPLETE' });
-  expect(tenantB.results[0]?.scope).toEqual(scope);
+  expect(tenantA.results[0]?.scope).toEqual(tenantB.results[0]?.scope);
+  expect(cache.keys.map((key) => key.partition.tenantId)).toContain('tenant-a');
+  expect(cache.keys.map((key) => key.partition.tenantId)).toContain('tenant-b');
+  expect(cache.keys.at(-1)?.partition).toEqual({ projectId: 'catalog', tenantId: 'tenant-a' });
 });
 
-/*** Evaluate one released Design profile through the generic Rules boundary and its authenticated cache partition. */
+/*** Evaluate one released Design profile through the generic Rules boundary and an authenticated cache partition. */
 function evaluateProfile(
   profileId: 'design.crap' | 'design.60-30-10',
   facts: readonly DesignFact[],
@@ -156,73 +211,40 @@ function evaluateProfile(
     ...(cache === undefined ? {} : { cache }),
     cachePartition: { projectId, tenantId },
     capabilities: ['rendered.area-analysis'],
-    factsVersion,
-    scope,
+    factsVersion: fixture.factsVersion,
+    scope: fixture.scope,
     selection: selectDesignRuleProfile(profileId).selection,
   });
 }
 
-/*** Create the fixed, portable rendered-area fixture shared verbatim by PHP and TypeScript adapters. */
-function createDesignFacts(tenantId: string, projectId: string): readonly DesignFact[] {
-  return ['desktop', 'tablet', 'mobile'].flatMap((breakpointId) =>
-    ['light', 'dark'].flatMap((themeId) => [
-      createFact(tenantId, projectId, breakpointId, themeId, 'page', 'document', {
-        accent: 10,
-        base: 60,
-        secondary: 30,
-      }),
-      createFact(tenantId, projectId, breakpointId, themeId, 'viewport', 'hero', {
-        accent: 50,
-        base: 30,
-        secondary: 20,
-      }),
-      createFact(tenantId, projectId, breakpointId, themeId, 'scroll-sample', 'footer', {
-        accent: 50,
-        base: 30,
-        secondary: 20,
-      }),
-    ]),
+/*** Verify Golden facts came from a distinct adapter and retained its adapter-owned canonical digest. */
+function assertAdapterOutput(facts: readonly DesignFact[], producerId: string): void {
+  expect(facts).toHaveLength(18);
+  expect(new Set(facts.map((fact) => fact.provenance.producer.id))).toEqual(new Set([producerId]));
+  expect(new Set(facts.map((fact) => fact.value.breakpointId))).toEqual(
+    new Set(['desktop', 'tablet', 'mobile']),
   );
+  expect(new Set(facts.map((fact) => fact.value.themeId))).toEqual(new Set(['light', 'dark']));
+  expect(new Set(facts.map((fact) => fact.value.scope))).toEqual(
+    new Set(['page', 'scroll-sample', 'viewport']),
+  );
+  for (const fact of facts) {
+    const { contentHash: expectedHash, ...hashable } = fact;
+    expect(expectedHash).toMatch(/^sha256:[a-f0-9]{64}$/);
+    expect(expectedHash).toBe(fixture.contentHash(hashable));
+  }
 }
 
-/*** Create one complete, exclusive visible-area observation without merging page, viewport, or scroll evidence. */
-function createFact(
-  tenantId: string,
-  projectId: string,
-  breakpointId: string,
-  themeId: string,
-  coverageScope: 'page' | 'scroll-sample' | 'viewport',
-  scopeId: string,
-  rolePixels: { readonly accent: number; readonly base: number; readonly secondary: number },
-): DesignFact {
+/*** Create policy provenance from the same stable serialization used by the adapter fact digests. */
+function policyProvenance(facts: readonly DesignFact[]) {
   return {
-    contentHash: `sha256:${breakpointId}:${themeId}:${coverageScope}:${scopeId}:${rolePixels.accent}:${rolePixels.base}:${rolePixels.secondary}`,
-    id: `design.color.usage-distribution:${breakpointId}:${themeId}:${coverageScope}:${scopeId}`,
-    kind: 'design.color.usage-distribution',
-    provenance: {
-      collectedAt: '2026-11-10T00:00:00.000Z',
-      producer: { id: 'design-fixture', version: factsVersion },
-      source: { id: 'design-fixture', revision: 'v1' },
-    },
-    schemaVersion: 1,
-    scope: {
-      ...scope,
-      target: { kind: 'application', projectId, targetId: 'landing', tenantId },
-    },
-    status: 'available',
-    value: {
-      breakpointId,
-      measuredPixels: 100,
-      rolePixels: { ...rolePixels, unknown: 0 },
-      scope: coverageScope,
-      scopeId,
-      themeId,
-      unknownPixels: 0,
-    },
+    commitSha: 'fixture-commit',
+    configHash: fixture.contentHash(policy),
+    factsHash: fixture.contentHash(facts),
   };
 }
 
-/*** Create one policy whose selected root uses Required or advisory behavior without changing provider configuration. */
+/*** Create a policy whose selected root uses Required or advisory behavior without changing provider configuration. */
 function createRulePolicy(mode: 'advisory' | 'required'): RulePolicy {
   return {
     profiles: [
@@ -236,38 +258,3 @@ function createRulePolicy(mode: 'advisory' | 'required'): RulePolicy {
     ],
   };
 }
-
-/*** Create deterministic in-memory storage whose identity is entirely defined by the generic cache key. */
-function createCache(): RuleEvaluationCache {
-  const entries = new Map<string, RuleResult>();
-  return {
-    read(key: RuleEvaluationCacheKey): RuleResult | undefined {
-      return entries.get(hash(key));
-    },
-    write(key: RuleEvaluationCacheKey, result: RuleResult): void {
-      entries.set(hash(key), result);
-    },
-  };
-}
-
-/*** Hash a serializable fixture or result with stable JSON serialization for cross-adapter parity assertions. */
-function hash(value: unknown): string {
-  return createHash('sha256').update(JSON.stringify(value)).digest('hex');
-}
-
-type DesignFact = AvailableFactEnvelope & {
-  readonly value: {
-    readonly breakpointId: string;
-    readonly measuredPixels: number;
-    readonly rolePixels: {
-      readonly accent: number;
-      readonly base: number;
-      readonly secondary: number;
-      readonly unknown: number;
-    };
-    readonly scope: 'page' | 'scroll-sample' | 'viewport';
-    readonly scopeId: string;
-    readonly themeId: string;
-    readonly unknownPixels: number;
-  };
-};
