@@ -1,0 +1,758 @@
+[
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:86c72412e5bda7296acf4ff5cf1d17744d03d212960168ee420b6a524df2fb2c"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:6b87a7a43c29d78c9d7c94849588ff6594813bfcdebcc6e62dd2edd08804dcb8"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:e84997f4771d83b515a6f901ac3bbe4947c1a5bb01e15b3ae7474fe539e5bea1"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:dba32dc2d3392e2a14f8ad19e932849bedae2009c4345128fa34bbdfdb56eb39"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:a273011cc1e52f2308754a2092cb1d675e732cbc108482a8f56a9d04c45ca691"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:desktop:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:1ce24fcd178f87821bfab0a300e68bf2ebff689d5e17cee5e831c5f45c6adb67"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:58be5b65e6df93df0771eda6e3de81c8ec2c1d487ef0a8cd93869c8a757e5ab4"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:ea00ab2416a8c48a19c319e743a50e0568011bdedfa5cb62e64b54a48f68362c"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:f945d67e54b3371870af8498953be4ba27f591aeb007b577476bab00aef1cc4e"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:4b76e8d84fad21cbae80adb6efa1458188ebcd53e84fe5cbf998192ee0084490"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:66bc2fad8db1ed89f01154e2b57dc2afc90e0d800ea36297b7cfccfdee28ce06"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:tablet:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:361a8bd7b0b7b3f8eb6b716a1e12070eb010a3509d82b28d953449209631a641"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:56adbef831dc8acd043c1f8c097ee93a65f1cd55aa3e87347a184f6f87c7da91"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:06cdae6ab89d8cbb21a17398d6c7eb6c0dc2e7260865b148c2c6d72ad1149908"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:75cef55954c05e7fbca512b9bf1b752f05d3ff08f30089f33ada642af042dc55"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 10,
+        "base": 60,
+        "secondary": 30,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:f3f0c8f59d81e7b9a60904f21903c09af1c07c0c54d0d303d3903553f180a1f9"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:e8eb914f1ad2850d68e4fcd5a47238d99fa3171fbd774e6b99ecea05abd3a32d"
+  },
+  {
+    "id": "design.color.usage-distribution:wordpress:7:page:42:mobile:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-11T00:00:00+00:00",
+      "producer": {
+        "id": "ankhorage-wordpress",
+        "version": "0.7.38"
+      },
+      "source": {
+        "id": "wordpress-page:42",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "wordpress:7:page:42",
+      "kind": "page",
+      "target": {
+        "kind": "wordpress-page",
+        "projectId": "wordpress:7",
+        "targetId": "42",
+        "tenantId": "wordpress:7"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "accent": 50,
+        "base": 30,
+        "secondary": 20,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:11ccf76fa1b5c35897dfc16df62ef21a0b6abda285fe8198a050e8a1a64b4f75"
+  }
+]
