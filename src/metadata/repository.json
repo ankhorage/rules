@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "library",
+  "title": "Ankhorage Rules",
+  "summary": "Provides a domain-agnostic rule engine, JSON configuration, and capability-based rule evaluation.",
+  "purpose": "Offer reusable deterministic rule evaluation without embedding policy for a particular product or infrastructure provider.",
+  "domain": "rule evaluation",
+  "responsibilities": [
+    "Define and evaluate generic rules and rule sets.",
+    "Parse and validate generic JSON rule configuration.",
+    "Expose capability-scoped rule evaluation through its public API and CLI provider."
+  ],
+  "boundaries": [
+    "Does not own domain-specific architecture, design, documentation, or repository policies.",
+    "Does not own application authorization or infrastructure integrations.",
+    "Does not infer policy from provider-specific runtime state."
+  ],
+  "audience": [
+    "Rule-provider packages that define domain-specific policies.",
+    "Applications and tools that need deterministic configured rule evaluation."
+  ],
+  "useCases": [
+    "Evaluate a collection of rules against a supplied context.",
+    "Evaluate registered rule sets from a JSON configuration.",
+    "Validate the generic shape of a repository rules configuration."
+  ],
+  "architecture": {
+    "role": "Domain-neutral rules core consumed by specialized rule-provider packages.",
+    "invariants": [
+      "The core remains independent of any one policy domain.",
+      "Rule evaluation is deterministic for the same context and configuration.",
+      "Domain-specific facts and policies enter through explicit rule sets and capabilities."
+    ]
+  }
+}
