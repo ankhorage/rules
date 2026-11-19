@@ -1,0 +1,758 @@
+[
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:e051169a0ba0754c2a0ddc2548f463e20d2260749d34589f594558d958758baa"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:3d63910a86176dac1fc09bc5b72dfd2036fa3ba57aa2b27143f3d91cb07ff39b"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:8bb073d590a0710a610fbe91b2e96816ce2814f7303c14dcc2a0dfc1a7c3dab3"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:9319a5a52ddf50972848b67623e1a6e3c7cc26c315d8b983fb0dfba12e625d57"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:635aa5f3b9b21b9397f2d08e4778df692da06d4baa012ef3ebcff9a952166137"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:desktop:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "desktop",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:3d0f5dfcfd4aa3bfc0a19cfe8d248e841f01ac409a01da833764d64770beae0f"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:b8ddf03868089f9993b83ad0be626644f62898976dede54519898dbf4767d9ac"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:b57e1feb664e222efe644bd612b52103f60d7292cb39f90c34537682235d59a8"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:868bd115c4aee98647e6ce19691f3cfe524df285463d1222ebc6293b2c8b5b59"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:6f0981e81ff0e7ef07427612efd3a51fe4098ea8a4d518ac229115ec2add6a5a"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:17e9b9e74ebdd6ba73673cbb9b95db04147ac1620b79477fac89cb915bb06f00"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:tablet:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "tablet",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:f5d42e8804d1381a09dbc02e4ae13aed2b17c7883c0c05d8cb35e9f5c4effa9b"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:e1ba0b3de3c7e50a62fa937f375aee5a301c17d5eaf876a18680a4c9ae287450"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:f3af61df9f979ec609fefa2899b35dbede6b1181b5b22af94a609e22d043059e"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "light",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:06ec2495c1e972ae52ae9a3cfe17b8a49d692fe84b03f689d8d64d0410df66d4"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:page:document",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 60,
+        "secondary": 30,
+        "accent": 10,
+        "unknown": 0
+      },
+      "scope": "page",
+      "scopeId": "document",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:db09b0143cf2af30c56f67c52d03ea66a8e3b57df2717a81835cf0aa9777b5fe"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:viewport:hero",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "viewport",
+      "scopeId": "hero",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:2ac9434d0575901f8ba0c3808024ca990d20128ef5008833f3c62900d639b857"
+  },
+  {
+    "id": "design.color.usage-distribution:studio:tenant-a:project:catalog:screen:landing:mobile:scroll-sample:footer",
+    "kind": "design.color.usage-distribution",
+    "provenance": {
+      "collectedAt": "2026-11-10T00:00:00.000Z",
+      "producer": {
+        "id": "@ankhorage/studio",
+        "version": "8"
+      },
+      "source": {
+        "id": "studio-screen:landing",
+        "revision": "design-fixtures/v1"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": {
+      "id": "studio:tenant-a:project:catalog:screen:landing",
+      "kind": "page",
+      "target": {
+        "kind": "studio-screen",
+        "projectId": "studio:tenant-a:project:catalog",
+        "targetId": "landing",
+        "tenantId": "tenant-a"
+      }
+    },
+    "status": "available",
+    "value": {
+      "breakpointId": "mobile",
+      "measuredPixels": 100,
+      "rolePixels": {
+        "base": 30,
+        "secondary": 20,
+        "accent": 50,
+        "unknown": 0
+      },
+      "scope": "scroll-sample",
+      "scopeId": "footer",
+      "themeId": "dark",
+      "unknownPixels": 0
+    },
+    "contentHash": "sha256:c02ad4c74c010ff7fb7124a231a26c4a2d8abc11f77ee81646145896570e92d4"
+  }
+]

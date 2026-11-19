@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "factsVersion": "design-fixtures/v1",
+  "scopes": ["page", "viewport", "scroll-sample"],
+  "breakpointIds": ["desktop", "tablet", "mobile"],
+  "themeIds": ["light", "dark"],
+  "measurements": {
+    "page": {
+      "scopeId": "document",
+      "rolePixels": { "base": 60, "secondary": 30, "accent": 10, "unknown": 0 }
+    },
+    "viewport": {
+      "scopeId": "hero",
+      "rolePixels": { "base": 30, "secondary": 20, "accent": 50, "unknown": 0 }
+    },
+    "scroll-sample": {
+      "scopeId": "footer",
+      "rolePixels": { "base": 30, "secondary": 20, "accent": 50, "unknown": 0 }
+    }
+  },
+  "adapterSources": {
+    "php": {
+      "boundary": "ANK_Design_Facts::color_usage_from_capture",
+      "sourceRevision": "6332bd5c7d6d4c8ed0035b2a939ce0a90a3067b1"
+    },
+    "studio": {
+      "boundary": "createStudioDesignFacts",
+      "sourceRevision": "f2b49701496012ebcd45bfa4e12cff6a64f9896a"
+    }
+  }
+}
