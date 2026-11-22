@@ -5,7 +5,7 @@
  * @usage
  * @readme
  */
-import { readRulesConfigAsync } from '@ankhorage/rules';
+import { readRulesConfigAsync } from '@ankhorage/rules/node';
 
 const result = await readRulesConfigAsync('rules.json');
 

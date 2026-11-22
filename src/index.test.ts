@@ -1,7 +1,3 @@
-import { mkdtemp, rm } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-
 import { isRecord } from '@ankhorage/utility/object';
 import { describe, expect, test } from 'bun:test';
 
@@ -13,12 +9,10 @@ import {
   evaluateConfiguredRules,
   evaluateRules,
   type JsonValue,
-  readRulesConfigAsync,
   resolveRulesStatus,
   type Rule,
   type RuleSet,
   validateRulesConfig,
-  writeRulesConfigAsync,
 } from './index.js';
 
 interface ContentContext {
@@ -112,10 +106,6 @@ describe('public Rules contract', () => {
   test('applies configured options and severity overrides', testConfiguredRules);
   test('sorts provider subjects by stable code-unit identifiers', testSubjectOrdering);
   test('reports structural configuration field diagnostics', testStructuralConfigDiagnostics);
-  test(
-    'reads, validates, writes, and validates the JSON-only configuration through public APIs',
-    testConfigFileOperations,
-  );
   test('exposes the required provider capability and standalone CLI contract', testCliContract);
 });
 
@@ -257,33 +247,12 @@ function testStructuralConfigDiagnostics(): void {
   ).toEqual(['invalid-options']);
 }
 
-async function testConfigFileOperations(): Promise<void> {
-  const directory = await mkdtemp(join(tmpdir(), 'ankhorage-rules-'));
-  const path = join(directory, 'rules.json');
-  const config = {
-    version: 1,
-    rules: [
-      { id: 'release.no-blockers', enabled: false },
-      { id: 'content.minimum-words', enabled: true, options: { minimum: 2 } },
-    ],
-  } as const;
-
-  try {
-    await writeRulesConfigAsync(path, config);
-    expect((await readRulesConfigAsync(path)).config?.rules.map((rule) => rule.id)).toEqual([
-      'content.minimum-words',
-      'release.no-blockers',
-    ]);
-    expect((await readRulesConfigAsync(path)).diagnostics).toEqual([]);
-  } finally {
-    await rm(directory, { recursive: true, force: true });
-  }
-}
-
 async function testCliContract(): Promise<void> {
   const rootApi = await import('./index.js');
   expect('createRulesRuntimeProvider' in rootApi).toBe(false);
   expect('runCli' in rootApi).toBe(false);
+  expect('readRulesConfigAsync' in rootApi).toBe(false);
+  expect('writeRulesConfigAsync' in rootApi).toBe(false);
 
   const provider = createRulesRuntimeProvider();
   expect(provider.capabilities).toBe(CAPABILITIES);
