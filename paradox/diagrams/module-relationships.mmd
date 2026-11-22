@@ -35,9 +35,11 @@ graph LR
   module_src_features_evaluation_domain_writeCachedRuleResult_ts["src/features/evaluation/domain/writeCachedRuleResult.ts"]
   module_src_index_test_ts["src/index.test.ts"]
   module_src_index_ts["src/index.ts"]
+  module_src_node_index_test_ts["src/node/index.test.ts"]
+  module_src_node_index_ts["src/node/index.ts"]
   module_src_types_rules_ts["src/types/rules.ts"]
   module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
-  module_examples_config_validation_validate_ts --> module_src_index_ts
+  module_examples_config_validation_validate_ts --> module_dist_node_index_d_ts
   module_src_cli_commands_config_validate_ts --> module_src_features_configuration_composition_readRulesConfigAsync_ts
   module_src_cli_commands_gate_ts --> module_src_types_rules_ts
   module_src_cli_createRulesRuntimeProvider_test_ts --> module_package_json
@@ -107,3 +109,5 @@ graph LR
   module_src_index_test_ts --> module_src_cli_index_ts
   module_src_index_test_ts --> module_src_cli_standalone_ts
   module_src_index_test_ts --> module_src_index_ts
+  module_src_node_index_test_ts --> module_package_json
+  module_src_node_index_test_ts --> module_src_node_index_ts

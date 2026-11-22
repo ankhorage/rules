@@ -1,5 +1,11 @@
 # @ankhorage/rules
 
+## 0.7.0
+
+### Minor Changes
+
+- 5bf5921: Keep the root evaluation entrypoint portable by moving Node filesystem configuration I/O to `@ankhorage/rules/node`.
+
 ## 0.6.0
 
 ### Minor Changes

@@ -167,20 +167,6 @@ Source: `src/types/rules.ts:2:1`
 
 A JSON value that can be stored in a portable Rules configuration or finding.
 
-## readRulesConfigAsync
-
-Kind: `function`
-Module: `src/features/configuration/composition/readRulesConfigAsync.ts`
-Source: `src/features/configuration/composition/readRulesConfigAsync.ts:6:1`
-
-Wire the configuration source reader into the public file-validation operation.
-
-### Signatures
-
-- `(path: string) => Promise<RulesConfigReadResult>`
-  - path: `string`
-  - returns: `Promise<RulesConfigReadResult>`
-
 ## resolveRulesStatus
 
 Kind: `function`
@@ -822,18 +808,3 @@ Validate canonical rules.json data, optionally against a concrete rule registry.
   - options: `RulesConfigValidationOptions<TContext>` (optional)
   - value: `unknown`
   - returns: `RulesConfigValidationResult`
-
-## writeRulesConfigAsync
-
-Kind: `function`
-Module: `src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts`
-Source: `src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts:8:1`
-
-Validate and atomically write canonical rules.json configuration through the filesystem adapter.
-
-### Signatures
-
-- `(path: string, config: RulesConfig) => Promise<void>`
-  - config: `RulesConfig`
-  - path: `string`
-  - returns: `Promise<void>`

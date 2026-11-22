@@ -4,7 +4,7 @@ graph TD
   package__ankhorage_rules --> entrypoint_src_index_ts
   module_examples_config_validation_validate_ts["examples/config-validation/validate.ts"]
   package__ankhorage_rules -.-> module_examples_config_validation_validate_ts
-  module_examples_config_validation_validate_ts --> module_src_index_ts
+  module_examples_config_validation_validate_ts --> module_dist_node_index_d_ts
   module_package_json["package.json"]
   package__ankhorage_rules -.-> module_package_json
   module_src_capabilities_index_ts["src/capabilities/index.ts"]
@@ -143,6 +143,12 @@ graph TD
   module_src_index_test_ts --> module_src_cli_standalone_ts
   module_src_index_test_ts --> module_src_index_ts
   module_src_index_ts["src/index.ts"]
+  module_src_node_index_test_ts["src/node/index.test.ts"]
+  package__ankhorage_rules -.-> module_src_node_index_test_ts
+  module_src_node_index_test_ts --> module_package_json
+  module_src_node_index_test_ts --> module_src_node_index_ts
+  module_src_node_index_ts["src/node/index.ts"]
+  package__ankhorage_rules -.-> module_src_node_index_ts
   module_src_types_rules_ts["src/types/rules.ts"]
   package__ankhorage_rules -.-> module_src_types_rules_ts
   module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]

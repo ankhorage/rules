@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.6.0",
+      "value": "v0.7.0",
       "color": "cb3837"
     },
     {
@@ -50,8 +50,8 @@
     {
       "id": "tests",
       "label": "tests",
-      "value": "checked",
-      "color": "0a7f3f"
+      "value": "configured",
+      "color": "6f42c1"
     },
     {
       "id": "docs",
@@ -70,7 +70,7 @@
       "title": "Validate Rules Configuration",
       "description": "Validate a repository rules.json file through the public generic Rules API.",
       "language": "ts",
-      "code": "import { readRulesConfigAsync } from '@ankhorage/rules';",
+      "code": "import { readRulesConfigAsync } from '@ankhorage/rules/node';",
       "sourcePath": "examples/config-validation/validate.ts",
       "isReadme": true,
       "see": [],
@@ -88,7 +88,7 @@
       "path": "examples/config-validation/validate.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/index.ts"
+        "dist/node/index.d.ts"
       ],
       "exports": []
     },
@@ -465,7 +465,6 @@
         "EvaluateRulesOptions",
         "getRuleExecutionProvenance",
         "JsonValue",
-        "readRulesConfigAsync",
         "resolveRulesStatus",
         "Rule",
         "RuleCapability",
@@ -508,7 +507,24 @@
         "RuleSourceLocation",
         "RulesStatusDescriptor",
         "RuleSubject",
-        "validateRulesConfig",
+        "validateRulesConfig"
+      ]
+    },
+    {
+      "path": "src/node/index.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "package.json",
+        "src/node/index.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "src/node/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "readRulesConfigAsync",
         "writeRulesConfigAsync"
       ]
     },
@@ -1117,44 +1133,6 @@
       ],
       "relatedSymbols": [],
       "signatures": [],
-      "members": [],
-      "structuredRows": []
-    },
-    {
-      "name": "readRulesConfigAsync",
-      "title": null,
-      "description": "Wire the configuration source reader into the public file-validation operation.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "function",
-      "modulePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-      "sourceLocation": {
-        "filePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-        "line": 6,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [
-        "RulesConfigReadResult"
-      ],
-      "signatures": [
-        {
-          "label": "(path: string) => Promise<RulesConfigReadResult>",
-          "parameters": [
-            {
-              "name": "path",
-              "type": "string",
-              "required": true,
-              "description": null
-            }
-          ],
-          "returnType": "Promise<RulesConfigReadResult>",
-          "returnDescription": null
-        }
-      ],
       "members": [],
       "structuredRows": []
     },
@@ -3115,50 +3093,6 @@
       ],
       "members": [],
       "structuredRows": []
-    },
-    {
-      "name": "writeRulesConfigAsync",
-      "title": null,
-      "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
-      "isReadme": false,
-      "see": [],
-      "security": [],
-      "kind": "function",
-      "modulePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-      "sourceLocation": {
-        "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-        "line": 8,
-        "column": 1
-      },
-      "exportPaths": [
-        "src/index.ts"
-      ],
-      "relatedSymbols": [
-        "RulesConfig"
-      ],
-      "signatures": [
-        {
-          "label": "(path: string, config: RulesConfig) => Promise<void>",
-          "parameters": [
-            {
-              "name": "config",
-              "type": "RulesConfig",
-              "required": true,
-              "description": null
-            },
-            {
-              "name": "path",
-              "type": "string",
-              "required": true,
-              "description": null
-            }
-          ],
-          "returnType": "Promise<void>",
-          "returnDescription": null
-        }
-      ],
-      "members": [],
-      "structuredRows": []
     }
   ],
   "components": [],
@@ -4567,7 +4501,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 102,
+        "line": 96,
         "column": 1
       }
     },
@@ -4578,7 +4512,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 122,
+        "line": 112,
         "column": 1
       }
     },
@@ -4589,7 +4523,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 142,
+        "line": 132,
         "column": 1
       }
     },
@@ -4600,7 +4534,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 161,
+        "line": 151,
         "column": 1
       }
     },
@@ -4611,7 +4545,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 195,
+        "line": 185,
         "column": 1
       }
     },
@@ -4622,18 +4556,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 239,
-        "column": 1
-      }
-    },
-    {
-      "name": "testConfigFileOperations",
-      "description": null,
-      "see": [],
-      "security": [],
-      "sourceLocation": {
-        "filePath": "src/index.test.ts",
-        "line": 260,
+        "line": 229,
         "column": 1
       }
     },
@@ -4644,7 +4567,7 @@
       "security": [],
       "sourceLocation": {
         "filePath": "src/index.test.ts",
-        "line": 283,
+        "line": 250,
         "column": 1
       }
     },
@@ -4727,14 +4650,6 @@
     },
     {
       "kind": "export",
-      "name": "readRulesConfigAsync",
-      "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-      "symbolName": "readRulesConfigAsync",
-      "description": "Wire the configuration source reader into the public file-validation operation.",
-      "isReadme": false
-    },
-    {
-      "kind": "export",
       "name": "resolveRulesStatus",
       "sourcePath": "src/features/evaluation/domain/resolveRulesStatus.ts",
       "symbolName": "resolveRulesStatus",
@@ -4747,14 +4662,6 @@
       "sourcePath": "src/features/configuration/domain/validateRulesConfig.ts",
       "symbolName": "validateRulesConfig",
       "description": "Validate canonical rules.json data, optionally against a concrete rule registry.",
-      "isReadme": false
-    },
-    {
-      "kind": "export",
-      "name": "writeRulesConfigAsync",
-      "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-      "symbolName": "writeRulesConfigAsync",
-      "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
       "isReadme": false
     }
   ],
@@ -4784,16 +4691,6 @@
         "fromPath": "src/index.test.ts",
         "toPath": "src/index.ts",
         "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
-        "toPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-        "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
-        "toPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-        "sourcePath": "src/index.ts"
       },
       {
         "fromPath": "src/index.ts",
@@ -4847,7 +4744,7 @@
       },
       {
         "fromPath": "examples/config-validation/validate.ts",
-        "toPath": "src/index.ts",
+        "toPath": "dist/node/index.d.ts",
         "sourcePath": "examples/config-validation/validate.ts"
       },
       {
@@ -4899,6 +4796,26 @@
         "fromPath": "src/constants/rules.ts",
         "toPath": "package.json",
         "sourcePath": "src/constants/rules.ts"
+      },
+      {
+        "fromPath": "src/node/index.test.ts",
+        "toPath": "package.json",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromPath": "src/node/index.test.ts",
+        "toPath": "src/node/index.ts",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromPath": "src/node/index.ts",
+        "toPath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
+        "sourcePath": "src/node/index.ts"
+      },
+      {
+        "fromPath": "src/node/index.ts",
+        "toPath": "src/features/configuration/composition/readRulesConfigAsync.ts",
+        "sourcePath": "src/node/index.ts"
       },
       {
         "fromPath": "src/cli/commands/gate.ts",
@@ -5334,48 +5251,6 @@
         "sourcePath": "src/index.test.ts"
       },
       {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "mkdtemp",
-        "callExpression": "mkdtemp",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "join",
-        "callExpression": "join",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "tmpdir",
-        "callExpression": "tmpdir",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "writeRulesConfigAsync",
-        "callExpression": "writeRulesConfigAsync",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "expect",
-        "callExpression": "expect",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "readRulesConfigAsync",
-        "callExpression": "readRulesConfigAsync",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
-        "fromSymbol": "testConfigFileOperations",
-        "toSymbol": "rm",
-        "callExpression": "rm",
-        "sourcePath": "src/index.test.ts"
-      },
-      {
         "fromSymbol": "testCliContract",
         "toSymbol": "expect",
         "callExpression": "expect",
@@ -5464,6 +5339,54 @@
         "toSymbol": "runCli",
         "callExpression": "runCli",
         "sourcePath": "src/cli/standalone.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "test",
+        "callExpression": "test",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "mkdtemp",
+        "callExpression": "mkdtemp",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "join",
+        "callExpression": "join",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "tmpdir",
+        "callExpression": "tmpdir",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "writeRulesConfigAsync",
+        "callExpression": "writeRulesConfigAsync",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "readRulesConfigAsync",
+        "callExpression": "readRulesConfigAsync",
+        "sourcePath": "src/node/index.test.ts"
+      },
+      {
+        "fromSymbol": "src/node/index.test.ts",
+        "toSymbol": "rm",
+        "callExpression": "rm",
+        "sourcePath": "src/node/index.test.ts"
       },
       {
         "fromSymbol": "validate",
@@ -6487,16 +6410,6 @@
       }
     ],
     "typeReferences": [
-      {
-        "fromSymbol": "writeRulesConfigAsync",
-        "toType": "RulesConfig",
-        "sourcePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts"
-      },
-      {
-        "fromSymbol": "readRulesConfigAsync",
-        "toType": "RulesConfigReadResult",
-        "sourcePath": "src/features/configuration/composition/readRulesConfigAsync.ts"
-      },
       {
         "fromSymbol": "validateRulesConfig",
         "toType": "RulesConfigValidationOptions",

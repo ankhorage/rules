@@ -35,6 +35,8 @@ graph LR
   module_src_features_evaluation_domain_writeCachedRuleResult_ts["src/features/evaluation/domain/writeCachedRuleResult.ts"]
   module_src_index_test_ts["src/index.test.ts"]
   module_src_index_ts["src/index.ts"]
+  module_src_node_index_test_ts["src/node/index.test.ts"]
+  module_src_node_index_ts["src/node/index.ts"]
   module_src_types_rules_ts["src/types/rules.ts"]
   module_src_utils_compareRuleEntityIds_ts["src/utils/compareRuleEntityIds.ts"]
   export_createRuleEvaluationCacheKey["createRuleEvaluationCacheKey"]
@@ -92,9 +94,6 @@ graph LR
   export_getRuleExecutionProvenance -.-> export_RuleResult
   export_JsonValue["JsonValue"]
   module_src_types_rules_ts --> export_JsonValue
-  export_readRulesConfigAsync["readRulesConfigAsync"]
-  module_src_features_configuration_composition_readRulesConfigAsync_ts --> export_readRulesConfigAsync
-  export_readRulesConfigAsync -.-> export_RulesConfigReadResult
   export_resolveRulesStatus["resolveRulesStatus"]
   module_src_features_evaluation_domain_resolveRulesStatus_ts --> export_resolveRulesStatus
   export_resolveRulesStatus -.-> export_RuleEvaluationResult
@@ -244,6 +243,3 @@ graph LR
   module_src_features_configuration_domain_validateRulesConfig_ts --> export_validateRulesConfig
   export_validateRulesConfig -.-> export_RulesConfigValidationOptions
   export_validateRulesConfig -.-> export_RulesConfigValidationResult
-  export_writeRulesConfigAsync["writeRulesConfigAsync"]
-  module_src_features_configuration_adapters_filesystem_writeRulesConfigAsync_ts --> export_writeRulesConfigAsync
-  export_writeRulesConfigAsync -.-> export_RulesConfig

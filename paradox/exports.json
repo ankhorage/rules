@@ -546,44 +546,6 @@
     "structuredRows": []
   },
   {
-    "name": "readRulesConfigAsync",
-    "title": null,
-    "description": "Wire the configuration source reader into the public file-validation operation.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "function",
-    "modulePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-    "sourceLocation": {
-      "filePath": "src/features/configuration/composition/readRulesConfigAsync.ts",
-      "line": 6,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "RulesConfigReadResult"
-    ],
-    "signatures": [
-      {
-        "label": "(path: string) => Promise<RulesConfigReadResult>",
-        "parameters": [
-          {
-            "name": "path",
-            "type": "string",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "Promise<RulesConfigReadResult>",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "resolveRulesStatus",
     "title": null,
     "description": "Summarize the complete Rules evaluation result without treating failed evaluation as canonical.",
@@ -2535,50 +2497,6 @@
           }
         ],
         "returnType": "RulesConfigValidationResult",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "writeRulesConfigAsync",
-    "title": null,
-    "description": "Validate and atomically write canonical rules.json configuration through the filesystem adapter.",
-    "isReadme": false,
-    "see": [],
-    "security": [],
-    "kind": "function",
-    "modulePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-    "sourceLocation": {
-      "filePath": "src/features/configuration/adapters/filesystem/writeRulesConfigAsync.ts",
-      "line": 8,
-      "column": 1
-    },
-    "exportPaths": [
-      "src/index.ts"
-    ],
-    "relatedSymbols": [
-      "RulesConfig"
-    ],
-    "signatures": [
-      {
-        "label": "(path: string, config: RulesConfig) => Promise<void>",
-        "parameters": [
-          {
-            "name": "config",
-            "type": "RulesConfig",
-            "required": true,
-            "description": null
-          },
-          {
-            "name": "path",
-            "type": "string",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "Promise<void>",
         "returnDescription": null
       }
     ],
