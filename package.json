@@ -37,6 +37,10 @@
     "./capabilities": {
       "types": "./dist/capabilities/index.d.ts",
       "import": "./dist/capabilities/index.js"
+    },
+    "./node": {
+      "types": "./dist/node/index.d.ts",
+      "import": "./dist/node/index.js"
     }
   },
   "bin": {
@@ -88,6 +92,7 @@
     "check-types": "bun x tsc --noEmit -p tsconfig.json",
     "typecheck": "bun run check-types",
     "test": "bun test",
+    "test:packed-expo-consumer": "bun scripts/test-packed-expo-consumer.ts",
     "test:standalone": "bun run build && bun scripts/test-standalone.ts",
     "docs": "bunx --package \"@ankhorage/paradox@$(node -p \"require('./package.json').devDependencies['@ankhorage/paradox']\")\" paradox && ankhorage-prettier --write README.md paradox",
     "changeset": "ankhorage-changeset",
